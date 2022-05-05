@@ -138,121 +138,12 @@
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{NavigationForm.uiStatus.loginStatus == 'accountCreation'}">
-                                <!-- account name -->
-                                <div class="form-group">
-                                    <h:outputLabel
-                                        for="accountName"
-                                        value="#{msgs.login_new_account_accountName}" />
-                                    <div class="email controls">
-                                        <x:inputText
-                                            id="accountName"
-                                            pt:aria-label="#{msgs.login_new_account_accountName}"
-                                            forceId="true"
-                                            styleClass="form-control"
-                                            value="#{externalLoginBean.accountName}"
-                                            required="true">
-                                            <f:passThroughAttribute
-                                                name="placeholder"
-                                                value="#{msgs.login_new_account_accountName}" />
-                                        </x:inputText>
-                                    </div>
-                                </div>
-                                <!-- email address -->
-                                <div class="form-group">
-                                    <h:outputLabel
-                                        for="emailAddress"
-                                        value="#{msgs.login_new_account_emailAddress}" />
-                                    <div class="email controls">
-                                        <x:inputText
-                                            id="emailAddress"
-                                            pt:aria-label="#{msgs.login_new_account_emailAddress}"
-                                            forceId="true"
-                                            styleClass="form-control"
-                                            value="#{externalLoginBean.emailAddress}"
-                                            required="true">
-                                            <f:passThroughAttribute
-                                                name="placeholder"
-                                                value="#{msgs.login_new_account_emailAddress}" />
-                                        </x:inputText>
-                                    </div>
-                                </div>
-                                <!-- firstname -->
-                                <div class="form-group">
-                                    <h:outputLabel
-                                        for="firstname"
-                                        value="#{msgs.firstname}" />
-                                    <div class="email controls">
-                                        <x:inputText
-                                            id="firstname"
-                                            pt:aria-label="#{msgs.firstname}"
-                                            forceId="true"
-                                            styleClass="form-control"
-                                            value="#{externalLoginBean.firstname}">
-                                            <f:passThroughAttribute
-                                                name="placeholder"
-                                                value="#{msgs.firstname}" />
-                                        </x:inputText>
-                                    </div>
-                                </div> 
-                                <!-- lastname -->
-                                <div class="form-group">
-                                    <h:outputLabel
-                                        for="lastname"
-                                        value="#{msgs.lastname}" />
-                                    <div class="email controls">
-                                        <x:inputText
-                                            id="lastname"
-                                            pt:aria-label="#{msgs.lastname}"
-                                            forceId="true"
-                                            styleClass="form-control"
-                                            value="#{externalLoginBean.lastname}">
-                                            <f:passThroughAttribute
-                                                name="placeholder"
-                                                value="#{msgs.lastname}" />
-                                        </x:inputText>
-                                    </div>
-                                </div>
+                            <ui:include src="account_creation_wizzard.xhtml"/>
+                            
+                                
 
-                                <!-- address -->
-                                <div class="form-group">
-                                    <h:outputLabel
-                                        for="address"
-                                        value="#{msgs.login_new_account_address}" />
-                                    <div class="email controls">
-                                        <x:inputTextarea
-                                            id="address"
-                                            pt:aria-label="#{msgs.login_new_account_address}"
-                                            forceId="true"
-                                            styleClass="form-control"
-                                            value="#{externalLoginBean.address}">
-                                            <f:passThroughAttribute
-                                                name="placeholder"
-                                                value="#{msgs.login_new_account_address}" />
-                                        </x:inputTextarea>
-                                    </div>
-                                </div>
-                                <div class="submit">
-                                <!-- create button -->
-                                <button
-                                    jsf:action="#{externalLoginBean.createAccount}"
-                                    jsf:id="create"
-                                    class="pull-right btn font-size-s"
-                                    style="background: #fff; outline: 1px solid #368ee0;">
-                                    <h:outputText value="#{msgs.login_new_account_createAccount}" />
-                                </button>
-                                <!-- cancel button -->
-                                <button
-                                    jsf:id="back"
-                                    class="float-left btn font-size-s"
-                                    style="background: #fff; outline: 1px solid #368ee0;"
-                                    jsf:immediate="true"
-                                    >
-                                    <f:setPropertyActionListener
-                                        value=""
-                                        target="#{NavigationForm.uiStatus.loginStatus}" />
-                                    <h:outputText value="#{msgs.abbrechen}" />
-                                </button>
-                                </div>
+                              
+
                             </h:panelGroup>
 
                         </h:form>

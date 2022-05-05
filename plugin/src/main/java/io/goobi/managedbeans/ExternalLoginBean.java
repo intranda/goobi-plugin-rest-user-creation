@@ -1,12 +1,15 @@
 package io.goobi.managedbeans;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.naming.ConfigurationException;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
@@ -22,6 +25,7 @@ import org.goobi.beans.User.UserStatus;
 import de.sub.goobi.config.ConfigurationHelper;
 import de.sub.goobi.forms.NavigationForm;
 import de.sub.goobi.helper.Helper;
+import de.sub.goobi.helper.JwtHelper;
 import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.persistence.managers.InstitutionManager;
 import de.sub.goobi.persistence.managers.LdapManager;
@@ -42,7 +46,16 @@ public class ExternalLoginBean implements Serializable {
     private String accountName;
     @Getter
     @Setter
+    private String password;
+    @Getter
+    @Setter
+    private String confirmPassword;
+    @Getter
+    @Setter
     private String emailAddress;
+    @Getter
+    @Setter
+    private String confirmEmailAddress;
     @Getter
     @Setter
     private String firstname;
@@ -51,7 +64,7 @@ public class ExternalLoginBean implements Serializable {
     private String lastname;
     @Getter
     @Setter
-    private String address;
+    private boolean privacyTextAccepted;
 
     public void createAccount() {
         // validate entries
@@ -84,6 +97,22 @@ public class ExternalLoginBean implements Serializable {
             return;
         }
 
+        if (!emailAddress.equals(confirmEmailAddress)) {
+            Helper.setFehlerMeldung("emailNotValid");
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            Helper.setFehlerMeldung("TODO");
+            return;
+        }
+        // check password length
+
+        if (!privacyTextAccepted) {
+            Helper.setFehlerMeldung("TODO");
+            return;
+        }
+
         // create new user
         User user = new User();
         user.setVorname(firstname);
@@ -93,7 +122,7 @@ public class ExternalLoginBean implements Serializable {
         user.setStatus(UserStatus.REGISTERED);
         user.setEmail(emailAddress);
 
-        user.getAdditionalData().put("address", address);
+        user.getAdditionalData().put("privacyAccpeted", String.valueOf(privacyTextAccepted));
 
         RandomNumberGenerator rng = new SecureRandomNumberGenerator();
         Object salt = rng.nextBytes();
@@ -110,10 +139,11 @@ public class ExternalLoginBean implements Serializable {
         }
 
         // TODO default dashboard plugin
+        // TODO
 
         // generate random password
-        int length = ConfigurationHelper.getInstance().getMinimumPasswordLength() + 10;
-        String password = createRandomPassword(length);
+        // int length = ConfigurationHelper.getInstance().getMinimumPasswordLength() + 10;
+        // String password = createRandomPassword(length);
 
         user.setEncryptedPassword(user.getPasswordHash(password));
         // save user
@@ -125,11 +155,26 @@ public class ExternalLoginBean implements Serializable {
         }
 
         // send mail with password
+        // generate confirmation link
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("purpose", "confirmMail");
+        tokenMap.put("id", "" + user.getId());
+        tokenMap.put("user", user.getLogin());
 
-        String messageSubject = SendMail.getInstance().getConfig().getUserCreationMailSubject();
-        String messageBody =
-                SendMail.getInstance().getConfig().getUserCreationMailBody().replace("{password}", password).replace("{login}", accountName);
-        SendMail.getInstance().sendMailToUser(messageSubject, messageBody, emailAddress);
+        try {
+            String token = JwtHelper.createToken(tokenMap);
+
+            String url = SendMail.getInstance().getConfig().getApiUrl().replace("mails/disable", "users/email/" + token);
+            String messageSubject = SendMail.getInstance().getConfig().getUserCreationMailSubject();
+            String messageBody =
+                    SendMail.getInstance().getConfig().getUserCreationMailBody().replace("{password}", password).replace("{login}", accountName);
+            SendMail.getInstance().sendMailToUser(messageSubject, messageBody, emailAddress);
+            System.out.println(url);
+        } catch (ConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
 
         // change ui status
 
