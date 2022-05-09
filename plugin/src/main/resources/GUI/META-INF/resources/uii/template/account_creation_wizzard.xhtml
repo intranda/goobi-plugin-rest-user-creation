@@ -15,7 +15,7 @@
     </composite:interface>
 
     <composite:implementation>
-
+<ui:fragment rendered="#{externalLoginBean.wizzardMode=='1'}">
         <!-- account name -->
         <div class="form-group">
             <h:outputLabel
@@ -205,10 +205,6 @@
                 </h:selectBooleanCheckbox>
             </div>
         </div>
-
-
-
-
         <div class="submit">
             <!-- create button -->
             <button
@@ -226,10 +222,30 @@
                 jsf:immediate="true">
                 <f:setPropertyActionListener
                     value=""
-                    target="#{NavigationForm.uiStatus.loginStatus}" />
+                    target="#{externalLoginBean.uiStatus}" />
                 <h:outputText value="#{msgs.abbrechen}" />
             </button>
         </div>
+
+</ui:fragment>
+
+<ui:fragment rendered="#{externalLoginBean.wizzardMode=='2'}">
+
+Name der abliefernden Institution/Organisation oder Person*
+Straße*
+Hausnummer*
+Ort*
+Postleitzahl*
+E-Mail-Adresse*
+Webseite (URL)
+Vorwahl*
+Rufnummer*
+
+
+
+</ui:fragment>
+
+
 
     </composite:implementation>
 

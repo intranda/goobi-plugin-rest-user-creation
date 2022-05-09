@@ -18,7 +18,7 @@
         <main>
             <h:panelGroup layout="block"
                 styleClass="wrapper wide"
-                style="#{NavigationForm.uiStatus.loginStatus == 'accountCreation'? 'top: 30%' : 'top: 50%' } ">
+                style="#{externalLoginBean.uiStatus == 'accountCreation'? 'top: 30%' : 'top: 50%' } ">
                 <h1>
                     <a href="index.xhtml">
                         <h:outputText
@@ -38,10 +38,10 @@
                     <ui:fragment rendered="#{!LoginForm.oidcAutoRedirect}">
                         <h2>
                             <h:outputText
-                                rendered="#{NavigationForm.uiStatus.loginStatus != 'accountCreation'}"
+                                rendered="#{externalLoginBean.uiStatus != 'accountCreation'}"
                                 value="#{msgs.login}" />
                             <h:outputText
-                                rendered="#{NavigationForm.uiStatus.loginStatus == 'accountCreation'}"
+                                rendered="#{externalLoginBean.uiStatus == 'accountCreation'}"
                                 value="#{msgs.login_new_account}" />
                         </h2>
                         <h:form
@@ -69,7 +69,7 @@
                                 tooltip="true"
                                 styleClass="messagesLogin" />
 
-                            <h:panelGroup rendered="#{NavigationForm.uiStatus.loginStatus != 'accountCreation'}">
+                            <h:panelGroup rendered="#{externalLoginBean.uiStatus != 'accountCreation'}">
                                 <script type="text/javascript">
                                                                                                                                     window.onload = function() {
                                                                                                                                         document.getElementById( 'login' ).focus();
@@ -111,7 +111,7 @@
                                             style="background: #fff; outline: 1px solid #368ee0;">
                                             <f:setPropertyActionListener
                                                 value="accountCreation"
-                                                target="#{NavigationForm.uiStatus.loginStatus}" />
+                                                target="#{externalLoginBean.uiStatus}" />
                                             <h:outputText value="#{msgs.login_createAccount}" />
                                         </button>
                                     </ui:fragment>
@@ -137,7 +137,7 @@
                                 </div>
                             </h:panelGroup>
 
-                            <h:panelGroup rendered="#{NavigationForm.uiStatus.loginStatus == 'accountCreation'}">
+                            <h:panelGroup rendered="#{externalLoginBean.uiStatus == 'accountCreation'}">
                             <ui:include src="account_creation_wizzard.xhtml"/>
                             
                                 

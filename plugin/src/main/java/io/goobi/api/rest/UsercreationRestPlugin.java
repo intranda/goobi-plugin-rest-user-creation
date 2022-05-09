@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
 import org.goobi.beans.User;
-import org.goobi.managedbeans.LoginBean;
 import org.jboss.weld.contexts.SerializableContextualInstanceImpl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -44,15 +43,13 @@ public class UsercreationRestPlugin {
     public void verifyEmail(@PathParam("token") String token) {
 
         HttpSession session = servletRequest.getSession();
-        LoginBean userBean = Helper.getLoginBeanFromSession(session);
-        if (userBean == null) {
-            // create new bean
-            userBean=  Helper.getBeanByClass(LoginBean.class);
-        }
+        //        LoginBean userBean = Helper.getLoginBeanFromSession(session);
+        //        if (userBean == null) {
+        //            // create new bean
+        //            userBean=  Helper.getBeanByClass(LoginBean.class);
+        //        }
 
-
-        ExternalLoginBean elb = (ExternalLoginBean) getBeanFromSession(session, ExternalLoginBean.class );
-
+        ExternalLoginBean elb = (ExternalLoginBean) getBeanFromSession(session, ExternalLoginBean.class);
         try {
             // validate request
             DecodedJWT jwt = JwtHelper.verifyTokenAndReturnClaims(token);
@@ -64,14 +61,18 @@ public class UsercreationRestPlugin {
             // log user in
             User user = UserManager.getUserByLogin(accountName);
             user.lazyLoad();
-            userBean.setMyBenutzer(user);
+            //            userBean.setMyBenutzer(user);
 
+            elb.setCurrentUser(user);
+            elb.setWizzardMode("2");
+            elb.setUiStatus("accountCreation");
             // forward to institution creation screen
             sessionForm.updateSessionUserName(servletRequest.getSession(), user);
             servletResponse.sendRedirect("/goobi/uii/external_index.xhtml");
 
         } catch (Exception e) {
-            userBean.setSsoError("TODO invalid request, maybe time run out.");
+            //            userBean.setSsoError("TODO invalid request, maybe time run out.");
+            log.error(e);
             try {
                 servletResponse.sendRedirect("/goobi/uii/logout.xhtml");
             } catch (IOException e1) {

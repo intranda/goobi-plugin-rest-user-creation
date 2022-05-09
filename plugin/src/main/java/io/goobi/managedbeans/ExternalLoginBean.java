@@ -65,6 +65,17 @@ public class ExternalLoginBean implements Serializable {
     @Getter
     @Setter
     private boolean privacyTextAccepted;
+    @Getter
+    @Setter
+    private String wizzardMode ="1";
+
+    @Getter
+    @Setter
+    private User currentUser;
+    @Getter
+    @Setter
+    private String uiStatus = "";
+
 
     public void createAccount() {
         // validate entries
