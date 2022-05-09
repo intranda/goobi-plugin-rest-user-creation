@@ -160,7 +160,7 @@
         </h:panelGroup>
 
         <c:if test="#{LoginForm.myBenutzer!=null}">
-            <ui:include src="/uii/template/inc_menu.xhtml" />
+            <ui:include src="include_userConfiguration.xhtml" />
             
             <div
                 class="container-fluid"
@@ -196,18 +196,6 @@
                                 </div>
                             </header>
                         </h:form>
-                        <nav aria-label="navigationBreadcrumb">
-                            <h:form
-                                style="margin:0px;"
-                                id="breadcrumb">
-
-                                <div class="breadcrumbs">
-                                    <ul>
-                                        <ui:insert name="breadcrumb" />
-                                    </ul>
-                                </div>
-                            </h:form>
-                        </nav>
                         <div role="complementary">
                             <h:panelGroup
                                 id="globalMessage"

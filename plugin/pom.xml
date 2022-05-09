@@ -6,7 +6,7 @@
   <packaging>pom</packaging>
   <properties>
   
-    <goobi.version>LOGIN</goobi.version>
+    <goobi.version>22.04.3-SNAPSHOT</goobi.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <distributionManagement>

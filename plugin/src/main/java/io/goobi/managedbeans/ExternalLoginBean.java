@@ -132,7 +132,7 @@ public class ExternalLoginBean implements Serializable {
         user.setInstitution(i);
 
         try {
-            Ldap ldap = LdapManager.getLdapById(0);
+            Ldap ldap = LdapManager.getLdapByName(ConfigurationHelper.getInstance().getExternalUserDefaultAuthenticationType());
             user.setLdapGruppe(ldap);
         } catch (DAOException e1) {
             log.error(e1);
@@ -174,7 +174,6 @@ public class ExternalLoginBean implements Serializable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
 
         // change ui status
 

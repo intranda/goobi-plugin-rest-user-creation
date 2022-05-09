@@ -1,78 +1,99 @@
 package io.goobi.api.rest;
 
+import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Context;
+
+import org.goobi.beans.User;
+import org.goobi.managedbeans.LoginBean;
+import org.jboss.weld.contexts.SerializableContextualInstanceImpl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import de.sub.goobi.forms.SessionForm;
+import de.sub.goobi.helper.Helper;
 import de.sub.goobi.helper.JwtHelper;
+import de.sub.goobi.persistence.managers.UserManager;
+import io.goobi.managedbeans.ExternalLoginBean;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @javax.ws.rs.Path("/users")
 public class UsercreationRestPlugin {
 
-    /**
-     * This sample method to allow the upload of JSON data via POST
-     * 
-     * Sample call:
-     * curl --location --request POST 'http://localhost:8080/goobi/api/intern/sample' \
-     *   --header 'Content-Type: application/json' \
-     *   --data-raw '{
-     *       "result": "success",
-     *       "message": "This is a sample message",
-     *       "processName": "Sample name",
-     *       "processId": 45
-     *   }'
-     * 
-     * @return XML as result
-     */
+    @Context
+    private HttpServletRequest servletRequest;
+
+    @Context
+    private HttpServletResponse servletResponse;
+
+    @Inject
+    private SessionForm sessionForm;
+
     @javax.ws.rs.Path("/email/{token}")
     @GET
     @Produces("text/xml")
-    public Response execute(@PathParam("token") String token) {
-        try {
-            DecodedJWT jwt =   JwtHelper.verifyTokenAndReturnClaims(token);
+    public void verifyEmail(@PathParam("token") String token) {
 
+        HttpSession session = servletRequest.getSession();
+        LoginBean userBean = Helper.getLoginBeanFromSession(session);
+        if (userBean == null) {
+            // create new bean
+            userBean=  Helper.getBeanByClass(LoginBean.class);
+        }
+
+
+        ExternalLoginBean elb = (ExternalLoginBean) getBeanFromSession(session, ExternalLoginBean.class );
+
+        try {
+            // validate request
+            DecodedJWT jwt = JwtHelper.verifyTokenAndReturnClaims(token);
+
+            // extract user data from request
             String userId = jwt.getClaim("id").asString();
             String accountName = jwt.getClaim("user").asString();
 
-            // your functionality comes here
-            System.out.println(userId);
-            System.out.println(accountName);
-
             // log user in
+            User user = UserManager.getUserByLogin(accountName);
+            user.lazyLoad();
+            userBean.setMyBenutzer(user);
+
             // forward to institution creation screen
+            sessionForm.updateSessionUserName(servletRequest.getSession(), user);
+            servletResponse.sendRedirect("/goobi/uii/external_index.xhtml");
 
         } catch (Exception e) {
-            log.error("An error occured while executing a REST call.", e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .build();
+            userBean.setSsoError("TODO invalid request, maybe time run out.");
+            try {
+                servletResponse.sendRedirect("/goobi/uii/logout.xhtml");
+            } catch (IOException e1) {
+                log.error(e1);
+            }
         }
-        return Response.status(Response.Status.OK).build();
     }
 
-    /**
-     * A sample method to request information as json for a specific process. This is just a kickstart method without any real functionality
-     * 
-     * Sample call:
-     * curl --location --request GET 'http://localhost:8080/goobi/api/intern/status/45'
-     * 
-     * @param processId identifier of a process
-     * @return JSON object with status information
-     */
-    @javax.ws.rs.Path("status/{processId}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public SampleResponse getProcessStatusAsJson(@PathParam("processId") int processId) {
-        SampleResponse sr = new SampleResponse();
-        sr.setMessage("This is a sample message");
-        sr.setProcessId(processId);
-        sr.setProcessName("Sample name");
-        sr.setResult("success");
-        return sr;
+    private static Object getBeanFromSession(HttpSession session, Class<?> clazz) {
+        Enumeration<String> attribs = session.getAttributeNames();
+        String attrib;
+        while (attribs.hasMoreElements()) {
+            attrib = attribs.nextElement();
+            Object obj = session.getAttribute(attrib);
+            if (obj instanceof SerializableContextualInstanceImpl) {
+                @SuppressWarnings("rawtypes")
+                SerializableContextualInstanceImpl impl = (SerializableContextualInstanceImpl) obj;
+                if (impl.getClass().equals(clazz)) {
+                    return impl.getInstance();
+                }
+            }
+        }
+        return Helper.getBeanByClass(clazz);
     }
 }
