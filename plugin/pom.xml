@@ -5,8 +5,7 @@
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <properties>
-  
-    <goobi.version>22.04.3-SNAPSHOT</goobi.version>
+    <goobi.version>22.04.3</goobi.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <distributionManagement>
@@ -22,7 +21,7 @@
     </repository>
   </repositories>
   <modules>
-    <module>module-main</module>    
+    <module>module-main</module>
   </modules>
   <dependencies>
     <dependency>
