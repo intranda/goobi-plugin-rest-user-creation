@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_plugin>
+	<institution>
+	        <field displayInTable="true" fieldType="textarea" label="Adresse" name="address"/>
+	        <field displayInTable="true" fieldType="input" label="Stadt" name="city"/>
+	        <field displayInTable="false" fieldType="dropdown" label="PLZ" name="zipcode">
+		    <value>10115</value>
+		    <value>10117</value>
+		    <value>10119</value>
+	        </field>
+	</institution>
+	<user>
+        	<field displayInTable="false" fieldType="textarea" label="Adresse" name="address"/>
+        	<field displayInTable="true" fieldType="input" label="Position" name="position"/>
+        	<field displayInTable="true" fieldType="dropdown" label="Rolle" name="role">
+        		<value>Autor</value>
+			<value>Verleger</value>
+		</field>
+	</user>
+
+	<privacyStatement>&lt;p&gt;&lt;strong&gt;Formatierte Datenschutzerkl&amp;auml;rung&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;1.) Lorem ipsum&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2.) Ut wisi enim ad minim veniam&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;</privacyStatement>
+
+<fields>
+
+
+	<field type="institution" displayInTable="false" fieldType="input" label="Straße" name="street" position="page2" required="true" validation="" validationErrorDescription=""/>
+	<field type="institution" displayInTable="false" fieldType="input" label="Hausnummer" name="number" position="page2" required="true" validation="[A-Za-z0-9]" validationErrorDescription="Ungültige Angabe, Zulässige Zeichen: Ziffern, Buchstaben"/>
+	<field type="institution" displayInTable="false" fieldType="input" label="Ort" name="city" position="page2" required="true" validation="" validationErrorDescription=""/>
+	<field type="institution" displayInTable="false" fieldType="input" label="Postleitzahl" name="zipcode" position="page2" required="true" validation="\d{5}" validationErrorDescription="Ungültige Angabe, es wurde keine Postleitzahl angegeben"/>
+	<field type="institution" displayInTable="false" fieldType="input" label="E-Mail-Adresse" name="email" position="page2" required="true" validation="" validationErrorDescription=""/>
+	<field type="institution" displayInTable="false" fieldType="input" label="Webseite (URL)" name="website" position="page2" required="false" validation="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&amp;//=]*)" validationErrorDescription="keine valide URL"/>
+	<field type="institution" displayInTable="false" fieldType="input" label="Vorwahl" name="areacode" position="page2" required="true" validation="\d+" validationErrorDescription="Nur Ziffern eingeben!"/>
+	<field type="institution" displayInTable="false" fieldType="input" label="Rufnummer" name="phonenumber" position="page2" required="true" validation="\d+" validationErrorDescription="Nur Ziffern eingeben!"/>
+
+</fields>
+
+
+</config_plugin>

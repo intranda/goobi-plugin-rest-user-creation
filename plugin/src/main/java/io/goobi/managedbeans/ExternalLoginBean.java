@@ -1,7 +1,9 @@
 package io.goobi.managedbeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -11,6 +13,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.naming.ConfigurationException;
 
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -22,6 +27,7 @@ import org.goobi.beans.Ldap;
 import org.goobi.beans.User;
 import org.goobi.beans.User.UserStatus;
 
+import de.sub.goobi.config.ConfigPlugins;
 import de.sub.goobi.config.ConfigurationHelper;
 import de.sub.goobi.forms.NavigationForm;
 import de.sub.goobi.helper.Helper;
@@ -41,6 +47,9 @@ public class ExternalLoginBean implements Serializable {
 
     private static final long serialVersionUID = 2129311315931276111L;
 
+    private static final String configurationName = "intranda_administration_deliveryManagement";
+
+    // fields for first page
     @Getter
     @Setter
     private String accountName;
@@ -67,7 +76,7 @@ public class ExternalLoginBean implements Serializable {
     private boolean privacyTextAccepted;
     @Getter
     @Setter
-    private String wizzardMode ="1";
+    private String wizzardMode = "page1";
 
     @Getter
     @Setter
@@ -76,6 +85,50 @@ public class ExternalLoginBean implements Serializable {
     @Setter
     private String uiStatus = "";
 
+    //    http://localhost:8080/goobi/api/users/email/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdXJwb3NlIjoiY29uZmlybU1haWwiLCJpc3MiOiJHb29iaSIsImlkIjoiMjciLCJleHAiOjE2NTIyMTE0OTUsInVzZXIiOiJyb2JlcnQifQ.SKkARFPmmgRz-eKKecOIHPOkk6VQuGt7jYsU5iqIvSg
+
+    // second page
+    @Getter
+    @Setter
+    private String institutionName;
+
+    // additional fields, stored in a map with pagenumber as key and list of fields as value
+    @Getter
+    private Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
+
+    public ExternalLoginBean() {
+        readConfiguration();
+    }
+
+    private void readConfiguration() {
+        XMLConfiguration conf = ConfigPlugins.getPluginConfig(configurationName);
+        conf.setExpressionEngine(new XPathExpressionEngine());
+
+        List<HierarchicalConfiguration> fields = conf.configurationsAt("/fields/field");
+
+        for (HierarchicalConfiguration hc : fields) {
+
+            String type = hc.getString("@type");
+            boolean displayInTable = hc.getBoolean("@displayInTable", false);
+            String fieldType = hc.getString("@fieldType", "input");
+            String label = hc.getString("@label");
+            String name = hc.getString("@name");
+            String position = hc.getString("@position", "");
+            boolean required = hc.getBoolean("@required", false);
+            String validation = hc.getString("@validation", null);
+            String validationErrorDescription = hc.getString("@validationErrorDescription", null);
+
+            UserCreationField ucf = new UserCreationField(type, displayInTable, fieldType, label, name, position, required, validation,
+                    validationErrorDescription, "");
+            List<UserCreationField> configuredFields = additionalFields.get(ucf.getPosition());
+            if (configuredFields == null) {
+                configuredFields = new ArrayList<>();
+            }
+            configuredFields.add(ucf);
+            additionalFields.put(ucf.getPosition(), configuredFields);
+        }
+
+    }
 
     public void createAccount() {
         // validate entries
@@ -177,13 +230,16 @@ public class ExternalLoginBean implements Serializable {
 
             String url = SendMail.getInstance().getConfig().getApiUrl().replace("mails/disable", "users/email/" + token);
             String messageSubject = SendMail.getInstance().getConfig().getUserCreationMailSubject();
-            String messageBody =
-                    SendMail.getInstance().getConfig().getUserCreationMailBody().replace("{password}", password).replace("{login}", accountName);
+            String messageBody = SendMail.getInstance()
+                    .getConfig()
+                    .getUserCreationMailBody()
+                    .replace("{password}", password)
+                    .replace("{login}", accountName)
+                    .replace("{url}", url);
             SendMail.getInstance().sendMailToUser(messageSubject, messageBody, emailAddress);
             System.out.println(url);
         } catch (ConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error(e);
         }
 
         // change ui status
@@ -209,7 +265,6 @@ public class ExternalLoginBean implements Serializable {
         Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(inLogin);
         valide = matcher.matches();
-
         return valide;
     }
 }

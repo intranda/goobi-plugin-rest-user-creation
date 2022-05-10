@@ -55,7 +55,7 @@ public class UsercreationRestPlugin {
             DecodedJWT jwt = JwtHelper.verifyTokenAndReturnClaims(token);
 
             // extract user data from request
-            String userId = jwt.getClaim("id").asString();
+            //            String userId = jwt.getClaim("id").asString();
             String accountName = jwt.getClaim("user").asString();
 
             // log user in
@@ -64,14 +64,13 @@ public class UsercreationRestPlugin {
             //            userBean.setMyBenutzer(user);
 
             elb.setCurrentUser(user);
-            elb.setWizzardMode("2");
+            elb.setWizzardMode("page2");
             elb.setUiStatus("accountCreation");
             // forward to institution creation screen
             sessionForm.updateSessionUserName(servletRequest.getSession(), user);
             servletResponse.sendRedirect("/goobi/uii/external_index.xhtml");
 
         } catch (Exception e) {
-            //            userBean.setSsoError("TODO invalid request, maybe time run out.");
             log.error(e);
             try {
                 servletResponse.sendRedirect("/goobi/uii/logout.xhtml");

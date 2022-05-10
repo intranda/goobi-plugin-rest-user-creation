@@ -36,13 +36,9 @@
                         value="Developer Mode ON"
                         rendered="#{DevModeBean.developerMode}" />
                     <ui:fragment rendered="#{!LoginForm.oidcAutoRedirect}">
-                        <h2>
+                        <h2 jsf:rendered="#{externalLoginBean.uiStatus != 'accountCreation'}">
                             <h:outputText
-                                rendered="#{externalLoginBean.uiStatus != 'accountCreation'}"
                                 value="#{msgs.login}" />
-                            <h:outputText
-                                rendered="#{externalLoginBean.uiStatus == 'accountCreation'}"
-                                value="#{msgs.login_new_account}" />
                         </h2>
                         <h:form
                             styleClass="form-validate"
