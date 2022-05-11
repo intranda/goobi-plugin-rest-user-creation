@@ -15,6 +15,7 @@ import javax.ws.rs.core.Context;
 import org.goobi.beans.User;
 import org.jboss.weld.contexts.SerializableContextualInstanceImpl;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import de.sub.goobi.forms.SessionForm;
@@ -69,6 +70,10 @@ public class UsercreationRestPlugin {
             // forward to institution creation screen
             sessionForm.updateSessionUserName(servletRequest.getSession(), user);
             servletResponse.sendRedirect("/goobi/uii/external_index.xhtml");
+
+        } catch (TokenExpiredException e) {
+            log.error(e);
+            // TODO delete user account, to start from scratch
 
         } catch (Exception e) {
             log.error(e);

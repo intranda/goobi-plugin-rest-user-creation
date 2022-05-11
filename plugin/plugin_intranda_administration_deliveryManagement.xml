@@ -30,6 +30,7 @@
 
 
 	<field type="institution" displayInTable="false" fieldType="input" label="Straße" name="street" position="page2" required="true" validation="" validationErrorDescription=""/>
+<!--
 	<field type="institution" displayInTable="false" fieldType="input" label="Hausnummer" name="number" position="page2" required="true" validation="[A-Za-z0-9]" validationErrorDescription="Ungültige Angabe, Zulässige Zeichen: Ziffern, Buchstaben"/>
 	<field type="institution" displayInTable="false" fieldType="input" label="Ort" name="city" position="page2" required="true" validation="" validationErrorDescription=""/>
 	<field type="institution" displayInTable="false" fieldType="input" label="Postleitzahl" name="zipcode" position="page2" required="true" validation="\d{5}" validationErrorDescription="Ungültige Angabe, es wurde keine Postleitzahl angegeben"/>
@@ -37,6 +38,42 @@
 	<field type="institution" displayInTable="false" fieldType="input" label="Webseite (URL)" name="website" position="page2" required="false" validation="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&amp;//=]*)" validationErrorDescription="keine valide URL"/>
 	<field type="institution" displayInTable="false" fieldType="input" label="Vorwahl" name="areacode" position="page2" required="true" validation="\d+" validationErrorDescription="Nur Ziffern eingeben!"/>
 	<field type="institution" displayInTable="false" fieldType="input" label="Rufnummer" name="phonenumber" position="page2" required="true" validation="\d+" validationErrorDescription="Nur Ziffern eingeben!"/>
+-->
+
+
+<field type="institution" displayInTable="false" fieldType="input" label="Funktion" name="contact-function"
+position="page3" required="false" validation="" validationErrorDescription=""/>
+
+<!-- Testdata for different field types -->
+<field type="institution" displayInTable="false" fieldType="dropdown" label="Titel" name="contact-title"
+position="page3" required="false" validation="" validationErrorDescription="">
+<value>Dr</value>
+<value>Prof</value>
+<value>PhD</value>
+</field>
+<field type="institution" displayInTable="false" fieldType="textarea" label="Vorname" name="contact-firstname"
+position="page3" required="true" validation="" validationErrorDescription=""/>
+
+<!--
+<field type="institution" displayInTable="false" fieldType="input" label="Titel" name="contact-title"
+position="page3" required="false" validation="" validationErrorDescription="">
+</field>
+<field type="institution" displayInTable="false" fieldType="input" label="Vorname" name="contact-firstname"
+position="page3" required="true" validation="" validationErrorDescription=""/>
+
+<field type="institution" displayInTable="false" fieldType="input" label="Nachname" name="contact-lastname"
+position="page3" required="true" validation="" validationErrorDescription=""/>
+<field type="institution" displayInTable="false" fieldType="input" label="E-Mail-Adresse" name="contact-email"
+position="page3" required="true" validation="" validationErrorDescription=""/>
+
+<field type="institution" displayInTable="false" fieldType="input" label="Vorwahl" name="contact-areacode" position="page3" required="false" validation="\d+" validationErrorDescription="Nur Ziffern eingeben!"/>
+<field type="institution" displayInTable="false" fieldType="input" label="Rufnummer" name="contact-phonenumber" position="page3" required="false" validation="\d+" validationErrorDescription="Nur Ziffern eingeben!"/>
+
+-->
+
+
+
+
 
 </fields>
 

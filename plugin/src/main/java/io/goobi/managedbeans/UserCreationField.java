@@ -1,11 +1,12 @@
 package io.goobi.managedbeans;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+
 import lombok.Data;
 
 @Data
-
-@AllArgsConstructor
 public class UserCreationField {
 
     private String type;
@@ -20,4 +21,18 @@ public class UserCreationField {
 
     private String value;
 
+    private List<String> selectItemList;
+
+
+    public void setBooleanValue(boolean val) {
+        if (val) {
+            value ="true";
+        } else {
+            value="false";
+        }
+    }
+
+    public boolean getBooleanValue() {
+        return StringUtils.isNotBlank(value) && "true".equals(value);
+    }
 }

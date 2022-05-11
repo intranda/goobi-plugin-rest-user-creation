@@ -2,6 +2,7 @@ package io.goobi.managedbeans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,7 @@ public class ExternalLoginBean implements Serializable {
     @Setter
     private String institutionName;
 
-    // additional fields, stored in a map with pagenumber as key and list of fields as value
+    // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
     private Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
 
@@ -107,23 +108,26 @@ public class ExternalLoginBean implements Serializable {
         List<HierarchicalConfiguration> fields = conf.configurationsAt("/fields/field");
 
         for (HierarchicalConfiguration hc : fields) {
+            UserCreationField ucf = new UserCreationField();
+            ucf.setType(hc.getString("@type"));
 
-            String type = hc.getString("@type");
-            boolean displayInTable = hc.getBoolean("@displayInTable", false);
-            String fieldType = hc.getString("@fieldType", "input");
-            String label = hc.getString("@label");
-            String name = hc.getString("@name");
-            String position = hc.getString("@position", "");
-            boolean required = hc.getBoolean("@required", false);
-            String validation = hc.getString("@validation", null);
-            String validationErrorDescription = hc.getString("@validationErrorDescription", null);
-
-            UserCreationField ucf = new UserCreationField(type, displayInTable, fieldType, label, name, position, required, validation,
-                    validationErrorDescription, "");
+            ucf.setDisplayInTable(hc.getBoolean("@displayInTable", false));
+            ucf.setFieldType(hc.getString("@fieldType", "input"));
+            ucf.setLabel(hc.getString("@label"));
+            ucf.setName(hc.getString("@name"));
+            ucf.setPosition(hc.getString("@position", ""));
+            ucf.setRequired(hc.getBoolean("@required", false));
+            ucf.setValidation(hc.getString("@validation", null));
+            ucf.setValidationErrorDescription(hc.getString("@validationErrorDescription", null));
             List<UserCreationField> configuredFields = additionalFields.get(ucf.getPosition());
             if (configuredFields == null) {
                 configuredFields = new ArrayList<>();
             }
+            if (ucf.getFieldType().equals("dropdown")) {
+                List<String> valueList = Arrays.asList(hc.getStringArray("/value"));
+                ucf.setSelectItemList(valueList);
+            }
+
             configuredFields.add(ucf);
             additionalFields.put(ucf.getPosition(), configuredFields);
         }
@@ -202,8 +206,9 @@ public class ExternalLoginBean implements Serializable {
             log.error(e1);
         }
 
+        user.setStandort("-");
+
         // TODO default dashboard plugin
-        // TODO
 
         // generate random password
         // int length = ConfigurationHelper.getInstance().getMinimumPasswordLength() + 10;
@@ -266,5 +271,58 @@ public class ExternalLoginBean implements Serializable {
         Matcher matcher = pattern.matcher(inLogin);
         valide = matcher.matches();
         return valide;
+    }
+
+    public void createInstitution() {
+
+    }
+
+    public void next() {
+        switch (wizzardMode) {
+            case "page2":
+                if (validateFields("page2")) {
+                    wizzardMode = "page3";
+                }
+                break;
+            case "page3":
+                if (validateFields("page3")) {
+                    wizzardMode = "page4";
+                }
+                break;
+            case "page4":
+                if (validateFields("page4")) {
+                    wizzardMode = "page5";
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private boolean validateFields(String pageName) {
+
+        return true;
+
+    }
+
+    public void back() {
+        switch (wizzardMode) {
+            case "page3":
+                wizzardMode = "page2";
+                break;
+            case "page4":
+                wizzardMode = "page3";
+                break;
+            case "page5":
+                wizzardMode = "page4";
+                break;
+            default:
+                break;
+        }
+    }
+
+    // TODO remove after tests
+    public void reloadConfiguration() {
+        readConfiguration();
     }
 }
