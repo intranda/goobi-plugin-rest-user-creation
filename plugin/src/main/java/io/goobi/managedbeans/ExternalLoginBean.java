@@ -242,7 +242,6 @@ public class ExternalLoginBean implements Serializable {
                     .replace("{login}", accountName)
                     .replace("{url}", url);
             SendMail.getInstance().sendMailToUser(messageSubject, messageBody, emailAddress);
-            System.out.println(url);
         } catch (ConfigurationException e) {
             log.error(e);
         }
@@ -251,6 +250,44 @@ public class ExternalLoginBean implements Serializable {
 
         NavigationForm form = (NavigationForm) Helper.getBeanByName("NavigationForm", NavigationForm.class);
         form.getUiStatus().put("loginStatus", "");
+
+    }
+
+    public void createInstitution() {
+
+        //        currentUser.set
+        Institution institution = new Institution();
+        institution.setLongName(institutionName);
+        institution.setShortName(institutionName);
+        currentUser.setInstitution(institution);
+
+        for (String pageNumber : additionalFields.keySet()) {
+            List<UserCreationField> fields = additionalFields.get(pageNumber);
+            for (UserCreationField f : fields) {
+                if ("institution".equals(f.getType())) {
+                    if (f.getFieldType().equals("combo") && f.getBooleanValue()) {
+                        institution.getAdditionalData().put(f.getName(), f.getSubValue());
+                    } else {
+                        institution.getAdditionalData().put(f.getName(), f.getValue());
+                    }
+                } else {
+                    if (f.getFieldType().equals("combo") && f.getBooleanValue()) {
+                        currentUser.getAdditionalData().put(f.getName(), f.getSubValue());
+                    } else {
+                        currentUser.getAdditionalData().put(f.getName(), f.getValue());
+                    }
+                }
+            }
+        }
+
+        try {
+            InstitutionManager.saveInstitution(institution);
+            UserManager.saveUser(currentUser);
+        } catch (DAOException e) {
+            log.error(e);
+        }
+
+        // TODO send mail to staff to activate account
 
     }
 
@@ -271,10 +308,6 @@ public class ExternalLoginBean implements Serializable {
         Matcher matcher = pattern.matcher(inLogin);
         valide = matcher.matches();
         return valide;
-    }
-
-    public void createInstitution() {
-
     }
 
     public void next() {

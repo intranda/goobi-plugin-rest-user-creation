@@ -559,12 +559,13 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <div class="submit">
                 <button
+                jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
                     jsf:action="#{externalLoginBean.back}"
                     jsf:id="goBack"
                     class="float-left btn btn-primary font-size-s">
                     <h:outputText value="#{msgs.back}" />
                 </button>
-
+<!-- 
                 <button
                     jsf:id="reloadConfig"
                     jsf:action="#{externalLoginBean.reloadConfiguration}"
@@ -572,15 +573,26 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
                     class="btn btn-primary font-size-s">
                     <h:outputText value="#{msgs.reloadConfiguration}" />
                 </button>
-
+-->
                 <button
+                 jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
                     jsf:id="goNext"
                     jsf:action="#{externalLoginBean.next}"
                     style="margin-bottom: 20px;"
                     class="btn btn-primary font-size-s pull-right">
                     <h:outputText value="#{msgs.next}" />
+                </button>
+                
+                 <button
+                 jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
+                    jsf:id="createInsitution"
+                    jsf:action="#{externalLoginBean.createInstitution}"
+                    style="margin-bottom: 20px;"
+                    class="btn btn-primary font-size-s pull-right">
+                    <h:outputText value="#{msgs.createInsitution}" />
 
                 </button>
+                
             </div>
 
         </ui:fragment>
