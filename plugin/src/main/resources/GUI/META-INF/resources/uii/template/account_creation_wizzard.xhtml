@@ -288,8 +288,50 @@
                                 name="placeholder"
                                 value="#{field.label}" />
                         </x:inputText>
-
-
+                        <x:inputTextarea
+                            rendered="#{field.fieldType=='textarea'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.value}"
+                            required="#{field.required}">
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:passThroughAttribute
+                                name="placeholder"
+                                value="#{field.label}" />
+                        </x:inputTextarea>
+                        <h:selectOneMenu
+                            rendered="#{field.fieldType=='dropdown'}"
+                            styleClass="form-control"
+                            value="#{field.value}"
+                            pt:aria-label="#{field.label}">
+                            <f:selectItem
+                                itemValue="null"
+                                itemLabel="#{msgs.bitteAuswaehlen}" />
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneMenu>
+                        <h:selectBooleanCheckbox
+                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.booleanValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                        </h:selectBooleanCheckbox>
+                        <h:selectOneRadio
+                            rendered="#{field.fieldType=='combo' and field.booleanValue}"
+                            styleClass="form-control"
+                            value="#{field.subValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneRadio>
                     </div>
                 </div>
             </ui:repeat>
@@ -317,7 +359,6 @@
                         class="fa fa-asterisk pull-right font-asterisk"
                         title="#{msgs.requiredField}"
                         data-toggle="tooltip" />
-
                     <div class="email controls">
                         <x:inputText
                             rendered="#{field.fieldType=='input'}"
@@ -332,7 +373,6 @@
                                 name="placeholder"
                                 value="#{field.label}" />
                         </x:inputText>
-
                         <x:inputTextarea
                             rendered="#{field.fieldType=='textarea'}"
                             pt:aria-label="#{field.label}"
@@ -346,8 +386,6 @@
                                 name="placeholder"
                                 value="#{field.label}" />
                         </x:inputTextarea>
-
-
                         <h:selectOneMenu
                             rendered="#{field.fieldType=='dropdown'}"
                             styleClass="form-control"
@@ -361,16 +399,24 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneMenu>
-
-                        <h:selectBooleanCheckbox 
-                            rendered="#{field.fieldType=='checkbox'}"
+                        <h:selectBooleanCheckbox
+                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
                             value="#{field.booleanValue}">
                             <f:ajax
-                                render="@this"
+                                render="@form"
                                 execute="@this" />
                         </h:selectBooleanCheckbox>
+                        <h:selectOneRadio
+                            rendered="#{field.fieldType=='combo' and field.booleanValue}"
+                            styleClass="form-control"
+                            value="#{field.subValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneRadio>
                     </div>
                 </div>
             </ui:repeat>
@@ -379,31 +425,134 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page4'}">
-               <h2>
+            <h2>
                 <h:outputText value="#{msgs.login_new_additionalData}" />
             </h2>
 
+            <ui:repeat
+                var="field"
+                value="#{externalLoginBean.additionalFields['page4']}">
 
-Zugriffs- und Nutzungsberechtigung: Ich möchte eine Zugriffs- und Nutzungsberechtigung als Standard-Einstellung für alle zukünftig abgelieferten Publikationen vergeben. 
+                <div class="form-group">
+                    <h:outputLabel value="#{field.label}" />
+                    <i
+                        jsf:rendered="#{field.required}"
+                        class="fa fa-asterisk pull-right font-asterisk"
+                        title="#{msgs.requiredField}"
+                        data-toggle="tooltip" />
+                    <div class="email controls">
+                        <x:inputText
+                            rendered="#{field.fieldType=='input'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.value}"
+                            required="#{field.required}">
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:passThroughAttribute
+                                name="placeholder"
+                                value="#{field.label}" />
+                        </x:inputText>
+                        <x:inputTextarea
+                            rendered="#{field.fieldType=='textarea'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.value}"
+                            required="#{field.required}">
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:passThroughAttribute
+                                name="placeholder"
+                                value="#{field.label}" />
+                        </x:inputTextarea>
+                        <h:selectOneMenu
+                            rendered="#{field.fieldType=='dropdown'}"
+                            styleClass="form-control"
+                            value="#{field.value}"
+                            pt:aria-label="#{field.label}">
+                            <f:selectItem
+                                itemValue="null"
+                                itemLabel="#{msgs.bitteAuswaehlen}" />
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneMenu>
+                        <h:selectBooleanCheckbox
+                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.booleanValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                        </h:selectBooleanCheckbox>
+                        <h:selectOneRadio
+                            rendered="#{field.fieldType=='combo' and field.booleanValue}"
+                            styleClass="form-control"
+                            value="#{field.subValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneRadio>
+                    </div>
+                </div>
+            </ui:repeat>
 
-Informationstext: Informationen zu den Zugriffsberechtigungen und Nutzungslizenzen finden Sie [hier | Link zu einer Webseite mit Erläuterungen zu gesetzlichen Rahmenbedingungen und Empfehlungen der ZLB] 
-Checkboxen-Feld
-    • Bei aktivierter Checkbox werden Zugriffs- und Nutzungsberechtigungen zur Auswahl mittels Radiobuttons angezeigt.
 
-Automatische Erinnerung per E-Mail: Ich möchte per E-Mail eine automatische Erinnerung an die Ablieferungspflicht erhalten.
-Checkboxen-Feld
-    • Bei aktivierter Checkbox wird eine Auswahlliste zur Häufigkeit der automatischen Erinnerung angezeigt (monatlich, quartalsweise, jährlich).
-
-
-</ui:fragment>
+        </ui:fragment>
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
-                    <h2>
+            <h2>
                 <h:outputText value="#{msgs.login_new_activation}" />
             </h2>
-        
-        
 
+            <!-- show all fields in read only mode -->
+            <h3>
+                <h:outputText value="#{msgs.login_new_institution}" />
+            </h3>
+            <intranda:formOutputText
+                label="#{msgs.login_new_account_institutionName}"
+                field="#{externalLoginBean.institutionName}"
+                name="institutionName"
+                fieldStyle="form-control" />
+            <ui:repeat
+                var="field"
+                value="#{externalLoginBean.additionalFields['page2']}">
+                <intranda:formOutputText
+                    name="field"
+                    label="#{field.label}"
+                    field="#{field.value}"
+                    fieldStyle="form-control" />
+            </ui:repeat>
+            <h3>
+                <h:outputText value="#{msgs.login_new_contact}" />
+            </h3>
+            <ui:repeat
+                var="field"
+                value="#{externalLoginBean.additionalFields['page3']}">
+                <intranda:formOutputText
+                    name="field"
+                    label="#{field.label}"
+                    field="#{field.value}"
+                    fieldStyle="form-control" />
+            </ui:repeat>
+            <h3>
+                <h:outputText value="#{msgs.login_new_additionalData}" />
+            </h3>
 
+            <ui:repeat
+                var="field"
+                value="#{externalLoginBean.additionalFields['page4']}">
+                <intranda:formOutputText
+                    name="field"
+                    label="#{field.label}"
+                    field="#{field.value}"
+                    fieldStyle="form-control" />
+            </ui:repeat>       
+                
 Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitaler Pflichtpublikationen
 </ui:fragment>
 

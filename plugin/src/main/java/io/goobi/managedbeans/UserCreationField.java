@@ -20,7 +20,7 @@ public class UserCreationField {
     private String validationErrorDescription;
 
     private String value;
-
+    private String subValue;
     private List<String> selectItemList;
 
 

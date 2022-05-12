@@ -123,7 +123,7 @@ public class ExternalLoginBean implements Serializable {
             if (configuredFields == null) {
                 configuredFields = new ArrayList<>();
             }
-            if (ucf.getFieldType().equals("dropdown")) {
+            if (ucf.getFieldType().equals("dropdown") || ucf.getFieldType().equals("combo")) {
                 List<String> valueList = Arrays.asList(hc.getStringArray("/value"));
                 ucf.setSelectItemList(valueList);
             }
