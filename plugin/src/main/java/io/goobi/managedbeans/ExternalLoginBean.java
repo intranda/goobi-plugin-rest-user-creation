@@ -93,6 +93,9 @@ public class ExternalLoginBean implements Serializable {
     @Setter
     private String institutionName;
 
+    @Getter
+    private boolean institutionNameInvalid = false;
+
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
     private Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
@@ -118,7 +121,8 @@ public class ExternalLoginBean implements Serializable {
             ucf.setPosition(hc.getString("@position", ""));
             ucf.setRequired(hc.getBoolean("@required", false));
             ucf.setValidation(hc.getString("@validation", null));
-            ucf.setValidationErrorDescription(hc.getString("@validationErrorDescription", null));
+            ucf.setValidationErrorMessage(hc.getString("@validationErrorDescription", null));
+            ucf.setHelpMessage(hc.getString("@helpMessage"));
             List<UserCreationField> configuredFields = additionalFields.get(ucf.getPosition());
             if (configuredFields == null) {
                 configuredFields = new ArrayList<>();
@@ -208,14 +212,7 @@ public class ExternalLoginBean implements Serializable {
 
         user.setStandort("-");
 
-        // TODO default dashboard plugin
-
-        // generate random password
-        // int length = ConfigurationHelper.getInstance().getMinimumPasswordLength() + 10;
-        // String password = createRandomPassword(length);
-
         user.setEncryptedPassword(user.getPasswordHash(password));
-        // save user
 
         try {
             UserManager.saveUser(user);
@@ -255,7 +252,6 @@ public class ExternalLoginBean implements Serializable {
 
     public void createInstitution() {
 
-        //        currentUser.set
         Institution institution = new Institution();
         institution.setLongName(institutionName);
         institution.setShortName(institutionName);
@@ -334,7 +330,25 @@ public class ExternalLoginBean implements Serializable {
 
     private boolean validateFields(String pageName) {
 
-        return true;
+        boolean valid = true;
+
+        if ("page2".equals(pageName)) {
+            // validate institution name, not empty and max 255 character
+            if (StringUtils.isBlank(institutionName) || institutionName.length() > 255) {
+                institutionNameInvalid = true;
+                valid = false;
+            } else {
+                institutionNameInvalid = false;
+            }
+        }
+
+        List<UserCreationField> fields = additionalFields.get(pageName);
+        for (UserCreationField field : fields) {
+            if (!field.validateValue()) {
+                valid = false;
+            }
+        }
+        return valid;
 
     }
 
@@ -354,8 +368,4 @@ public class ExternalLoginBean implements Serializable {
         }
     }
 
-    // TODO remove after tests
-    public void reloadConfiguration() {
-        readConfiguration();
-    }
 }

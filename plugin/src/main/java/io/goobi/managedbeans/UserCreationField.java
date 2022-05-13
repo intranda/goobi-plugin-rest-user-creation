@@ -17,22 +17,48 @@ public class UserCreationField {
     private String position;
     private boolean required;
     private String validation;
-    private String validationErrorDescription;
+    private String validationErrorMessage;
 
     private String value;
     private String subValue;
     private List<String> selectItemList;
 
+    private boolean validationError = false;
+
+    private String helpMessage;
 
     public void setBooleanValue(boolean val) {
         if (val) {
-            value ="true";
+            value = "true";
         } else {
-            value="false";
+            value = "false";
         }
     }
 
     public boolean getBooleanValue() {
         return StringUtils.isNotBlank(value) && "true".equals(value);
+    }
+
+    public boolean validateValue() {
+
+        String val = value;
+        if (StringUtils.isNotBlank(subValue)) {
+            val = subValue;
+        }
+
+        validationError = false;
+        if (required && StringUtils.isBlank(val)) {
+            validationError = true;
+            return false;
+        }
+
+        if (StringUtils.isNotBlank(validation) && StringUtils.isNotBlank(val)) {
+            if (!val.matches(validation)) {
+                validationError = true;
+                return false;
+            }
+
+        }
+        return true;
     }
 }

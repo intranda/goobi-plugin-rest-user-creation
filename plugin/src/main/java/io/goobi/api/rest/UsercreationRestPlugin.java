@@ -63,6 +63,7 @@ public class UsercreationRestPlugin {
             User user = UserManager.getUserByLogin(accountName);
             user.lazyLoad();
             //            userBean.setMyBenutzer(user);
+            // TODO check, if institution is already assigned. abort
 
             elb.setCurrentUser(user);
             elb.setWizzardMode("page2");

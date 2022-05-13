@@ -253,14 +253,23 @@
                         forceId="true"
                         styleClass="form-control"
                         value="#{externalLoginBean.institutionName}"
-                        required="true">
+                        required="false">
                         <f:passThroughAttribute
                             name="placeholder"
                             value="#{msgs.login_new_account_institutionName}" />
                     </x:inputText>
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{externalLoginBean.institutionNameInvalid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{msgs.login_new_account_institutionNameInvalid}" />
+                    </h:panelGroup>
+                    <h:outputText
+                        styleClass="help-block font-light"
+                        rendered="#{NavigationForm.showHelp}"
+                        value="#{fieldy.login_new_account_institutionNameHelp}" />
                 </div>
             </div>
-
 
             <ui:repeat
                 var="field"
@@ -276,11 +285,11 @@
 
                     <div class="email controls">
                         <x:inputText
+                            id="input"
                             rendered="#{field.fieldType=='input'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
-                            value="#{field.value}"
-                            required="#{field.required}">
+                            value="#{field.value}">
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
@@ -289,11 +298,11 @@
                                 value="#{field.label}" />
                         </x:inputText>
                         <x:inputTextarea
+                            id="textarea"
                             rendered="#{field.fieldType=='textarea'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
-                            value="#{field.value}"
-                            required="#{field.required}">
+                            value="#{field.value}">
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
@@ -302,6 +311,7 @@
                                 value="#{field.label}" />
                         </x:inputTextarea>
                         <h:selectOneMenu
+                            id="dropdown"
                             rendered="#{field.fieldType=='dropdown'}"
                             styleClass="form-control"
                             value="#{field.value}"
@@ -324,6 +334,7 @@
                                 execute="@this" />
                         </h:selectBooleanCheckbox>
                         <h:selectOneRadio
+                            id="radio"
                             rendered="#{field.fieldType=='combo' and field.booleanValue}"
                             styleClass="form-control"
                             value="#{field.subValue}">
@@ -332,17 +343,21 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneRadio>
+
+                        <h:panelGroup
+                            layout="block"
+                            rendered="#{field.validationError}"
+                            styleClass="font-danger validation-message">
+                            <h:outputText value="#{field.validationErrorMessage}" />
+                        </h:panelGroup>
+                        <h:outputText
+                            styleClass="help-block font-light"
+                            rendered="#{NavigationForm.showHelp}"
+                            value="#{fieldy.helpMessage}" />
                     </div>
                 </div>
             </ui:repeat>
-
-
-
-
-
         </ui:fragment>
-
-
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page3'}">
             <h2>
@@ -364,8 +379,7 @@
                             rendered="#{field.fieldType=='input'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
-                            value="#{field.value}"
-                            required="#{field.required}">
+                            value="#{field.value}">
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
@@ -377,8 +391,7 @@
                             rendered="#{field.fieldType=='textarea'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
-                            value="#{field.value}"
-                            required="#{field.required}">
+                            value="#{field.value}">
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
@@ -417,6 +430,16 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneRadio>
+                        <h:panelGroup
+                            layout="block"
+                            rendered="#{field.validationError}"
+                            styleClass="font-danger validation-message">
+                            <h:outputText value="#{field.validationErrorMessage}" />
+                        </h:panelGroup>
+                        <h:outputText
+                            styleClass="help-block font-light"
+                            rendered="#{NavigationForm.showHelp}"
+                            value="#{fieldy.helpMessage}" />
                     </div>
                 </div>
             </ui:repeat>
@@ -445,8 +468,7 @@
                             rendered="#{field.fieldType=='input'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
-                            value="#{field.value}"
-                            required="#{field.required}">
+                            value="#{field.value}">
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
@@ -458,8 +480,7 @@
                             rendered="#{field.fieldType=='textarea'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
-                            value="#{field.value}"
-                            required="#{field.required}">
+                            value="#{field.value}">
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
@@ -498,6 +519,16 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneRadio>
+                        <h:panelGroup
+                            layout="block"
+                            rendered="#{field.validationError}"
+                            styleClass="font-danger validation-message">
+                            <h:outputText value="#{field.validationErrorMessage}" />
+                        </h:panelGroup>
+                        <h:outputText
+                            styleClass="help-block font-light"
+                            rendered="#{NavigationForm.showHelp}"
+                            value="#{fieldy.helpMessage}" />
                     </div>
                 </div>
             </ui:repeat>
@@ -559,32 +590,24 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <div class="submit">
                 <button
-                jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
+                    jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
                     jsf:action="#{externalLoginBean.back}"
                     jsf:id="goBack"
                     class="float-left btn btn-primary font-size-s">
                     <h:outputText value="#{msgs.back}" />
                 </button>
-<!-- 
+
                 <button
-                    jsf:id="reloadConfig"
-                    jsf:action="#{externalLoginBean.reloadConfiguration}"
-                    style="margin-bottom: 20px;"
-                    class="btn btn-primary font-size-s">
-                    <h:outputText value="#{msgs.reloadConfiguration}" />
-                </button>
--->
-                <button
-                 jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
+                    jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
                     jsf:id="goNext"
                     jsf:action="#{externalLoginBean.next}"
                     style="margin-bottom: 20px;"
                     class="btn btn-primary font-size-s pull-right">
                     <h:outputText value="#{msgs.next}" />
                 </button>
-                
-                 <button
-                 jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
+
+                <button
+                    jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
                     jsf:id="createInsitution"
                     jsf:action="#{externalLoginBean.createInstitution}"
                     style="margin-bottom: 20px;"
@@ -592,7 +615,7 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
                     <h:outputText value="#{msgs.createInsitution}" />
 
                 </button>
-                
+
             </div>
 
         </ui:fragment>
