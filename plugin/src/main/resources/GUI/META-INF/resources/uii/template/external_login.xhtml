@@ -9,16 +9,21 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:o="http://omnifaces.org/ui"
     xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites"
-    xmlns:jsf="http://xmlns.jcp.org/jsf">
+    xmlns:jsf="http://xmlns.jcp.org/jsf"
+ 	template="/uii/templatePG/templatePG.html">
 
     <composite:interface>
     </composite:interface>
 
     <composite:implementation>
+
+
         <main>
+        	<!--
             <h:panelGroup layout="block"
                 styleClass="wrapper wide"
                 style="#{externalLoginBean.uiStatus == 'accountCreation'? 'top: 30%' : 'top: 50%' } ">
+                -->
                 <h1>
                     <a href="index.xhtml">
                         <h:outputText
@@ -30,7 +35,7 @@
                 <div
                     id="login-body"
                     class="login-body"
-                    style="margin-bottom: 5px;">
+                    >
                     <h:outputText
                         style="color:red;"
                         value="Developer Mode ON"
@@ -99,46 +104,48 @@
                                         </x:inputSecret>
                                     </div>
                                 </div>
-                                <div class="submit">
-                                    <ui:fragment rendered="#{LoginForm.userCreationEnabled}">
+
+                                <div class="form-actions">
+                                    <div class="submit">
+                                        <ui:fragment rendered="#{LoginForm.userCreationEnabled}">
+                                            <button
+                                                jsf:id="createAccount"
+                                                class="btn btn-blank me-2">
+                                                <f:setPropertyActionListener
+                                                    value="accountCreation"
+                                                    target="#{externalLoginBean.uiStatus}" />
+                                                <h:outputText value="#{msgs.login_createAccount}" />
+                                            </button>
+                                        </ui:fragment>
+
+
+                                        <ui:fragment rendered="#{LoginForm.useOpenIDConnect}">
+                                            <button
+                                                jsf:id="openIdLogin"
+                                                jsf:action="#{LoginForm.openIDLogin}"
+                                                class="btn btn-blank">
+                                                OpenID connect
+                                            </button>
+                                        </ui:fragment>
                                         <button
-                                            jsf:id="createAccount"
-                                            class="float-left btn font-size-s"
-                                            style="background: #fff; outline: 1px solid #368ee0;">
+                                            jsf:id="loginButton"
+                                            jsf:action="#{LoginForm.Einloggen}"
+                                            class="btn btn-primary-400">
+                                            <h:outputText value="#{msgs.einloggen}" />
                                             <f:setPropertyActionListener
-                                                value="accountCreation"
-                                                target="#{externalLoginBean.uiStatus}" />
-                                            <h:outputText value="#{msgs.login_createAccount}" />
+                                                target="#{NavigationForm.aktuell}"
+                                                value="a0" />
                                         </button>
-                                    </ui:fragment>
-
-
-                                    <ui:fragment rendered="#{LoginForm.useOpenIDConnect}">
-                                        <button
-                                            jsf:id="openIdLogin"
-                                            jsf:action="#{LoginForm.openIDLogin}"
-                                            class="float-left btn font-size-s"
-                                            style="background: #fff; outline: 1px solid #368ee0;">OpenID connect</button>
-                                    </ui:fragment>
-                                    <button
-                                        jsf:id="loginButton"
-                                        jsf:action="#{LoginForm.Einloggen}"
-                                        style="margin-bottom: 20px;"
-                                        class="btn btn-primary font-size-s pull-right">
-                                        <h:outputText value="#{msgs.einloggen}" />
-                                        <f:setPropertyActionListener
-                                            target="#{NavigationForm.aktuell}"
-                                            value="a0" />
-                                    </button>
+                                    </div>
                                 </div>
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{externalLoginBean.uiStatus == 'accountCreation'}">
                             <ui:include src="account_creation_wizzard.xhtml"/>
-                            
-                                
 
-                              
+
+
+
 
                             </h:panelGroup>
 
@@ -203,7 +210,9 @@
                     styleClass="pull-right"
                     value="#{msgs.version} #{HelperForm.version}" />
 
+			<!--
             </h:panelGroup>
+            -->
         </main>
     </composite:implementation>
 
