@@ -9,6 +9,7 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:o="http://omnifaces.org/ui"
     xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites"
+    xmlns:zlb="http://xmlns.jcp.org/jsf/composite/composites"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <composite:interface>
@@ -21,209 +22,194 @@
                 <h:outputText value="#{msgs.login_new_account}" />
             </h2>
 
-            <!-- account name -->
+            <!-- firstname -->
             <div class="form-group">
-                <h:outputLabel
-                    for="accountName"
-                    value="#{msgs.login_new_account_accountName}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
-                <div class="email controls">
-                    <x:inputText
-                        id="accountName"
-                        pt:aria-label="#{msgs.login_new_account_accountName}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.accountName}"
-                        required="true">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="#{msgs.login_new_account_accountName}" />
-                    </x:inputText>
-                </div>
+                <zlb:label
+                    labelFor="firstname"
+                    labelText="#{msgs.firstname}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
+
+                <x:inputText
+                    id="firstname"
+                    pt:aria-label="#{msgs.firstname}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.firstname}">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="#{msgs.firstname}" />
+                </x:inputText>
             </div>
+
+            <!-- lastname -->
+            <div class="form-group">
+                <zlb:label
+                    labelFor="lastname"
+                    labelText="#{msgs.lastname}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
+
+                <x:inputText
+                    id="lastname"
+                    pt:aria-label="#{msgs.lastname}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.lastname}">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="#{msgs.lastname}" />
+                </x:inputText>
+            </div>
+
+            <!-- account name -->
+            <!--
+            <div class="form-group">
+                <zlb:label
+                    labelFor="accountName"
+                    labelText="#{msgs.login_new_account_accountName}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
+
+                <x:inputText
+                    id="accountName"
+                    pt:aria-label="#{msgs.login_new_account_accountName}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.accountName}"
+                    required="true">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="#{msgs.login_new_account_accountName}" />
+                </x:inputText>
+
+            </div>
+            -->
 
             <!-- password -->
             <div class="form-group">
-                <h:outputLabel
-                    for="password"
-                    value="#{msgs.login_new_account_password}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
-                <div class="email controls">
-                    <x:inputSecret
-                        id="password"
-                        pt:aria-label="#{msgs.login_new_account_password}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.password}"
-                        required="true">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="#{msgs.login_new_account_password}" />
-                    </x:inputSecret>
-                </div>
+                <zlb:label
+                    labelFor="password"
+                    labelText="#{msgs.login_new_account_password}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
+
+                <x:inputSecret
+                    id="password"
+                    pt:aria-label="#{msgs.login_new_account_password}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.password}"
+                    required="true">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="#{msgs.login_new_account_password}" />
+                </x:inputSecret>
             </div>
 
             <!-- confirm password -->
             <div class="form-group">
-                <h:outputLabel
-                    for="password2"
-                    value="#{msgs.login_new_account_password2}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
-                <div class="email controls">
-                    <x:inputSecret
-                        id="password2"
-                        pt:aria-label="#{msgs.login_new_account_password2}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.confirmPassword}"
-                        required="true">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="#{msgs.login_new_account_password2}" />
-                    </x:inputSecret>
-                </div>
+                <zlb:label
+                    labelFor="password2"
+                    labelText="#{msgs.login_new_account_password2}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
+
+                <x:inputSecret
+                    id="password2"
+                    pt:aria-label="#{msgs.login_new_account_password2}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.confirmPassword}"
+                    required="true">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="#{msgs.login_new_account_password2}" />
+                </x:inputSecret>
             </div>
 
-
-
-            <!-- firstname -->
-            <div class="form-group">
-                <h:outputLabel
-                    for="firstname"
-                    value="#{msgs.firstname}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
-                <div class="email controls">
-                    <x:inputText
-                        id="firstname"
-                        pt:aria-label="#{msgs.firstname}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.firstname}">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="#{msgs.firstname}" />
-                    </x:inputText>
-                </div>
-            </div>
-            <!-- lastname -->
-            <div class="form-group">
-                <h:outputLabel
-                    for="lastname"
-                    value="#{msgs.lastname}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
-
-                <div class="email controls">
-                    <x:inputText
-                        id="lastname"
-                        pt:aria-label="#{msgs.lastname}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.lastname}">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="#{msgs.lastname}" />
-                    </x:inputText>
-                </div>
-            </div>
 
             <!-- email address -->
             <div class="form-group">
-                <h:outputLabel
-                    for="emailAddress"
-                    value="#{msgs.login_new_account_emailAddress}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
-                <div class="email controls">
-                    <x:inputText
-                        id="emailAddress"
-                        pt:aria-label="#{msgs.login_new_account_emailAddress}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.emailAddress}"
-                        required="true">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="#{msgs.login_new_account_emailAddress}" />
-                    </x:inputText>
-                </div>
+                <zlb:label
+                    labelFor="emailAddress"
+                    labelText="#{msgs.login_new_account_emailAddress}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
+
+                <x:inputText
+                    id="emailAddress"
+                    pt:aria-label="#{msgs.login_new_account_emailAddress}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.emailAddress}"
+                    required="true">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="#{msgs.login_new_account_emailAddress}" />
+                </x:inputText>
             </div>
+
             <!-- confirm email -->
-
             <div class="form-group">
-                <h:outputLabel
-                    for="emailAddress2"
-                    value="#{msgs.login_new_account_emailAddress2}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
+                <zlb:label
+                    labelFor="emailAddress2"
+                    labelText="#{msgs.login_new_account_emailAddress2}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
 
-                <div class="email controls">
-                    <x:inputText
-                        id="emailAddress2"
-                        pt:aria-label="#{msgs.login_new_account_emailAddress2}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.confirmEmailAddress}"
-                        required="true">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="#{msgs.login_new_account_emailAddress2}" />
-                    </x:inputText>
-                </div>
+                <x:inputText
+                    id="emailAddress2"
+                    pt:aria-label="#{msgs.login_new_account_emailAddress2}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.confirmEmailAddress}"
+                    required="true">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="#{msgs.login_new_account_emailAddress2}" />
+                </x:inputText>
             </div>
 
-            <div class="form-group">
-                <h:outputLabel
-                    for="privacyStatement"
-                    value="#{msgs.login_new_account_confirmPrivacyStatement}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
+            <div class="form-group confirm-privacy">
 
-                <div class="email controls">
-                    <h:selectBooleanCheckbox
-                        id="privacyStatement"
-                        pt:aria-label="#{msgs.login_new_account_confirmPrivacyStatement}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.privacyTextAccepted}"
-                        required="true">
-                    </h:selectBooleanCheckbox>
-                </div>
+                <h:selectBooleanCheckbox
+                    id="privacyStatement"
+                    pt:aria-label="#{msgs.login_new_account_confirmPrivacyStatement}"
+                    forceId="true"
+                    styleClass="form-check-input"
+                    value="#{externalLoginBean.privacyTextAccepted}"
+                    required="true">
+                </h:selectBooleanCheckbox>
+
+                <zlb:label
+                    labelFor="privacyStatement"
+                    labelText="#{msgs.login_new_account_confirmPrivacyStatement}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true"
+                />
             </div>
-            <div class="submit">
+
+            <div class="form-actions">
                 <!-- create button -->
                 <button
                     jsf:action="#{externalLoginBean.createAccount}"
                     jsf:id="create"
-                    class="pull-right btn font-size-s"
-                    style="background: #fff; outline: 1px solid #368ee0;">
+                    class="btn btn-primary-400 me-2"
+                >
                     <h:outputText value="#{msgs.login_new_account_createAccount}" />
                 </button>
                 <!-- cancel button -->
                 <button
                     jsf:id="back"
-                    class="float-left btn font-size-s"
-                    style="background: #fff; outline: 1px solid #368ee0;"
+                    class="btn btn-blank"
                     jsf:immediate="true">
                     <f:setPropertyActionListener
                         value=""
@@ -582,8 +568,8 @@
                     label="#{field.label}"
                     field="#{field.value}"
                     fieldStyle="form-control" />
-            </ui:repeat>       
-                
+            </ui:repeat>
+
 Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitaler Pflichtpublikationen
 </ui:fragment>
 

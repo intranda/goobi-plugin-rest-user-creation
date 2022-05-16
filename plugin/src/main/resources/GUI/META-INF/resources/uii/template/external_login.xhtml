@@ -19,22 +19,17 @@
 
 
         <main>
-        	<!--
-            <h:panelGroup layout="block"
-                styleClass="wrapper wide"
-                style="#{externalLoginBean.uiStatus == 'accountCreation'? 'top: 30%' : 'top: 50%' } ">
-                -->
-                <h1>
-                    <a href="index.xhtml">
-                        <h:outputText
-                            escape="false"
-                            value="#{HelperForm.applicationHeaderTitle}" />
-                    </a>
-                </h1>
+            <h1>
+                <a href="index.xhtml">
+                    <h:outputText
+                        escape="false"
+                        value="#{HelperForm.applicationHeaderTitle}" />
+                </a>
+            </h1>
 
                 <div
                     id="login-body"
-                    class="login-body"
+                    class="#{externalLoginBean.uiStatus != 'accountCreation' ? 'login-body' : ''} container"
                     >
                     <h:outputText
                         style="color:red;"
@@ -46,7 +41,7 @@
                                 value="#{msgs.login}" />
                         </h2>
                         <h:form
-                            styleClass="form-validate"
+                            styleClass="form-validate #{externalLoginBean.uiStatus != 'accountCreation' ? '' : 'layout'}"
                             id="loginForm"
                             prependId="false">
                             <h:panelGroup id="globalWarningMessage">
@@ -81,9 +76,11 @@
                                         <span
                                             class="input-required"
                                             jsf:rendered="#{true}">
-                                            *
+                                            <i class="fa fa-asterisk"/>
                                         </span>
-                                        <ui:include src="../includes/icon-help.xhtml"/>
+                                        <ui:include src="../includes/icon-help.xhtml">
+                                            <ui:param name="helpText" value="Lorem Ipsum" />
+                                        </ui:include>
                                     </label>
                                     <x:inputText
                                         id="login"
@@ -103,9 +100,11 @@
                                         <span
                                             class="input-required"
                                             jsf:rendered="#{true}">
-                                            *
+                                            <i class="fa fa-asterisk"/>
                                         </span>
-                                        <ui:include src="../includes/icon-help.xhtml"/>
+                                        <ui:include src="../includes/icon-help.xhtml">
+                                            <ui:param name="helpText" value="Lorem Ipsum" />
+                                        </ui:include>
                                     </label>
                                     <x:inputSecret
                                         id="passwort"

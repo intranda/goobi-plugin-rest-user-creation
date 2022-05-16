@@ -21,6 +21,16 @@ body {
   min-height: 100vh;
 }
 
+/* Typography */
+h1, h2 {
+  color: var(--clr-primary-400);
+}
+
+h2 {
+  font-size: 2.2rem;
+  line-height: 2.6rem;
+}
+
 /* Buttons */
 .btn-primary-400:hover {
   background-color: var(--clr-primary-200);
@@ -105,6 +115,7 @@ main h1 {
   margin: auto;
   padding: 64px;
   background-color: var(--clr-neutral-400);
+  max-width: 480px;
 }
 
 .login-body h2 {
@@ -114,7 +125,6 @@ main h1 {
 /* Form elements */
 
 .form-group {
-  min-width: 420px;
   padding-left: 0;
   padding-right: 0;
 }
@@ -126,31 +136,35 @@ main h1 {
 .form-group svg {
   height: 1.2rem;
   width: 1.2rem;
-}
-
-.form-group svg {
+  cursor: pointer;
   margin-left: 4px;
   color: var(--clr-primary-400);
   vertical-align: super;
 }
 
+.form-group .fa-asterisk {
+  font-size: .8rem;
+  vertical-align: super;
+}
+
 .form-control {
   font-size: 1.4rem;
-
 }
 
 .form-text {
   font-size: 1.2rem;
 }
 
-
 .form-actions {
   padding-left: 0;
   padding-right: 0;
+  grid-column: -1 / 1;
 }
 
-
-
+/* Create account */
+.confirm-privacy {
+  grid-column: 1 / -1;
+}
 
 /* FOOTER */
 
@@ -201,9 +215,16 @@ main h1 {
 
 /* Views */
 
-#createAccount {
+.layout {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(48rem, 1fr));
 	gap: var(--gap);
+  border-radius: var(--border-radius);
 }
+
+.layout #globalWarningMessage,
+.layout h2 {
+  grid-column: 1 / -1;
+}
+
 

@@ -105,6 +105,7 @@
     <link rel="stylesheet" href="template/assets/css/index.css?v=#{HelperForm.buildVersion}" />
 
 
+
     <script src="template/js/intranda.js?v=1.2"></script>
     <!-- jQuery -->
     <h:outputScript
@@ -122,8 +123,13 @@
     <!-- slimScroll -->
     <script src="template/js/plugins/slimscroll/jquery.slimscroll.min.js?v=#{HelperForm.buildVersion}"></script>
     <!-- Bootstrap -->
+
+    <!-- BS 5 -->
+    <script src="template/js/PG/bootstrap.bundle.min.js?v=#{HelperForm.buildVersion}"></script>
+    <!--
     <script src="template/js/bootstrap.min.js?v=#{HelperForm.buildVersion}"></script>
     <script src="template/js/bootstrap-slider.js?v=#{HelperForm.buildVersion}"></script>
+    -->
     <!-- Bootbox -->
     <script src="template/js/plugins/bootbox/jquery.bootbox.js?v=#{HelperForm.buildVersion}"></script>
     <!-- Bootbox -->
@@ -168,6 +174,7 @@
 <ui:insert name="metadata" />
 
 <h:body
+    id="zlbEPflicht"
     styleClass="#{LoginForm.myBenutzer == null?'login':'sidebar-right'}"
     >
     <ds:windowId />
@@ -310,17 +317,11 @@
                 }
             });
 
-            $(document).ready(function () {
-                $('[data-toggle="tooltip"]').tooltip();
-                $('[data-toggle="popover"]').popover();
-                if ($('.popover.fade.right.in').length > 0) {
-                    $('.popover.fade.right.in').remove();
-                }
-                setTimeout(scrollDownScrollDowns(), 100);
-                if(typeof updateGoobiScriptIndicator !== 'undefined') {
-                	setTimeout(updateGoobiScriptIndicator, 500);
-                }
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"], [data-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+              return new bootstrap.Tooltip(tooltipTriggerEl)
             });
+
 
             $(document).bind('keyup', '#{LoginForm.myBenutzer.shortcutPrefix}+right', function () {
                 var myButton = $("a[id$=':navnext']")
