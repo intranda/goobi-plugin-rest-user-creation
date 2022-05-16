@@ -10,7 +10,10 @@
   --clr-text-body: #333333;
   --clr-text-light: #FFFFFF;
 
+  /* Sizing */
+  --fs-400: 1.6rem;
   --height-footer-and-nav: 139px;
+  --gap: 4.8rem;
 }
 
 /* GENERAL */
@@ -27,6 +30,12 @@ body {
 .btn-blank {
   color: var(--clr-text-body);
   border-color: var(--clr-text-body);
+}
+
+.btn-blank:hover {
+  background-color: var(--clr-text-body);
+  border-color: var(--clr-text-body);
+  color: var(--clr-text-light);
 }
 
 
@@ -102,9 +111,46 @@ main h1 {
   text-transform: uppercase;
 }
 
+/* Form elements */
+
 .form-group {
   min-width: 420px;
+  padding-left: 0;
+  padding-right: 0;
 }
+
+.form-group label {
+  font-weight: 400;
+}
+
+.form-group svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.form-group svg {
+  margin-left: 4px;
+  color: var(--clr-primary-400);
+  vertical-align: super;
+}
+
+.form-control {
+  font-size: 1.4rem;
+
+}
+
+.form-text {
+  font-size: 1.2rem;
+}
+
+
+.form-actions {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+
 
 /* FOOTER */
 
@@ -152,3 +198,12 @@ main h1 {
   color: var(--clr-primary-400);
   text-decoration: underline;
 }
+
+/* Views */
+
+#createAccount {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(48rem, 1fr));
+	gap: var(--gap);
+}
+

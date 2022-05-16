@@ -77,32 +77,47 @@
                                                                                                                                     }
                                                                                                                                 </script>
                                 <div class="form-group">
-                                    <div class="email controls">
-                                        <x:inputText
-                                            id="login"
-                                            pt:aria-label="#{msgs.login}"
-                                            forceId="true"
-                                            styleClass="form-control"
-                                            value="#{LoginForm.login}">
-                                            <f:passThroughAttribute
-                                                name="placeholder"
-                                                value="#{msgs.login}" />
-                                        </x:inputText>
-                                    </div>
+                                    <label for="login">User name
+                                        <span
+                                            class="input-required"
+                                            jsf:rendered="#{true}">
+                                            *
+                                        </span>
+                                        <ui:include src="../includes/icon-help.xhtml"/>
+                                    </label>
+                                    <x:inputText
+                                        id="login"
+                                        pt:aria-label="#{msgs.login}"
+                                        forceId="true"
+                                        styleClass="form-control"
+                                        value="#{LoginForm.login}">
+                                        <f:passThroughAttribute
+                                            name="placeholder"
+                                            value="#{msgs.login}" />
+                                    </x:inputText>
+                                    <div id="loginHelp" class="form-text">Help text (visible when clicking help button in the upper right corner)</div>
                                 </div>
+
                                 <div class="form-group">
-                                    <div class="pw controls">
-                                        <x:inputSecret
-                                            id="passwort"
-                                            pt:aria-label="#{msgs.passwort}"
-                                            forceId="true"
-                                            styleClass="form-control"
-                                            value="#{LoginForm.passwort}">
-                                            <f:passThroughAttribute
-                                                name="placeholder"
-                                                value="#{msgs.passwort}" />
-                                        </x:inputSecret>
-                                    </div>
+                                    <label for="passwort">Password
+                                        <span
+                                            class="input-required"
+                                            jsf:rendered="#{true}">
+                                            *
+                                        </span>
+                                        <ui:include src="../includes/icon-help.xhtml"/>
+                                    </label>
+                                    <x:inputSecret
+                                        id="passwort"
+                                        pt:aria-label="#{msgs.passwort}"
+                                        forceId="true"
+                                        styleClass="form-control"
+                                        value="#{LoginForm.passwort}">
+                                        <f:passThroughAttribute
+                                            name="placeholder"
+                                            value="#{msgs.passwort}" />
+                                    </x:inputSecret>
+                                    <div id="passwortHelp" class="form-text">Help text (visible when clicking help button in the upper right corner)</div>
                                 </div>
 
                                 <div class="form-actions">
