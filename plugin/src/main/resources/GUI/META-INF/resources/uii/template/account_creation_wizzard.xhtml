@@ -39,7 +39,7 @@
                     value="#{externalLoginBean.firstname}">
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{msgs.firstname}" />
+                        value="" />
                 </x:inputText>
             </div>
 
@@ -60,7 +60,7 @@
                     value="#{externalLoginBean.lastname}">
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{msgs.lastname}" />
+                        value="" />
                 </x:inputText>
             </div>
 
@@ -83,7 +83,7 @@
                     required="true">
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{msgs.login_new_account_accountName}" />
+                        value="" />
                 </x:inputText>
 
             </div>
@@ -107,7 +107,7 @@
                     required="true">
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{msgs.login_new_account_password}" />
+                        value="" />
                 </x:inputSecret>
             </div>
 
@@ -129,7 +129,7 @@
                     required="true">
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{msgs.login_new_account_password2}" />
+                        value="" />
                 </x:inputSecret>
             </div>
 
@@ -152,7 +152,7 @@
                     required="true">
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{msgs.login_new_account_emailAddress}" />
+                        value="" />
                 </x:inputText>
             </div>
 
@@ -174,7 +174,7 @@
                     required="true">
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{msgs.login_new_account_emailAddress2}" />
+                        value="" />
                 </x:inputText>
             </div>
 
@@ -242,7 +242,7 @@
                         required="false">
                         <f:passThroughAttribute
                             name="placeholder"
-                            value="#{msgs.login_new_account_institutionName}" />
+                            value="" />
                     </x:inputText>
                     <h:panelGroup
                         layout="block"
@@ -281,7 +281,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="#{field.label}" />
+                                value="" />
                         </x:inputText>
                         <x:inputTextarea
                             id="textarea"
@@ -294,7 +294,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="#{field.label}" />
+                                value="" />
                         </x:inputTextarea>
                         <h:selectOneMenu
                             id="dropdown"
@@ -371,7 +371,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="#{field.label}" />
+                                value="" />
                         </x:inputText>
                         <x:inputTextarea
                             rendered="#{field.fieldType=='textarea'}"
@@ -383,7 +383,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="#{field.label}" />
+                                value="" />
                         </x:inputTextarea>
                         <h:selectOneMenu
                             rendered="#{field.fieldType=='dropdown'}"
@@ -460,7 +460,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="#{field.label}" />
+                                value="" />
                         </x:inputText>
                         <x:inputTextarea
                             rendered="#{field.fieldType=='textarea'}"
@@ -472,7 +472,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="#{field.label}" />
+                                value="" />
                         </x:inputTextarea>
                         <h:selectOneMenu
                             rendered="#{field.fieldType=='dropdown'}"

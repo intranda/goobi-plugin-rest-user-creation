@@ -105,10 +105,10 @@ main h1 {
   padding-top: 16px;
   padding-bottom: 40px;
 
+  border-bottom: 1px solid var(--clr-neutral-600);
   width: 100%;
   text-align: center;
-  border-bottom: 1px solid var(--clr-neutral-200)
-
+  text-transform: uppercase;
 }
 
 .login-body {
@@ -134,8 +134,8 @@ main h1 {
 }
 
 .form-group svg {
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 1.6rem;
+  width: 1.6rem;
   cursor: pointer;
   margin-left: 4px;
   color: var(--clr-primary-400);
