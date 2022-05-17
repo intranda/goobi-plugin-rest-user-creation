@@ -22,14 +22,38 @@
                 <h:outputText value="#{msgs.login_new_account}" />
             </h2>
 
+
+
+            <!-- account name -->
+            <div class="form-group">
+                <zlb:label
+                    labelFor="accountName"
+                    labelText="#{msgs.login_new_account_accountName}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
+                <x:inputText
+                    id="accountName"
+                    pt:aria-label="#{msgs.login_new_account_accountName}"
+                    forceId="true"
+                    styleClass="form-control"
+                    value="#{externalLoginBean.accountName}"
+                    required="true">
+                    <f:passThroughAttribute
+                        name="placeholder"
+                        value="" />
+                </x:inputText>
+            </div>
+            <div class="form-group">
+            </div>
+
             <!-- firstname -->
             <div class="form-group">
                 <zlb:label
                     labelFor="firstname"
                     labelText="#{msgs.firstname}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
+                    labelRequired="true" />
 
                 <x:inputText
                     id="firstname"
@@ -49,8 +73,7 @@
                     labelFor="lastname"
                     labelText="#{msgs.lastname}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
+                    labelRequired="true" />
 
                 <x:inputText
                     id="lastname"
@@ -64,39 +87,13 @@
                 </x:inputText>
             </div>
 
-            <!-- account name -->
-            <!--
-            <div class="form-group">
-                <zlb:label
-                    labelFor="accountName"
-                    labelText="#{msgs.login_new_account_accountName}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
-
-                <x:inputText
-                    id="accountName"
-                    pt:aria-label="#{msgs.login_new_account_accountName}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.accountName}"
-                    required="true">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputText>
-
-            </div>
-            -->
-
             <!-- password -->
             <div class="form-group">
                 <zlb:label
                     labelFor="password"
                     labelText="#{msgs.login_new_account_password}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
+                    labelRequired="true" />
 
                 <x:inputSecret
                     id="password"
@@ -117,8 +114,7 @@
                     labelFor="password2"
                     labelText="#{msgs.login_new_account_password2}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
+                    labelRequired="true" />
 
                 <x:inputSecret
                     id="password2"
@@ -140,8 +136,7 @@
                     labelFor="emailAddress"
                     labelText="#{msgs.login_new_account_emailAddress}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
+                    labelRequired="true" />
 
                 <x:inputText
                     id="emailAddress"
@@ -162,8 +157,7 @@
                     labelFor="emailAddress2"
                     labelText="#{msgs.login_new_account_emailAddress2}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
+                    labelRequired="true" />
 
                 <x:inputText
                     id="emailAddress2"
@@ -193,8 +187,7 @@
                     labelFor="privacyStatement"
                     labelText="#{msgs.login_new_account_confirmPrivacyStatement}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true"
-                />
+                    labelRequired="true" />
             </div>
 
             <div class="form-actions">
@@ -202,8 +195,7 @@
                 <button
                     jsf:action="#{externalLoginBean.createAccount}"
                     jsf:id="create"
-                    class="btn btn-primary-400 me-2"
-                >
+                    class="btn btn-primary-400 me-2">
                     <h:outputText value="#{msgs.login_new_account_createAccount}" />
                 </button>
                 <!-- cancel button -->
