@@ -19,18 +19,16 @@
         <composite:attribute name="fieldRequired" default="false" />
         <!-- #{field.value} -->
         <composite:attribute name="value" />
-        <!-- #{field.booleanValue} -->
-        <composite:attribute name="booleanValue" />
-        <!-- #{field.displayType} -->
-        <composite:attribute name="fieldType" default="input" />
+        <!-- #{field.value2} -->
+        <composite:attribute name="secondValue" />
+        <!-- #{field.role} -->
+        <composite:attribute name="role" />        
         <!-- #{field.validationError} -->
         <composite:attribute name="showErrorMessage" default="false" />
         <!-- #{field.validationErrorMessage} -->
         <composite:attribute name="errorMessageText"  />
         <!-- #{field.selectItemList} -->
         <composite:attribute name="selectItems"  />
-        <!-- #{field.subValue} -->
-        <composite:attribute name="subValue"  />
 
         <!-- #{field.helpMessage} ? -->
         <composite:attribute name="placeholderText" default="" />
@@ -44,7 +42,7 @@
         <h:panelGroup
             id="#{cc.attrs.identifier}"
             layout="block"
-            styleClass="form-group #{cc.attrs.mainClass}">
+            styleClass="form-group grid-row #{cc.attrs.mainClass}">
             <label for="#{cc.attrs.identifier}_input">
                 #{cc.attrs.labelText}
                 <h:panelGroup styleClass="input-required" rendered="#{cc.attrs.fieldRequired}">
@@ -59,7 +57,6 @@
             <div class="form-field #{cc.attrs.subClass}">
                 <x:inputText
                     id="#{cc.attrs.identifier}_input"
-                    rendered="#{cc.attrs.fieldType=='input'}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}">
@@ -71,24 +68,23 @@
                         value="#{cc.attrs.placeholderText}" />
                 </x:inputText>
 
-                <x:inputTextarea
-                    id="#{cc.attrs.identifier}_textare"
-                    rendered="#{cc.attrs.fieldType=='textarea'}"
+                <x:inputText
+                    id="#{cc.attrs.identifier}_input2"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}">
+                    value="#{cc.attrs.secondValue}">
                     <f:ajax
                         render="#{cc.attrs.identifier}"
                         execute="@this" />
                     <f:passThroughAttribute
                         name="placeholder"
                         value="#{cc.attrs.placeholderText}" />
-                </x:inputTextarea>
+                </x:inputText>
+
                 <h:selectOneMenu
                     id="#{cc.attrs.identifier}_select"
-                    rendered="#{cc.attrs.fieldType=='dropdown'}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}"
+                    value="#{cc.attrs.role}"
                     pt:aria-label="#{cc.attrs.labelText}">
                     <f:selectItem
                         itemValue="null"
@@ -98,26 +94,7 @@
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneMenu>
-                <h:selectBooleanCheckbox
-                    id="#{cc.attrs.identifier}_checkbox"
-                    rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}"
-                    pt:aria-label="#{cc.attrs.labelText}"
-                    styleClass="form-control"
-                    value="#{cc.attrs.booleanValue}">
-                    <f:ajax
-                        render="#{cc.attrs.identifier}"
-                        execute="@this" />
-                </h:selectBooleanCheckbox>
-                <h:selectOneRadio
-                id="#{cc.attrs.identifier}_radio"
-                    rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
-                    styleClass="form-control"
-                    value="#{cc.attrs.subValue}">
-                    <f:ajax
-                        render="#{cc.attrs.identifier}"
-                        execute="@this" />
-                    <f:selectItems value="#{cc.attrs.selectItems}" />
-                </h:selectOneRadio>
+
 
                 <h:panelGroup
                     layout="block"
