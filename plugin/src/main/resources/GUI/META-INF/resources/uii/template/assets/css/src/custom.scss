@@ -208,10 +208,13 @@ main h1 svg {
 /* custom styles */
 .form-floating {
   display: grid;
-  grid-template-columns: 4fr 4.8rem;
+  grid-template-columns: 4fr 9rem;
   align-items: center;
   @media screen and (max-width: 620px) {
     --grid-tc: 100%;
+  }
+  &--full-width input {
+    grid-column: 1 / -1;
   }
 }
 
@@ -239,11 +242,23 @@ input {
 
 .form-icons {
   display: flex;
+  justify-content: flex-end;
   color: var(--clr-primary-400);
   cursor: pointer;
 
-  svg {
-    margin-inline-start: 0.8rem;
+  &__button {
+    width: 4.4rem;
+    height: 4.4rem;
+    margin-inline-start: 0.2rem;
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+
+    background: #f0f;
+
+    svg {
+      pointer-events: none;
+    }
   }
 }
 

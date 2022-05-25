@@ -679,13 +679,16 @@ main h1 svg {
 /* custom styles */
 .form-floating {
   display: grid;
-  grid-template-columns: 4fr 4.8rem;
+  grid-template-columns: 4fr 9rem;
   align-items: center;
 }
 @media screen and (max-width: 620px) {
   .form-floating {
     --grid-tc: 100%;
   }
+}
+.form-floating--full-width input {
+  grid-column: 1/-1;
 }
 
 input {
@@ -711,11 +714,21 @@ input {
 
 .form-icons {
   display: flex;
+  justify-content: flex-end;
   color: var(--clr-primary-400);
   cursor: pointer;
 }
-.form-icons svg {
-  margin-inline-start: 0.8rem;
+.form-icons__button {
+  width: 4.4rem;
+  height: 4.4rem;
+  margin-inline-start: 0.2rem;
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  background: #f0f;
+}
+.form-icons__button svg {
+  pointer-events: none;
 }
 
 .form-group svg {

@@ -33,6 +33,7 @@
                     inputValue="#{externalLoginBean.accountName}"
                     inputRequired="true"
                     inputPlaceholder="#{msgs.login_new_account_accountName}"
+                    inputDuplicate="true"
                     helpText="lorem ipsum" />
 
                 <zlb:label
@@ -67,6 +68,7 @@
                     inputValue="#{externalLoginBean.lastname}"
                     inputRequired="true"
                     inputPlaceholder="#{msgs.login_new_account_lastname}"
+                    showHelpBtn="false"
                     labelHelpText="Lorem ipsum" />
 
                 <zlb:label
@@ -91,14 +93,8 @@
                         value="" />
                 </x:inputSecret>
 
-                <!-- ICONS -->
-                <div class="form-icons">
-                  <ui:include src="/uii/includes/icon-plus.xhtml" />
-
-                  <ui:include src="/uii/includes/icon-help.xhtml">
-                    <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
-                  </ui:include>
-                </div>
+                <!-- Icons -->
+                <ui:include src="/uii/includes/form_icons.xhtml" />
 
                 <zlb:label
                     labelFor="password"
@@ -106,9 +102,9 @@
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
 
-              <div class="help-text vis-hidden">
-                  Lorem Ipsum
-              </div>
+                <div class="help-text vis-hidden">
+                    Lorem Ipsum
+                </div>
 
             </div>
 
@@ -127,14 +123,8 @@
                         value="" />
                 </x:inputSecret>
 
-                <!-- ICONS -->
-                <div class="form-icons">
-                  <ui:include src="/uii/includes/icon-plus.xhtml" />
-
-                  <ui:include src="/uii/includes/icon-help.xhtml">
-                    <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
-                  </ui:include>
-                </div>
+                <!-- Icons -->
+                <ui:include src="/uii/includes/form_icons.xhtml" />
 
                 <zlb:label
                     labelFor="password2"

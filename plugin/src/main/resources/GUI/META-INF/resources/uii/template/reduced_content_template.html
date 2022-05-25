@@ -252,14 +252,11 @@
                 form.addEventListener('click', handleClick);
 
                 function handleClick(e) {
-                    if(e.target.classList.contains('bi-question-circle')) {
-                    const formElement = e.target.parentElement.parentElement
-                    const helpText = formElement.querySelector('.help-text');
-                    helpText.classList.toggle('vis-hidden');
-                    console.log(helpText)
-
-
-                }
+                    if(e.target.classList.contains('form-icons__button--help')) {
+                        const formElement = e.target.parentElement.parentElement
+                        const helpText = formElement.querySelector('.help-text');
+                        helpText.classList.toggle('vis-hidden');
+                    }
                 }
 
 

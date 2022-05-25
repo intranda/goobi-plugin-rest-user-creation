@@ -79,7 +79,7 @@
                                     */
                                 </script>
 
-                                <div class="form-floating">
+                                <div class="form-floating form-floating--full-width">
 
                                     <zlb:input
                                         inputId="login"
@@ -87,6 +87,7 @@
                                         inputValue="#{LoginForm.login}"
                                         inputRequired="true"
                                         inputPlaceholder="#{LoginForm.login}"
+                                        showHelpBtn="true"
                                         helpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
 
                                     <zlb:label
@@ -96,7 +97,7 @@
                                         labelRequired="true" />
                                 </div>
 
-                                <div class="form-floating">
+                                <div class="form-floating form-floating--full-width">
 
 
                                     <x:inputSecret
@@ -117,13 +118,10 @@
                                         labelRequired="true" />
 
                                     <!-- ICONS -->
-                                    <div class="form-icons">
-                                      <ui:include src="/uii/includes/icon-plus.xhtml" />
-
-                                      <ui:include src="/uii/includes/icon-help.xhtml">
-                                        <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
-                                      </ui:include>
-                                    </div>
+                                    <ui:include src="/uii/includes/form_icons.xhtml" >
+                                        <ui:param name="showHelpBtn" value="false" />
+                                        <ui:param name="duplicateElement" value="false" />
+                                    </ui:include>
 
                                     <div class="help-text vis-hidden">
                                       #{msgs.help__password}
