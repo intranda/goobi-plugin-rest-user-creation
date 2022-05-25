@@ -18,82 +18,66 @@
     <composite:implementation>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
-            <h2>
-                <h:outputText value="#{msgs.login_new_account}" />
-            </h2>
+
+        <h2>
+            <h:outputText value="#{msgs.login_new_account}" />
+        </h2>
 
 
-
+          <section class="common-region">
             <!-- account name -->
-            <div class="form-group">
+            <div class="form-floating">
+                <zlb:input
+                    inputId="accountName"
+                    inputAriaLabel="#{msgs.login_new_account_accountName}"
+                    inputValue="#{externalLoginBean.accountName}"
+                    inputRequired="true"
+                    inputPlaceholder="#{msgs.login_new_account_accountName}"
+                    helpText="lorem ipsum" />
+
                 <zlb:label
                     labelFor="accountName"
                     labelText="#{msgs.login_new_account_accountName}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
-
-                <x:inputText
-                    id="accountName"
-                    pt:aria-label="#{msgs.login_new_account_accountName}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.accountName}"
-                    required="true">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputText>
-            </div>
-            <div class="form-group">
             </div>
 
             <!-- firstname -->
-            <div class="form-group">
+            <div class="form-floating column-start">
+                <zlb:input
+                    inputId="firstname"
+                    inputAriaLabel="#{msgs.firstname}"
+                    inputValue="#{externalLoginBean.firstname}"
+                    inputRequired="true"
+                    inputPlaceholder="#{msgs.login_new_account_firstname}"
+                    labelHelpText="Lorem ipsum" />
+
                 <zlb:label
                     labelFor="firstname"
                     labelText="#{msgs.firstname}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
-
-                <x:inputText
-                    id="firstname"
-                    pt:aria-label="#{msgs.firstname}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.firstname}">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputText>
             </div>
 
             <!-- lastname -->
-            <div class="form-group">
+            <div class="form-floating">
+                <zlb:input
+                    inputId="lastname"
+                    inputAriaLabel="#{msgs.lastname}"
+                    inputValue="#{externalLoginBean.lastname}"
+                    inputRequired="true"
+                    inputPlaceholder="#{msgs.login_new_account_lastname}"
+                    labelHelpText="Lorem ipsum" />
+
                 <zlb:label
                     labelFor="lastname"
                     labelText="#{msgs.lastname}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
-
-                <x:inputText
-                    id="lastname"
-                    pt:aria-label="#{msgs.lastname}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.lastname}">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputText>
             </div>
 
             <!-- password -->
-            <div class="form-group">
-                <zlb:label
-                    labelFor="password"
-                    labelText="#{msgs.login_new_account_password}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+            <div class="form-floating">
 
                 <x:inputSecret
                     id="password"
@@ -106,15 +90,30 @@
                         name="placeholder"
                         value="" />
                 </x:inputSecret>
+
+                <!-- ICONS -->
+                <div class="form-icons">
+                  <ui:include src="/uii/includes/icon-plus.xhtml" />
+
+                  <ui:include src="/uii/includes/icon-help.xhtml">
+                    <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
+                  </ui:include>
+                </div>
+
+                <zlb:label
+                    labelFor="password"
+                    labelText="#{msgs.login_new_account_password}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
+              <div class="help-text vis-hidden">
+                  Lorem Ipsum
+              </div>
+
             </div>
 
             <!-- confirm password -->
-            <div class="form-group">
-                <zlb:label
-                    labelFor="password2"
-                    labelText="#{msgs.login_new_account_password2}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+            <div class="form-floating">
 
                 <x:inputSecret
                     id="password2"
@@ -127,52 +126,66 @@
                         name="placeholder"
                         value="" />
                 </x:inputSecret>
+
+                <!-- ICONS -->
+                <div class="form-icons">
+                  <ui:include src="/uii/includes/icon-plus.xhtml" />
+
+                  <ui:include src="/uii/includes/icon-help.xhtml">
+                    <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
+                  </ui:include>
+                </div>
+
+                <zlb:label
+                    labelFor="password2"
+                    labelText="#{msgs.login_new_account_password2}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
+              <div class="help-text vis-hidden">
+                  Lorem Ipsum
+              </div>
             </div>
 
 
             <!-- email address -->
-            <div class="form-group">
+            <div class="form-floating">
+                <zlb:input
+                    inputId="emailAddress"
+                    inputAriaLabel="#{msgs.login_new_account_emailAddress}"
+                    inputForceId="true"
+                    inputValue="#{externalLoginBean.emailAddress}"
+                    inputRequired="true"
+                    inputPlaceholder="#{msgs.login_new_account_emailAddress}"
+                    labelHelpText="Lorem ipsum" />
+
+
                 <zlb:label
                     labelFor="emailAddress"
                     labelText="#{msgs.login_new_account_emailAddress}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
-
-                <x:inputText
-                    id="emailAddress"
-                    pt:aria-label="#{msgs.login_new_account_emailAddress}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.emailAddress}"
-                    required="true">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputText>
             </div>
 
             <!-- confirm email -->
-            <div class="form-group">
+            <div class="form-floating">
+
+                <zlb:input
+                    inputId="emailAddress2"
+                    inputAriaLabel="#{msgs.login_new_account_emailAddress2}"
+                    inputForceId="true"
+                    inputValue="#{externalLoginBean.emailAddress}"
+                    inputRequired="true"
+                    inputPlaceholder="#{msgs.login_new_account_emailAddress}" />
+
                 <zlb:label
                     labelFor="emailAddress2"
                     labelText="#{msgs.login_new_account_emailAddress2}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
-
-                <x:inputText
-                    id="emailAddress2"
-                    pt:aria-label="#{msgs.login_new_account_emailAddress2}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.confirmEmailAddress}"
-                    required="true">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputText>
             </div>
 
-            <div class="form-group confirm-privacy">
+            <div class="form-check confirm-privacy">
 
                 <h:selectBooleanCheckbox
                     id="privacyStatement"
@@ -184,29 +197,42 @@
                 </h:selectBooleanCheckbox>
 
                 <zlb:label
+                    syleClass="form-check-label"
                     labelFor="privacyStatement"
                     labelText="#{msgs.login_new_account_confirmPrivacyStatement}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
+
+                <!-- ICONS -->
+                <div class="form-icons">
+                  <ui:include src="/uii/includes/icon-plus.xhtml" />
+
+                  <ui:include src="/uii/includes/icon-help.xhtml">
+                    <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
+                  </ui:include>
+                </div>
+
             </div>
+            </section> <!-- end common-region -->
 
             <div class="form-actions">
-                <!-- create button -->
-                <button
-                    jsf:action="#{externalLoginBean.createAccount}"
-                    jsf:id="create"
-                    class="btn btn-primary-400 me-2">
-                    <h:outputText value="#{msgs.login_new_account_createAccount}" />
-                </button>
                 <!-- cancel button -->
                 <button
                     jsf:id="back"
-                    class="btn btn-blank"
+                    class="btn btn-blank me-4"
                     jsf:immediate="true">
                     <f:setPropertyActionListener
                         value=""
                         target="#{externalLoginBean.uiStatus}" />
                     <h:outputText value="#{msgs.abbrechen}" />
+                </button>
+
+                <!-- create button -->
+                <button
+                    jsf:action="#{externalLoginBean.createAccount}"
+                    jsf:id="create"
+                    class="btn btn-primary-400">
+                    <h:outputText value="#{msgs.login_new_account_createAccount}" />
                 </button>
             </div>
         </ui:fragment>
@@ -215,7 +241,7 @@
             <h2>
                 <h:outputText value="#{msgs.login_new_institution}" />
             </h2>
-            <div class="form-group">
+            <div class="form-floating">
                 <h:outputLabel
                     for="institutionName"
                     value="#{msgs.login_new_account_institutionName}" />
@@ -253,7 +279,7 @@
                 var="field"
                 value="#{externalLoginBean.additionalFields['page2']}">
 
-                <div class="form-group">
+                <div class="form-floating">
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"
@@ -345,7 +371,7 @@
                 var="field"
                 value="#{externalLoginBean.additionalFields['page3']}">
 
-                <div class="form-group">
+                <div class="form-floating">
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"
@@ -434,7 +460,7 @@
                 var="field"
                 value="#{externalLoginBean.additionalFields['page4']}">
 
-                <div class="form-group">
+                <div class="form-floating">
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"

@@ -9,6 +9,7 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:o="http://omnifaces.org/ui"
     xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites"
+    xmlns:zlb="http://xmlns.jcp.org/jsf/composite/composites"
     xmlns:jsf="http://xmlns.jcp.org/jsf"
  	template="/uii/templatePG/templatePG.html">
 
@@ -69,46 +70,35 @@
                                 styleClass="messagesLogin" />
 
                             <h:panelGroup rendered="#{externalLoginBean.uiStatus != 'accountCreation'}">
+
                                 <script type="text/javascript">
-                                                                                                                                    window.onload = function() {
-                                                                                                                                        document.getElementById( 'login' ).focus();
-                                                                                                                                    }
-                                                                                                                                </script>
-                                <div class="form-group">
-                                    <label for="login">User name
-                                        <span
-                                            class="input-required"
-                                            jsf:rendered="#{true}">
-                                            <i class="fa fa-asterisk"/>
-                                        </span>
-                                        <ui:include src="../includes/icon-help.xhtml">
-                                            <ui:param name="helpText" value="Lorem Ipsum" />
-                                        </ui:include>
-                                    </label>
-                                    <x:inputText
-                                        id="login"
-                                        pt:aria-label="#{msgs.login}"
-                                        forceId="true"
-                                        styleClass="form-control"
-                                        value="#{LoginForm.login}">
-                                        <f:passThroughAttribute
-                                            name="placeholder"
-                                            value="" />
-                                    </x:inputText>
-                                    <div id="loginHelp" class="form-text">Help text (visible when clicking help button in the upper right corner)</div>
+                                    /*
+                                    window.onload = function() {
+                                        document.getElementById( 'login' ).focus();
+                                    }
+                                    */
+                                </script>
+
+                                <div class="form-floating">
+
+                                    <zlb:input
+                                        inputId="login"
+                                        inputAriaLabel="#{msgs.login}"
+                                        inputValue="#{LoginForm.login}"
+                                        inputRequired="true"
+                                        inputPlaceholder="#{LoginForm.login}"
+                                        helpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+
+                                    <zlb:label
+                                        labelFor="login"
+                                        labelText="User name"
+                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                        labelRequired="true" />
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="passwort">Password
-                                        <span
-                                            class="input-required"
-                                            jsf:rendered="#{true}">
-                                            <i class="fa fa-asterisk"/>
-                                        </span>
-                                        <ui:include src="../includes/icon-help.xhtml">
-                                            <ui:param name="helpText" value="Lorem Ipsum" />
-                                        </ui:include>
-                                    </label>
+                                <div class="form-floating">
+
+
                                     <x:inputSecret
                                         id="passwort"
                                         pt:aria-label="#{msgs.passwort}"
@@ -119,7 +109,26 @@
                                             name="placeholder"
                                             value="" />
                                     </x:inputSecret>
-                                    <div id="passwortHelp" class="form-text">Help text (visible when clicking help button in the upper right corner)</div>
+
+                                    <zlb:label
+                                        labelFor="passwort"
+                                        labelText="Password"
+                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                        labelRequired="true" />
+
+                                    <!-- ICONS -->
+                                    <div class="form-icons">
+                                      <ui:include src="/uii/includes/icon-plus.xhtml" />
+
+                                      <ui:include src="/uii/includes/icon-help.xhtml">
+                                        <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
+                                      </ui:include>
+                                    </div>
+
+                                    <div class="help-text vis-hidden">
+                                      #{msgs.help__password}
+                                    </div>
+
                                 </div>
 
                                 <div class="form-actions">
