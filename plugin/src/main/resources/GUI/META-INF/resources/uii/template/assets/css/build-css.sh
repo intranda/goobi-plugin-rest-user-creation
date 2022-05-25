@@ -2,7 +2,7 @@
 
 SRC_BS='src/bs.scss';
 DST_BS='dist/bootstrap.css'
-SRC_CUSTOM='src/custom.scss'
+SRC_CUSTOM='src/index.scss'
 DST_CUSTOM='dist/custom.css'
 
 # include these load paths

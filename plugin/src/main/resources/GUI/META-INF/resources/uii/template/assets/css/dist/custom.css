@@ -725,7 +725,6 @@ input {
   background-color: transparent;
   border: 0;
   color: inherit;
-  background: #f0f;
 }
 .form-icons__button svg {
   pointer-events: none;
