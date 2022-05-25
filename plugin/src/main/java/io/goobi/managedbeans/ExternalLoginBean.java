@@ -214,6 +214,8 @@ public class ExternalLoginBean implements Serializable {
 
         user.setEncryptedPassword(user.getPasswordHash(password));
 
+        user.setDashboardPlugin("intranda_dashboard_delivery");
+
         try {
             UserManager.saveUser(user);
         } catch (DAOException e) {
@@ -255,6 +257,8 @@ public class ExternalLoginBean implements Serializable {
         Institution institution = new Institution();
         institution.setLongName(institutionName);
         institution.setShortName(institutionName);
+        institution.setAllowAllPlugins(true);
+        institution.setAllowAllAuthentications(true);
         currentUser.setInstitution(institution);
 
         for (String pageNumber : additionalFields.keySet()) {
