@@ -85,7 +85,7 @@
                 </x:inputTextarea>
                 <h:selectOneMenu
                     id="#{cc.attrs.identifier}_select"
-                    rendered="#{cc.attrs.fieldType=='dropdown'}"
+                    rendered="#{cc.attrs.fieldType=='dropdown' or cc.attrs.fieldType=='journaltitles'}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}"
                     pt:aria-label="#{cc.attrs.labelText}">

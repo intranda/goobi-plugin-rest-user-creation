@@ -160,17 +160,14 @@
                                                 target="#{NavigationForm.aktuell}"
                                                 value="a0" />
                                         </button>
+                                        <!-- TODO forgot password button -->
+                                        
                                     </div>
                                 </div>
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{externalLoginBean.uiStatus == 'accountCreation'}">
-                            <ui:include src="account_creation_wizzard.xhtml"/>
-
-
-
-
-
+                                <ui:include src="account_creation_wizzard.xhtml"/>
                             </h:panelGroup>
 
                         </h:form>
