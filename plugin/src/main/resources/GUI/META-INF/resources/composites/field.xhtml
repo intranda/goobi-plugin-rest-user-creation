@@ -28,8 +28,8 @@
             default="input" />
         <!-- #{field.validationError} -->
         <composite:attribute
-            name="showErrorMessage"
-            default="false" />
+            name="propertyValid"
+            default="true" />
         <!-- #{field.validationErrorMessage} -->
         <composite:attribute name="errorMessageText" />
         <!-- #{field.selectItemList} -->
@@ -78,9 +78,7 @@
                     rendered="#{cc.attrs.fieldType=='input'}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}"
-                    validator="#{field.fieldValidator}">
-                    <!-- listener="#{field.validateFieldValues}"  -->
+                    value="#{cc.attrs.value}">
                     <f:ajax
                         render="@form"
                         execute="@this" />
@@ -139,7 +137,7 @@
 
                 <h:panelGroup
                     layout="block"
-                    rendered="#{cc.attrs.showErrorMessage}"
+                    rendered="#{!cc.attrs.propertyValid}"
                     styleClass="font-danger validation-message">
                     <h:outputText value="#{cc.attrs.errorMessageText}" />
                 </h:panelGroup>

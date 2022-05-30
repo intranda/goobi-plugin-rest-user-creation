@@ -22,7 +22,9 @@
         <!-- #{field.role} -->
         <composite:attribute name="role" />
         <!-- #{field.validationError} -->
-        <composite:attribute name="showErrorMessage" default="false" />
+        <composite:attribute
+            name="propertyValid"
+            default="true" />
         <!-- #{field.validationErrorMessage} -->
         <composite:attribute name="errorMessageText" />
         <!-- #{field.selectItemList} -->
@@ -85,7 +87,7 @@
 
                 <h:panelGroup
                     layout="block"
-                    rendered="#{cc.attrs.showErrorMessage}"
+                     rendered="#{!cc.attrs.propertyValid}"
                     styleClass="font-danger validation-message">
                     <h:outputText value="#{cc.attrs.errorMessageText}" />
                 </h:panelGroup>
