@@ -14,7 +14,7 @@
 
 <composite:implementation>
 
-<c:if test="#{duplicateElement != 'false' and showHelpBtn != 'false' }">
+<c:if test="#{duplicateElement != 'false' or showHelpBtn != 'false' }">
   <div class="form-icons">
     <!-- Duplicate form element -->
     <c:if test="#{duplicateElement != null ? duplicateElement : 'false'}">
