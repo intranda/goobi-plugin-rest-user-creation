@@ -1,12 +1,12 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:composite="http://xmlns.jcp.org/jsf/composite"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:x="http://myfaces.apache.org/tomahawk"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    >
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <composite:interface>
         <composite:attribute name="identifier" />
@@ -15,28 +15,43 @@
         <!-- #{field.helpMessage} -->
         <composite:attribute name="labelHelpText" />
         <!-- #{field.required} -->
-        <composite:attribute name="fieldRequired" default="false" />
+        <composite:attribute
+            name="fieldRequired"
+            default="false" />
         <!-- #{field.value} -->
         <composite:attribute name="value" />
         <!-- #{field.booleanValue} -->
         <composite:attribute name="booleanValue" />
         <!-- #{field.displayType} -->
-        <composite:attribute name="fieldType" default="input" />
+        <composite:attribute
+            name="fieldType"
+            default="input" />
         <!-- #{field.validationError} -->
-        <composite:attribute name="showErrorMessage" default="false" />
+        <composite:attribute
+            name="showErrorMessage"
+            default="false" />
         <!-- #{field.validationErrorMessage} -->
-        <composite:attribute name="errorMessageText"  />
+        <composite:attribute name="errorMessageText" />
         <!-- #{field.selectItemList} -->
-        <composite:attribute name="selectItems"  />
+        <composite:attribute name="selectItems" />
         <!-- #{field.subValue} -->
-        <composite:attribute name="subValue"  />
+        <composite:attribute name="subValue" />
 
         <!-- #{field.helpMessage} ? -->
-        <composite:attribute name="placeholderText" default="" />
+        <composite:attribute
+            name="placeholderText"
+            default="" />
         <!-- styling options -->
-        <composite:attribute name="mainClass" default="" />
-        <composite:attribute name="subClass" default="" />
-        <composite:attribute name="fieldStyle" default="" />
+        <composite:attribute
+            name="mainClass"
+            default="" />
+        <composite:attribute
+            name="subClass"
+            default="" />
+        <composite:attribute
+            name="fieldStyle"
+            default="" />
+        <composite:attribute name="fieldListener" />
     </composite:interface>
 
     <composite:implementation>
@@ -46,7 +61,9 @@
             styleClass="form-group #{cc.attrs.mainClass}">
             <label for="#{cc.attrs.identifier}_input">
                 #{cc.attrs.labelText}
-                <h:panelGroup styleClass="input-required" rendered="#{cc.attrs.fieldRequired}">
+                <h:panelGroup
+                    styleClass="input-required"
+                    rendered="#{cc.attrs.fieldRequired}">
                     <i class="fa fa-asterisk" />
                 </h:panelGroup>
                 <ui:include src="../uii/includes/icon-help.xhtml">
@@ -61,9 +78,11 @@
                     rendered="#{cc.attrs.fieldType=='input'}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}">
+                    value="#{cc.attrs.value}"
+                    validator="#{field.fieldValidator}">
+                    <!-- listener="#{field.validateFieldValues}"  -->
                     <f:ajax
-                        render="#{cc.attrs.identifier}"
+                        render="@form"
                         execute="@this" />
                     <f:passThroughAttribute
                         name="placeholder"
@@ -77,7 +96,7 @@
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}">
                     <f:ajax
-                        render="#{cc.attrs.identifier}"
+                        render="@form"
                         execute="@this" />
                     <f:passThroughAttribute
                         name="placeholder"
@@ -93,7 +112,7 @@
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
                     <f:ajax
-                        render="#{cc.attrs.identifier}"
+                        render="@form"
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneMenu>
@@ -104,16 +123,16 @@
                     styleClass="form-control"
                     value="#{cc.attrs.booleanValue}">
                     <f:ajax
-                        render="#{cc.attrs.identifier}"
+                        render="@form"
                         execute="@this" />
                 </h:selectBooleanCheckbox>
                 <h:selectOneRadio
-                id="#{cc.attrs.identifier}_radio"
+                    id="#{cc.attrs.identifier}_radio"
                     rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
                     styleClass="form-control"
                     value="#{cc.attrs.subValue}">
                     <f:ajax
-                        render="#{cc.attrs.identifier}"
+                        render="@form"
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneRadio>
