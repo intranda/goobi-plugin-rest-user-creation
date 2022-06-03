@@ -47,9 +47,13 @@
         <composite:attribute
             name="fieldStyle"
             default="" />
-            
-        <composite:attribute name="displayDuplicateButton" default="false" />
-        <composite:attribute name="render" default="@form" />                 
+
+        <composite:attribute
+            name="displayDuplicateButton"
+            default="false" />
+        <composite:attribute
+            name="render"
+            default="@form" />
     </composite:interface>
 
     <composite:implementation>
@@ -110,8 +114,8 @@
                     styleClass="help-block font-light"
                     rendered="#{NavigationForm.showHelp}"
                     value="#{cc.attrs.labelHelpText}" />
-            <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
             </div>
+            <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
                 <button
                     jsf:id="button"
                     jsf:action="#{DashboardForm.plugin.duplicateMetadataField}">
@@ -120,9 +124,9 @@
                         value="#{field}"
                         target="#{DashboardForm.plugin.currentField}" />
                 </button>
-            </h:panelGroup>                    
-                    
-                    
+            </h:panelGroup>
+
+
 
 
         </h:panelGroup>
