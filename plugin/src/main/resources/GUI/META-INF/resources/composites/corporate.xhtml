@@ -6,7 +6,8 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:x="http://myfaces.apache.org/tomahawk"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <composite:interface>
 
@@ -22,7 +23,9 @@
         <!-- #{field.role} -->
         <composite:attribute name="role" />
         <!-- #{field.validationError} -->
-        <composite:attribute name="showErrorMessage" default="false" />
+        <composite:attribute
+            name="propertyValid"
+            default="true" />
         <!-- #{field.validationErrorMessage} -->
         <composite:attribute name="errorMessageText" />
         <!-- #{field.selectItemList} -->
@@ -34,6 +37,10 @@
         <composite:attribute name="mainClass" default="" />
         <composite:attribute name="subClass" default="" />
         <composite:attribute name="fieldStyle" default="" />
+        
+        <composite:attribute name="displayDuplicateButton" default="false" />
+        <composite:attribute name="render" default="@form" />        
+        
     </composite:interface>
 
     <composite:implementation>
@@ -61,7 +68,7 @@
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}">
                     <f:ajax
-                        render="#{cc.attrs.identifier}"
+                        render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:passThroughAttribute
                         name="placeholder"
@@ -77,7 +84,7 @@
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
                     <f:ajax
-                        render="#{cc.attrs.identifier}"
+                        render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneMenu>
@@ -85,7 +92,7 @@
 
                 <h:panelGroup
                     layout="block"
-                    rendered="#{cc.attrs.showErrorMessage}"
+                     rendered="#{!cc.attrs.propertyValid}"
                     styleClass="font-danger validation-message">
                     <h:outputText value="#{cc.attrs.errorMessageText}" />
                 </h:panelGroup>
@@ -94,7 +101,16 @@
                     rendered="#{NavigationForm.showHelp}"
                     value="#{cc.attrs.labelHelpText}" />
             </div>
-
+            <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
+                <button
+                    jsf:id="button"
+                    jsf:action="#{DashboardForm.plugin.duplicateMetadataField}">
+                    <i class="fa fa-plus" />
+                    <f:setPropertyActionListener
+                        value="#{field}"
+                        target="#{DashboardForm.plugin.currentField}" />
+                </button>
+            </h:panelGroup>
 
         </h:panelGroup>
 
