@@ -2,6 +2,7 @@
   --clr-primary-400: #368ee0;
   --clr-primary-600: #1b67af;
   --clr-neutral-200: #f4f4f4;
+  --clr-neutral-300: #ced4da;
   --clr-neutral-400: #aaaaaa;
   --clr-neutral-600: #666666;
   --clr-white: #ffffff;
@@ -37,6 +38,14 @@
 
 .text-neutral-200 {
   color: var(--text-neutral-200);
+}
+
+.bg-neutral-300 {
+  background-color: var(--clr-neutral-300);
+}
+
+.text-neutral-300 {
+  color: var(--text-neutral-300);
 }
 
 .bg-neutral-400 {
@@ -139,6 +148,10 @@
   color: var(--clr-neutral-200);
 }
 
+.text-neutral-300 {
+  color: var(--clr-neutral-300);
+}
+
 .text-neutral-400 {
   color: var(--clr-neutral-400);
 }
@@ -216,6 +229,18 @@
 .btn-neutral-200:hover {
   background-color: #e7e7e7;
   border-color: #e7e7e7;
+  color: #fff;
+}
+
+.btn-neutral-300 {
+  background-color: var(--clr-neutral-300);
+  border-color: var(--clr-neutral-300);
+  color: #fff;
+}
+
+.btn-neutral-300:hover {
+  background-color: #bfc7cf;
+  border-color: #bfc7cf;
   color: #fff;
 }
 
@@ -383,6 +408,14 @@
   border-color: var(--clr-neutral-200);
 }
 
+.box.box--neutral-300 {
+  border-color: var(--clr-neutral-300);
+}
+.box.box--neutral-300 .box-title {
+  background-color: var(--clr-neutral-300);
+  border-color: var(--clr-neutral-300);
+}
+
 .box.box--neutral-400 {
   border-color: var(--clr-neutral-400);
 }
@@ -540,6 +573,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Override BS inline padding (applied when opening a modal) */
+body.modal-open {
+  padding-right: 0 !important;
+}
+
 /* Typography */
 h1,
 h2 {
@@ -655,6 +693,19 @@ main h1 svg {
 .login-body h2 {
   text-transform: uppercase;
   font-size: 3.6rem;
+}
+
+.page__heading {
+  display: flex;
+  justify-content: space-between;
+}
+.page__help {
+  padding-right: 0;
+}
+.page__help svg {
+  width: 3.2rem;
+  height: 3.2rem;
+  fill: var(--clr-primary-400);
 }
 
 #loginForm {
@@ -827,8 +878,28 @@ input {
 }
 
 .layout #globalWarningMessage,
-.layout h2 {
+.layout .page__heading {
   grid-column: 1/-1;
+}
+
+/* Modals */
+.modal-dialog {
+  font-size: var(--fs-400);
+  max-width: 900px;
+}
+.modal-content {
+  padding: 2.4rem 4rem;
+  border: 0;
+  border-radius: var(--border-radius);
+}
+.modal-header, .modal-footer {
+  border-top: 0;
+  border-bottom: 0;
+}
+.modal__img {
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+  width: 100%;
 }
 
 /* Utilities */

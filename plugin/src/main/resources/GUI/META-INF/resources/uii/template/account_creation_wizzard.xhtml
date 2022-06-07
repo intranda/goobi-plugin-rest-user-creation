@@ -15,13 +15,34 @@
     <composite:interface>
     </composite:interface>
 
+    <c:set var="showPageHelp" value="false" />
+
     <composite:implementation>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
 
-        <h2>
+
+        <h2 class="page__heading">
             <h:outputText value="#{msgs.login_new_account}" />
+            <button type="button" class="btn page__help" data-bs-toggle="modal" data-bs-title="help title" data-bs-target="#pageHelpModal">
+              <ui:include src="/uii/includes/icon-help.xhtml" />
+            </button>
         </h2>
+
+        <zlb:modal
+            modalId="pageHelpModal"
+            modalTitle="Seiten Hilfe"
+            >
+
+            <!-- Dummy child, will be replaced later -->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ratione totam itaque. Dignissimos quasi nam rerum provident commodi esse cumque architecto culpa, delectus asperiores nisi tempore, incidunt natus praesentium ex?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ratione totam itaque. Dignissimos quasi nam rerum provident commodi esse cumque architecto culpa, delectus asperiores nisi tempore, incidunt natus praesentium ex?</p>
+
+            <img src="https://via.placeholder.com/700x350" class="modal__img"/>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ratione totam itaque. Dignissimos quasi nam rerum provident commodi esse cumque architecto culpa, delectus asperiores nisi tempore, incidunt natus praesentium ex?</p>
+
+        </zlb:modal>
 
 
           <section class="common-region">
@@ -69,7 +90,7 @@
                     inputValue="#{externalLoginBean.lastname}"
                     inputRequired="true"
                     inputPlaceholder="#{msgs.login_new_account_lastname}"
-                    showHelpBtn="false"
+                    showHelpBtn="true"
                     labelHelpText="Lorem ipsum" />
 
                 <zlb:label
@@ -103,9 +124,11 @@
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
 
+                <!--
                 <div class="help-text vis-hidden">
                     Lorem Ipsum
                 </div>
+                -->
 
             </div>
 
@@ -133,9 +156,11 @@
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
 
+                <!--
               <div class="help-text vis-hidden">
                   Lorem Ipsum
               </div>
+                -->
             </div>
 
 
@@ -194,17 +219,21 @@
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
 
-                <!-- ICONS -->
-                <div class="form-icons">
-                  <ui:include src="/uii/includes/icon-plus.xhtml" />
-
-                  <ui:include src="/uii/includes/icon-help.xhtml">
-                    <ui:param name="helpText" value="#{cc.attrs.labelHelpText}" />
+                  <!-- ICONS -->
+                  <ui:include src="/uii/includes/form_icons.xhtml">
+                    <ui:param name="duplicateElement" value="false" />
+                    <ui:param name="showHelpBtn" value="true" />
+                    <ui:param name="helpTitle" value="Privacy Help" />
+                    <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
                   </ui:include>
-                </div>
 
             </div>
             </section> <!-- end common-region -->
+
+            <zlb:modal
+                modalId="exampleModal"
+            >
+            </zlb:modal>
 
             <div class="form-actions">
                 <!-- cancel button -->

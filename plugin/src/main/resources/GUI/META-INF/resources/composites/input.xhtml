@@ -17,7 +17,7 @@
 		<composite:attribute name="inputPlaceholder" />
 		<composite:attribute name="inputDuplicate" default="false" />
 		<composite:attribute name="showHelpBtn" default="true" />
-		<composite:attribute name="helpText" default="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."/>
+		<composite:attribute name="helpText" default="default help text"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -40,11 +40,14 @@
 			<ui:include src="/uii/includes/form_icons.xhtml">
 				<ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
 				<ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
+				<ui:param name="helpBody" value="#{cc.attrs.helpText}" />
 			</ui:include>
 
+			<!--
 			<div class="help-text vis-hidden">
 				#{cc.attrs.helpText}
 			</div>
+			-->
 
 	</composite:implementation>
 

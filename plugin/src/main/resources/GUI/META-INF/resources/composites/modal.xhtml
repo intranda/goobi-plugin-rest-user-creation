@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:x="http://myfaces.apache.org/tomahawk"
+  xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<composite:interface>
+		<composite:attribute name="modalId" />
+		<composite:attribute name="modalTitle" />
+	</composite:interface>
+
+	<composite:implementation>
+
+	<div class="modal fade" tabindex="-1" id="#{cc.attrs.modalId}">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+						<h2 class="modal-title">#{cc.attrs.modalTitle}</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+							<composite:insertChildren/>
+          </div>
+          <div class="modal-footer">
+						<!--
+            <button type="button" class="btn btn-blank" data-bs-dismiss="modal">Close</button>
+						-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+		<script>
+
+			console.log("#{cc.attrs.modalId}")
+			var zlbModal = document.getElementById("#{cc.attrs.modalId}")
+			zlbModal.addEventListener('show.bs.modal', function (event) {
+				// Button that triggered the modal
+				var button = event.relatedTarget
+				// Extract info from data-bs-* attributes
+				var title = button.getAttribute('data-bs-title')
+				var body = button.getAttribute('data-bs-body')
+				// If necessary, you could initiate an AJAX request here
+				// and then do the updating in a callback.
+				//
+				// Update the modal's content.
+				if(title) {
+					var modalTitle = exampleModal.querySelector('.modal-title')
+					modalTitle.textContent = title
+				}
+				if(body) {
+					var modalBody = exampleModal.querySelector('.modal-body')
+					modalBody.textContent = body
+				}
+
+			})
+
+		</script>
+
+	</composite:implementation>
+
+</ui:composition>
+

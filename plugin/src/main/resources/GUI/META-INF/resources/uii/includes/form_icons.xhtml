@@ -24,7 +24,14 @@
     </c:if>
 
     <c:if test="#{showHelpBtn != null ? showHelpBtn : 'true'}">
-        <button type="button" class="form-icons__button form-icons__button--help">
+        <button
+          type="button"
+          class="form-icons__button form-icons__button--help"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          data-bs-title="#{helpTitle != null ? helpTitle : 'default title'}"
+          data-bs-body="#{helpBody != null ? helpBody: 'default body text'}"
+          >
           <ui:include src="/uii/includes/icon-help.xhtml" />
         </button>
     </c:if>

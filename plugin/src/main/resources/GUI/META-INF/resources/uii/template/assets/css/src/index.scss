@@ -58,6 +58,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Override BS inline padding (applied when opening a modal) */
+body.modal-open {
+  padding-right: 0 !important;
+}
+
 /* Typography */
 h1,
 h2 {
@@ -182,6 +187,21 @@ main h1 svg {
 .login-body h2 {
   text-transform: uppercase;
   font-size: 3.6rem;
+}
+
+.page {
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__help {
+    padding-right: 0;
+    svg {
+      width: 3.2rem;
+      height: 3.2rem;
+      fill: var(--clr-primary-400);
+    }
+  }
 }
 
 #loginForm {
@@ -359,8 +379,32 @@ input {
 }
 
 .layout #globalWarningMessage,
-.layout h2 {
+.layout .page__heading {
   grid-column: 1 / -1;
+}
+
+/* Modals */
+.modal {
+  &-dialog {
+    font-size: (var(--fs-400));
+    max-width: 900px;
+  }
+
+  &-content {
+    padding: 2.4rem 4rem;
+    border: 0;
+    border-radius: var(--border-radius);
+  }
+  &-header,
+  &-footer {
+    border-top: 0;
+    border-bottom: 0;
+  }
+  &__img {
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
+    width: 100%;
+  }
 }
 
 /* Utilities */
