@@ -71,12 +71,12 @@
 
                             <h:panelGroup rendered="#{externalLoginBean.uiStatus != 'accountCreation'}">
 
-                                <script type="text/javascript">
-                                    /*
-                                    window.onload = function() {
+                                <script>
+                                    /* Focus first form Element on the login page */
+                                    function focusForm() {
                                         document.getElementById( 'login' ).focus();
                                     }
-                                    */
+                                    document.addEventListener("DOMContentLoaded", focusForm)
                                 </script>
 
                                 <div class="form-floating form-floating--full-width">
@@ -87,7 +87,7 @@
                                         inputValue="#{LoginForm.login}"
                                         inputRequired="true"
                                         inputPlaceholder="#{LoginForm.login}"
-                                        showHelpBtn="true"
+                                        showHelpBtn="false"
                                         helpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
 
                                     <zlb:label
@@ -108,7 +108,7 @@
                                         value="#{LoginForm.passwort}">
                                         <f:passThroughAttribute
                                             name="placeholder"
-                                            value="" />
+                                            value="#{msgs.passwort}" />
                                     </x:inputSecret>
 
                                     <zlb:label
@@ -161,7 +161,7 @@
                                                 value="a0" />
                                         </button>
                                         <!-- TODO forgot password button -->
-                                        
+
                                     </div>
                                 </div>
                             </h:panelGroup>
