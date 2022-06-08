@@ -15,10 +15,11 @@
     <composite:interface>
     </composite:interface>
 
-    <c:set var="showPageHelp" value="false" />
-
     <composite:implementation>
 
+        <script>
+            console.log("#{externalLoginBean.wizzardMode}")
+        </script>
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
 
 
@@ -28,6 +29,7 @@
               <ui:include src="/uii/includes/icon-help.xhtml" />
             </button>
         </h2>
+
 
 
           <section class="common-region">
@@ -216,7 +218,7 @@
             </section> <!-- end common-region -->
 
 
-            <div class="form-actions">
+            <div class="form-actions form-actions--progress">
                 <!-- cancel button -->
                 <button
                     jsf:id="back"
@@ -227,6 +229,8 @@
                         target="#{externalLoginBean.uiStatus}" />
                     <h:outputText value="#{msgs.abbrechen}" />
                 </button>
+
+                <ui:include src="/uii/includes/zlb-progress.xhtml" />
 
                 <!-- create button -->
                 <button
