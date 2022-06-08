@@ -69,7 +69,13 @@
                                     document.addEventListener("DOMContentLoaded", focusForm)
                                 </script>
 
-                                <div class="form-floating form-floating--full-width">
+                                <div class="form form--full-width">
+
+                                    <zlb:label
+                                        labelFor="login"
+                                        labelText="User name"
+                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                        labelRequired="true" />
 
                                     <zlb:input
                                         inputId="login"
@@ -80,15 +86,15 @@
                                         showHelpBtn="false"
                                         helpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
 
-                                    <zlb:label
-                                        labelFor="login"
-                                        labelText="User name"
-                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                                        labelRequired="true" />
                                 </div>
 
-                                <div class="form-floating form-floating--full-width">
+                                <div class="form form--full-width">
 
+                                    <zlb:label
+                                        labelFor="passwort"
+                                        labelText="Password"
+                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                        labelRequired="true" />
 
                                     <x:inputSecret
                                         id="passwort"
@@ -101,11 +107,6 @@
                                             value="#{msgs.passwort}" />
                                     </x:inputSecret>
 
-                                    <zlb:label
-                                        labelFor="passwort"
-                                        labelText="Password"
-                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                                        labelRequired="true" />
 
                                     <!-- ICONS -->
                                     <ui:include src="/uii/includes/form_icons.xhtml" >

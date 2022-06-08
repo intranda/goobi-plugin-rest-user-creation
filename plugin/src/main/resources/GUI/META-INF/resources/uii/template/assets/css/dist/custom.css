@@ -780,6 +780,9 @@ main h1 svg {
     --grid-tc: 100%;
   }
 }
+.form--full-width {
+  grid-template-columns: 1fr;
+}
 .form--full-width input {
   grid-column: 1/-1;
 }
@@ -788,7 +791,7 @@ main h1 svg {
   font-size: 1.6rem;
   color: var(--clr-text-body);
 }
-.form input {
+.form input:not([type=checkbox]) {
   height: 3.8rem;
   grid-column: 1;
 }
@@ -863,12 +866,17 @@ main h1 svg {
 }
 
 /* Create account */
-.confirm-privacy {
+.confirm-privacy,
+.form-check {
   grid-column: 1/-1;
   display: flex;
   gap: 8px;
   align-items: center;
   font-size: var(--fs-400);
+}
+.confirm-privacy input,
+.form-check input {
+  flex-basis: 2rem;
 }
 
 /* FOOTER */

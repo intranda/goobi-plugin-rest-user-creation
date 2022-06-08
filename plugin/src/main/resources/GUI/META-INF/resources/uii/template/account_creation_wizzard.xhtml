@@ -17,14 +17,19 @@
 
     <composite:implementation>
 
-        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
-
         <h2 class="page__heading">
-            <h:outputText value="#{msgs.login_new_account}" />
+            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page1'}" value="#{msgs.login_new_account}" />
+            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page2'}" value="#{msgs.login_new_institution}" />
+            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page3'}" value="#{msgs.login_new_institution}" />
+            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page4'}" value="#{msgs.login_new_institution}" />
+            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page5'}" value="#{msgs.login_new_institution}" />
             <button type="button" class="btn page__help" data-bs-toggle="modal" data-bs-title="help title" data-bs-target="#pageHelpModal">
               <ui:include src="/uii/includes/icon-help.xhtml" />
             </button>
         </h2>
+
+
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
 
           <section class="common-region">
             <!-- account name -->
@@ -244,12 +249,6 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
-        <h2 class="page__heading">
-            <h:outputText value="#{msgs.login_new_institution}" />
-            <button type="button" class="btn page__help" data-bs-toggle="modal" data-bs-title="help title" data-bs-target="#pageHelpModal">
-              <ui:include src="/uii/includes/icon-help.xhtml" />
-            </button>
-        </h2>
 
           <section class="common-region">
             <div class="form">
@@ -417,14 +416,38 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page3'}">
+
+          <section class="common-region">
+
+            <!--
             <h2>
                 <h:outputText value="#{msgs.login_new_contact}" />
             </h2>
+            -->
+
             <ui:repeat
                 var="field"
                 value="#{externalLoginBean.additionalFields['page3']}">
 
                 <div class="form">
+
+                <zlb:label
+                    labelFor="input1"
+                    labelText="#{field.label}"
+                    labelRequired="#{field.required}" />
+
+                <zlb:input
+                    inputId="input1"
+                    inputAriaLabel="#{field.label}"
+                    inputForceId="true"
+                    inputValue="#{filed.value}"
+                    inputRequired="false"
+                    inputPlaceholder=""
+                    inputDuplicate="false"
+                    showHelpBtn="true"
+                    helpText="lorem ipsum" />
+
+                  <!--
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"
@@ -444,6 +467,9 @@
                                 name="placeholder"
                                 value="" />
                         </x:inputText>
+                        -->
+
+
                         <x:inputTextarea
                             rendered="#{field.fieldType=='textarea'}"
                             pt:aria-label="#{field.label}"
@@ -497,9 +523,12 @@
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
                             value="#{fieldy.helpMessage}" />
+                        <!--
                     </div>
+                        -->
                 </div>
             </ui:repeat>
+          </section>
 
 
         </ui:fragment>
@@ -509,18 +538,31 @@
                 <h:outputText value="#{msgs.login_new_additionalData}" />
             </h2>
 
+            <section class="common-region">
             <ui:repeat
                 var="field"
                 value="#{externalLoginBean.additionalFields['page4']}">
 
-                <div class="form">
+
+                    <ui:fragment rendered="#{field.fieldType!='checkbox' and field.fieldType!='combo'}">
+                    <div class="form">
+                      <zlb:label
+                          syleClass="form-check-label"
+                          labelFor="input"
+                          labelText="#{field.label}"
+                          labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                          labelRequired="#{field.required}" />
+
+                    <!--
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"
                         class="fa fa-asterisk pull-right font-asterisk"
                         title="#{msgs.requiredField}"
                         data-toggle="tooltip" />
+
                     <div class="email controls">
+                    -->
                         <x:inputText
                             rendered="#{field.fieldType=='input'}"
                             pt:aria-label="#{field.label}"
@@ -558,15 +600,8 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneMenu>
-                        <h:selectBooleanCheckbox
-                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
-                            pt:aria-label="#{field.label}"
-                            styleClass="form-control"
-                            value="#{field.booleanValue}">
-                            <f:ajax
-                                render="@form"
-                                execute="@this" />
-                        </h:selectBooleanCheckbox>
+
+
                         <h:selectOneRadio
                             rendered="#{field.fieldType=='combo' and field.booleanValue}"
                             styleClass="form-control"
@@ -586,13 +621,50 @@
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
                             value="#{fieldy.helpMessage}" />
-                    </div>
-                </div>
+                        </div>
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}">
+
+                        <div class="form-check">
+
+                          <h:selectBooleanCheckbox
+                              pt:aria-label="#{field.label}"
+                              styleClass="form-check-input"
+                              value="#{field.booleanValue}">
+                              <f:ajax
+                                  render="@form"
+                                  execute="@this" />
+                          </h:selectBooleanCheckbox>
+
+
+                          <zlb:label
+                              syleClass="form-check-label"
+                              labelFor="input"
+                              labelText="#{field.label}"
+                              labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                              labelRequired="#{field.required}" />
+
+
+                            <!-- ICONS -->
+                            <ui:include src="/uii/includes/form_icons.xhtml">
+                              <ui:param name="duplicateElement" value="false" />
+                              <ui:param name="showHelpBtn" value="true" />
+                              <ui:param name="helpTitle" value="Default Help Title" />
+                              <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                          </ui:include>
+
+                        </div>
+
+                        </ui:fragment>
             </ui:repeat>
+            </section>
 
 
         </ui:fragment>
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
+
+          <section class="common-region">
             <h2>
                 <h:outputText value="#{msgs.login_new_activation}" />
             </h2>
@@ -642,7 +714,9 @@
             </ui:repeat>
 
 Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitaler Pflichtpublikationen
+          </section>
 </ui:fragment>
+
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <div class="submit form-actions form-actions--progress">

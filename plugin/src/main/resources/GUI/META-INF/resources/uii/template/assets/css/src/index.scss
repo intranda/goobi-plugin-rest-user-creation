@@ -282,6 +282,9 @@ main h1 svg {
   @media screen and (max-width: 620px) {
     --grid-tc: 100%;
   }
+  &--full-width {
+    grid-template-columns: 1fr;
+  }
   &--full-width input {
     grid-column: 1 / -1;
   }
@@ -291,7 +294,7 @@ main h1 svg {
     font-size: 1.6rem;
     color: var(--clr-text-body);
   }
-  input {
+  input:not([type="checkbox"]) {
     height: 3.8rem;
     grid-column: 1;
   }
@@ -371,12 +374,17 @@ main h1 svg {
 }
 
 /* Create account */
-.confirm-privacy {
+.confirm-privacy,
+.form-check {
   grid-column: 1 / -1;
   display: flex;
   gap: 8px;
   align-items: center;
   font-size: var(--fs-400);
+
+  input {
+    flex-basis: 2rem;
+  }
 }
 
 /* FOOTER */
