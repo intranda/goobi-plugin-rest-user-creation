@@ -17,11 +17,7 @@
 
     <composite:implementation>
 
-        <script>
-            console.log("#{externalLoginBean.wizzardMode}")
-        </script>
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
-
 
         <h2 class="page__heading">
             <h:outputText value="#{msgs.login_new_account}" />
@@ -30,11 +26,15 @@
             </button>
         </h2>
 
-
-
           <section class="common-region">
             <!-- account name -->
-            <div class="form-floating">
+            <div class="form">
+                <zlb:label
+                    labelFor="accountName"
+                    labelText="#{msgs.login_new_account_accountName}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
                 <zlb:input
                     inputId="accountName"
                     inputAriaLabel="#{msgs.login_new_account_accountName}"
@@ -44,16 +44,16 @@
                     inputDuplicate="true"
                     showHelpBtn="true"
                     helpText="lorem ipsum" />
-
-                <zlb:label
-                    labelFor="accountName"
-                    labelText="#{msgs.login_new_account_accountName}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
             </div>
 
             <!-- firstname -->
-            <div class="form-floating column-start">
+            <div class="form column-start">
+                <zlb:label
+                    labelFor="firstname"
+                    labelText="#{msgs.firstname}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
                 <zlb:input
                     inputId="firstname"
                     inputAriaLabel="#{msgs.firstname}"
@@ -61,16 +61,16 @@
                     inputRequired="true"
                     inputPlaceholder="#{msgs.login_new_account_firstname}"
                     labelHelpText="Lorem ipsum" />
-
-                <zlb:label
-                    labelFor="firstname"
-                    labelText="#{msgs.firstname}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
             </div>
 
             <!-- lastname -->
-            <div class="form-floating">
+            <div class="form">
+                <zlb:label
+                    labelFor="lastname"
+                    labelText="#{msgs.lastname}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
                 <zlb:input
                     inputId="lastname"
                     inputAriaLabel="#{msgs.lastname}"
@@ -80,15 +80,16 @@
                     showHelpBtn="true"
                     labelHelpText="Lorem ipsum" />
 
-                <zlb:label
-                    labelFor="lastname"
-                    labelText="#{msgs.lastname}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
             </div>
 
             <!-- password -->
-            <div class="form-floating">
+            <div class="form">
+
+                <zlb:label
+                    labelFor="password"
+                    labelText="#{msgs.login_new_account_password}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
 
                 <x:inputSecret
                     id="password"
@@ -105,11 +106,6 @@
                 <!-- Icons -->
                 <ui:include src="/uii/includes/form_icons.xhtml" />
 
-                <zlb:label
-                    labelFor="password"
-                    labelText="#{msgs.login_new_account_password}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
 
                 <!--
                 <div class="help-text vis-hidden">
@@ -120,7 +116,13 @@
             </div>
 
             <!-- confirm password -->
-            <div class="form-floating">
+            <div class="form">
+
+                <zlb:label
+                    labelFor="password2"
+                    labelText="#{msgs.login_new_account_password2}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
 
                 <x:inputSecret
                     id="password2"
@@ -137,11 +139,6 @@
                 <!-- Icons -->
                 <ui:include src="/uii/includes/form_icons.xhtml" />
 
-                <zlb:label
-                    labelFor="password2"
-                    labelText="#{msgs.login_new_account_password2}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
 
                 <!--
               <div class="help-text vis-hidden">
@@ -152,7 +149,14 @@
 
 
             <!-- email address -->
-            <div class="form-floating">
+            <div class="form">
+
+                <zlb:label
+                    labelFor="emailAddress"
+                    labelText="#{msgs.login_new_account_emailAddress}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
                 <zlb:input
                     inputId="emailAddress"
                     inputAriaLabel="#{msgs.login_new_account_emailAddress}"
@@ -161,17 +165,16 @@
                     inputRequired="true"
                     inputPlaceholder="#{msgs.login_new_account_emailAddress}"
                     labelHelpText="Lorem ipsum" />
-
-
-                <zlb:label
-                    labelFor="emailAddress"
-                    labelText="#{msgs.login_new_account_emailAddress}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
             </div>
 
             <!-- confirm email -->
-            <div class="form-floating">
+            <div class="form">
+
+                <zlb:label
+                    labelFor="emailAddress2"
+                    labelText="#{msgs.login_new_account_emailAddress2}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
 
                 <zlb:input
                     inputId="emailAddress2"
@@ -181,11 +184,6 @@
                     inputRequired="true"
                     inputPlaceholder="#{msgs.login_new_account_emailAddress}" />
 
-                <zlb:label
-                    labelFor="emailAddress2"
-                    labelText="#{msgs.login_new_account_emailAddress2}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
             </div>
 
             <div class="form-check confirm-privacy">
@@ -230,7 +228,9 @@
                     <h:outputText value="#{msgs.abbrechen}" />
                 </button>
 
-                <ui:include src="/uii/includes/zlb-progress.xhtml" />
+                <ui:include src="/uii/includes/zlb-progress.xhtml">
+                    <ui:param name="data" value="#{externalLoginBean}" />
+                </ui:include>
 
                 <!-- create button -->
                 <button
@@ -240,16 +240,19 @@
                     <h:outputText value="#{msgs.login_new_account_createAccount}" />
                 </button>
             </div>
+
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
-            <h2>
-                <h:outputText value="#{msgs.login_new_institution}" />
-            </h2>
-
+        <h2 class="page__heading">
+            <h:outputText value="#{msgs.login_new_institution}" />
+            <button type="button" class="btn page__help" data-bs-toggle="modal" data-bs-title="help title" data-bs-target="#pageHelpModal">
+              <ui:include src="/uii/includes/icon-help.xhtml" />
+            </button>
+        </h2>
 
           <section class="common-region">
-            <div class="form-floating">
+            <div class="form">
 
                 <!--
                 <h:outputLabel
@@ -285,6 +288,11 @@
                 </div>
                 -->
 
+                <zlb:label
+                    labelFor="institutionName"
+                    labelText="#{msgs.login_new_account_institutionName}"
+                    labelRequired="true" />
+
                 <zlb:input
                     inputId="institutionName"
                     inputAriaLabel="#{msgs.login_new_account_institutionName}"
@@ -296,18 +304,18 @@
                     showHelpBtn="true"
                     helpText="lorem ipsum" />
 
-                <zlb:label
-                    labelFor="institutionName"
-                    labelText="#{msgs.login_new_account_institutionName}"
-                    labelRequired="true" />
-
             </div>
 
             <ui:repeat
                 var="field"
                 value="#{externalLoginBean.additionalFields['page2']}">
 
-                <div class="form-floating">
+                <div class="form">
+
+                <zlb:label
+                    labelFor="input"
+                    labelText="#{field.label}"
+                    labelRequired="#{field.required}" />
 
                 <zlb:input
                     inputId="input"
@@ -320,10 +328,6 @@
                     showHelpBtn="true"
                     helpText="lorem ipsum" />
 
-                <zlb:label
-                    labelFor="input"
-                    labelText="#{field.label}"
-                    labelRequired="#{field.required}" />
 
                     <!--
                     <h:outputLabel value="{field.label}" />
@@ -346,7 +350,8 @@
                                 name="placeholder"
                                 value="" />
                         </x:inputText>
-                    -->
+
+                -->
                     <div class="email controls">
                         <x:inputTextarea
                             id="textarea"
@@ -419,7 +424,7 @@
                 var="field"
                 value="#{externalLoginBean.additionalFields['page3']}">
 
-                <div class="form-floating">
+                <div class="form">
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"
@@ -508,7 +513,7 @@
                 var="field"
                 value="#{externalLoginBean.additionalFields['page4']}">
 
-                <div class="form-floating">
+                <div class="form">
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"
@@ -640,7 +645,7 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
 </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
-            <div class="submit form-actions">
+            <div class="submit form-actions form-actions--progress">
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
                     jsf:action="#{externalLoginBean.back}"
@@ -648,6 +653,10 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
                     class="btn btn-primary-400">
                     <h:outputText value="#{msgs.back}" />
                 </button>
+
+                <ui:include src="/uii/includes/zlb-progress.xhtml">
+                    <ui:param name="data" value="#{externalLoginBean}" />
+                </ui:include>
 
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
@@ -657,6 +666,7 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
                     class="btn btn-primary-400">
                     <h:outputText value="#{msgs.next}" />
                 </button>
+
 
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
