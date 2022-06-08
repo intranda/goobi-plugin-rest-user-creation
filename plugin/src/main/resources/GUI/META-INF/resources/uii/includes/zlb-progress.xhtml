@@ -16,6 +16,9 @@
 
 <c:set var="steps" value="#{[['page1', 'done'], ['page2', 'active'], ['page3', 'pending'], ['page4', 'pending'], ['page5', 'pending']]}" />
 
+    <script>
+        console.log(111 + "#{data}")
+    </script>
 <div class="zlb-progress">
 
     <c:forEach var="step" items="#{steps}">
