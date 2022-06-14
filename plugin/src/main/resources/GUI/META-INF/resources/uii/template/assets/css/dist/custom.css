@@ -941,7 +941,7 @@ main h1 svg {
   font-weight: bold;
 }
 .overview .control-label::after {
-  content: ":";
+  content: ": ";
 }
 .overview .col-sm-9 {
   display: inline-block;
@@ -951,6 +951,30 @@ main h1 svg {
 .overview .col-sm-9 span {
   padding: 0;
   margin: 0;
+}
+
+.additional-data .form-group label {
+  font-size: var(--fs-400);
+  display: inline;
+}
+.additional-data input[type=checkbox] {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: 8px;
+}
+.additional-data input[checked=checked] {
+  background-color: var(--clr-primary-400);
+  border-color: var(--clr-primary-400);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+.additional-data table td {
+  display: flex;
+  gap: 8px;
+}
+.additional-data [type=radio] {
+  background-color: var(--clr-primary-400);
+  border-color: var(--clr-primary-400);
 }
 
 .common-region {

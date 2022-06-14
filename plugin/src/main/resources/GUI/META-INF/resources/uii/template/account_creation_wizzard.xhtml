@@ -563,16 +563,26 @@
 
         </ui:fragment>
 
-        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page4'}">
             <h2>
                 <h:outputText value="#{msgs.login_new_additionalData}" />
             </h2>
 
-            <section class="common-region">
+            <section class="common-region additional-data">
             <ui:repeat
                 var="field"
                 value="#{externalLoginBean.additionalFields['page4']}">
                 <div class="form-group">
+
+                    <h:selectBooleanCheckbox
+                        rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                        pt:aria-label="#{field.label}"
+                        styleClass="form-control"
+                        value="#{field.booleanValue}">
+                        <f:ajax
+                            render="@form"
+                            execute="@this" />
+                    </h:selectBooleanCheckbox>
 
                     <h:outputLabel value="#{field.label}" />
 
@@ -620,15 +630,6 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneMenu>
-                        <h:selectBooleanCheckbox
-                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
-                            pt:aria-label="#{field.label}"
-                            styleClass="form-control"
-                            value="#{field.booleanValue}">
-                            <f:ajax
-                                render="@form"
-                                execute="@this" />
-                        </h:selectBooleanCheckbox>
                         <h:selectOneRadio
                             rendered="#{field.fieldType=='combo' and field.booleanValue}"
                             styleClass="form-control"
@@ -726,7 +727,7 @@
                     jsf:id="goNext"
                     jsf:action="#{externalLoginBean.next}"
                     style="margin-bottom: 20px;"
-                    class="btn btn-primary-400">
+                    class="btn btn-blank">
                     <h:outputText value="#{msgs.next}" />
                 </button>
                 <button
