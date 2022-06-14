@@ -16,6 +16,7 @@
 		<composite:attribute name="inputRequired" default="false" />
 		<composite:attribute name="inputPlaceholder" />
 		<composite:attribute name="inputDuplicate" default="false" />
+		<composite:attribute name="inputAjax" />
 		<composite:attribute name="showHelpBtn" default="true" />
 		<composite:attribute name="helpText" default="default help text"/>
 	</composite:interface>
@@ -29,6 +30,9 @@
         styleClass="form-control"
         value="#{cc.attrs.inputValue}"
         required="#{cc.attrs.inputRequired}">
+				<f:ajax
+						render="#{cc.attrs.inputAjax}"
+						execute="#{cc.attrs.inputAjax}" />
         <f:passThroughAttribute
             name="placeholder"
             value="#{cc.attrs.inputPlaceholder}" />

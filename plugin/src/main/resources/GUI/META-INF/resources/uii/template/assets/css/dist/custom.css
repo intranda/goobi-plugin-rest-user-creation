@@ -928,6 +928,31 @@ main h1 svg {
 }
 
 /* Views */
+.overview .common-region {
+  font-size: var(--fs-400);
+  font-family: "Open Sans", sans-serif;
+}
+.overview h3 {
+  color: var(--clr-primary-400);
+}
+.overview .control-label {
+  font-size: var(--fs-400);
+  display: inline;
+  font-weight: bold;
+}
+.overview .control-label::after {
+  content: ":";
+}
+.overview .col-sm-9 {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+.overview .col-sm-9 span {
+  padding: 0;
+  margin: 0;
+}
+
 .common-region {
   display: grid;
   grid-template-columns: var(--grid-tc);
@@ -937,6 +962,9 @@ main h1 svg {
   padding: 3.2rem 2.4rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+}
+.common-region.one-col {
+  --grid-tc: 1fr;
 }
 
 .layout #globalWarningMessage,

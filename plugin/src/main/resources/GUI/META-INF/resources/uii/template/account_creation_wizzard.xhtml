@@ -316,26 +316,30 @@
                     labelText="#{field.label}"
                     labelRequired="#{field.required}" />
 
+                <!--
                 <zlb:input
                     inputId="input"
                     inputAriaLabel="#{field.label}"
                     inputForceId="true"
-                    inputValue="#{filed.value}"
+                    inputValue="#{field.value}"
                     inputRequired="false"
                     inputPlaceholder=""
                     inputDuplicate="false"
+                    inputAjax="@this"
                     showHelpBtn="true"
+
                     helpText="lorem ipsum" />
 
 
-                    <!--
                     <h:outputLabel value="{field.label}" />
+
                     <i
                         jsf:rendered="#{field.required}"
                         class="fa fa-asterisk pull-right font-asterisk"
                         title="#{msgs.requiredField}"
                         data-toggle="tooltip" />
 
+                    -->
                         <x:inputText
                             id="input"
                             rendered="#{field.fieldType=='input'}"
@@ -350,8 +354,12 @@
                                 value="" />
                         </x:inputText>
 
-                -->
+
+
+                        <!--
                     <div class="email controls">
+                        -->
+
                         <x:inputTextarea
                             id="textarea"
                             rendered="#{field.fieldType=='textarea'}"
@@ -409,7 +417,18 @@
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
                             value="#{fieldy.helpMessage}" />
+                        <!--
                     </div>
+                        -->
+
+                  <!-- ICONS -->
+                  <ui:include src="/uii/includes/form_icons.xhtml">
+                    <ui:param name="duplicateElement" value="false" />
+                    <ui:param name="showHelpBtn" value="true" />
+                    <ui:param name="helpTitle" value="Privacy Help" />
+                    <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                  </ui:include>
+
                 </div>
             </ui:repeat>
             </section>
@@ -436,6 +455,7 @@
                     labelText="#{field.label}"
                     labelRequired="#{field.required}" />
 
+                  <!--
                 <zlb:input
                     inputId="input1"
                     inputAriaLabel="#{field.label}"
@@ -447,7 +467,6 @@
                     showHelpBtn="true"
                     helpText="lorem ipsum" />
 
-                  <!--
                     <h:outputLabel value="#{field.label}" />
                     <i
                         jsf:rendered="#{field.required}"
@@ -455,6 +474,8 @@
                         title="#{msgs.requiredField}"
                         data-toggle="tooltip" />
                     <div class="email controls">
+                    -->
+
                         <x:inputText
                             rendered="#{field.fieldType=='input'}"
                             pt:aria-label="#{field.label}"
@@ -467,7 +488,6 @@
                                 name="placeholder"
                                 value="" />
                         </x:inputText>
-                        -->
 
 
                         <x:inputTextarea
@@ -525,7 +545,17 @@
                             value="#{fieldy.helpMessage}" />
                         <!--
                     </div>
-                        -->
+                    -->
+
+
+                  <!-- ICONS -->
+                  <ui:include src="/uii/includes/form_icons.xhtml">
+                    <ui:param name="duplicateElement" value="false" />
+                    <ui:param name="showHelpBtn" value="true" />
+                    <ui:param name="helpTitle" value="Privacy Help" />
+                    <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                  </ui:include>
+
                 </div>
             </ui:repeat>
           </section>
@@ -533,7 +563,7 @@
 
         </ui:fragment>
 
-        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page4'}">
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
             <h2>
                 <h:outputText value="#{msgs.login_new_additionalData}" />
             </h2>
@@ -542,27 +572,17 @@
             <ui:repeat
                 var="field"
                 value="#{externalLoginBean.additionalFields['page4']}">
+                <div class="form-group">
 
-
-                    <ui:fragment rendered="#{field.fieldType!='checkbox' and field.fieldType!='combo'}">
-                    <div class="form">
-                      <zlb:label
-                          syleClass="form-check-label"
-                          labelFor="input"
-                          labelText="#{field.label}"
-                          labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                          labelRequired="#{field.required}" />
-
-                    <!--
                     <h:outputLabel value="#{field.label}" />
+
                     <i
                         jsf:rendered="#{field.required}"
                         class="fa fa-asterisk pull-right font-asterisk"
                         title="#{msgs.requiredField}"
                         data-toggle="tooltip" />
-
                     <div class="email controls">
-                    -->
+
                         <x:inputText
                             rendered="#{field.fieldType=='input'}"
                             pt:aria-label="#{field.label}"
@@ -589,7 +609,7 @@
                         </x:inputTextarea>
                         <h:selectOneMenu
                             rendered="#{field.fieldType=='dropdown'}"
-                            styleClass="form-control"
+                            styleClass="form-select"
                             value="#{field.value}"
                             pt:aria-label="#{field.label}">
                             <f:selectItem
@@ -600,8 +620,15 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneMenu>
-
-
+                        <h:selectBooleanCheckbox
+                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.booleanValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                        </h:selectBooleanCheckbox>
                         <h:selectOneRadio
                             rendered="#{field.fieldType=='combo' and field.booleanValue}"
                             styleClass="form-control"
@@ -621,54 +648,21 @@
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
                             value="#{fieldy.helpMessage}" />
-                        </div>
-                        </ui:fragment>
+                    </div>
+                </div>
 
-                        <ui:fragment rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}">
-
-                        <div class="form-check">
-
-                          <h:selectBooleanCheckbox
-                              pt:aria-label="#{field.label}"
-                              styleClass="form-check-input"
-                              value="#{field.booleanValue}">
-                              <f:ajax
-                                  render="@form"
-                                  execute="@this" />
-                          </h:selectBooleanCheckbox>
-
-
-                          <zlb:label
-                              syleClass="form-check-label"
-                              labelFor="input"
-                              labelText="#{field.label}"
-                              labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                              labelRequired="#{field.required}" />
-
-
-                            <!-- ICONS -->
-                            <ui:include src="/uii/includes/form_icons.xhtml">
-                              <ui:param name="duplicateElement" value="false" />
-                              <ui:param name="showHelpBtn" value="true" />
-                              <ui:param name="helpTitle" value="Default Help Title" />
-                              <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
-                          </ui:include>
-
-                        </div>
-
-                        </ui:fragment>
             </ui:repeat>
+
             </section>
 
 
         </ui:fragment>
-        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
 
-          <section class="common-region">
+         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
             <h2>
                 <h:outputText value="#{msgs.login_new_activation}" />
             </h2>
-
+            <section class="common-region one-col overview">
             <!-- show all fields in read only mode -->
             <h3>
                 <h:outputText value="#{msgs.login_new_institution}" />
@@ -702,7 +696,6 @@
             <h3>
                 <h:outputText value="#{msgs.login_new_additionalData}" />
             </h3>
-
             <ui:repeat
                 var="field"
                 value="#{externalLoginBean.additionalFields['page4']}">
@@ -712,11 +705,9 @@
                     field="#{field.value}"
                     fieldStyle="form-control" />
             </ui:repeat>
-
-Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitaler Pflichtpublikationen
-          </section>
-</ui:fragment>
-
+            Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitaler Pflichtpublikationen
+            </section>
+        </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <div class="submit form-actions form-actions--progress">
@@ -727,11 +718,9 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
                     class="btn btn-primary-400">
                     <h:outputText value="#{msgs.back}" />
                 </button>
-
                 <ui:include src="/uii/includes/zlb-progress.xhtml">
                     <ui:param name="data" value="#{externalLoginBean}" />
                 </ui:include>
-
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
                     jsf:id="goNext"
@@ -740,8 +729,6 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
                     class="btn btn-primary-400">
                     <h:outputText value="#{msgs.next}" />
                 </button>
-
-
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
                     jsf:id="createInsitution"
@@ -749,12 +736,10 @@ Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitale
                     style="margin-bottom: 20px;"
                     class="btn btn-primary-400">
                     <h:outputText value="#{msgs.createInsitution}" />
-
                 </button>
-
             </div>
-
         </ui:fragment>
+
 
         <zlb:modal
             modalId="exampleModal"
