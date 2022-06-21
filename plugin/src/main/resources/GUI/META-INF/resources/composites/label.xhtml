@@ -17,11 +17,13 @@
 
 	<composite:implementation>
 
-		<label for="#{cc.attrs.labelFor}">
+		<label for="#{cc.attrs.labelFor}" class="zlb-label">
 			#{cc.attrs.labelText}
 
 			<span
-				class="input-required">
+				class="input-required"
+				jsf:rendered="#{cc.attrs.labelRequired}"
+				>
 				<i class="fa fa-asterisk"/>
 			</span>
 

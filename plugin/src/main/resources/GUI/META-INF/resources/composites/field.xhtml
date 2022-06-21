@@ -10,6 +10,10 @@
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <composite:interface>
+        <composite:attribute name="inputDuplicate" default="false" />
+        <composite:attribute name="showHelpBtn" default="true" />
+        <composite:attribute name="helpText" default="default help text"/>
+
         <composite:attribute name="identifier" />
         <!-- #{field.label} -->
         <composite:attribute name="labelText" />
@@ -52,7 +56,7 @@
         <composite:attribute
             name="fieldStyle"
             default="" />
-            
+
         <composite:attribute name="displayDuplicateButton" default="false" />
         <composite:attribute name="render" default="@form" />
 
@@ -63,6 +67,8 @@
             id="#{cc.attrs.identifier}"
             layout="block"
             styleClass="form-group #{cc.attrs.mainClass}">
+
+            <!--
             <label for="#{cc.attrs.identifier}_input">
                 #{cc.attrs.labelText}
                 <h:panelGroup
@@ -76,7 +82,9 @@
                         value="#{cc.attrs.labelHelpText}" />
                 </ui:include>
             </label>
-            <div class="form-field #{cc.attrs.subClass}">
+            -->
+
+            <div class="form form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
                 <x:inputText
                     id="#{cc.attrs.identifier}_input"
                     rendered="#{cc.attrs.fieldType=='input'}"
@@ -145,6 +153,13 @@
                     value="#{cc.attrs.value}">
                 </h:outputText>
 
+                  <!-- ICONS + HELP -->
+                  <ui:include src="/uii/includes/form_icons.xhtml">
+                    <ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
+                    <ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
+                    <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
+                  </ui:include>
+
                 <h:panelGroup
                     layout="block"
                     rendered="#{!cc.attrs.propertyValid}"
@@ -156,6 +171,7 @@
                     rendered="#{NavigationForm.showHelp}"
                     value="#{cc.attrs.labelHelpText}" />
             </div>
+
             <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
                 <button
                     jsf:id="button"
@@ -166,6 +182,8 @@
                         target="#{DashboardForm.plugin.currentField}" />
                 </button>
             </h:panelGroup>
+
+
 
         </h:panelGroup>
 
