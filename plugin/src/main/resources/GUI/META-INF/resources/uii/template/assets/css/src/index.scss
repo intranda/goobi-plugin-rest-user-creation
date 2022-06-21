@@ -31,6 +31,7 @@
 
   --clr-accent: #ffa100;
   --clr-success: #16882e;
+  --clr-danger: #d30404;
 
   --clr-text-body: #333333;
   --clr-text-light: #ffffff;
@@ -235,8 +236,10 @@ main h1 svg {
 
 .page {
   &__heading {
+    grid-column: 1 / -1;
     display: flex;
     justify-content: space-between;
+    margin: 8rem 0 6.4rem 0;
   }
   &__help {
     padding-right: 0;
@@ -254,6 +257,10 @@ main h1 svg {
 }
 
 /* Form elements */
+
+.zlb-label {
+  margin-bottom: 0.8rem;
+}
 
 /* BS overrides */
 
@@ -294,17 +301,28 @@ main h1 svg {
     font-size: 1.6rem;
     color: var(--clr-text-body);
   }
+
+  /*
   input:not([type="checkbox"]) {
     height: 3.8rem;
     grid-column: 1;
   }
+  */
 
   .email.controls {
     color: var(--clr-neutral-800);
     font-size: var(--fs-200);
-    position: absolute;
-    bottom: -24px;
   }
+}
+
+/* VALIDATION */
+.validate--danger input {
+  border-color: var(--clr-danger);
+}
+
+input ~ .font-danger {
+  color: var(--clr-danger);
+  font-size: var(--fs-200);
 }
 
 .help-text {
@@ -329,15 +347,17 @@ main h1 svg {
   display: flex;
   justify-content: flex-end;
   color: var(--clr-primary-400);
-  cursor: pointer;
 
   &__button {
+    display: flex;
+    align-items: center;
     width: 3.2rem;
     height: 3.2rem;
     margin-inline-start: 0.2rem;
     background-color: transparent;
     border: 0;
     color: inherit;
+    cursor: pointer;
 
     svg {
       pointer-events: none;
@@ -360,7 +380,8 @@ main h1 svg {
 }
 
 .form-control {
-  font-size: 1.4rem;
+  padding: 0.375em 0.75em;
+  font-size: 1.6rem;
 }
 
 .form-text {
@@ -374,6 +395,7 @@ main h1 svg {
 }
 
 /* Create account */
+
 .confirm-privacy,
 .form-check {
   grid-column: 1 / -1;
@@ -512,11 +534,16 @@ main h1 svg {
   &.one-col {
     --grid-tc: 1fr;
   }
+  &--no-borders {
+    border: 0;
+  }
 }
 
-.layout #globalWarningMessage,
-.layout .page__heading {
+.layout #globalWarningMessage {
   grid-column: 1 / -1;
+}
+
+.page__heading {
 }
 
 /* COMPONENTS */
@@ -620,6 +647,7 @@ main h1 svg {
 
     &:hover {
       filter: brightness(110%);
+      filter: brightness(80%);
     }
   }
 }
@@ -627,4 +655,7 @@ main h1 svg {
 /* Utilities */
 .column-start {
   grid-column: 1 / 1;
+}
+.grid-full-width {
+  grid-column: 1 / -1;
 }

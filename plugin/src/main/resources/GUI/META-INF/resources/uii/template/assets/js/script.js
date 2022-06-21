@@ -2,6 +2,7 @@ $("document").ready(function () {
   console.log('ready')
 
   // Scripts for modals can be found in `resources/composites/modals.xhtml`
+  // => "Inline Help" + page help
 
   // Activate Tooltips
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"], [data-toggle="tooltip"]'))
@@ -22,10 +23,7 @@ $("document").ready(function () {
           helpText.classList.toggle('vis-hidden');
       }
   }
-
   */
-
-
 
 
 });
