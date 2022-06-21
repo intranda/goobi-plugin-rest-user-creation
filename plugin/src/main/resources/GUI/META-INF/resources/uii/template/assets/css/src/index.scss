@@ -260,6 +260,7 @@ main h1 svg {
 
 .zlb-label {
   margin-bottom: 0.8rem;
+  grid-column: 1 / -1;
 }
 
 /* BS overrides */
@@ -501,6 +502,7 @@ input ~ .font-danger {
     height: 16px;
     display: inline-block;
     margin-right: 8px;
+    padding: 0;
   }
 
   input[checked="checked"] {

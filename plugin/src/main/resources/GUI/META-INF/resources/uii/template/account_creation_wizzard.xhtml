@@ -407,6 +407,14 @@
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneRadio>
 
+                          <!-- ICONS -->
+                          <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param name="duplicateElement" value="false" />
+                            <ui:param name="showHelpBtn" value="true" />
+                            <ui:param name="helpTitle" value="Privacy Help" />
+                            <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                          </ui:include>
+
                         <h:panelGroup
                             layout="block"
                             rendered="#{field.validationError}"
@@ -421,13 +429,6 @@
                     </div>
                         -->
 
-                  <!-- ICONS -->
-                  <ui:include src="/uii/includes/form_icons.xhtml">
-                    <ui:param name="duplicateElement" value="false" />
-                    <ui:param name="showHelpBtn" value="true" />
-                    <ui:param name="helpTitle" value="Privacy Help" />
-                    <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
-                  </ui:include>
 
                 </div>
             </ui:repeat>
@@ -533,6 +534,15 @@
                                 execute="@this" />
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneRadio>
+
+                          <!-- ICONS -->
+                          <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param name="duplicateElement" value="false" />
+                            <ui:param name="showHelpBtn" value="true" />
+                            <ui:param name="helpTitle" value="Privacy Help" />
+                            <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                          </ui:include>
+
                         <h:panelGroup
                             layout="block"
                             rendered="#{field.validationError}"
@@ -548,13 +558,6 @@
                     -->
 
 
-                  <!-- ICONS -->
-                  <ui:include src="/uii/includes/form_icons.xhtml">
-                    <ui:param name="duplicateElement" value="false" />
-                    <ui:param name="showHelpBtn" value="true" />
-                    <ui:param name="helpTitle" value="Privacy Help" />
-                    <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
-                  </ui:include>
 
                 </div>
             </ui:repeat>
