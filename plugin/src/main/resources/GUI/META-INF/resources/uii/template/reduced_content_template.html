@@ -10,6 +10,7 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:o="http://omnifaces.org/ui"
     xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:zlb="http://xmlns.jcp.org/jsf/composite/composites"
     xmlns:ds="http://deltaspike.apache.org/jsf">
 
     <!-- THIS IS FOR TESTING PURPOSE, DO NOT USE IT FOR ACTUAL PAGES -->
@@ -228,6 +229,26 @@
                 </div>
             </div>
         </c:if>
+
+        <zlb:modal
+            modalId="exampleModal"
+        >
+        </zlb:modal>
+
+        <zlb:modal
+            modalId="pageHelpModal"
+            modalTitle="Seiten Hilfe"
+            >
+
+            <!-- Dummy child, will be replaced later -->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ratione totam itaque. Dignissimos quasi nam rerum provident commodi esse cumque architecto culpa, delectus asperiores nisi tempore, incidunt natus praesentium ex?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ratione totam itaque. Dignissimos quasi nam rerum provident commodi esse cumque architecto culpa, delectus asperiores nisi tempore, incidunt natus praesentium ex?</p>
+
+            <img src="https://via.placeholder.com/700x350" class="modal__img"/>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ratione totam itaque. Dignissimos quasi nam rerum provident commodi esse cumque architecto culpa, delectus asperiores nisi tempore, incidunt natus praesentium ex?</p>
+
+        </zlb:modal>
 
         <ui:include src="../includes/footer.xhtml" />
 
