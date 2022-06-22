@@ -64,7 +64,7 @@
                     inputAriaLabel="#{msgs.firstname}"
                     inputValue="#{externalLoginBean.firstname}"
                     inputRequired="true"
-                    inputPlaceholder="#{msgs.login_new_account_firstname}"
+                    inputPlaceholder="#{msgs.firstname}"
                     labelHelpText="Lorem ipsum" />
             </div>
 
@@ -81,7 +81,7 @@
                     inputAriaLabel="#{msgs.lastname}"
                     inputValue="#{externalLoginBean.lastname}"
                     inputRequired="true"
-                    inputPlaceholder="#{msgs.login_new_account_lastname}"
+                    inputPlaceholder="#{msgs.lastname}"
                     showHelpBtn="true"
                     labelHelpText="Lorem ipsum" />
 
@@ -202,12 +202,18 @@
                     required="true">
                 </h:selectBooleanCheckbox>
 
-                <zlb:label
-                    syleClass="form-check-label"
-                    labelFor="privacyStatement"
-                    labelText="#{msgs.login_new_account_confirmPrivacyStatement}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+        <label for="privacyStatement" class="zlb-label">
+            <h:outputText escape="false" value="#{msgs.login_new_account_confirmPrivacyStatement}" />
+
+            <span
+                class="input-required"
+                jsf:rendered="true"
+                >
+                <i class="fa fa-asterisk"/>
+            </span>
+
+        </label>
+
 
                   <!-- ICONS -->
                   <ui:include src="/uii/includes/form_icons.xhtml">
@@ -245,6 +251,30 @@
                     <h:outputText value="#{msgs.login_new_account_createAccount}" />
                 </button>
             </div>
+
+
+<div class="modal fade" id="privacyModal" aria-labelledby="#{msgs.displayMode_privacyPolicy}" aria-hidden="true" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><h:outputText value="#{msgs.displayMode_privacyPolicy}"/> </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="#{msgs.close}"></button>
+      </div>
+      <div class="modal-body">
+  <h:outputText value="#{externalLoginBean.privacyStatement}" escape="false" />
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h:outputText value="#{msgs.close}"/> </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
         </ui:fragment>
 

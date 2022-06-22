@@ -24,7 +24,7 @@
     <c:forEach var="step" items="#{steps}">
         <div class="zlb-progress__step">
             <a href="#" class="zlb-progress__step__link #{step[1]}">
-                <div class="zlb-progress__step__name">#{step[0]}</div>
+                <div class="zlb-progress__step__name">#{msgs[step[0]]}</div>
             </a>
         </div>
     </c:forEach>
