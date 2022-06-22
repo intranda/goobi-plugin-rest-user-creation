@@ -1008,12 +1008,19 @@ input ~ .font-danger {
   padding: 3.2rem 2.4rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+  /* standard is 2 columns
+   * 2 cols are used in views with inputs
+   * 3 cols in views with boxes (usually overviews of possible user actions)
+   */
 }
 .common-region.one-col {
   --grid-tc: 1fr;
 }
 .common-region--no-borders {
   border: 0;
+}
+.common-region--three-cols {
+  --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
 }
 
 .layout #globalWarningMessage {

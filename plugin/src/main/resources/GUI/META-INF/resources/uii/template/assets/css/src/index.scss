@@ -539,6 +539,14 @@ input ~ .font-danger {
   &--no-borders {
     border: 0;
   }
+
+  /* standard is 2 columns
+   * 2 cols are used in views with inputs
+   * 3 cols in views with boxes (usually overviews of possible user actions)
+   */
+  &--three-cols {
+    --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
+  }
 }
 
 .layout #globalWarningMessage {
