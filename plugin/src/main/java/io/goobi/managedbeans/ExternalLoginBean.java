@@ -96,6 +96,10 @@ public class ExternalLoginBean implements Serializable {
     @Getter
     private boolean institutionNameInvalid = false;
 
+    @Getter
+    private String privacyStatement;
+
+
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
     private Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
@@ -107,6 +111,7 @@ public class ExternalLoginBean implements Serializable {
     private void readConfiguration() {
         XMLConfiguration conf = ConfigPlugins.getPluginConfig(configurationName);
         conf.setExpressionEngine(new XPathExpressionEngine());
+        privacyStatement = conf.getString("/privacyStatement");
 
         List<HierarchicalConfiguration> fields = conf.configurationsAt("/fields/field");
 
@@ -134,6 +139,7 @@ public class ExternalLoginBean implements Serializable {
 
             configuredFields.add(ucf);
             additionalFields.put(ucf.getPosition(), configuredFields);
+
         }
 
     }
