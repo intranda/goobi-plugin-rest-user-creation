@@ -528,10 +528,11 @@ input ~ .font-danger {
   gap: var(--gap);
   row-gap: calc(var(--gap) + 1rem);
   column-gap: calc(var(--gap) + 3rem);
-  padding: 3.2rem 2.4rem;
 
+  padding: 3.2rem 2.4rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+  margin-bottom: var(--gap);
 
   &.one-col {
     --grid-tc: 1fr;
@@ -666,6 +667,19 @@ input ~ .font-danger {
 .column-start {
   grid-column: 1 / 1;
 }
+
 .grid-full-width {
   grid-column: 1 / -1;
+}
+
+.corporategrid {
+  display: grid;
+  gap: calc(var(--gap) / 2);
+  grid-template-columns: 1fr 1fr;
+}
+
+.persongrid {
+  display: grid;
+  gap: calc(var(--gap) / 2);
+  grid-template-columns: repeat(3, 1fr);
 }
