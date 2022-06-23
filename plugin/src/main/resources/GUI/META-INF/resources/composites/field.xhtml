@@ -68,21 +68,24 @@
             layout="block"
             styleClass="form-group #{cc.attrs.mainClass}">
 
-            <!--
-            <label for="#{cc.attrs.identifier}_input">
+            <label
+                for="#{cc.attrs.identifier}_input"
+                class="zlb-label"
+                >
                 #{cc.attrs.labelText}
                 <h:panelGroup
                     styleClass="input-required"
                     rendered="#{cc.attrs.fieldRequired}">
                     <i class="fa fa-asterisk" />
                 </h:panelGroup>
+                <!--
                 <ui:include src="../uii/includes/icon-help.xhtml">
                     <ui:param
                         name="helpText"
                         value="#{cc.attrs.labelHelpText}" />
                 </ui:include>
+                -->
             </label>
-            -->
 
             <div class="form form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
                 <x:inputText
@@ -153,36 +156,41 @@
                     value="#{cc.attrs.value}">
                 </h:outputText>
 
-                  <!-- ICONS + HELP -->
-                  <ui:include src="/uii/includes/form_icons.xhtml">
-                    <ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
-                    <ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
-                    <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
-                  </ui:include>
 
-                <h:panelGroup
-                    layout="block"
-                    rendered="#{!cc.attrs.propertyValid}"
-                    styleClass="font-danger validation-message">
-                    <h:outputText value="#{cc.attrs.errorMessageText}" />
-                </h:panelGroup>
-                <h:outputText
-                    styleClass="help-block font-light"
-                    rendered="#{NavigationForm.showHelp}"
-                    value="#{cc.attrs.labelHelpText}" />
-            </div>
 
+            <div class="form-icons">
             <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
                 <button
                     jsf:id="button"
-                    jsf:action="#{DashboardForm.plugin.duplicateMetadataField}">
-                    <i class="fa fa-plus" />
+                    jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
+                    class="form-icons__button form-icons__button--duplicate">
+                    <ui:include src="/uii/includes/icon-plus.xhtml" />
                     <f:setPropertyActionListener
                         value="#{field}"
                         target="#{DashboardForm.plugin.currentField}" />
                 </button>
             </h:panelGroup>
 
+              <!-- ICONS + HELP -->
+              <ui:include src="/uii/includes/form_icons.xhtml">
+                <ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
+                <ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
+                <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
+              </ui:include>
+            </div>
+
+            <!-- Help text / danger text -->
+            <h:panelGroup
+                layout="block"
+                rendered="#{!cc.attrs.propertyValid}"
+                styleClass="font-danger validation-message">
+                <h:outputText value="#{cc.attrs.errorMessageText}" />
+            </h:panelGroup>
+            <h:outputText
+                styleClass="help-block font-light"
+                rendered="#{NavigationForm.showHelp}"
+                value="#{cc.attrs.labelHelpText}" />
+        </div>
 
 
         </h:panelGroup>

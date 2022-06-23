@@ -21,7 +21,7 @@
         <!-- #{field.value2} -->
         <composite:attribute name="secondValue" />
         <!-- #{field.role} -->
-        <composite:attribute name="role" />        
+        <composite:attribute name="role" />
         <!-- #{field.validationError} -->
         <composite:attribute
             name="propertyValid"
@@ -32,30 +32,32 @@
         <composite:attribute name="selectItems"  />
         <!-- #{field.helpMessage} ? -->
         <composite:attribute name="placeholderText" default="" />
-        
+
         <!-- styling options -->
         <composite:attribute name="mainClass" default="" />
         <composite:attribute name="subClass" default="" />
         <composite:attribute name="fieldStyle" default="" />
         <composite:attribute name="displayDuplicateButton" default="false" />
-        <composite:attribute name="render" default="@form" />             
+        <composite:attribute name="render" default="@form" />
     </composite:interface>
 
     <composite:implementation>
         <h:panelGroup
             id="#{cc.attrs.identifier}"
             layout="block"
-            styleClass="form-group grid-row #{cc.attrs.mainClass}">
-            <label for="#{cc.attrs.identifier}_input">
+            styleClass="form grid-row #{cc.attrs.mainClass}">
+            <label for="#{cc.attrs.identifier}_input" class="zlb-label">
                 #{cc.attrs.labelText}
                 <h:panelGroup styleClass="input-required" rendered="#{cc.attrs.fieldRequired}">
                     <i class="fa fa-asterisk" />
                 </h:panelGroup>
+                <!--
                 <ui:include src="../uii/includes/icon-help.xhtml">
                     <ui:param
                         name="helpText"
                         value="#{cc.attrs.labelHelpText}" />
                 </ui:include>
+                -->
             </label>
             <div class="form-field #{cc.attrs.subClass}">
                 <x:inputText
@@ -97,7 +99,31 @@
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneMenu>
+                </div>
 
+
+                <div class="form-icons">
+                    <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
+                        <button
+                            jsf:id="button"
+                            jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
+                            class="form-icons__button form-icons__button--duplicate">
+                            <ui:include src="/uii/includes/icon-plus.xhtml" />
+                            <f:setPropertyActionListener
+                                value="#{field}"
+                                target="#{DashboardForm.plugin.currentField}" />
+                        </button>
+                    </h:panelGroup>
+
+                      <!-- ICONS + HELP -->
+                      <ui:include src="/uii/includes/form_icons.xhtml">
+                        <ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
+                        <ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
+                        <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
+                      </ui:include>
+
+                </div>
+                <!-- Help text / danger text -->
                 <h:panelGroup
                     layout="block"
                      rendered="#{!cc.attrs.propertyValid}"
@@ -108,17 +134,6 @@
                     styleClass="help-block font-light"
                     rendered="#{NavigationForm.showHelp}"
                     value="#{cc.attrs.labelHelpText}" />
-            </div>
-            <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
-                <button
-                    jsf:id="button"
-                    jsf:action="#{DashboardForm.plugin.duplicateMetadataField}">
-                    <i class="fa fa-plus" />
-                    <f:setPropertyActionListener
-                        value="#{field}"
-                        target="#{DashboardForm.plugin.currentField}" />
-                </button>
-            </h:panelGroup>
 
         </h:panelGroup>
 
