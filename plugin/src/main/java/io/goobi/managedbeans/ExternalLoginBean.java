@@ -86,19 +86,21 @@ public class ExternalLoginBean implements Serializable {
     @Setter
     private String uiStatus = "";
 
-    //    http://localhost:8080/goobi/api/users/email/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdXJwb3NlIjoiY29uZmlybU1haWwiLCJpc3MiOiJHb29iaSIsImlkIjoiMjciLCJleHAiOjE2NTIyMTE0OTUsInVzZXIiOiJyb2JlcnQifQ.SKkARFPmmgRz-eKKecOIHPOkk6VQuGt7jYsU5iqIvSg
-
     // second page
+    @Getter
+    @Setter
+    private String institutionShortName;
     @Getter
     @Setter
     private String institutionName;
 
     @Getter
     private boolean institutionNameInvalid = false;
+    @Getter
+    private boolean institutionShortNameInvalid = false;
 
     @Getter
     private String privacyStatement;
-
 
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
@@ -152,7 +154,7 @@ public class ExternalLoginBean implements Serializable {
         } else {
             // check that account name only uses valid characters
             if (!isLoginValide(accountName)) {
-                Helper.setFehlerMeldung("loginNotValid");
+                Helper.setFehlerMeldung("loginWrongCharacter");
                 return;
             }
             // check that the account name was not used yet
@@ -255,14 +257,14 @@ public class ExternalLoginBean implements Serializable {
 
         NavigationForm form = (NavigationForm) Helper.getBeanByName("NavigationForm", NavigationForm.class);
         form.getUiStatus().put("loginStatus", "");
-
+        wizzardMode = "confirm";
     }
 
     public void createInstitution() {
 
         Institution institution = new Institution();
+        institution.setShortName(institutionShortName);
         institution.setLongName(institutionName);
-        institution.setShortName(institutionName);
         institution.setAllowAllPlugins(true);
         institution.setAllowAllAuthentications(true);
         currentUser.setInstitution(institution);
@@ -295,6 +297,8 @@ public class ExternalLoginBean implements Serializable {
 
         // TODO send mail to staff to activate account
 
+        wizzardMode = "wait";
+
     }
 
     public static String createRandomPassword(int length) {
@@ -309,7 +313,7 @@ public class ExternalLoginBean implements Serializable {
 
     private boolean isLoginValide(String inLogin) {
         boolean valide = true;
-        String patternStr = "[A-Za-z0-9@_\\-.]*";
+        String patternStr = "[a-z0-9\\._-]+";
         Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(inLogin);
         valide = matcher.matches();
@@ -343,6 +347,14 @@ public class ExternalLoginBean implements Serializable {
         boolean valid = true;
 
         if ("page2".equals(pageName)) {
+            // shortname: max 6 characters, A-Za-z0-9
+            if (StringUtils.isBlank(institutionShortName) || institutionShortName.length() > 6 || !institutionShortName.matches("[A-Za-z0-9]+")) {
+                institutionShortNameInvalid = true;
+                valid = false;
+            } else {
+                institutionShortNameInvalid = false;
+            }
+
             // validate institution name, not empty and max 255 character
             if (StringUtils.isBlank(institutionName) || institutionName.length() > 255) {
                 institutionNameInvalid = true;
