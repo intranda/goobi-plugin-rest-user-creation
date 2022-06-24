@@ -26,7 +26,7 @@
                 value="#{msgs.login_new_institution}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page3'}"
-                value="#{msgs.login_new_institution}" />
+                value="#{msgs.login_new_contact}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page4'}"
                 value="#{msgs.login_new_institution}" />
@@ -323,7 +323,9 @@
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='confirm'}">
 
             <section class="common-region">
-                <h:outputText value="#{msgs.login_new_account_confirmEmail}" />
+                <h:outputText
+                    escape="false"
+                    value="#{msgs.login_new_account_confirmEmail}" />
             </section>
         </ui:fragment>
 
@@ -352,9 +354,15 @@
                         rendered="#{externalLoginBean.institutionShortNameInvalid}"
                         styleClass="font-danger validation-message">
                         <h:outputText value="#{msgs.login_new_account_institutionShortNameInvalid}" />
-                    </h:panelGroup>                        
+                    </h:panelGroup>
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{externalLoginBean.institutionShortNameInUse}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{msgs.login_new_account_institutionShortNameInUse}" />
+                    </h:panelGroup>                    
                 </div>
-                
+
                 <div class="form">
                     <zlb:label
                         labelFor="institutionName"
@@ -490,6 +498,25 @@
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page3'}">
 
+            <div class="form">
+                <h:selectBooleanCheckbox
+                    id="contactPersonCheckbox"
+                    pt:aria-label="#{msgs.login_new_account_userIsContactPerson}"
+                    forceId="true"
+                    styleClass="form-check-input"
+                    value="#{externalLoginBean.userIsContactPerson}"
+                    required="false">
+                    <f:ajax
+                        execute="@this"
+                        render="@form" />
+                </h:selectBooleanCheckbox>
+                <zlb:label
+                    labelFor="contactPersonCheckbox"
+                    labelText="#{msgs.login_new_account_userIsContactPerson}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
+
+            </div>
             <section class="common-region">
 
                 <!--

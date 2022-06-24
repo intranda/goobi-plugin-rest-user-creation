@@ -1,6 +1,8 @@
 package io.goobi.managedbeans;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import javax.naming.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
+import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -36,6 +39,7 @@ import de.sub.goobi.helper.JwtHelper;
 import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.persistence.managers.InstitutionManager;
 import de.sub.goobi.persistence.managers.LdapManager;
+import de.sub.goobi.persistence.managers.MySQLHelper;
 import de.sub.goobi.persistence.managers.UserManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -98,9 +102,15 @@ public class ExternalLoginBean implements Serializable {
     private boolean institutionNameInvalid = false;
     @Getter
     private boolean institutionShortNameInvalid = false;
+    @Getter
+    private boolean institutionShortNameInUse = false;
 
     @Getter
     private String privacyStatement;
+
+    // third page
+    @Getter
+    private boolean userIsContactPerson;
 
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
@@ -353,6 +363,31 @@ public class ExternalLoginBean implements Serializable {
                 valid = false;
             } else {
                 institutionShortNameInvalid = false;
+
+                // check that shortname is not in use
+                String query = "select count(1) from institution where shortName = ?";
+                Connection connection = null;
+                try {
+                    connection = MySQLHelper.getInstance().getConnection();
+                    QueryRunner run = new QueryRunner();
+                    int number = run.query(connection, query, MySQLHelper.resultSetToIntegerHandler, institutionShortName);
+                    if (number > 0) {
+                        valid = false;
+                        institutionShortNameInUse = true;
+                    } else {
+                        institutionShortNameInUse = false;
+                    }
+                } catch (SQLException e) {
+                    log.error(e);
+                } finally {
+                    if (connection != null) {
+                        try {
+                            MySQLHelper.closeConnection(connection);
+                        } catch (SQLException e) {
+                        }
+                    }
+                }
+
             }
 
             // validate institution name, not empty and max 255 character
@@ -390,4 +425,22 @@ public class ExternalLoginBean implements Serializable {
         }
     }
 
+    public void setUserIsContactPerson(boolean userIsContactPerson) {
+        if (this.userIsContactPerson != userIsContactPerson) {
+            this.userIsContactPerson = userIsContactPerson;
+            if (userIsContactPerson) {
+
+                List<UserCreationField> fields = additionalFields.get("page3");
+                for (UserCreationField field : fields) {
+                    if (field.getName().toLowerCase().contains("firstname")) {
+                        field.setValue(currentUser.getVorname());
+                    } else if (field.getName().toLowerCase().contains("lastname")) {
+                        field.setValue(currentUser.getNachname());
+                    } else if (field.getName().toLowerCase().contains("email")) {
+                        field.setValue(currentUser.getEmail());
+                    }
+                }
+            }
+        }
+    }
 }
