@@ -112,6 +112,13 @@ public class ExternalLoginBean implements Serializable {
     @Getter
     private boolean userIsContactPerson;
 
+    @Getter
+    private boolean displaySecondContact = false;
+
+    @Getter
+    @Setter
+    private boolean activation;
+
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
     private Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
@@ -193,13 +200,13 @@ public class ExternalLoginBean implements Serializable {
         }
 
         if (!password.equals(confirmPassword)) {
-            Helper.setFehlerMeldung("TODO");
+            Helper.setFehlerMeldung("login_new_account_confirmPasswordWrong");
             return;
         }
         // check password length
 
         if (!privacyTextAccepted) {
-            Helper.setFehlerMeldung("TODO");
+            Helper.setFehlerMeldung("login_new_account_privacyTextNotAcccepted");
             return;
         }
 
@@ -271,6 +278,11 @@ public class ExternalLoginBean implements Serializable {
     }
 
     public void createInstitution() {
+
+        if (!activation) {
+            Helper.setFehlerMeldung("login_new_account_activationNotSet");
+            return;
+        }
 
         Institution institution = new Institution();
         institution.setShortName(institutionShortName);
@@ -443,4 +455,40 @@ public class ExternalLoginBean implements Serializable {
             }
         }
     }
+
+    public void createNewContact() {
+        displaySecondContact = true;
+        //        if (additionalFields.get("page3a") != null) {
+        //            // second contact already exists
+        //            return;
+        //        }
+        //
+        //        List<UserCreationField> existingFields = additionalFields.get("page3");
+        //
+        //        List<UserCreationField> newFields = new ArrayList<>();
+        //
+        //        for (UserCreationField f : existingFields) {
+        //
+        //            UserCreationField newField = new UserCreationField();
+        //
+        //            newField.setType(f.getType());
+        //            newField.setDisplayInTable(f.isDisplayInTable());
+        //            newField.setFieldType(f.getFieldType());
+        //            newField.setLabel(f.getLabel());
+        //            String name = f.getName().replace("contact", "contact2");
+        //            newField.setName(name);
+        //            newField.setPosition(f.getPosition());
+        //            newField.setRequired(f.isRequired());
+        //            newField.setValidation(f.getValidation());
+        //            newField.setValidationErrorMessage(f.getValidationErrorMessage());
+        //            newField.setSelectItemList(f.getSelectItemList());
+        //
+        //            newField.setHelpMessage(f.getHelpMessage());
+        //            newFields.add(newField);
+        //        }
+        //
+        //        additionalFields.put("page3a", newFields);
+
+    }
+
 }

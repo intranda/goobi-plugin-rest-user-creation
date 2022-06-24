@@ -360,7 +360,7 @@
                         rendered="#{externalLoginBean.institutionShortNameInUse}"
                         styleClass="font-danger validation-message">
                         <h:outputText value="#{msgs.login_new_account_institutionShortNameInUse}" />
-                    </h:panelGroup>                    
+                    </h:panelGroup>
                 </div>
 
                 <div class="form">
@@ -536,26 +536,120 @@
                             labelText="#{field.label}"
                             labelRequired="#{field.required}" />
 
-                        <!--
-                <zlb:input
-                    inputId="input1"
-                    inputAriaLabel="#{field.label}"
-                    inputForceId="true"
-                    inputValue="#{filed.value}"
-                    inputRequired="false"
-                    inputPlaceholder=""
-                    inputDuplicate="false"
-                    showHelpBtn="true"
-                    helpText="lorem ipsum" />
 
-                    <h:outputLabel value="#{field.label}" />
-                    <i
-                        jsf:rendered="#{field.required}"
-                        class="fa fa-asterisk pull-right font-asterisk"
-                        title="#{msgs.requiredField}"
-                        data-toggle="tooltip" />
-                    <div class="email controls">
+                        <x:inputText
+                            rendered="#{field.fieldType=='input'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.value}">
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:passThroughAttribute
+                                name="placeholder"
+                                value="" />
+                        </x:inputText>
+
+
+                        <x:inputTextarea
+                            rendered="#{field.fieldType=='textarea'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.value}">
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:passThroughAttribute
+                                name="placeholder"
+                                value="" />
+                        </x:inputTextarea>
+                        <h:selectOneMenu
+                            rendered="#{field.fieldType=='dropdown'}"
+                            styleClass="form-control"
+                            value="#{field.value}"
+                            pt:aria-label="#{field.label}">
+                            <f:selectItem
+                                itemValue="null"
+                                itemLabel="#{msgs.bitteAuswaehlen}" />
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneMenu>
+                        <h:selectBooleanCheckbox
+                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.booleanValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                        </h:selectBooleanCheckbox>
+                        <h:selectOneRadio
+                            rendered="#{field.fieldType=='combo' and field.booleanValue}"
+                            styleClass="form-control"
+                            value="#{field.subValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneRadio>
+
+                        <!-- ICONS -->
+                        <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param
+                                name="duplicateElement"
+                                value="false" />
+                            <ui:param
+                                name="showHelpBtn"
+                                value="true" />
+                            <ui:param
+                                name="helpTitle"
+                                value="Privacy Help" />
+                            <ui:param
+                                name="helpBody"
+                                value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                        </ui:include>
+
+                        <h:panelGroup
+                            layout="block"
+                            rendered="#{field.validationError}"
+                            styleClass="font-danger validation-message">
+                            <h:outputText value="#{field.validationErrorMessage}" />
+                        </h:panelGroup>
+                        <h:outputText
+                            styleClass="help-block font-light"
+                            rendered="#{NavigationForm.showHelp}"
+                            value="#{fieldy.helpMessage}" />
+                        <!--
+                    </div>
                     -->
+
+                    </div>
+                </ui:repeat>
+            </section>
+
+            <button
+            jsf:rendered="#{!externalLoginBean.displaySecondContact}"
+                jsf:id="createNewContact"
+                jsf:action="#{externalLoginBean.createNewContact}"
+                style="margin-bottom: 20px;"
+                class="btn btn-blank">
+                <h:outputText value="#{msgs.login_new_createNewContact}" />
+            </button>
+
+            <section class="common-region" jsf:rendered="#{externalLoginBean.displaySecondContact}">
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page3a']}">
+
+                    <div class="form">
+
+                        <zlb:label
+                            labelFor="input1"
+                            labelText="#{field.label}"
+                            labelRequired="#{field.required}" />
+
 
                         <x:inputText
                             rendered="#{field.fieldType=='input'}"
@@ -650,6 +744,7 @@
                     </div>
                 </ui:repeat>
             </section>
+
 
 
         </ui:fragment>
@@ -788,6 +883,18 @@
                         field="#{field.value}"
                         fieldStyle="form-control" />
                 </ui:repeat>
+                <ui:fragment rendered="#{externalLoginBean.displaySecondContact}">
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page3a']}">
+                    <intranda:formOutputText
+                        name="field"
+                        label="#{field.label}"
+                        field="#{field.value}"
+                        fieldStyle="form-control" />
+                </ui:repeat>
+                </ui:fragment>
+                
                 <h3>
                     <h:outputText value="#{msgs.login_new_additionalData}" />
                 </h3>
@@ -800,7 +907,20 @@
                         field="#{field.value}"
                         fieldStyle="form-control" />
                 </ui:repeat>
-                Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitaler Pflichtpublikationen
+                
+                 <h:selectBooleanCheckbox
+                        id="activation"
+                        pt:aria-label="#{msgs.login_new_account_activation}"
+                        forceId="true"
+                        styleClass="form-check-input"
+                        value="#{externalLoginBean.activation}"
+                        required="true">
+                    </h:selectBooleanCheckbox>
+                <zlb:label
+                        labelFor="activation"
+                        labelText="#{msgs.login_new_account_activation}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
             </section>
         </ui:fragment>
 
