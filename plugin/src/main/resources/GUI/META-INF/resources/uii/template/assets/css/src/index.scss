@@ -50,7 +50,7 @@
   --grid-tc: repeat(auto-fit, minmax(45rem, 1fr));
 }
 
-/* GENERAL */
+/* LAYOUT */
 html {
   min-height: 100vh;
   width: 100vw;
@@ -80,6 +80,23 @@ h2 {
 h2 {
   font-size: 2.2rem;
   line-height: 2.6rem;
+}
+
+.page {
+  &__heading {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    margin: 8rem 0 6.4rem 0;
+  }
+  &__help {
+    padding-right: 0;
+    svg {
+      width: 3.2rem;
+      height: 3.2rem;
+      fill: var(--clr-primary-400);
+    }
+  }
 }
 
 /* Buttons */
@@ -220,40 +237,6 @@ main h1 a {
 
 main h1 svg {
   margin-left: auto;
-}
-
-.login-body {
-  margin: auto;
-  padding: 64px;
-  background-color: var(--clr-neutral-400);
-  max-width: 480px;
-}
-
-.login-body h2 {
-  text-transform: uppercase;
-  font-size: 3.6rem;
-}
-
-.page {
-  &__heading {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: space-between;
-    margin: 8rem 0 6.4rem 0;
-  }
-  &__help {
-    padding-right: 0;
-    svg {
-      width: 3.2rem;
-      height: 3.2rem;
-      fill: var(--clr-primary-400);
-    }
-  }
-}
-
-#loginForm {
-  display: grid;
-  grid-gap: var(--gap);
 }
 
 /* Form elements */
@@ -454,39 +437,6 @@ input ~ .font-danger {
   text-decoration: underline;
 }
 
-/* Views */
-
-.overview {
-  .common-region {
-    font-size: var(--fs-400);
-    font-family: "Open Sans", sans-serif;
-  }
-  h3 {
-    color: var(--clr-primary-400);
-  }
-
-  .control-label {
-    font-size: var(--fs-400);
-    display: inline;
-    font-weight: bold;
-  }
-
-  .control-label::after {
-    content: ": ";
-  }
-
-  .col-sm-9 {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-  }
-
-  .col-sm-9 span {
-    padding: 0;
-    margin: 0;
-  }
-}
-
 .additional-data {
   .form-group label {
     font-size: var(--fs-400);
@@ -678,4 +628,89 @@ input ~ .font-danger {
   display: grid;
   gap: calc(var(--gap) / 2);
   grid-template-columns: repeat(3, 1fr);
+}
+
+/* VIEWS */
+
+// Login
+.login-body {
+  margin: auto;
+  padding: 64px;
+  background-color: var(--clr-neutral-400);
+  max-width: 480px;
+}
+
+.login-body h2 {
+  text-transform: uppercase;
+  font-size: 3.6rem;
+}
+
+.login-body {
+  #loginForm {
+    display: grid;
+    grid-gap: var(--gap);
+  }
+
+  .messagesLogin {
+    padding-left: 0;
+    font-size: var(--fs-200);
+    color: var(--clr-danger);
+    li {
+      list-style: none;
+    }
+  }
+
+  .form-actions .submit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  #loginButton {
+    order: 1;
+  }
+
+  #resetPassword {
+    width: 100%;
+    text-align: end;
+    order: 2;
+
+    padding: 0;
+    border: 0;
+    margin: 0;
+    margin-top: 1.6rem;
+    color: var(--clr-primary-400);
+  }
+}
+
+// Overview
+.overview {
+  .common-region {
+    font-size: var(--fs-400);
+    font-family: "Open Sans", sans-serif;
+  }
+  h3 {
+    color: var(--clr-primary-400);
+  }
+
+  .control-label {
+    font-size: var(--fs-400);
+    display: inline;
+    font-weight: bold;
+  }
+
+  .control-label::after {
+    content: ": ";
+  }
+
+  .col-sm-9 {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+  }
+
+  .col-sm-9 span {
+    padding: 0;
+    margin: 0;
+  }
 }

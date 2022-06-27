@@ -73,7 +73,7 @@
                                     labelFor="login"
                                     labelText="User name"
                                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                                    labelRequired="true" />
+                                    labelRequired="false" />
 
                                 <zlb:input
                                     inputId="login"
@@ -92,7 +92,7 @@
                                     labelFor="passwort"
                                     labelText="Password"
                                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                                    labelRequired="true" />
+                                    labelRequired="false" />
 
                                 <x:inputSecret
                                     id="passwort"
@@ -102,7 +102,7 @@
                                     value="#{LoginForm.passwort}">
                                     <f:passThroughAttribute
                                         name="placeholder"
-                                        value="#{msgs.passwort}" />
+                                        value="" />
                                 </x:inputSecret>
 
 
@@ -122,18 +122,6 @@
 
                             <div class="form-actions">
                                 <div class="submit">
-                                    <ui:fragment rendered="#{LoginForm.userCreationEnabled}">
-                                        <button
-                                            jsf:id="createAccount"
-                                            class="btn btn-blank me-2">
-                                            <f:setPropertyActionListener
-                                                value="accountCreation"
-                                                target="#{externalLoginBean.uiStatus}" />
-                                            <h:outputText value="#{msgs.login_createAccount}" />
-                                        </button>
-                                    </ui:fragment>
-
-
                                     <ui:fragment rendered="#{LoginForm.useOpenIDConnect}">
                                         <button
                                             jsf:id="openIdLogin"
@@ -149,10 +137,22 @@
                                             target="#{NavigationForm.aktuell}"
                                             value="a0" />
                                     </button>
+                                    <ui:fragment rendered="#{LoginForm.userCreationEnabled}">
+                                        <button
+                                            jsf:id="createAccount"
+                                            class="btn btn-blank me-2">
+                                            <f:setPropertyActionListener
+                                                value="accountCreation"
+                                                target="#{externalLoginBean.uiStatus}" />
+                                            <h:outputText value="#{msgs.login_createAccount}" />
+                                        </button>
+                                    </ui:fragment>
+
+
                                     <!-- TODO forgot password button -->
                                     <button
                                         jsf:id="resetPassword"
-                                        class="btn btn-primary-400">
+                                        class="btn btn-link">
                                         <h:outputText value="#{msgs.login_new_account_resetPassword}" />
                                         <f:setPropertyActionListener
                                             value="resetPassword"
@@ -171,7 +171,7 @@
                                     labelFor="loginOrMail"
                                     labelText="User name or email"
                                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                                    labelRequired="true" />
+                                    labelRequired="false" />
 
                                 <zlb:input
                                     inputId="loginOrMail"
@@ -187,7 +187,7 @@
                             <div class="form-actions">
                                 <button
                                     jsf:id="back2"
-                                    class="btn btn-blank me-4"
+                                    class="btn btn-blank me-2"
                                     jsf:immediate="true">
                                     <f:setPropertyActionListener
                                         value=""
