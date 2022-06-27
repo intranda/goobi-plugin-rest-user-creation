@@ -52,14 +52,15 @@
 
 /* LAYOUT */
 html {
-  min-height: 100vh;
-  width: 100vw;
-  font-family: "Open Sans", sans-serif;
   font-size: 62.5%;
 }
 
 body {
   overflow-x: hidden;
+  min-height: 100vh;
+  width: 100vw;
+  font-family: "Open Sans", sans-serif;
+  font-size: var(--fs-400);
 }
 
 /* Override BS inline padding (applied when opening a modal) */
@@ -252,23 +253,9 @@ main h1 svg {
   grid-column: 1 / -1;
 }
 
-/* BS overrides */
-
-/*
- * Todo: DELETE IF NO FLOATING LABELS
-.form-floating > .form-control,
-.form-floating > .form-select {
-  height: calc(5.6rem + 2px);
-  padding: 1.6rem 1.2rem;
+.form-check .zlb-label {
+  margin: 0;
 }
-
-.form-floating > label {
-  padding: 1.6rem 1.2rem;
-  font-weight: 400;
-  font-size: 1.4rem;
-}
-
-*/
 
 /* custom styles */
 .form {
@@ -384,15 +371,16 @@ input ~ .font-danger {
   grid-column: -1 / 1;
 }
 
-/* Create account */
-
+// Checkboxes
 .confirm-privacy,
 .form-check {
-  grid-column: 1 / -1;
-  display: flex;
-  gap: 8px;
   align-items: center;
   font-size: var(--fs-400);
+}
+
+.form-check-input:checked {
+  background-color: var(--clr-primary-400);
+  border: var(--clr-primary-400);
 }
 
 /* FOOTER */
@@ -480,6 +468,7 @@ input ~ .font-danger {
   gap: var(--gap);
   row-gap: calc(var(--gap) + 1rem);
   column-gap: calc(var(--gap) + 3rem);
+  align-items: baseline;
 
   padding: 3.2rem 2.4rem;
   border: 1px solid var(--border-color);
@@ -651,19 +640,19 @@ input ~ .font-danger {
   font-size: 3.6rem;
 }
 
+.messagesLogin {
+  padding-left: 0;
+  font-size: var(--fs-200);
+  color: var(--clr-danger);
+  li {
+    list-style: none;
+  }
+}
+
 .login-body {
   #loginForm {
     display: grid;
     grid-gap: var(--gap);
-  }
-
-  .messagesLogin {
-    padding-left: 0;
-    font-size: var(--fs-200);
-    color: var(--clr-danger);
-    li {
-      list-style: none;
-    }
   }
 
   .form-actions .submit {

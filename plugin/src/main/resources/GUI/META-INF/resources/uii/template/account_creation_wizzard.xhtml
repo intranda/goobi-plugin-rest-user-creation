@@ -61,7 +61,7 @@
                         inputValue="#{externalLoginBean.accountName}"
                         inputRequired="true"
                         inputPlaceholder="#{msgs.login_new_account_accountName}"
-                        inputDuplicate="true"
+                        inputDuplicate="false"
                         showHelpBtn="true"
                         helpText="lorem ipsum" />
                 </div>
@@ -125,7 +125,6 @@
 
                     <!-- Icons -->
                     <ui:include src="/uii/includes/form_icons.xhtml" />
-
 
                     <!--
                 <div class="help-text vis-hidden">
@@ -206,31 +205,33 @@
 
                 </div>
 
-                <div class="form-check confirm-privacy">
+                <div class="form form-check confirm-privacy">
 
-                    <h:selectBooleanCheckbox
-                        id="privacyStatement"
-                        pt:aria-label="#{msgs.login_new_account_confirmPrivacyStatement}"
-                        forceId="true"
-                        styleClass="form-check-input"
-                        value="#{externalLoginBean.privacyTextAccepted}"
-                        required="true">
-                    </h:selectBooleanCheckbox>
+                    <div class="form-check-wrapper">
+                        <h:selectBooleanCheckbox
+                            id="privacyStatement"
+                            pt:aria-label="#{msgs.login_new_account_confirmPrivacyStatement}"
+                            forceId="true"
+                            styleClass="form-check-input"
+                            value="#{externalLoginBean.privacyTextAccepted}"
+                            required="true">
+                        </h:selectBooleanCheckbox>
 
-                    <label
-                        for="privacyStatement"
-                        class="zlb-label">
-                        <h:outputText
-                            escape="false"
-                            value="#{msgs.login_new_account_confirmPrivacyStatement}" />
+                        <label
+                            for="privacyStatement"
+                            class="zlb-label">
+                            <h:outputText
+                                escape="false"
+                                value="#{msgs.login_new_account_confirmPrivacyStatement}" />
 
-                        <span
-                            class="input-required"
-                            jsf:rendered="true">
-                            <i class="fa fa-asterisk" />
-                        </span>
+                            <span
+                                class="input-required"
+                                jsf:rendered="true">
+                                <i class="fa fa-asterisk" />
+                            </span>
 
-                    </label>
+                        </label>
+                    </div> <!-- end form-check-wrapper -->
 
 
                     <!-- ICONS -->
@@ -332,7 +333,7 @@
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
 
             <section class="common-region">
-                <div class="form">
+                <div class="form #{externalLoginBean.institutionShortNameInUse == true || externalLoginBean.institutionShortNameInvalid == true ? 'validate--danger' : ''}">
 
                     <zlb:label
                         labelFor="institutionShortName"
@@ -363,7 +364,7 @@
                     </h:panelGroup>
                 </div>
 
-                <div class="form">
+                <div class="form #{externalLoginBean.institutionNameInvalid ? 'validate--danger' : ''}">
                     <zlb:label
                         labelFor="institutionName"
                         labelText="#{msgs.login_new_account_institutionName}"
@@ -391,7 +392,7 @@
                     var="field"
                     value="#{externalLoginBean.additionalFields['page2']}">
 
-                    <div class="form">
+                    <div class="form #{field.validationError ? 'validate--danger' : ''}">
 
                         <zlb:label
                             labelFor="input"
@@ -486,10 +487,6 @@
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
                             value="#{fieldy.helpMessage}" />
-                        <!--
-                    </div>
-                        -->
-
 
                     </div>
                 </ui:repeat>
@@ -499,6 +496,7 @@
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page3'}">
 
             <div class="form">
+                <div class="form-check-wrapper">
                 <h:selectBooleanCheckbox
                     id="contactPersonCheckbox"
                     pt:aria-label="#{msgs.login_new_account_userIsContactPerson}"
@@ -515,21 +513,16 @@
                     labelText="#{msgs.login_new_account_userIsContactPerson}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="true" />
+                </div>
 
             </div>
             <section class="common-region">
-
-                <!--
-            <h2>
-                <h:outputText value="#{msgs.login_new_contact}" />
-            </h2>
-            -->
 
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page3']}">
 
-                    <div class="form">
+                <div class="form #{field.validationError ? 'validate--danger' : ''}">
 
                         <zlb:label
                             labelFor="input1"
@@ -894,7 +887,7 @@
                         fieldStyle="form-control" />
                 </ui:repeat>
                 </ui:fragment>
-                
+
                 <h3>
                     <h:outputText value="#{msgs.login_new_additionalData}" />
                 </h3>
@@ -907,7 +900,7 @@
                         field="#{field.value}"
                         fieldStyle="form-control" />
                 </ui:repeat>
-                
+
                  <h:selectBooleanCheckbox
                         id="activation"
                         pt:aria-label="#{msgs.login_new_account_activation}"
