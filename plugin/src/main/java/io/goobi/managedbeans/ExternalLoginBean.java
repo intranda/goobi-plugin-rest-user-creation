@@ -1,6 +1,8 @@
 package io.goobi.managedbeans;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import javax.naming.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
+import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -36,6 +39,7 @@ import de.sub.goobi.helper.JwtHelper;
 import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.persistence.managers.InstitutionManager;
 import de.sub.goobi.persistence.managers.LdapManager;
+import de.sub.goobi.persistence.managers.MySQLHelper;
 import de.sub.goobi.persistence.managers.UserManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -86,19 +90,34 @@ public class ExternalLoginBean implements Serializable {
     @Setter
     private String uiStatus = "";
 
-    //    http://localhost:8080/goobi/api/users/email/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdXJwb3NlIjoiY29uZmlybU1haWwiLCJpc3MiOiJHb29iaSIsImlkIjoiMjciLCJleHAiOjE2NTIyMTE0OTUsInVzZXIiOiJyb2JlcnQifQ.SKkARFPmmgRz-eKKecOIHPOkk6VQuGt7jYsU5iqIvSg
-
     // second page
+    @Getter
+    @Setter
+    private String institutionShortName;
     @Getter
     @Setter
     private String institutionName;
 
     @Getter
     private boolean institutionNameInvalid = false;
+    @Getter
+    private boolean institutionShortNameInvalid = false;
+    @Getter
+    private boolean institutionShortNameInUse = false;
 
     @Getter
     private String privacyStatement;
 
+    // third page
+    @Getter
+    private boolean userIsContactPerson;
+
+    @Getter
+    private boolean displaySecondContact = false;
+
+    @Getter
+    @Setter
+    private boolean activation;
 
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
@@ -152,7 +171,7 @@ public class ExternalLoginBean implements Serializable {
         } else {
             // check that account name only uses valid characters
             if (!isLoginValide(accountName)) {
-                Helper.setFehlerMeldung("loginNotValid");
+                Helper.setFehlerMeldung("loginWrongCharacter");
                 return;
             }
             // check that the account name was not used yet
@@ -181,13 +200,13 @@ public class ExternalLoginBean implements Serializable {
         }
 
         if (!password.equals(confirmPassword)) {
-            Helper.setFehlerMeldung("TODO");
+            Helper.setFehlerMeldung("login_new_account_confirmPasswordWrong");
             return;
         }
         // check password length
 
         if (!privacyTextAccepted) {
-            Helper.setFehlerMeldung("TODO");
+            Helper.setFehlerMeldung("login_new_account_privacyTextNotAcccepted");
             return;
         }
 
@@ -255,14 +274,19 @@ public class ExternalLoginBean implements Serializable {
 
         NavigationForm form = (NavigationForm) Helper.getBeanByName("NavigationForm", NavigationForm.class);
         form.getUiStatus().put("loginStatus", "");
-
+        wizzardMode = "confirm";
     }
 
     public void createInstitution() {
 
+        if (!activation) {
+            Helper.setFehlerMeldung("login_new_account_activationNotSet");
+            return;
+        }
+
         Institution institution = new Institution();
+        institution.setShortName(institutionShortName);
         institution.setLongName(institutionName);
-        institution.setShortName(institutionName);
         institution.setAllowAllPlugins(true);
         institution.setAllowAllAuthentications(true);
         currentUser.setInstitution(institution);
@@ -295,6 +319,8 @@ public class ExternalLoginBean implements Serializable {
 
         // TODO send mail to staff to activate account
 
+        wizzardMode = "wait";
+
     }
 
     public static String createRandomPassword(int length) {
@@ -309,7 +335,7 @@ public class ExternalLoginBean implements Serializable {
 
     private boolean isLoginValide(String inLogin) {
         boolean valide = true;
-        String patternStr = "[A-Za-z0-9@_\\-.]*";
+        String patternStr = "[a-z0-9\\._-]+";
         Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(inLogin);
         valide = matcher.matches();
@@ -343,6 +369,39 @@ public class ExternalLoginBean implements Serializable {
         boolean valid = true;
 
         if ("page2".equals(pageName)) {
+            // shortname: max 6 characters, A-Za-z0-9
+            if (StringUtils.isBlank(institutionShortName) || institutionShortName.length() > 6 || !institutionShortName.matches("[A-Za-z0-9]+")) {
+                institutionShortNameInvalid = true;
+                valid = false;
+            } else {
+                institutionShortNameInvalid = false;
+
+                // check that shortname is not in use
+                String query = "select count(1) from institution where shortName = ?";
+                Connection connection = null;
+                try {
+                    connection = MySQLHelper.getInstance().getConnection();
+                    QueryRunner run = new QueryRunner();
+                    int number = run.query(connection, query, MySQLHelper.resultSetToIntegerHandler, institutionShortName);
+                    if (number > 0) {
+                        valid = false;
+                        institutionShortNameInUse = true;
+                    } else {
+                        institutionShortNameInUse = false;
+                    }
+                } catch (SQLException e) {
+                    log.error(e);
+                } finally {
+                    if (connection != null) {
+                        try {
+                            MySQLHelper.closeConnection(connection);
+                        } catch (SQLException e) {
+                        }
+                    }
+                }
+
+            }
+
             // validate institution name, not empty and max 255 character
             if (StringUtils.isBlank(institutionName) || institutionName.length() > 255) {
                 institutionNameInvalid = true;
@@ -376,6 +435,60 @@ public class ExternalLoginBean implements Serializable {
             default:
                 break;
         }
+    }
+
+    public void setUserIsContactPerson(boolean userIsContactPerson) {
+        if (this.userIsContactPerson != userIsContactPerson) {
+            this.userIsContactPerson = userIsContactPerson;
+            if (userIsContactPerson) {
+
+                List<UserCreationField> fields = additionalFields.get("page3");
+                for (UserCreationField field : fields) {
+                    if (field.getName().toLowerCase().contains("firstname")) {
+                        field.setValue(currentUser.getVorname());
+                    } else if (field.getName().toLowerCase().contains("lastname")) {
+                        field.setValue(currentUser.getNachname());
+                    } else if (field.getName().toLowerCase().contains("email")) {
+                        field.setValue(currentUser.getEmail());
+                    }
+                }
+            }
+        }
+    }
+
+    public void createNewContact() {
+        displaySecondContact = true;
+        //        if (additionalFields.get("page3a") != null) {
+        //            // second contact already exists
+        //            return;
+        //        }
+        //
+        //        List<UserCreationField> existingFields = additionalFields.get("page3");
+        //
+        //        List<UserCreationField> newFields = new ArrayList<>();
+        //
+        //        for (UserCreationField f : existingFields) {
+        //
+        //            UserCreationField newField = new UserCreationField();
+        //
+        //            newField.setType(f.getType());
+        //            newField.setDisplayInTable(f.isDisplayInTable());
+        //            newField.setFieldType(f.getFieldType());
+        //            newField.setLabel(f.getLabel());
+        //            String name = f.getName().replace("contact", "contact2");
+        //            newField.setName(name);
+        //            newField.setPosition(f.getPosition());
+        //            newField.setRequired(f.isRequired());
+        //            newField.setValidation(f.getValidation());
+        //            newField.setValidationErrorMessage(f.getValidationErrorMessage());
+        //            newField.setSelectItemList(f.getSelectItemList());
+        //
+        //            newField.setHelpMessage(f.getHelpMessage());
+        //            newFields.add(newField);
+        //        }
+        //
+        //        additionalFields.put("page3a", newFields);
+
     }
 
 }

@@ -18,213 +18,240 @@
     <composite:implementation>
 
         <h2 class="page__heading">
-            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page1'}" value="#{msgs.login_new_account}" />
-            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page2'}" value="#{msgs.login_new_institution}" />
-            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page3'}" value="#{msgs.login_new_institution}" />
-            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page4'}" value="#{msgs.login_new_institution}" />
-            <h:outputText  rendered="#{externalLoginBean.wizzardMode=='page5'}" value="#{msgs.login_new_institution}" />
-            <button type="button" class="btn page__help" data-bs-toggle="modal" data-bs-title="help title" data-bs-target="#pageHelpModal">
-              <ui:include src="/uii/includes/icon-help.xhtml" />
+            <h:outputText
+                rendered="#{externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='confirm'}"
+                value="#{msgs.login_new_account}" />
+            <h:outputText
+                rendered="#{externalLoginBean.wizzardMode=='page2'}"
+                value="#{msgs.login_new_institution}" />
+            <h:outputText
+                rendered="#{externalLoginBean.wizzardMode=='page3'}"
+                value="#{msgs.login_new_contact}" />
+            <h:outputText
+                rendered="#{externalLoginBean.wizzardMode=='page4'}"
+                value="#{msgs.login_new_institution}" />
+            <h:outputText
+                rendered="#{externalLoginBean.wizzardMode=='page5'}"
+                value="#{msgs.login_new_institution}" />
+            <button
+                type="button"
+                class="btn page__help"
+                data-bs-toggle="modal"
+                data-bs-title="help title"
+                data-bs-target="#pageHelpModal">
+                <ui:include src="/uii/includes/icon-help.xhtml" />
             </button>
         </h2>
 
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
 
-          <section class="common-region">
-            <!-- account name -->
-            <div class="form">
-                <zlb:label
-                    labelFor="accountName"
-                    labelText="#{msgs.login_new_account_accountName}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+            <section class="common-region">
+                <!-- account name -->
+                <div class="form">
+                    <zlb:label
+                        labelFor="accountName"
+                        labelText="#{msgs.login_new_account_accountName}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
 
-                <zlb:input
-                    inputId="accountName"
-                    inputAriaLabel="#{msgs.login_new_account_accountName}"
-                    inputValue="#{externalLoginBean.accountName}"
-                    inputRequired="true"
-                    inputPlaceholder="#{msgs.login_new_account_accountName}"
-                    inputDuplicate="true"
-                    showHelpBtn="true"
-                    helpText="lorem ipsum" />
-            </div>
+                    <zlb:input
+                        inputId="accountName"
+                        inputAriaLabel="#{msgs.login_new_account_accountName}"
+                        inputValue="#{externalLoginBean.accountName}"
+                        inputRequired="true"
+                        inputPlaceholder="#{msgs.login_new_account_accountName}"
+                        inputDuplicate="true"
+                        showHelpBtn="true"
+                        helpText="lorem ipsum" />
+                </div>
 
-            <!-- firstname -->
-            <div class="form column-start">
-                <zlb:label
-                    labelFor="firstname"
-                    labelText="#{msgs.firstname}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+                <!-- firstname -->
+                <div class="form column-start">
+                    <zlb:label
+                        labelFor="firstname"
+                        labelText="#{msgs.firstname}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
 
-                <zlb:input
-                    inputId="firstname"
-                    inputAriaLabel="#{msgs.firstname}"
-                    inputValue="#{externalLoginBean.firstname}"
-                    inputRequired="true"
-                    inputPlaceholder="#{msgs.firstname}"
-                    labelHelpText="Lorem ipsum" />
-            </div>
+                    <zlb:input
+                        inputId="firstname"
+                        inputAriaLabel="#{msgs.firstname}"
+                        inputValue="#{externalLoginBean.firstname}"
+                        inputRequired="true"
+                        inputPlaceholder="#{msgs.firstname}"
+                        labelHelpText="Lorem ipsum" />
+                </div>
 
-            <!-- lastname -->
-            <div class="form">
-                <zlb:label
-                    labelFor="lastname"
-                    labelText="#{msgs.lastname}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+                <!-- lastname -->
+                <div class="form">
+                    <zlb:label
+                        labelFor="lastname"
+                        labelText="#{msgs.lastname}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
 
-                <zlb:input
-                    inputId="lastname"
-                    inputAriaLabel="#{msgs.lastname}"
-                    inputValue="#{externalLoginBean.lastname}"
-                    inputRequired="true"
-                    inputPlaceholder="#{msgs.lastname}"
-                    showHelpBtn="true"
-                    labelHelpText="Lorem ipsum" />
+                    <zlb:input
+                        inputId="lastname"
+                        inputAriaLabel="#{msgs.lastname}"
+                        inputValue="#{externalLoginBean.lastname}"
+                        inputRequired="true"
+                        inputPlaceholder="#{msgs.lastname}"
+                        showHelpBtn="true"
+                        labelHelpText="Lorem ipsum" />
 
-            </div>
+                </div>
 
-            <!-- password -->
-            <div class="form">
+                <!-- password -->
+                <div class="form">
 
-                <zlb:label
-                    labelFor="password"
-                    labelText="#{msgs.login_new_account_password}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+                    <zlb:label
+                        labelFor="password"
+                        labelText="#{msgs.login_new_account_password}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
 
-                <x:inputSecret
-                    id="password"
-                    pt:aria-label="#{msgs.login_new_account_password}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.password}"
-                    required="true">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputSecret>
+                    <x:inputSecret
+                        id="password"
+                        pt:aria-label="#{msgs.login_new_account_password}"
+                        forceId="true"
+                        styleClass="form-control"
+                        value="#{externalLoginBean.password}"
+                        required="true">
+                        <f:passThroughAttribute
+                            name="placeholder"
+                            value="" />
+                    </x:inputSecret>
 
-                <!-- Icons -->
-                <ui:include src="/uii/includes/form_icons.xhtml" />
+                    <!-- Icons -->
+                    <ui:include src="/uii/includes/form_icons.xhtml" />
 
 
-                <!--
+                    <!--
                 <div class="help-text vis-hidden">
                     Lorem Ipsum
                 </div>
                 -->
 
-            </div>
+                </div>
 
-            <!-- confirm password -->
-            <div class="form">
+                <!-- confirm password -->
+                <div class="form">
 
-                <zlb:label
-                    labelFor="password2"
-                    labelText="#{msgs.login_new_account_password2}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+                    <zlb:label
+                        labelFor="password2"
+                        labelText="#{msgs.login_new_account_password2}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
 
-                <x:inputSecret
-                    id="password2"
-                    pt:aria-label="#{msgs.login_new_account_password2}"
-                    forceId="true"
-                    styleClass="form-control"
-                    value="#{externalLoginBean.confirmPassword}"
-                    required="true">
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="" />
-                </x:inputSecret>
+                    <x:inputSecret
+                        id="password2"
+                        pt:aria-label="#{msgs.login_new_account_password2}"
+                        forceId="true"
+                        styleClass="form-control"
+                        value="#{externalLoginBean.confirmPassword}"
+                        required="true">
+                        <f:passThroughAttribute
+                            name="placeholder"
+                            value="" />
+                    </x:inputSecret>
 
-                <!-- Icons -->
-                <ui:include src="/uii/includes/form_icons.xhtml" />
+                    <!-- Icons -->
+                    <ui:include src="/uii/includes/form_icons.xhtml" />
 
 
-                <!--
+                    <!--
               <div class="help-text vis-hidden">
                   Lorem Ipsum
               </div>
                 -->
-            </div>
+                </div>
 
 
-            <!-- email address -->
-            <div class="form">
+                <!-- email address -->
+                <div class="form">
 
-                <zlb:label
-                    labelFor="emailAddress"
-                    labelText="#{msgs.login_new_account_emailAddress}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+                    <zlb:label
+                        labelFor="emailAddress"
+                        labelText="#{msgs.login_new_account_emailAddress}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
 
-                <zlb:input
-                    inputId="emailAddress"
-                    inputAriaLabel="#{msgs.login_new_account_emailAddress}"
-                    inputForceId="true"
-                    inputValue="#{externalLoginBean.emailAddress}"
-                    inputRequired="true"
-                    inputPlaceholder="#{msgs.login_new_account_emailAddress}"
-                    labelHelpText="Lorem ipsum" />
-            </div>
+                    <zlb:input
+                        inputId="emailAddress"
+                        inputAriaLabel="#{msgs.login_new_account_emailAddress}"
+                        inputForceId="true"
+                        inputValue="#{externalLoginBean.emailAddress}"
+                        inputRequired="true"
+                        inputPlaceholder="#{msgs.login_new_account_emailAddress}"
+                        labelHelpText="Lorem ipsum" />
+                </div>
 
-            <!-- confirm email -->
-            <div class="form">
+                <!-- confirm email -->
+                <div class="form">
 
-                <zlb:label
-                    labelFor="emailAddress2"
-                    labelText="#{msgs.login_new_account_emailAddress2}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+                    <zlb:label
+                        labelFor="emailAddress2"
+                        labelText="#{msgs.login_new_account_emailAddress2}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
 
-                <zlb:input
-                    inputId="emailAddress2"
-                    inputAriaLabel="#{msgs.login_new_account_emailAddress2}"
-                    inputForceId="true"
-                    inputValue="#{externalLoginBean.confirmEmailAddress}"
-                    inputRequired="true"
-                    inputPlaceholder="#{msgs.login_new_account_emailAddress}" />
+                    <zlb:input
+                        inputId="emailAddress2"
+                        inputAriaLabel="#{msgs.login_new_account_emailAddress2}"
+                        inputForceId="true"
+                        inputValue="#{externalLoginBean.confirmEmailAddress}"
+                        inputRequired="true"
+                        inputPlaceholder="#{msgs.login_new_account_emailAddress}" />
 
-            </div>
+                </div>
 
-            <div class="form-check confirm-privacy">
+                <div class="form-check confirm-privacy">
 
-                <h:selectBooleanCheckbox
-                    id="privacyStatement"
-                    pt:aria-label="#{msgs.login_new_account_confirmPrivacyStatement}"
-                    forceId="true"
-                    styleClass="form-check-input"
-                    value="#{externalLoginBean.privacyTextAccepted}"
-                    required="true">
-                </h:selectBooleanCheckbox>
+                    <h:selectBooleanCheckbox
+                        id="privacyStatement"
+                        pt:aria-label="#{msgs.login_new_account_confirmPrivacyStatement}"
+                        forceId="true"
+                        styleClass="form-check-input"
+                        value="#{externalLoginBean.privacyTextAccepted}"
+                        required="true">
+                    </h:selectBooleanCheckbox>
 
-        <label for="privacyStatement" class="zlb-label">
-            <h:outputText escape="false" value="#{msgs.login_new_account_confirmPrivacyStatement}" />
+                    <label
+                        for="privacyStatement"
+                        class="zlb-label">
+                        <h:outputText
+                            escape="false"
+                            value="#{msgs.login_new_account_confirmPrivacyStatement}" />
 
-            <span
-                class="input-required"
-                jsf:rendered="true"
-                >
-                <i class="fa fa-asterisk"/>
-            </span>
+                        <span
+                            class="input-required"
+                            jsf:rendered="true">
+                            <i class="fa fa-asterisk" />
+                        </span>
 
-        </label>
+                    </label>
 
 
-                  <!-- ICONS -->
-                  <ui:include src="/uii/includes/form_icons.xhtml">
-                    <ui:param name="duplicateElement" value="false" />
-                    <ui:param name="showHelpBtn" value="true" />
-                    <ui:param name="helpTitle" value="Privacy Help" />
-                    <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
-                  </ui:include>
+                    <!-- ICONS -->
+                    <ui:include src="/uii/includes/form_icons.xhtml">
+                        <ui:param
+                            name="duplicateElement"
+                            value="false" />
+                        <ui:param
+                            name="showHelpBtn"
+                            value="true" />
+                        <ui:param
+                            name="helpTitle"
+                            value="Privacy Help" />
+                        <ui:param
+                            name="helpBody"
+                            value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                    </ui:include>
 
-            </div>
-            </section> <!-- end common-region -->
+                </div>
+            </section>
+            <!-- end common-region -->
 
 
             <div class="form-actions form-actions--progress">
@@ -240,7 +267,9 @@
                 </button>
 
                 <ui:include src="/uii/includes/zlb-progress.xhtml">
-                    <ui:param name="data" value="#{externalLoginBean}" />
+                    <ui:param
+                        name="data"
+                        value="#{externalLoginBean}" />
                 </ui:include>
 
                 <!-- create button -->
@@ -253,123 +282,123 @@
             </div>
 
 
-<div class="modal fade" id="privacyModal" aria-labelledby="#{msgs.displayMode_privacyPolicy}" aria-hidden="true" tabindex="-1">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"><h:outputText value="#{msgs.displayMode_privacyPolicy}"/> </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="#{msgs.close}"></button>
-      </div>
-      <div class="modal-body">
-  <h:outputText value="#{externalLoginBean.privacyStatement}" escape="false" />
-     
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><h:outputText value="#{msgs.close}"/> </button>
-      </div>
-    </div>
-  </div>
-</div>
+            <div
+                class="modal fade"
+                id="privacyModal"
+                aria-labelledby="#{msgs.displayMode_privacyPolicy}"
+                aria-hidden="true"
+                tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <h:outputText value="#{msgs.displayMode_privacyPolicy}" />
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="#{msgs.close}"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h:outputText
+                                value="#{externalLoginBean.privacyStatement}"
+                                escape="false" />
+
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+                                <h:outputText value="#{msgs.close}" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:fragment>
 
 
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='confirm'}">
 
-
-
-
+            <section class="common-region">
+                <h:outputText
+                    escape="false"
+                    value="#{msgs.login_new_account_confirmEmail}" />
+            </section>
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
 
-          <section class="common-region">
-            <div class="form">
+            <section class="common-region">
+                <div class="form">
 
-                <!--
-                <h:outputLabel
-                    for="institutionName"
-                    value="#{msgs.login_new_account_institutionName}" />
-                <i
-                    class="fa fa-asterisk pull-right font-asterisk"
-                    title="#{msgs.requiredField}"
-                    data-toggle="tooltip" />
+                    <zlb:label
+                        labelFor="institutionShortName"
+                        labelText="#{msgs.login_new_account_institutionShortName}"
+                        labelRequired="true" />
 
-                <div class="email controls">
-                    <x:inputText
-                        id="institutionName"
-                        pt:aria-label="#{msgs.login_new_account_institutionName}"
-                        forceId="true"
-                        styleClass="form-control"
-                        value="#{externalLoginBean.institutionName}"
-                        required="false">
-                        <f:passThroughAttribute
-                            name="placeholder"
-                            value="" />
-                    </x:inputText>
+                    <zlb:input
+                        inputId="institutionShortName"
+                        inputAriaLabel="#{msgs.login_new_account_institutionShortName}"
+                        inputForceId="true"
+                        inputValue="#{externalLoginBean.institutionShortName}"
+                        inputRequired="false"
+                        inputPlaceholder=""
+                        inputDuplicate="false"
+                        showHelpBtn="true"
+                        helpText="lorem ipsum" />
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{externalLoginBean.institutionShortNameInvalid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{msgs.login_new_account_institutionShortNameInvalid}" />
+                    </h:panelGroup>
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{externalLoginBean.institutionShortNameInUse}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{msgs.login_new_account_institutionShortNameInUse}" />
+                    </h:panelGroup>
+                </div>
+
+                <div class="form">
+                    <zlb:label
+                        labelFor="institutionName"
+                        labelText="#{msgs.login_new_account_institutionName}"
+                        labelRequired="true" />
+
+                    <zlb:input
+                        inputId="institutionName"
+                        inputAriaLabel="#{msgs.login_new_account_institutionName}"
+                        inputForceId="true"
+                        inputValue="#{externalLoginBean.institutionName}"
+                        inputRequired="false"
+                        inputPlaceholder=""
+                        inputDuplicate="false"
+                        showHelpBtn="true"
+                        helpText="lorem ipsum" />
                     <h:panelGroup
                         layout="block"
                         rendered="#{externalLoginBean.institutionNameInvalid}"
                         styleClass="font-danger validation-message">
                         <h:outputText value="#{msgs.login_new_account_institutionNameInvalid}" />
                     </h:panelGroup>
-                    <h:outputText
-                        styleClass="help-block font-light"
-                        rendered="#{NavigationForm.showHelp}"
-                        value="#{fieldy.login_new_account_institutionNameHelp}" />
                 </div>
-                -->
 
-                <zlb:label
-                    labelFor="institutionName"
-                    labelText="#{msgs.login_new_account_institutionName}"
-                    labelRequired="true" />
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page2']}">
 
-                <zlb:input
-                    inputId="institutionName"
-                    inputAriaLabel="#{msgs.login_new_account_institutionName}"
-                    inputForceId="true"
-                    inputValue="#{externalLoginBean.institutionName}"
-                    inputRequired="false"
-                    inputPlaceholder=""
-                    inputDuplicate="true"
-                    showHelpBtn="true"
-                    helpText="lorem ipsum" />
+                    <div class="form">
 
-            </div>
-
-            <ui:repeat
-                var="field"
-                value="#{externalLoginBean.additionalFields['page2']}">
-
-                <div class="form">
-
-                <zlb:label
-                    labelFor="input"
-                    labelText="#{field.label}"
-                    labelRequired="#{field.required}" />
-
-                <!--
-                <zlb:input
-                    inputId="input"
-                    inputAriaLabel="#{field.label}"
-                    inputForceId="true"
-                    inputValue="#{field.value}"
-                    inputRequired="false"
-                    inputPlaceholder=""
-                    inputDuplicate="false"
-                    inputAjax="@this"
-                    showHelpBtn="true"
-
-                    helpText="lorem ipsum" />
+                        <zlb:label
+                            labelFor="input"
+                            labelText="#{field.label}"
+                            labelRequired="#{field.required}" />
 
 
-                    <h:outputLabel value="{field.label}" />
-
-                    <i
-                        jsf:rendered="#{field.required}"
-                        class="fa fa-asterisk pull-right font-asterisk"
-                        title="#{msgs.requiredField}"
-                        data-toggle="tooltip" />
-
-                    -->
                         <x:inputText
                             id="input"
                             rendered="#{field.fieldType=='input'}"
@@ -383,12 +412,6 @@
                                 name="placeholder"
                                 value="" />
                         </x:inputText>
-
-
-
-                        <!--
-                    <div class="email controls">
-                        -->
 
                         <x:inputTextarea
                             id="textarea"
@@ -437,13 +460,21 @@
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneRadio>
 
-                          <!-- ICONS -->
-                          <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param name="duplicateElement" value="false" />
-                            <ui:param name="showHelpBtn" value="true" />
-                            <ui:param name="helpTitle" value="Privacy Help" />
-                            <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
-                          </ui:include>
+                        <!-- ICONS -->
+                        <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param
+                                name="duplicateElement"
+                                value="false" />
+                            <ui:param
+                                name="showHelpBtn"
+                                value="true" />
+                            <ui:param
+                                name="helpTitle"
+                                value="Privacy Help" />
+                            <ui:param
+                                name="helpBody"
+                                value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                        </ui:include>
 
                         <h:panelGroup
                             layout="block"
@@ -460,52 +491,51 @@
                         -->
 
 
-                </div>
-            </ui:repeat>
+                    </div>
+                </ui:repeat>
             </section>
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page3'}">
 
-          <section class="common-region">
+            <div class="form">
+                <h:selectBooleanCheckbox
+                    id="contactPersonCheckbox"
+                    pt:aria-label="#{msgs.login_new_account_userIsContactPerson}"
+                    forceId="true"
+                    styleClass="form-check-input"
+                    value="#{externalLoginBean.userIsContactPerson}"
+                    required="false">
+                    <f:ajax
+                        execute="@this"
+                        render="@form" />
+                </h:selectBooleanCheckbox>
+                <zlb:label
+                    labelFor="contactPersonCheckbox"
+                    labelText="#{msgs.login_new_account_userIsContactPerson}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="true" />
 
-            <!--
+            </div>
+            <section class="common-region">
+
+                <!--
             <h2>
                 <h:outputText value="#{msgs.login_new_contact}" />
             </h2>
             -->
 
-            <ui:repeat
-                var="field"
-                value="#{externalLoginBean.additionalFields['page3']}">
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page3']}">
 
-                <div class="form">
+                    <div class="form">
 
-                <zlb:label
-                    labelFor="input1"
-                    labelText="#{field.label}"
-                    labelRequired="#{field.required}" />
+                        <zlb:label
+                            labelFor="input1"
+                            labelText="#{field.label}"
+                            labelRequired="#{field.required}" />
 
-                  <!--
-                <zlb:input
-                    inputId="input1"
-                    inputAriaLabel="#{field.label}"
-                    inputForceId="true"
-                    inputValue="#{filed.value}"
-                    inputRequired="false"
-                    inputPlaceholder=""
-                    inputDuplicate="false"
-                    showHelpBtn="true"
-                    helpText="lorem ipsum" />
-
-                    <h:outputLabel value="#{field.label}" />
-                    <i
-                        jsf:rendered="#{field.required}"
-                        class="fa fa-asterisk pull-right font-asterisk"
-                        title="#{msgs.requiredField}"
-                        data-toggle="tooltip" />
-                    <div class="email controls">
-                    -->
 
                         <x:inputText
                             rendered="#{field.fieldType=='input'}"
@@ -565,13 +595,135 @@
                             <f:selectItems value="#{field.selectItemList}" />
                         </h:selectOneRadio>
 
-                          <!-- ICONS -->
-                          <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param name="duplicateElement" value="false" />
-                            <ui:param name="showHelpBtn" value="true" />
-                            <ui:param name="helpTitle" value="Privacy Help" />
-                            <ui:param name="helpBody" value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
-                          </ui:include>
+                        <!-- ICONS -->
+                        <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param
+                                name="duplicateElement"
+                                value="false" />
+                            <ui:param
+                                name="showHelpBtn"
+                                value="true" />
+                            <ui:param
+                                name="helpTitle"
+                                value="Privacy Help" />
+                            <ui:param
+                                name="helpBody"
+                                value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                        </ui:include>
+
+                        <h:panelGroup
+                            layout="block"
+                            rendered="#{field.validationError}"
+                            styleClass="font-danger validation-message">
+                            <h:outputText value="#{field.validationErrorMessage}" />
+                        </h:panelGroup>
+                        <h:outputText
+                            styleClass="help-block font-light"
+                            rendered="#{NavigationForm.showHelp}"
+                            value="#{fieldy.helpMessage}" />
+                        <!--
+                    </div>
+                    -->
+
+                    </div>
+                </ui:repeat>
+            </section>
+
+            <button
+            jsf:rendered="#{!externalLoginBean.displaySecondContact}"
+                jsf:id="createNewContact"
+                jsf:action="#{externalLoginBean.createNewContact}"
+                style="margin-bottom: 20px;"
+                class="btn btn-blank">
+                <h:outputText value="#{msgs.login_new_createNewContact}" />
+            </button>
+
+            <section class="common-region" jsf:rendered="#{externalLoginBean.displaySecondContact}">
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page3a']}">
+
+                    <div class="form">
+
+                        <zlb:label
+                            labelFor="input1"
+                            labelText="#{field.label}"
+                            labelRequired="#{field.required}" />
+
+
+                        <x:inputText
+                            rendered="#{field.fieldType=='input'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.value}">
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:passThroughAttribute
+                                name="placeholder"
+                                value="" />
+                        </x:inputText>
+
+
+                        <x:inputTextarea
+                            rendered="#{field.fieldType=='textarea'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.value}">
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:passThroughAttribute
+                                name="placeholder"
+                                value="" />
+                        </x:inputTextarea>
+                        <h:selectOneMenu
+                            rendered="#{field.fieldType=='dropdown'}"
+                            styleClass="form-control"
+                            value="#{field.value}"
+                            pt:aria-label="#{field.label}">
+                            <f:selectItem
+                                itemValue="null"
+                                itemLabel="#{msgs.bitteAuswaehlen}" />
+                            <f:ajax
+                                render="@this"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneMenu>
+                        <h:selectBooleanCheckbox
+                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                            pt:aria-label="#{field.label}"
+                            styleClass="form-control"
+                            value="#{field.booleanValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                        </h:selectBooleanCheckbox>
+                        <h:selectOneRadio
+                            rendered="#{field.fieldType=='combo' and field.booleanValue}"
+                            styleClass="form-control"
+                            value="#{field.subValue}">
+                            <f:ajax
+                                render="@form"
+                                execute="@this" />
+                            <f:selectItems value="#{field.selectItemList}" />
+                        </h:selectOneRadio>
+
+                        <!-- ICONS -->
+                        <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param
+                                name="duplicateElement"
+                                value="false" />
+                            <ui:param
+                                name="showHelpBtn"
+                                value="true" />
+                            <ui:param
+                                name="helpTitle"
+                                value="Privacy Help" />
+                            <ui:param
+                                name="helpBody"
+                                value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                        </ui:include>
 
                         <h:panelGroup
                             layout="block"
@@ -589,9 +741,10 @@
 
 
 
-                </div>
-            </ui:repeat>
-          </section>
+                    </div>
+                </ui:repeat>
+            </section>
+
 
 
         </ui:fragment>
@@ -602,144 +755,178 @@
             </h2>
 
             <section class="common-region additional-data">
-            <ui:repeat
-                var="field"
-                value="#{externalLoginBean.additionalFields['page4']}">
-                <div class="form-group">
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page4']}">
+                    <div class="form-group">
 
-                    <h:selectBooleanCheckbox
-                        rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
-                        pt:aria-label="#{field.label}"
-                        styleClass="form-control"
-                        value="#{field.booleanValue}">
-                        <f:ajax
-                            render="@form"
-                            execute="@this" />
-                    </h:selectBooleanCheckbox>
-
-                    <h:outputLabel value="#{field.label}" />
-
-                    <i
-                        jsf:rendered="#{field.required}"
-                        class="fa fa-asterisk pull-right font-asterisk"
-                        title="#{msgs.requiredField}"
-                        data-toggle="tooltip" />
-                    <div class="email controls">
-
-                        <x:inputText
-                            rendered="#{field.fieldType=='input'}"
+                        <h:selectBooleanCheckbox
+                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
                             pt:aria-label="#{field.label}"
                             styleClass="form-control"
-                            value="#{field.value}">
-                            <f:ajax
-                                render="@this"
-                                execute="@this" />
-                            <f:passThroughAttribute
-                                name="placeholder"
-                                value="" />
-                        </x:inputText>
-                        <x:inputTextarea
-                            rendered="#{field.fieldType=='textarea'}"
-                            pt:aria-label="#{field.label}"
-                            styleClass="form-control"
-                            value="#{field.value}">
-                            <f:ajax
-                                render="@this"
-                                execute="@this" />
-                            <f:passThroughAttribute
-                                name="placeholder"
-                                value="" />
-                        </x:inputTextarea>
-                        <h:selectOneMenu
-                            rendered="#{field.fieldType=='dropdown'}"
-                            styleClass="form-select"
-                            value="#{field.value}"
-                            pt:aria-label="#{field.label}">
-                            <f:selectItem
-                                itemValue="null"
-                                itemLabel="#{msgs.bitteAuswaehlen}" />
-                            <f:ajax
-                                render="@this"
-                                execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
-                        </h:selectOneMenu>
-                        <h:selectOneRadio
-                            rendered="#{field.fieldType=='combo' and field.booleanValue}"
-                            styleClass="form-control"
-                            value="#{field.subValue}">
+                            value="#{field.booleanValue}">
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
-                        </h:selectOneRadio>
-                        <h:panelGroup
-                            layout="block"
-                            rendered="#{field.validationError}"
-                            styleClass="font-danger validation-message">
-                            <h:outputText value="#{field.validationErrorMessage}" />
-                        </h:panelGroup>
-                        <h:outputText
-                            styleClass="help-block font-light"
-                            rendered="#{NavigationForm.showHelp}"
-                            value="#{fieldy.helpMessage}" />
-                    </div>
-                </div>
+                        </h:selectBooleanCheckbox>
 
-            </ui:repeat>
+                        <h:outputLabel value="#{field.label}" />
+
+                        <i
+                            jsf:rendered="#{field.required}"
+                            class="fa fa-asterisk pull-right font-asterisk"
+                            title="#{msgs.requiredField}"
+                            data-toggle="tooltip" />
+                        <div class="email controls">
+
+                            <x:inputText
+                                rendered="#{field.fieldType=='input'}"
+                                pt:aria-label="#{field.label}"
+                                styleClass="form-control"
+                                value="#{field.value}">
+                                <f:ajax
+                                    render="@this"
+                                    execute="@this" />
+                                <f:passThroughAttribute
+                                    name="placeholder"
+                                    value="" />
+                            </x:inputText>
+                            <x:inputTextarea
+                                rendered="#{field.fieldType=='textarea'}"
+                                pt:aria-label="#{field.label}"
+                                styleClass="form-control"
+                                value="#{field.value}">
+                                <f:ajax
+                                    render="@this"
+                                    execute="@this" />
+                                <f:passThroughAttribute
+                                    name="placeholder"
+                                    value="" />
+                            </x:inputTextarea>
+                            <h:selectOneMenu
+                                rendered="#{field.fieldType=='dropdown'}"
+                                styleClass="form-select"
+                                value="#{field.value}"
+                                pt:aria-label="#{field.label}">
+                                <f:selectItem
+                                    itemValue="null"
+                                    itemLabel="#{msgs.bitteAuswaehlen}" />
+                                <f:ajax
+                                    render="@this"
+                                    execute="@this" />
+                                <f:selectItems value="#{field.selectItemList}" />
+                            </h:selectOneMenu>
+                            <h:selectOneRadio
+                                rendered="#{field.fieldType=='combo' and field.booleanValue}"
+                                styleClass="form-control"
+                                value="#{field.subValue}">
+                                <f:ajax
+                                    render="@form"
+                                    execute="@this" />
+                                <f:selectItems value="#{field.selectItemList}" />
+                            </h:selectOneRadio>
+                            <h:panelGroup
+                                layout="block"
+                                rendered="#{field.validationError}"
+                                styleClass="font-danger validation-message">
+                                <h:outputText value="#{field.validationErrorMessage}" />
+                            </h:panelGroup>
+                            <h:outputText
+                                styleClass="help-block font-light"
+                                rendered="#{NavigationForm.showHelp}"
+                                value="#{fieldy.helpMessage}" />
+                        </div>
+                    </div>
+
+                </ui:repeat>
+
+                <!-- TODO duplicate area, add prefix to new fields -->
+
 
             </section>
 
 
         </ui:fragment>
 
-         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
             <h2>
                 <h:outputText value="#{msgs.login_new_activation}" />
             </h2>
             <section class="common-region one-col overview">
-            <!-- show all fields in read only mode -->
-            <h3>
-                <h:outputText value="#{msgs.login_new_institution}" />
-            </h3>
-            <intranda:formOutputText
-                label="#{msgs.login_new_account_institutionName}"
-                field="#{externalLoginBean.institutionName}"
-                name="institutionName"
-                fieldStyle="form-control" />
-            <ui:repeat
-                var="field"
-                value="#{externalLoginBean.additionalFields['page2']}">
+                <!-- show all fields in read only mode -->
+                <h3>
+                    <h:outputText value="#{msgs.login_new_institution}" />
+                </h3>
                 <intranda:formOutputText
-                    name="field"
-                    label="#{field.label}"
-                    field="#{field.value}"
+                    label="#{msgs.login_new_account_institutionName}"
+                    field="#{externalLoginBean.institutionName}"
+                    name="institutionName"
                     fieldStyle="form-control" />
-            </ui:repeat>
-            <h3>
-                <h:outputText value="#{msgs.login_new_contact}" />
-            </h3>
-            <ui:repeat
-                var="field"
-                value="#{externalLoginBean.additionalFields['page3']}">
-                <intranda:formOutputText
-                    name="field"
-                    label="#{field.label}"
-                    field="#{field.value}"
-                    fieldStyle="form-control" />
-            </ui:repeat>
-            <h3>
-                <h:outputText value="#{msgs.login_new_additionalData}" />
-            </h3>
-            <ui:repeat
-                var="field"
-                value="#{externalLoginBean.additionalFields['page4']}">
-                <intranda:formOutputText
-                    name="field"
-                    label="#{field.label}"
-                    field="#{field.value}"
-                    fieldStyle="form-control" />
-            </ui:repeat>
-            Freischaltung:* Hiermit beantrage ich die Freischaltung zur Ablieferung digitaler Pflichtpublikationen
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page2']}">
+                    <intranda:formOutputText
+                        name="field"
+                        label="#{field.label}"
+                        field="#{field.value}"
+                        fieldStyle="form-control" />
+                </ui:repeat>
+                <h3>
+                    <h:outputText value="#{msgs.login_new_contact}" />
+                </h3>
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page3']}">
+                    <intranda:formOutputText
+                        name="field"
+                        label="#{field.label}"
+                        field="#{field.value}"
+                        fieldStyle="form-control" />
+                </ui:repeat>
+                <ui:fragment rendered="#{externalLoginBean.displaySecondContact}">
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page3a']}">
+                    <intranda:formOutputText
+                        name="field"
+                        label="#{field.label}"
+                        field="#{field.value}"
+                        fieldStyle="form-control" />
+                </ui:repeat>
+                </ui:fragment>
+                
+                <h3>
+                    <h:outputText value="#{msgs.login_new_additionalData}" />
+                </h3>
+                <ui:repeat
+                    var="field"
+                    value="#{externalLoginBean.additionalFields['page4']}">
+                    <intranda:formOutputText
+                        name="field"
+                        label="#{field.label}"
+                        field="#{field.value}"
+                        fieldStyle="form-control" />
+                </ui:repeat>
+                
+                 <h:selectBooleanCheckbox
+                        id="activation"
+                        pt:aria-label="#{msgs.login_new_account_activation}"
+                        forceId="true"
+                        styleClass="form-check-input"
+                        value="#{externalLoginBean.activation}"
+                        required="true">
+                    </h:selectBooleanCheckbox>
+                <zlb:label
+                        labelFor="activation"
+                        labelText="#{msgs.login_new_account_activation}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
+            </section>
+        </ui:fragment>
+
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode=='wait'}">
+            <section class="common-region">
+                <h:outputText value="#{msgs.login_new_account_creationSuccessful}" />
             </section>
         </ui:fragment>
 
@@ -753,7 +940,9 @@
                     <h:outputText value="#{msgs.back}" />
                 </button>
                 <ui:include src="/uii/includes/zlb-progress.xhtml">
-                    <ui:param name="data" value="#{externalLoginBean}" />
+                    <ui:param
+                        name="data"
+                        value="#{externalLoginBean}" />
                 </ui:include>
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"

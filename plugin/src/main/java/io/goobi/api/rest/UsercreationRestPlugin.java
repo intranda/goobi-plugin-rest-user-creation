@@ -63,7 +63,6 @@ public class UsercreationRestPlugin {
             User user = UserManager.getUserByLogin(accountName);
             user.lazyLoad();
             //            userBean.setMyBenutzer(user);
-            // TODO check, if institution is already assigned. abort
 
             elb.setCurrentUser(user);
             elb.setWizzardMode("page2");
@@ -74,7 +73,7 @@ public class UsercreationRestPlugin {
 
         } catch (TokenExpiredException e) {
             log.error(e);
-            // TODO delete user account, to start from scratch
+            // TODO delete user account, to start from scratch, forward to start page
 
         } catch (Exception e) {
             log.error(e);
