@@ -257,6 +257,13 @@ main h1 svg {
   margin: 0;
 }
 
+.info-required {
+  font-size: var(--fs-200);
+  span {
+    color: var(--clr-primary-400);
+  }
+}
+
 /* custom styles */
 .form {
   position: relative;
@@ -530,7 +537,7 @@ input ~ .font-danger {
   --progress-line-height: 2px;
 
   position: relative;
-  margin: 0 auto;
+  margin: 8rem auto;
   width: 70%;
   display: flex;
   justify-content: space-between;
@@ -548,6 +555,7 @@ input ~ .font-danger {
   }
   &__step {
     position: relative;
+    display: flex;
 
     &__link {
       text-decoration: none;
