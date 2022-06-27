@@ -687,12 +687,21 @@ header .container-fluid.header__lower .actions__help svg {
 
 .brand {
   display: flex;
+  text-decoration: none;
 }
 
 .brand__logo {
   padding-right: 8px;
   margin-right: 8px;
   border-right: 1px solid #fff;
+}
+
+.brand__copy,
+.brand__copy:focus,
+.brand__copy:hover,
+.brand__copy:active,
+.brand__copy:visited {
+  color: #fff;
 }
 
 .actions {
