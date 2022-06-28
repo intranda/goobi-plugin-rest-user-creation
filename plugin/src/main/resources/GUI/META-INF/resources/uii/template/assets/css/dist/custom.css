@@ -759,6 +759,7 @@ main h1 svg {
 
 .info-required {
   font-size: var(--fs-200);
+  margin-bottom: 2.4rem;
 }
 .info-required span {
   color: var(--clr-primary-400);
@@ -1014,7 +1015,7 @@ input ~ .font-danger {
   --progress-step-width: 16px;
   --progress-line-height: 2px;
   position: relative;
-  margin: 8rem auto;
+  margin: 0.8rem auto;
   width: 70%;
   display: flex;
   justify-content: space-between;
@@ -1026,7 +1027,7 @@ input ~ .font-danger {
   height: var(--progress-line-height);
   transform: translateY(-50%);
   top: calc(var(--progress-step-width) / 2 + var(--progress-line-height) / 2);
-  width: calc(100% - var(--progress-step-width) * 2);
+  width: 100%;
   z-index: -1;
   background-color: var(--clr-neutral-600);
 }
@@ -1035,12 +1036,15 @@ input ~ .font-danger {
   display: flex;
 }
 .zlb-progress__step__link {
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   color: var(--clr-text-body);
   font-size: var(--fs-200);
 }
 .zlb-progress__step__link::before {
   display: inline-block;
+  position: absolute;
   content: "";
   width: var(--progress-step-width);
   height: var(--progress-step-width);
@@ -1060,6 +1064,15 @@ input ~ .font-danger {
 .zlb-progress__step__link.done::before {
   background-color: var(--clr-success);
 }
+.zlb-progress__step:last-child .zlb-progress__step__link {
+  justify-content: flex-end;
+}
+.zlb-progress__step:first-child .zlb-progress__step__link {
+  justify-content: flex-start;
+}
+.zlb-progress__step__name {
+  margin-top: 1.6rem;
+}
 
 .form-actions:not(.form-actions--progress) {
   margin-left: auto;
@@ -1067,10 +1080,10 @@ input ~ .font-danger {
 
 .form-actions.form-actions--progress {
   display: flex;
-  margin: 3.2rem 0;
+  margin: 1.6rem 0;
 }
 .form-actions.form-actions--progress .btn {
-  align-self: flex-start;
+  align-self: baseline;
 }
 .form-actions.form-actions--progress .btn-primary-400 {
   background-color: var(--clr-success);

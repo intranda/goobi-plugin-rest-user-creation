@@ -254,6 +254,9 @@
             </section>
             <!-- end common-region -->
 
+            <div class="info-required">
+                <h:outputText escape="false" value="#{msgs.login_new_account_requiredFields}" />
+            </div>
 
             <div class="form-actions form-actions--progress">
                 <!-- cancel button -->
@@ -277,7 +280,7 @@
                 <button
                     jsf:action="#{externalLoginBean.createAccount}"
                     jsf:id="create"
-                    class="btn btn-primary-400">
+                    class="btn btn-primary-400 ms-4">
                     <h:outputText value="#{msgs.login_new_account_createAccount}" />
                 </button>
             </div>
@@ -925,8 +928,11 @@
             </section>
         </ui:fragment>
 
-        <div class="info-required">
-            <h:outputText escape="false" value="#{msgs.login_new_account_requiredFields}" />
+        <div class="info-required"
+             jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">
+            <h:outputText
+                escape="false"
+                value="#{msgs.login_new_account_requiredFields}" />
         </div>
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <div class="submit form-actions form-actions--progress">
