@@ -93,6 +93,7 @@ h2 {
     grid-column: 1 / -1;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 8rem 0 6.4rem 0;
   }
   &__help {
@@ -179,19 +180,33 @@ header .container-fluid {
       margin-right: auto;
       color: inherit;
     }
+  }
+}
+.actions__help {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--clr-primary-400);
+  margin-left: auto;
+  font-size: 2.2rem;
+  text-transform: capitalize;
+  svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
 
+@media (max-width: 900px) {
+  .header__lower {
+    flex-wrap: wrap;
+    text-align: center;
+
+    /* do not show goobi logo on small screens */
+    & > svg {
+      display: none;
+    }
     .actions__help {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--clr-primary-400);
-      margin-left: auto;
-      font-size: 2.2rem;
-      text-transform: capitalize;
-      svg {
-        width: 2.2rem;
-        height: 2.2rem;
-      }
+      margin: 0 auto;
     }
   }
 }
@@ -296,6 +311,16 @@ main h1 svg {
 .zlb-label {
   margin-bottom: 0.8rem;
   grid-column: 1 / -1;
+}
+
+section:not(.overview) .form-check {
+  padding-left: 0;
+}
+
+@media (min-width: 900px) {
+  .overview .form-check {
+    max-width: 45%;
+  }
 }
 
 .form-check .zlb-label {
@@ -776,5 +801,20 @@ input ~ .font-danger {
   .col-sm-9 span {
     padding: 0;
     margin: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .common-region {
+    --grid-tc: 1fr;
+    padding: 1.6rem 1.6rem;
+  }
+  .zlb-progress__step__name {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .zlb-progress {
+    display: none;
   }
 }

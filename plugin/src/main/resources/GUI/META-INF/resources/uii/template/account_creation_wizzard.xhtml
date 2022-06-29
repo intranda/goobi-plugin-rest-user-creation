@@ -29,13 +29,14 @@
                 value="#{msgs.login_new_contact}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page4'}"
-                value="#{msgs.login_new_institution}" />
+                value="#{msgs.login_new_additionalData}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page5'}"
-                value="#{msgs.login_new_institution}" />
+                value="#{msgs.login_new_activation}" />
             <button
                 type="button"
                 class="btn page__help"
+                aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_pageHelp}"
                 data-bs-toggle="modal"
                 data-bs-title="help title"
                 data-bs-target="#pageHelpModal">
@@ -51,9 +52,7 @@
                 <div class="form">
                     <zlb:label
                         labelFor="accountName"
-                        labelText="#{msgs.login_new_account_accountName}"
-                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                        labelRequired="true" />
+                        labelText="#{msgs.login_new_account_accountName}" />
 
                     <zlb:input
                         inputId="accountName"
@@ -63,7 +62,8 @@
                         inputPlaceholder="#{msgs.login_new_account_accountName}"
                         inputDuplicate="false"
                         showHelpBtn="true"
-                        helpText="lorem ipsum" />
+                        helpTitle="#{msgs.login_new_account_accountName}"
+                        helpText="#{msgs.plugin_rest_usercreation_helpText_userName}" />
                 </div>
 
                 <!-- firstname -->
@@ -80,7 +80,8 @@
                         inputValue="#{externalLoginBean.firstname}"
                         inputRequired="true"
                         inputPlaceholder="#{msgs.firstname}"
-                        labelHelpText="Lorem ipsum" />
+                        helpTitle="#{msgs.firstname}"
+                        helpText="#{msgs.plugin_rest_usercreation_helpText_firstname}" />
                 </div>
 
                 <!-- lastname -->
@@ -98,7 +99,8 @@
                         inputRequired="true"
                         inputPlaceholder="#{msgs.lastname}"
                         showHelpBtn="true"
-                        labelHelpText="Lorem ipsum" />
+                        helpTitle="#{msgs.lastname}"
+                        helpText="#{msgs.plugin_rest_usercreation_helpText_lastname}" />
 
                 </div>
 
@@ -124,13 +126,10 @@
                     </x:inputSecret>
 
                     <!-- Icons -->
-                    <ui:include src="/uii/includes/form_icons.xhtml" />
-
-                    <!--
-                <div class="help-text vis-hidden">
-                    Lorem Ipsum
-                </div>
-                -->
+                    <ui:include src="/uii/includes/form_icons.xhtml" >
+                        <ui:param name="helpTitle" value="#{msgs.login_new_account_password}" />
+                        <ui:param name="helpBody" value="#{msgs.plugin_rest_usercreation_helpText_password}" />
+                    </ui:include>
 
                 </div>
 
@@ -156,14 +155,11 @@
                     </x:inputSecret>
 
                     <!-- Icons -->
-                    <ui:include src="/uii/includes/form_icons.xhtml" />
+                    <ui:include src="/uii/includes/form_icons.xhtml" >
+                        <ui:param name="helpTitle" value="#{msgs.login_new_account_password2}" />
+                        <ui:param name="helpBody" value="#{msgs.plugin_rest_usercreation_helpText_password2}" />
+                    </ui:include>
 
-
-                    <!--
-              <div class="help-text vis-hidden">
-                  Lorem Ipsum
-              </div>
-                -->
                 </div>
 
 
@@ -183,7 +179,8 @@
                         inputValue="#{externalLoginBean.emailAddress}"
                         inputRequired="true"
                         inputPlaceholder="#{msgs.login_new_account_emailAddress}"
-                        labelHelpText="Lorem ipsum" />
+                        helpTitle="#{msgs.login_new_account_emailAddress}"
+                        helpText="#{msgs.plugin_rest_usercreation_helpText_email}" />
                 </div>
 
                 <!-- confirm email -->
@@ -201,7 +198,9 @@
                         inputForceId="true"
                         inputValue="#{externalLoginBean.confirmEmailAddress}"
                         inputRequired="true"
-                        inputPlaceholder="#{msgs.login_new_account_emailAddress}" />
+                        inputPlaceholder="#{msgs.login_new_account_emailAddress}"
+                        helpTitle="#{msgs.login_new_account_emailAddress}"
+                        helpText="#{msgs.plugin_rest_usercreation_helpText_email}" />
 
                 </div>
 
@@ -237,17 +236,11 @@
                     <!-- ICONS -->
                     <ui:include src="/uii/includes/form_icons.xhtml">
                         <ui:param
-                            name="duplicateElement"
-                            value="false" />
-                        <ui:param
-                            name="showHelpBtn"
-                            value="true" />
-                        <ui:param
                             name="helpTitle"
-                            value="Privacy Help" />
+                            value="#{msgs.plugin_rest_usercreation_helpTitle_privacy}" />
                         <ui:param
                             name="helpBody"
-                            value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                            value="#{msgs.plugin_rest_usercreation_helpText_privacy}" />
                     </ui:include>
 
                 </div>
@@ -255,7 +248,7 @@
             <!-- end common-region -->
 
             <div class="info-required">
-                <h:outputText escape="false" value="#{msgs.login_new_account_requiredFields}" />
+                <h:outputText escape="false" value="#{msgs.plugin_rest_usercreation_requiredFields}" />
             </div>
 
             <div class="form-actions form-actions--progress">
@@ -352,7 +345,8 @@
                         inputPlaceholder=""
                         inputDuplicate="false"
                         showHelpBtn="true"
-                        helpText="lorem ipsum" />
+                        helpTitle="#{msgs.login_new_account_institutionShortName}"
+                        helpText="#{msgs.plugin_rest_usercreation_helpText_institutionShortName}" />
                     <h:panelGroup
                         layout="block"
                         rendered="#{externalLoginBean.institutionShortNameInvalid}"
@@ -382,7 +376,8 @@
                         inputPlaceholder=""
                         inputDuplicate="false"
                         showHelpBtn="true"
-                        helpText="lorem ipsum" />
+                        helpTitle="#{msgs.login_new_account_institutionName}"
+                        helpText="#{msgs.plugin_rest_usercreation_helpText_institutionName}" />
                     <h:panelGroup
                         layout="block"
                         rendered="#{externalLoginBean.institutionNameInvalid}"
@@ -467,17 +462,11 @@
                         <!-- ICONS -->
                         <ui:include src="/uii/includes/form_icons.xhtml">
                             <ui:param
-                                name="duplicateElement"
-                                value="false" />
-                            <ui:param
-                                name="showHelpBtn"
-                                value="true" />
-                            <ui:param
                                 name="helpTitle"
-                                value="Privacy Help" />
+                                value="#{field.label}" />
                             <ui:param
                                 name="helpBody"
-                                value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                                value="#{field.helpMessage}" />
                         </ui:include>
 
                         <h:panelGroup
@@ -489,7 +478,7 @@
                         <h:outputText
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
-                            value="#{fieldy.helpMessage}" />
+                            value="#{field.helpMessage}" />
 
                     </div>
                 </ui:repeat>
@@ -594,17 +583,11 @@
                         <!-- ICONS -->
                         <ui:include src="/uii/includes/form_icons.xhtml">
                             <ui:param
-                                name="duplicateElement"
-                                value="false" />
-                            <ui:param
-                                name="showHelpBtn"
-                                value="true" />
-                            <ui:param
                                 name="helpTitle"
-                                value="Privacy Help" />
+                                value="#{field.label}" />
                             <ui:param
                                 name="helpBody"
-                                value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                                value="#{field.helpMessage}" />
                         </ui:include>
 
                         <h:panelGroup
@@ -616,10 +599,7 @@
                         <h:outputText
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
-                            value="#{fieldy.helpMessage}" />
-                        <!--
-                    </div>
-                    -->
+                            value="#{field.helpMessage}" />
 
                     </div>
                 </ui:repeat>
@@ -708,17 +688,11 @@
                         <!-- ICONS -->
                         <ui:include src="/uii/includes/form_icons.xhtml">
                             <ui:param
-                                name="duplicateElement"
-                                value="false" />
-                            <ui:param
-                                name="showHelpBtn"
-                                value="true" />
-                            <ui:param
                                 name="helpTitle"
-                                value="Privacy Help" />
+                                value="#{field.label}" />
                             <ui:param
                                 name="helpBody"
-                                value="Lorem ipsum dolor sit amet, consetetur sadipscing elitr" />
+                                value="#{field.helpMessage}" />
                         </ui:include>
 
                         <h:panelGroup
@@ -730,12 +704,7 @@
                         <h:outputText
                             styleClass="help-block font-light"
                             rendered="#{NavigationForm.showHelp}"
-                            value="#{fieldy.helpMessage}" />
-                        <!--
-                    </div>
-                    -->
-
-
+                            value="#{field.helpMessage}" />
 
                     </div>
                 </ui:repeat>
@@ -746,9 +715,11 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page4'}">
+        <!--
             <h2 class="page__heading">
                 <h:outputText value="#{msgs.login_new_additionalData}" />
             </h2>
+        -->
 
             <section class="common-region additional-data">
                 <ui:repeat
@@ -756,17 +727,41 @@
                     value="#{externalLoginBean.additionalFields['page4']}">
                     <div class="form-group">
 
-                        <h:selectBooleanCheckbox
-                            rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
-                            pt:aria-label="#{field.label}"
-                            styleClass="form-control"
-                            value="#{field.booleanValue}">
-                            <f:ajax
-                                render="@form"
-                                execute="@this" />
-                        </h:selectBooleanCheckbox>
 
-                        <h:outputLabel value="#{field.label}" />
+                    <ui:fragment rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}">
+
+                    <div class="form form-check">
+                        <div class="form-check-wrapper">
+
+                            <h:selectBooleanCheckbox
+                                rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                                pt:aria-label="#{field.label}"
+                                styleClass="form-control"
+                                value="#{field.booleanValue}">
+                                <f:ajax
+                                    render="@form"
+                                    execute="@this" />
+                            </h:selectBooleanCheckbox>
+
+                            <zlb:label
+                                    labelFor="activation"
+                                    labelText="#{field.label}"
+                                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                    labelRequired="#{field.required}" />
+                        </div> <!-- end form-check-wraper -->
+
+                        <!-- ICONS -->
+                        <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param
+                                name="helpTitle"
+                                value="#{field.label}" />
+                            <ui:param
+                                name="helpBody"
+                                value="#{field.helpMessage}" />
+                        </ui:include>
+
+                    </div>
+                    </ui:fragment>
 
                         <i
                             jsf:rendered="#{field.required}"
@@ -845,9 +840,11 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
+            <!--
             <h2 class="page__heading">
                 <h:outputText value="#{msgs.login_new_activation}" />
             </h2>
+            -->
             <section class="common-region one-col overview">
                 <!-- show all fields in read only mode -->
                 <h3>
@@ -904,20 +901,31 @@
                         fieldStyle="form-control" />
                 </ui:repeat>
 
-                <div class="form-check-wrapper">
-                     <h:selectBooleanCheckbox
-                            id="activation"
-                            pt:aria-label="#{msgs.login_new_account_activation}"
-                            forceId="true"
-                            styleClass="form-check-input"
-                            value="#{externalLoginBean.activation}"
-                            required="true">
-                        </h:selectBooleanCheckbox>
-                    <zlb:label
-                            labelFor="activation"
-                            labelText="#{msgs.login_new_account_activation}"
-                            labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                            labelRequired="true" />
+                <div class="form form-check">
+                    <div class="form-check-wrapper">
+                         <h:selectBooleanCheckbox
+                                id="activation"
+                                pt:aria-label="#{msgs.login_new_account_activation}"
+                                forceId="true"
+                                styleClass="form-check-input"
+                                value="#{externalLoginBean.activation}"
+                                required="true">
+                            </h:selectBooleanCheckbox>
+                        <zlb:label
+                                labelFor="activation"
+                                labelText="#{msgs.login_new_account_activation}"
+                                labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                labelRequired="true" />
+                    </div>
+                    <!-- ICONS -->
+                    <ui:include src="/uii/includes/form_icons.xhtml">
+                        <ui:param
+                            name="helpTitle"
+                            value="#{field.label}" />
+                        <ui:param
+                            name="helpBody"
+                            value="#{field.helpMessage}" />
+                    </ui:include>
                 </div>
             </section>
         </ui:fragment>
@@ -932,7 +940,7 @@
              jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <h:outputText
                 escape="false"
-                value="#{msgs.login_new_account_requiredFields}" />
+                value="#{msgs.plugin_rest_usercreation_requiredFields}" />
         </div>
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <div class="submit form-actions form-actions--progress">
@@ -940,7 +948,7 @@
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
                     jsf:action="#{externalLoginBean.back}"
                     jsf:id="goBack"
-                    class="btn btn-blank">
+                    class="btn btn-blank me-auto">
                     <h:outputText value="#{msgs.back}" />
                 </button>
                 <ui:include src="/uii/includes/zlb-progress.xhtml">
@@ -952,16 +960,14 @@
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
                     jsf:id="goNext"
                     jsf:action="#{externalLoginBean.next}"
-                    style="margin-bottom: 20px;"
-                    class="btn btn-success">
+                    class="btn btn-success ms-auto">
                     <h:outputText value="#{msgs.next}" />
                 </button>
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
                     jsf:id="createInsitution"
                     jsf:action="#{externalLoginBean.createInstitution}"
-                    style="margin-bottom: 20px;"
-                    class="btn btn-success">
+                    class="btn btn-success ms-auto">
                     <h:outputText value="#{msgs.createInsitution}" />
                 </button>
             </div>
