@@ -2,6 +2,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+    xmlns:zlb="http://xmlns.jcp.org/jsf/composite/composites"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -12,6 +13,7 @@
     <composite:interface>
         <composite:attribute name="inputDuplicate" default="false" />
         <composite:attribute name="showHelpBtn" default="true" />
+        <composite:attribute name="helpTitle" default="default help Title (field.xhtml)"/>
         <composite:attribute name="helpText" default="default help text"/>
 
         <composite:attribute name="identifier" />
@@ -68,6 +70,39 @@
             layout="block"
             styleClass="form-group #{cc.attrs.mainClass}">
 
+            <!-- Checkbox needs slightly different markup -->
+            <ui:fragment rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}" >
+            <div class="form form-check">
+                <div class="form-check-wrapper">
+
+                <h:selectBooleanCheckbox
+                    id="#{cc.attrs.identifier}_checkbox"
+                    rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}"
+                    pt:aria-label="#{cc.attrs.labelText}"
+                    styleClass="form-check-input"
+                    value="#{cc.attrs.booleanValue}">
+                    <f:ajax
+                        render="#{cc.attrs.render}"
+                        execute="@this" />
+                </h:selectBooleanCheckbox>
+
+                 <zlb:label
+                    labelFor="activation"
+                    labelText="#{cc.attrs.labelText}"
+                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                    labelRequired="#{cc.attrs.fieldRequired}" />
+                </div> <!-- end form-check-wraper -->
+
+                 <!-- ICONS -->
+                <ui:include src="/uii/includes/form_icons.xhtml">
+                    <ui:param name="helpTitle" value="#{cc.attrs.helpTitle}" />
+                    <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
+                </ui:include>
+
+            </div> <!-- end form-check -->
+            </ui:fragment>
+
+            <ui:fragment rendered="#{cc.attrs.fieldType!='checkbox' and cc.attrs.fieldType!='combo'}" >
             <label
                 for="#{cc.attrs.identifier}_input"
                 class="zlb-label"
@@ -78,13 +113,6 @@
                     rendered="#{cc.attrs.fieldRequired}">
                     <i class="fa fa-asterisk" />
                 </h:panelGroup>
-                <!--
-                <ui:include src="../uii/includes/icon-help.xhtml">
-                    <ui:param
-                        name="helpText"
-                        value="#{cc.attrs.labelHelpText}" />
-                </ui:include>
-                -->
             </label>
 
             <div class="form form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
@@ -129,16 +157,6 @@
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneMenu>
-                <h:selectBooleanCheckbox
-                    id="#{cc.attrs.identifier}_checkbox"
-                    rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}"
-                    pt:aria-label="#{cc.attrs.labelText}"
-                    styleClass="form-control"
-                    value="#{cc.attrs.booleanValue}">
-                    <f:ajax
-                        render="#{cc.attrs.render}"
-                        execute="@this" />
-                </h:selectBooleanCheckbox>
                 <h:selectOneRadio
                     id="#{cc.attrs.identifier}_radio"
                     rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
@@ -175,6 +193,7 @@
               <ui:include src="/uii/includes/form_icons.xhtml">
                 <ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
                 <ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
+                <ui:param name="helpTitle" value="#{cc.attrs.helpTitle}" />
                 <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
               </ui:include>
             </div>
@@ -193,6 +212,7 @@
         </div>
 
 
+        </ui:fragment>
         </h:panelGroup>
 
     </composite:implementation>
