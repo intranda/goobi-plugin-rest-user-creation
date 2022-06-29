@@ -810,7 +810,7 @@ main h1 svg {
   grid-column: 1/-1;
 }
 
-section:not(.overview) .form-check {
+section .overview .form-check {
   padding-left: 0;
 }
 
@@ -1028,6 +1028,7 @@ input ~ .font-danger {
 .common-region {
   display: grid;
   grid-template-columns: var(--grid-tc);
+  grid-auto-rows: auto;
   gap: var(--gap);
   row-gap: calc(var(--gap) + 1rem);
   column-gap: calc(var(--gap) + 3rem);
@@ -1049,6 +1050,8 @@ input ~ .font-danger {
 }
 .common-region--three-cols {
   --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
+  align-items: unset;
+  grid-auto-rows: auto;
 }
 
 .layout #globalWarningMessage {
