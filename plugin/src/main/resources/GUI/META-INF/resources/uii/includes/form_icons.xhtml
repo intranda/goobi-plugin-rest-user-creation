@@ -15,7 +15,9 @@
 <composite:implementation>
 
 <c:if test="#{duplicateElement != 'false' or showHelpBtn != 'false' }">
+
   <div class="form-icons">
+
     <!-- Duplicate form element -->
     <c:if test="#{duplicateElement != null ? duplicateElement : 'false'}">
         <button type="button" class="form-icons__button form-icons__button--duplicate">
@@ -27,6 +29,7 @@
         <button
           type="button"
           class="form-icons__button form-icons__button--help"
+          aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementHelp}"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
           data-bs-title="#{helpTitle != null ? helpTitle : 'default title'}"
