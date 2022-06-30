@@ -470,37 +470,5 @@ public class ExternalLoginBean implements Serializable {
 
     public void createNewContact() {
         displaySecondContact = true;
-        //        if (additionalFields.get("page3a") != null) {
-        //            // second contact already exists
-        //            return;
-        //        }
-        //
-        //        List<UserCreationField> existingFields = additionalFields.get("page3");
-        //
-        //        List<UserCreationField> newFields = new ArrayList<>();
-        //
-        //        for (UserCreationField f : existingFields) {
-        //
-        //            UserCreationField newField = new UserCreationField();
-        //
-        //            newField.setType(f.getType());
-        //            newField.setDisplayInTable(f.isDisplayInTable());
-        //            newField.setFieldType(f.getFieldType());
-        //            newField.setLabel(f.getLabel());
-        //            String name = f.getName().replace("contact", "contact2");
-        //            newField.setName(name);
-        //            newField.setPosition(f.getPosition());
-        //            newField.setRequired(f.isRequired());
-        //            newField.setValidation(f.getValidation());
-        //            newField.setValidationErrorMessage(f.getValidationErrorMessage());
-        //            newField.setSelectItemList(f.getSelectItemList());
-        //
-        //            newField.setHelpMessage(f.getHelpMessage());
-        //            newFields.add(newField);
-        //        }
-        //
-        //        additionalFields.put("page3a", newFields);
-
     }
-
 }

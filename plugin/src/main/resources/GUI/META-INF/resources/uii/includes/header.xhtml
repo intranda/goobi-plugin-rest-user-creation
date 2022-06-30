@@ -6,54 +6,192 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:x="http://myfaces.apache.org/tomahawk"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:jsf="http://xmlns.jcp.org/jsf">
+    xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites">
 
-<composite:interface>
-</composite:interface>
+    <composite:interface>
+    </composite:interface>
 
-<composite:implementation>
-<header class="header">
-    <div class="container-fluid header__upper">
-    <a href="https://www.zlb.de" target="_blank" rel="noopener" class="brand">
-        <img src="template/assets/img/ZLB_logo_small_white.png" alt="" class="brand__logo" />
-        <div class="brand__copy">
-            <div>Zentral- und</div>
-            <div>Landesbibliothek Berlin</div>
-        </div>
-    </a>
-
-    <div class="actions">
-        <div class="actions__lang">
-			      <ui:include src="/uii/includes/icon-language.xhtml" />
-            <span>Language</span>
-        </div>
-        <div class="actions__user">
-            <span>User Name</span>
-			      <ui:include src="/uii/includes/icon-logo-intranda.xhtml" />
-        </div>
-    </div>
-    </div>
-    <div class="container-fluid header__lower">
-
-			      <ui:include src="../includes/icon-logo-goobi.xhtml" />
-            <h1>
-                <a href="index.xhtml">
-                    <h:outputText
-                        escape="false"
-                        value="ZLB E-Pflicht" />
+    <composite:implementation>
+        <header class="header">
+            <div class="container-fluid header__upper">
+                <a
+                    href="https://www.zlb.de"
+                    target="_blank"
+                    rel="noopener"
+                    class="brand">
+                    <img
+                        src="template/assets/img/ZLB_logo_small_white.png"
+                        alt=""
+                        class="brand__logo" />
+                    <div class="brand__copy">
+                        <div>Zentral- und</div>
+                        <div>Landesbibliothek Berlin</div>
+                    </div>
                 </a>
 
-            </h1>
+                <div class="actions">
+                    <h:form>
 
-        <div class="actions__help">
-            <ui:include src="/uii/includes/icon-info.xhtml" />
-            Hilfe
-        </div>
-    </div>
+                        <div class="actions__lang">
+                            <ui:include src="/uii/includes/icon-language.xhtml" />
+                            <!-- Language dropdown -->
+                            <div
+                                class="nav-item dropdown language-select"
+                                data-toggle="tooltip"
+                                title="#{msgs.spracheAendern}"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
 
-</header>
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
 
-</composite:implementation>
+                                    <!-- Language icon -->
+                                    <ui:include src="/uii/includes/svg/icon_language.xhtml">
+                                        <ui:param
+                                            name="iconClass"
+                                            value="language-select__icon" />
+                                    </ui:include>
+
+                                    <span class="language-select__locale">#{SpracheForm.locale}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <ui:repeat
+                                        var="availableLanguage"
+                                        value="#{SpracheForm.supportedLocales}"
+                                        id="plugin4">
+                                        <li class="nav-item">
+                                            <button
+                                                jsf:id="locale"
+                                                class="dropdown-item text_head btn-link"
+                                                jsf:action="#{SpracheForm.SpracheUmschalten}"
+                                                title="#{availableLanguage.displayLanguageTranslated}">
+                                                <f:param
+                                                    name="locale"
+                                                    value="#{availableLanguage.id}" />
+                                                <f:setPropertyActionListener
+                                                    value="#{null}"
+                                                    target="#{SessionForm.dateFormatter}" />
+                                                <!--
+                                    <h:graphicImage value="&#127760;" />
+                                    -->
+                                                <span>
+                                                    <h:outputText value="#{msgs[availableLanguage.displayLanguageSelf]}" />
+                                                </span>
+                                            </button>
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="actions__user">
+                            <c:if test="#{LoginForm.myBenutzer != null}">
+                                <div class="nav-item user__account-menu dropdown">
+                                    <a
+                                        class="nav-link dropdown-toggle"
+                                        href="#"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <span class="user__account-menu__name">
+                                            <h:outputText
+                                                rendered="#{LoginForm.myBenutzer != null}"
+                                                value="#{LoginForm.myBenutzer.vorname} #{LoginForm.myBenutzer.nachname}" />
+                                        </span>
+                                        <c:if test="#{empty LoginForm.myBenutzer.imageUrl}">
+                                            <img
+                                                class="user__account-menu__avatar-default"
+                                                alt=""
+                                                src="templatePG/img/intranda.svg" />
+                                        </c:if>
+                                        <c:if test="#{not empty LoginForm.myBenutzer.imageUrl}">
+                                            <img
+                                                alt=""
+                                                src="#{LoginForm.myBenutzer.imageUrl}" />
+                                        </c:if>
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+
+                                        <!-- User settings 
+                            <intranda:menuItem
+                                id="a50"
+                                linkClass="dropdown-item"
+                                parentMenu="menu_account"
+                                label="#{msgs.benutzerkonfiguration}"
+                                action="user_config"
+                                display="#{NavigationForm.uiStatus.user_config}"
+                                icon="fa fa-user-circle-o box-icon-fix-menu" />-->
+
+                                        <!-- Change password 
+                            <h:panelGroup rendered="#{HelperForm.passwordIsChangable}">
+                                <intranda:menuItem
+                                    id="a51"
+                                    linkClass="dropdown-item"
+                                    parentMenu="menu_account"
+                                    label="#{msgs.passwortAendern}"
+                                    action="user_password"
+                                    icon="fa fa-key box-icon-fix-menu" />
+                            </h:panelGroup>-->
+
+                                        <!-- Logout -->
+                                        <ui:fragment rendered="#{!LoginForm.showSSOLogoutPage}">
+                                            <intranda:menuItem
+                                                id="a52"
+                                                linkClass="dropdown-item"
+                                                parentMenu="menu_account"
+                                                label="#{msgs.logout}"
+                                                action="#{LoginForm.logoutExternalUser}"
+                                                icon="fa fa-power-off box-icon-fix-menu" />
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{LoginForm.showSSOLogoutPage}">
+                                            <intranda:menuItem
+                                                id="openIdLogout"
+                                                linkClass="dropdown-item"
+                                                parentMenu="menu_account"
+                                                label="#{msgs.logout}"
+                                                action="#{LoginForm.logoutOpenId}"
+                                                icon="fa fa-power-off box-icon-fix-menu" />
+                                        </ui:fragment>
+
+                                    </ul>
+                                </div>
+                                <!-- end nav-item user__account-menu dropdown -->
+                            </c:if>
+
+
+
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <div class="container-fluid header__lower">
+
+                <ui:include src="../includes/icon-logo-goobi.xhtml" />
+                <h1>
+                    <a href="index.xhtml">
+                        <h:outputText
+                            escape="false"
+                            value="ZLB E-Pflicht" />
+                    </a>
+
+                </h1>
+
+                <div class="actions__help">
+                    <ui:include src="/uii/includes/icon-info.xhtml" />
+                    Hilfe
+                </div>
+            </div>
+
+        </header>
+
+    </composite:implementation>
 
 
 </ui:composition>
