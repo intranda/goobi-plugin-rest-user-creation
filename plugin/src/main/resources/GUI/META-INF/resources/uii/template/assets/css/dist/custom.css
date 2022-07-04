@@ -566,6 +566,11 @@
   --height-footer-and-nav: 303px;
 }
 
+/* GENERAL */
+.tooltip {
+  font-size: var(--fs-200);
+}
+
 /* LAYOUT */
 html {
   font-size: 62.5%;
