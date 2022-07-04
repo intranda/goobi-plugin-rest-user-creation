@@ -692,6 +692,38 @@ header .container-fluid.header__lower svg {
   color: inherit;
 }
 
+.actions form {
+  display: flex;
+  align-items: center;
+}
+
+.actions a {
+  color: #fff;
+}
+.actions a:focus, .actions a:hover, .actions a:active {
+  color: var(--clr-accent);
+}
+.actions a::after {
+  display: none;
+}
+
+.language-select__locale {
+  text-transform: uppercase;
+  margin-left: 8px;
+  margin-right: 24px;
+}
+
+.user__account-menu__name {
+  margin-right: 8px;
+}
+
+.dropdown-menu span,
+.dropdown-menu i {
+  color: var(--clr-text-body);
+  font-size: var(--fs-400);
+}
+
+/* lower header => actions: help button */
 .actions__help {
   display: flex;
   align-items: center;
