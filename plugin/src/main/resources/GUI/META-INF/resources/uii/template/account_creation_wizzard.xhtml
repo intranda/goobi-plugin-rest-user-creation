@@ -49,21 +49,40 @@
 
             <section class="common-region">
                 <!-- account name -->
-                <div class="form">
+                <div class="form #{externalLoginBean.institutionShortNameInUse == true || externalLoginBean.institutionShortNameInvalid == true ? 'validate--danger' : ''}">
+
                     <zlb:label
                         labelFor="accountName"
-                        labelText="#{msgs.login_new_account_accountName}" />
+                        labelText="#{msgs.login_new_account_accountName}"
+                        labelRequired="true" />
 
-                    <zlb:input
-                        inputId="accountName"
-                        inputAriaLabel="#{msgs.login_new_account_accountName}"
-                        inputValue="#{externalLoginBean.accountName}"
-                        inputRequired="true"
-                        inputPlaceholder="#{msgs.login_new_account_accountName}"
-                        inputDuplicate="false"
-                        showHelpBtn="true"
-                        helpTitle="#{msgs.login_new_account_accountName}"
-                        helpText="#{msgs.plugin_rest_usercreation_helpText_userName}" />
+                    <x:inputText
+                        id="accountName"
+                        pt:aria-label="#{msgs.login_new_account_accountName}"
+                        styleClass="form-control"
+                        value="#{externalLoginBean.accountName}">
+                        <f:ajax
+                            render="@this"
+                            execute="@this" />
+                        <f:passThroughAttribute
+                            name="placeholder"
+                            value="#{msgs.login_new_account_accountName}" />
+                    </x:inputText>
+                    <!-- ICONS -->
+                    <ui:include src="/uii/includes/form_icons.xhtml">
+                        <ui:param
+                            name="helpTitle"
+                            value="#{msgs.login_new_account_accountName}" />
+                        <ui:param
+                            name="helpBody"
+                            value="#{msgs.plugin_rest_usercreation_helpText_userName}" />
+                    </ui:include>
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{!externalLoginBean.accountNameValid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{externalLoginBean.accountNameErrorMessage}" />
+                    </h:panelGroup>
                 </div>
 
                 <!-- firstname -->
@@ -78,10 +97,18 @@
                         inputId="firstname"
                         inputAriaLabel="#{msgs.firstname}"
                         inputValue="#{externalLoginBean.firstname}"
-                        inputRequired="true"
+                        inputRequired="false"
                         inputPlaceholder="#{msgs.firstname}"
                         helpTitle="#{msgs.firstname}"
                         helpText="#{msgs.plugin_rest_usercreation_helpText_firstname}" />
+
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{!externalLoginBean.firstNameValid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{externalLoginBean.firstNameErrorMessage}" />
+                    </h:panelGroup>
+
                 </div>
 
                 <!-- lastname -->
@@ -96,12 +123,17 @@
                         inputId="lastname"
                         inputAriaLabel="#{msgs.lastname}"
                         inputValue="#{externalLoginBean.lastname}"
-                        inputRequired="true"
+                        inputRequired="false"
                         inputPlaceholder="#{msgs.lastname}"
                         showHelpBtn="true"
                         helpTitle="#{msgs.lastname}"
                         helpText="#{msgs.plugin_rest_usercreation_helpText_lastname}" />
-
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{!externalLoginBean.lastNameValid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{externalLoginBean.lastNameErrorMessage}" />
+                    </h:panelGroup>
                 </div>
 
                 <!-- password -->
@@ -119,18 +151,28 @@
                         forceId="true"
                         styleClass="form-control"
                         value="#{externalLoginBean.password}"
-                        required="true">
+                        required="false">
                         <f:passThroughAttribute
                             name="placeholder"
                             value="" />
                     </x:inputSecret>
 
                     <!-- Icons -->
-                    <ui:include src="/uii/includes/form_icons.xhtml" >
-                        <ui:param name="helpTitle" value="#{msgs.login_new_account_password}" />
-                        <ui:param name="helpBody" value="#{msgs.plugin_rest_usercreation_helpText_password}" />
+                    <ui:include src="/uii/includes/form_icons.xhtml">
+                        <ui:param
+                            name="helpTitle"
+                            value="#{msgs.login_new_account_password}" />
+                        <ui:param
+                            name="helpBody"
+                            value="#{msgs.plugin_rest_usercreation_helpText_password}" />
                     </ui:include>
 
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{!externalLoginBean.passwordValid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{externalLoginBean.passwordErrorMessage}" />
+                    </h:panelGroup>
                 </div>
 
                 <!-- confirm password -->
@@ -148,16 +190,20 @@
                         forceId="true"
                         styleClass="form-control"
                         value="#{externalLoginBean.confirmPassword}"
-                        required="true">
+                        required="false">
                         <f:passThroughAttribute
                             name="placeholder"
                             value="" />
                     </x:inputSecret>
 
                     <!-- Icons -->
-                    <ui:include src="/uii/includes/form_icons.xhtml" >
-                        <ui:param name="helpTitle" value="#{msgs.login_new_account_password2}" />
-                        <ui:param name="helpBody" value="#{msgs.plugin_rest_usercreation_helpText_password2}" />
+                    <ui:include src="/uii/includes/form_icons.xhtml">
+                        <ui:param
+                            name="helpTitle"
+                            value="#{msgs.login_new_account_password2}" />
+                        <ui:param
+                            name="helpBody"
+                            value="#{msgs.plugin_rest_usercreation_helpText_password2}" />
                     </ui:include>
 
                 </div>
@@ -177,11 +223,19 @@
                         inputAriaLabel="#{msgs.login_new_account_emailAddress}"
                         inputForceId="true"
                         inputValue="#{externalLoginBean.emailAddress}"
-                        inputRequired="true"
+                        inputRequired="false"
                         inputPlaceholder="#{msgs.login_new_account_emailAddress}"
                         helpTitle="#{msgs.login_new_account_emailAddress}"
                         helpText="#{msgs.plugin_rest_usercreation_helpText_email}" />
+
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{!externalLoginBean.emailValid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{externalLoginBean.emailErrorMessage}" />
+                    </h:panelGroup>
                 </div>
+
 
 
 
@@ -194,7 +248,7 @@
                             forceId="true"
                             styleClass="form-check-input"
                             value="#{externalLoginBean.privacyTextAccepted}"
-                            required="true">
+                            required="false">
                         </h:selectBooleanCheckbox>
 
                         <label
@@ -211,7 +265,15 @@
                             </span>
 
                         </label>
-                    </div> <!-- end form-check-wrapper -->
+
+                        <h:panelGroup
+                            layout="block"
+                            rendered="#{!externalLoginBean.privacyValid}"
+                            styleClass="font-danger validation-message">
+                            <h:outputText value="#{externalLoginBean.privacyErrorMessage}" />
+                        </h:panelGroup>
+                    </div>
+                    <!-- end form-check-wrapper -->
 
 
                     <!-- ICONS -->
@@ -229,7 +291,9 @@
             <!-- end common-region -->
 
             <div class="info-required">
-                <h:outputText escape="false" value="#{msgs.plugin_rest_usercreation_requiredFields}" />
+                <h:outputText
+                    escape="false"
+                    value="#{msgs.plugin_rest_usercreation_requiredFields}" />
             </div>
 
             <div class="form-actions form-actions--progress">
@@ -470,22 +534,22 @@
 
             <div class="form">
                 <div class="form-check-wrapper">
-                <h:selectBooleanCheckbox
-                    id="contactPersonCheckbox"
-                    pt:aria-label="#{msgs.login_new_account_userIsContactPerson}"
-                    forceId="true"
-                    styleClass="form-check-input"
-                    value="#{externalLoginBean.userIsContactPerson}"
-                    required="false">
-                    <f:ajax
-                        execute="@this"
-                        render="@form" />
-                </h:selectBooleanCheckbox>
-                <zlb:label
-                    labelFor="contactPersonCheckbox"
-                    labelText="#{msgs.login_new_account_userIsContactPerson}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="true" />
+                    <h:selectBooleanCheckbox
+                        id="contactPersonCheckbox"
+                        pt:aria-label="#{msgs.login_new_account_userIsContactPerson}"
+                        forceId="true"
+                        styleClass="form-check-input"
+                        value="#{externalLoginBean.userIsContactPerson}"
+                        required="false">
+                        <f:ajax
+                            execute="@this"
+                            render="@form" />
+                    </h:selectBooleanCheckbox>
+                    <zlb:label
+                        labelFor="contactPersonCheckbox"
+                        labelText="#{msgs.login_new_account_userIsContactPerson}"
+                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                        labelRequired="true" />
                 </div>
 
             </div>
@@ -495,7 +559,7 @@
                     var="field"
                     value="#{externalLoginBean.additionalFields['page3']}">
 
-                <div class="form #{field.validationError ? 'validate--danger' : ''}">
+                    <div class="form #{field.validationError ? 'validate--danger' : ''}">
 
                         <zlb:label
                             labelFor="input1"
@@ -587,7 +651,7 @@
             </section>
 
             <button
-            jsf:rendered="#{!externalLoginBean.displaySecondContact}"
+                jsf:rendered="#{!externalLoginBean.displaySecondContact}"
                 jsf:id="createNewContact"
                 jsf:action="#{externalLoginBean.createNewContact}"
                 style="margin-bottom: 20px;"
@@ -595,7 +659,9 @@
                 <h:outputText value="#{msgs.login_new_createNewContact}" />
             </button>
 
-            <section class="common-region" jsf:rendered="#{externalLoginBean.displaySecondContact}">
+            <section
+                class="common-region"
+                jsf:rendered="#{externalLoginBean.displaySecondContact}">
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page3a']}">
@@ -696,11 +762,6 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page4'}">
-        <!--
-            <h2 class="page__heading">
-                <h:outputText value="#{msgs.login_new_additionalData}" />
-            </h2>
-        -->
 
             <section class="common-region additional-data">
                 <ui:repeat
@@ -709,40 +770,41 @@
                     <div class="form-group">
 
 
-                    <ui:fragment rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}">
+                        <ui:fragment rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}">
 
-                    <div class="form form-check">
-                        <div class="form-check-wrapper">
+                            <div class="form form-check">
+                                <div class="form-check-wrapper">
 
-                            <h:selectBooleanCheckbox
-                                rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
-                                pt:aria-label="#{field.label}"
-                                styleClass="form-control"
-                                value="#{field.booleanValue}">
-                                <f:ajax
-                                    render="@form"
-                                    execute="@this" />
-                            </h:selectBooleanCheckbox>
+                                    <h:selectBooleanCheckbox
+                                        rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
+                                        pt:aria-label="#{field.label}"
+                                        styleClass="form-control"
+                                        value="#{field.booleanValue}">
+                                        <f:ajax
+                                            render="@form"
+                                            execute="@this" />
+                                    </h:selectBooleanCheckbox>
 
-                            <zlb:label
-                                    labelFor="activation"
-                                    labelText="#{field.label}"
-                                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                                    labelRequired="#{field.required}" />
-                        </div> <!-- end form-check-wraper -->
+                                    <zlb:label
+                                        labelFor="activation"
+                                        labelText="#{field.label}"
+                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                        labelRequired="#{field.required}" />
+                                </div>
+                                <!-- end form-check-wraper -->
 
-                        <!-- ICONS -->
-                        <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param
-                                name="helpTitle"
-                                value="#{field.label}" />
-                            <ui:param
-                                name="helpBody"
-                                value="#{field.helpMessage}" />
-                        </ui:include>
+                                <!-- ICONS -->
+                                <ui:include src="/uii/includes/form_icons.xhtml">
+                                    <ui:param
+                                        name="helpTitle"
+                                        value="#{field.label}" />
+                                    <ui:param
+                                        name="helpBody"
+                                        value="#{field.helpMessage}" />
+                                </ui:include>
 
-                    </div>
-                    </ui:fragment>
+                            </div>
+                        </ui:fragment>
 
                         <i
                             jsf:rendered="#{field.required}"
@@ -852,15 +914,15 @@
                         fieldStyle="form-control" />
                 </ui:repeat>
                 <ui:fragment rendered="#{externalLoginBean.displaySecondContact}">
-                <ui:repeat
-                    var="field"
-                    value="#{externalLoginBean.additionalFields['page3a']}">
-                    <intranda:formOutputText
-                        name="field"
-                        label="#{field.label}"
-                        field="#{field.value}"
-                        fieldStyle="form-control" />
-                </ui:repeat>
+                    <ui:repeat
+                        var="field"
+                        value="#{externalLoginBean.additionalFields['page3a']}">
+                        <intranda:formOutputText
+                            name="field"
+                            label="#{field.label}"
+                            field="#{field.value}"
+                            fieldStyle="form-control" />
+                    </ui:repeat>
                 </ui:fragment>
 
                 <h3>
@@ -878,19 +940,19 @@
 
                 <div class="form form-check">
                     <div class="form-check-wrapper">
-                         <h:selectBooleanCheckbox
-                                id="activation"
-                                pt:aria-label="#{msgs.login_new_account_activation}"
-                                forceId="true"
-                                styleClass="form-check-input"
-                                value="#{externalLoginBean.activation}"
-                                required="true">
-                            </h:selectBooleanCheckbox>
+                        <h:selectBooleanCheckbox
+                            id="activation"
+                            pt:aria-label="#{msgs.login_new_account_activation}"
+                            forceId="true"
+                            styleClass="form-check-input"
+                            value="#{externalLoginBean.activation}"
+                            required="true">
+                        </h:selectBooleanCheckbox>
                         <zlb:label
-                                labelFor="activation"
-                                labelText="#{msgs.login_new_account_activation}"
-                                labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                                labelRequired="true" />
+                            labelFor="activation"
+                            labelText="#{msgs.login_new_account_activation}"
+                            labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                            labelRequired="true" />
                     </div>
                     <!-- ICONS -->
                     <ui:include src="/uii/includes/form_icons.xhtml">
@@ -907,12 +969,15 @@
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='wait'}">
             <section class="common-region">
-                <h:outputText escape="false" value="#{msgs.login_new_account_creationSuccessful}" />
+                <h:outputText
+                    escape="false"
+                    value="#{msgs.login_new_account_creationSuccessful}" />
             </section>
         </ui:fragment>
 
-        <div class="info-required"
-             jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">
+        <div
+            class="info-required"
+            jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">
             <h:outputText
                 escape="false"
                 value="#{msgs.plugin_rest_usercreation_requiredFields}" />
