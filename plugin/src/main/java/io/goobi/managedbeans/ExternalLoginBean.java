@@ -1,6 +1,7 @@
 package io.goobi.managedbeans;
 
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,7 +9,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,7 +52,7 @@ public class ExternalLoginBean implements Serializable {
 
     private static final long serialVersionUID = 2129311315931276111L;
 
-    private static final String configurationName = "intranda_administration_deliveryManagement";
+    private static final String CONFIGURATION_NAME = "intranda_administration_deliveryManagement";
 
     // fields for first page
     @Getter
@@ -67,9 +67,7 @@ public class ExternalLoginBean implements Serializable {
     @Getter
     @Setter
     private String emailAddress;
-    @Getter
-    @Setter
-    private String confirmEmailAddress;
+
     @Getter
     @Setter
     private String firstname;
@@ -78,14 +76,14 @@ public class ExternalLoginBean implements Serializable {
     private String lastname;
     @Getter
     @Setter
-    private boolean privacyTextAccepted;
+    private boolean privacyTextAccepted = false;
     @Getter
     @Setter
     private String wizzardMode = "page1";
 
     @Getter
     @Setter
-    private User currentUser;
+    transient User currentUser;
     @Getter
     @Setter
     private String uiStatus = "";
@@ -119,25 +117,58 @@ public class ExternalLoginBean implements Serializable {
     @Setter
     private boolean activation;
 
-
     @Getter
     private String privacyLink;
 
     @Getter
     private String legalNoticeLink;
 
+    private static final String COMBO_FIELDNAME = "combo";
 
+    private String registrationMailRecipient;
+    private String registrationMailSubject;
+    private String registrationMailBody;
+
+    @Getter
+    private boolean accountNameValid = true;
+    @Getter
+    private String accountNameErrorMessage;
+
+    @Getter
+    private boolean firstNameValid = true;
+    @Getter
+    private String firstNameErrorMessage;
+
+    @Getter
+    private boolean lastNameValid = true;
+    @Getter
+    private String lastNameErrorMessage;
+
+    @Getter
+    private boolean emailValid = true;
+    @Getter
+    private String emailErrorMessage;
+
+    @Getter
+    private boolean passwordValid = true;
+    @Getter
+    private String passwordErrorMessage;
+
+    @Getter
+    private boolean privacyValid = true;
+    @Getter
+    private String privacyErrorMessage;
 
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
-    private Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
+    transient Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
 
     public ExternalLoginBean() {
         readConfiguration();
     }
 
     private void readConfiguration() {
-        XMLConfiguration conf = ConfigPlugins.getPluginConfig(configurationName);
+        XMLConfiguration conf = ConfigPlugins.getPluginConfig(CONFIGURATION_NAME);
         conf.setExpressionEngine(new XPathExpressionEngine());
         privacyStatement = conf.getString("/privacyStatement");
 
@@ -163,7 +194,7 @@ public class ExternalLoginBean implements Serializable {
             if (configuredFields == null) {
                 configuredFields = new ArrayList<>();
             }
-            if (ucf.getFieldType().equals("dropdown") || ucf.getFieldType().equals("combo")) {
+            if (ucf.getFieldType().equals("dropdown") || ucf.getFieldType().equals(COMBO_FIELDNAME)) {
                 List<String> valueList = Arrays.asList(hc.getStringArray("/value"));
                 ucf.setSelectItemList(valueList);
             }
@@ -173,17 +204,28 @@ public class ExternalLoginBean implements Serializable {
 
         }
 
+        registrationMailRecipient = conf.getString("/registration/recipient");
+        registrationMailSubject = conf.getString("/registration/subject");
+        registrationMailBody = conf.getString("/registration/body");
+
     }
 
     public void createAccount() {
+        accountNameValid = true;
+        firstNameValid = true;
+        lastNameValid = true;
+        emailValid = true;
+        passwordValid = true;
         // validate entries
         if (StringUtils.isBlank(accountName)) {
-            Helper.setFehlerMeldung("keinLoginAngegeben");
+            accountNameErrorMessage = Helper.getTranslation("keinLoginAngegeben");
+            accountNameValid = false;
             return;
         } else {
             // check that account name only uses valid characters
             if (!isLoginValide(accountName)) {
-                Helper.setFehlerMeldung("loginWrongCharacter");
+                accountNameErrorMessage = Helper.getTranslation("loginWrongCharacter");
+                accountNameValid = false;
                 return;
             }
             // check that the account name was not used yet
@@ -192,7 +234,8 @@ public class ExternalLoginBean implements Serializable {
             try {
                 int num = new UserManager().getHitSize(null, query, null);
                 if (num > 0) {
-                    Helper.setFehlerMeldung("loginBereitsVergeben");
+                    accountNameErrorMessage = Helper.getTranslation("loginBereitsVergeben");
+                    accountNameValid = false;
                     return;
                 }
             } catch (DAOException e) {
@@ -200,25 +243,39 @@ public class ExternalLoginBean implements Serializable {
             }
         }
 
+        if (StringUtils.isBlank(firstname)) {
+            firstNameValid = false;
+            firstNameErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField");
+            return;
+        }
+
+        if (StringUtils.isBlank(lastname)) {
+            lastNameValid = false;
+            lastNameErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField");
+            return;
+        }
+
         // check that email address is valid?
         if (!EmailValidator.getInstance().isValid(emailAddress)) {
-            Helper.setFehlerMeldung("emailNotValid");
+            emailValid = false;
+            emailErrorMessage = Helper.getTranslation("emailNotValid");
             return;
         }
-
-        if (!emailAddress.equals(confirmEmailAddress)) {
-            Helper.setFehlerMeldung("emailNotValid");
+        if (StringUtils.isBlank(password)) {
+            passwordValid = false;
+            passwordErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField");
             return;
         }
-
         if (!password.equals(confirmPassword)) {
-            Helper.setFehlerMeldung("login_new_account_confirmPasswordWrong");
+            passwordValid = false;
+            passwordErrorMessage = Helper.getTranslation("login_new_account_confirmPasswordWrong");
             return;
         }
         // check password length
 
         if (!privacyTextAccepted) {
-            Helper.setFehlerMeldung("login_new_account_privacyTextNotAcccepted");
+            privacyValid = false;
+            privacyErrorMessage = Helper.getTranslation("login_new_account_privacyTextNotAcccepted");
             return;
         }
 
@@ -307,13 +364,13 @@ public class ExternalLoginBean implements Serializable {
             List<UserCreationField> fields = additionalFields.get(pageNumber);
             for (UserCreationField f : fields) {
                 if ("institution".equals(f.getType())) {
-                    if (f.getFieldType().equals("combo") && f.getBooleanValue()) {
+                    if (f.getFieldType().equals(COMBO_FIELDNAME) && f.getBooleanValue()) {
                         institution.getAdditionalData().put(f.getName(), f.getSubValue());
                     } else {
                         institution.getAdditionalData().put(f.getName(), f.getValue());
                     }
                 } else {
-                    if (f.getFieldType().equals("combo") && f.getBooleanValue()) {
+                    if (f.getFieldType().equals(COMBO_FIELDNAME) && f.getBooleanValue()) {
                         currentUser.getAdditionalData().put(f.getName(), f.getSubValue());
                     } else {
                         currentUser.getAdditionalData().put(f.getName(), f.getValue());
@@ -329,14 +386,16 @@ public class ExternalLoginBean implements Serializable {
             log.error(e);
         }
 
-        // TODO send mail to staff to activate account
+        // send mail to staff to activate account
+        if (StringUtils.isNotBlank(registrationMailRecipient)) {
+            SendMail.getInstance().sendMailToUser(registrationMailSubject, registrationMailBody.replace("{login}", accountName), emailAddress);
 
+        }
         wizzardMode = "wait";
-
     }
 
     public static String createRandomPassword(int length) {
-        Random r = new Random();
+        SecureRandom r = new SecureRandom();
         StringBuilder password = new StringBuilder();
         while (password.length() < length) {
             // ASCII interval: [97 + 0, 97 + 25] => [97, 122] => [a, z]
@@ -382,37 +441,7 @@ public class ExternalLoginBean implements Serializable {
 
         if ("page2".equals(pageName)) {
             // shortname: max 6 characters, A-Za-z0-9
-            if (StringUtils.isBlank(institutionShortName) || institutionShortName.length() > 6 || !institutionShortName.matches("[A-Za-z0-9]+")) {
-                institutionShortNameInvalid = true;
-                valid = false;
-            } else {
-                institutionShortNameInvalid = false;
-
-                // check that shortname is not in use
-                String query = "select count(1) from institution where shortName = ?";
-                Connection connection = null;
-                try {
-                    connection = MySQLHelper.getInstance().getConnection();
-                    QueryRunner run = new QueryRunner();
-                    int number = run.query(connection, query, MySQLHelper.resultSetToIntegerHandler, institutionShortName);
-                    if (number > 0) {
-                        valid = false;
-                        institutionShortNameInUse = true;
-                    } else {
-                        institutionShortNameInUse = false;
-                    }
-                } catch (SQLException e) {
-                    log.error(e);
-                } finally {
-                    if (connection != null) {
-                        try {
-                            MySQLHelper.closeConnection(connection);
-                        } catch (SQLException e) {
-                        }
-                    }
-                }
-
-            }
+            valid = validateInstitutionName(valid);
 
             // validate institution name, not empty and max 255 character
             if (StringUtils.isBlank(institutionName) || institutionName.length() > 255) {
@@ -431,6 +460,42 @@ public class ExternalLoginBean implements Serializable {
         }
         return valid;
 
+    }
+
+    private boolean validateInstitutionName(boolean valid) {
+        if (StringUtils.isBlank(institutionShortName) || institutionShortName.length() > 6 || !institutionShortName.matches("[A-Za-z0-9]+")) {
+            institutionShortNameInvalid = true;
+            valid = false;
+        } else {
+            institutionShortNameInvalid = false;
+
+            // check that shortname is not in use
+            String query = "select count(1) from institution where shortName = ?";
+            Connection connection = null;
+            try {
+                connection = MySQLHelper.getInstance().getConnection();
+                QueryRunner run = new QueryRunner();
+                int number = run.query(connection, query, MySQLHelper.resultSetToIntegerHandler, institutionShortName);
+                if (number > 0) {
+                    valid = false;
+                    institutionShortNameInUse = true;
+                } else {
+                    institutionShortNameInUse = false;
+                }
+            } catch (SQLException e) {
+                log.error(e);
+            } finally {
+                if (connection != null) {
+                    try {
+                        MySQLHelper.closeConnection(connection);
+                    } catch (SQLException e) {
+                        log.error(e);
+                    }
+                }
+            }
+
+        }
+        return valid;
     }
 
     public void back() {

@@ -91,7 +91,19 @@
                     labelText="#{cc.attrs.labelText}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="#{cc.attrs.fieldRequired}" />
+                    
+                <h:selectOneRadio
+                    id="#{cc.attrs.identifier}_radio"
+                    rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
+                    styleClass="form-control"
+                    value="#{cc.attrs.subValue}">
+                    <f:ajax
+                        render="#{cc.attrs.render}"
+                        execute="@this" />
+                    <f:selectItems value="#{cc.attrs.selectItems}" />
+                </h:selectOneRadio>
                 </div> <!-- end form-check-wraper -->
+
 
                  <!-- ICONS -->
                 <ui:include src="/uii/includes/form_icons.xhtml">
@@ -157,16 +169,6 @@
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneMenu>
-                <h:selectOneRadio
-                    id="#{cc.attrs.identifier}_radio"
-                    rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
-                    styleClass="form-control"
-                    value="#{cc.attrs.subValue}">
-                    <f:ajax
-                        render="#{cc.attrs.render}"
-                        execute="@this" />
-                    <f:selectItems value="#{cc.attrs.selectItems}" />
-                </h:selectOneRadio>
 
                 <h:outputText
                     rendered="#{cc.attrs.fieldType=='output'}"
