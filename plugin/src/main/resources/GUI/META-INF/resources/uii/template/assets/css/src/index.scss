@@ -93,6 +93,21 @@ h2 {
   line-height: 2.6rem;
 }
 
+.heading__contact {
+  color: var(--clr-primary-400);
+}
+
+// Reset counter globally
+#login-body {
+  counter-reset: section;
+}
+
+// Insert count
+.heading__contact::before {
+  counter-increment: section;
+  content: counter(section)". "
+}
+
 .page {
   &__heading {
     grid-column: 1 / -1;

@@ -555,6 +555,8 @@
             </div>
             <section class="common-region">
 
+                <h3 class="heading__contact">#{msgs.login_new_contact}</h3>
+
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page3']}">
@@ -662,6 +664,9 @@
             <section
                 class="common-region"
                 jsf:rendered="#{externalLoginBean.displaySecondContact}">
+
+                <h3 class="heading__contact">#{msgs.login_new_contact}</h3>
+
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page3a']}">

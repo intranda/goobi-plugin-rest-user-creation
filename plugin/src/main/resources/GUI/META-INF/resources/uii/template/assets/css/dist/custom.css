@@ -609,6 +609,19 @@ h2 {
   line-height: 2.6rem;
 }
 
+.heading__contact {
+  color: var(--clr-primary-400);
+}
+
+#login-body {
+  counter-reset: section;
+}
+
+.heading__contact::before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+
 .page__heading {
   grid-column: 1/-1;
   display: flex;
