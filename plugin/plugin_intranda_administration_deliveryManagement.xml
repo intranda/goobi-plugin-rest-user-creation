@@ -92,4 +92,11 @@ This is an automatic reminder for data delivery to the ZLB. &lt;br /&gt;&lt;br /
 Click here to login: &lt;a href="{url}"&gt;login.&lt;/a&gt;
 		</body>
 	</reminder>
+    
+    <registration>
+        <recipient>robert@intranda.com</recipient>
+        <subject>Neuer Account wurde erstellt</subject>
+        <body>Es wurde ein neuer Account erstellt: {login}</body>
+    </registration>   
+    
 </config_plugin>
