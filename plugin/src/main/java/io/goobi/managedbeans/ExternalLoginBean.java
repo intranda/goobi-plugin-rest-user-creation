@@ -67,9 +67,7 @@ public class ExternalLoginBean implements Serializable {
     @Getter
     @Setter
     private String emailAddress;
-    @Getter
-    @Setter
-    private String confirmEmailAddress;
+
     @Getter
     @Setter
     private String firstname;
@@ -209,11 +207,6 @@ public class ExternalLoginBean implements Serializable {
 
         // check that email address is valid?
         if (!EmailValidator.getInstance().isValid(emailAddress)) {
-            Helper.setFehlerMeldung("emailNotValid");
-            return;
-        }
-
-        if (!emailAddress.equals(confirmEmailAddress)) {
             Helper.setFehlerMeldung("emailNotValid");
             return;
         }
