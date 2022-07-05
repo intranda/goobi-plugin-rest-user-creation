@@ -49,7 +49,7 @@
 
             <section class="common-region">
                 <!-- account name -->
-                <div class="form #{externalLoginBean.institutionShortNameInUse == true || externalLoginBean.institutionShortNameInvalid == true ? 'validate--danger' : ''}">
+                <div class="form #{!externalLoginBean.accountNameValid ? 'validate--danger' : ''}">
 
                     <zlb:label
                         labelFor="accountName"
@@ -86,7 +86,7 @@
                 </div>
 
                 <!-- firstname -->
-                <div class="form column-start">
+                <div class="form column-start #{!externalLoginBean.firstNameValid ? 'validate--danger' : ''}">
                     <zlb:label
                         labelFor="firstname"
                         labelText="#{msgs.firstname}"
@@ -112,7 +112,7 @@
                 </div>
 
                 <!-- lastname -->
-                <div class="form">
+                <div class="form #{!externalLoginBean.lastNameValid ? 'validate--danger' : ''}">
                     <zlb:label
                         labelFor="lastname"
                         labelText="#{msgs.lastname}"
@@ -137,7 +137,7 @@
                 </div>
 
                 <!-- password -->
-                <div class="form">
+                <div class="form #{!externalLoginBean.passwordValid ? 'validate--danger' : ''}">
 
                     <zlb:label
                         labelFor="password"
@@ -176,7 +176,7 @@
                 </div>
 
                 <!-- confirm password -->
-                <div class="form">
+                <div class="form #{!externalLoginBean.passwordValid ? 'validate--danger' : ''}">
 
                     <zlb:label
                         labelFor="password2"
@@ -210,7 +210,7 @@
 
 
                 <!-- email address -->
-                <div class="form">
+                <div class="form #{!externalLoginBean.emailValid ? 'validate--danger' : ''}">
 
                     <zlb:label
                         labelFor="emailAddress"
@@ -239,7 +239,7 @@
 
 
 
-                <div class="form form-check confirm-privacy">
+                <div class="form form-check confirm-privacy #{!externalLoginBean.privacyValid ? 'validate--danger' : ''}">
 
                     <div class="form-check-wrapper">
                         <h:selectBooleanCheckbox
