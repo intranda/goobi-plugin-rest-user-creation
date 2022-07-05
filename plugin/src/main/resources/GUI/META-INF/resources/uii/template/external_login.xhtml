@@ -139,6 +139,7 @@
                                     </button>
                                     <ui:fragment rendered="#{LoginForm.userCreationEnabled}">
                                         <button
+                                        jsf:immediate="true"
                                             jsf:id="createAccount"
                                             class="btn btn-blank me-2">
                                             <f:setPropertyActionListener
@@ -149,7 +150,7 @@
                                     </ui:fragment>
 
 
-                                    <!-- TODO forgot password button -->
+                                    <!-- forgot password button -->
                                     <button
                                         jsf:id="resetPassword"
                                         class="btn btn-link">

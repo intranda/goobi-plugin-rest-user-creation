@@ -812,8 +812,6 @@
 
                 </ui:repeat>
 
-                <!-- TODO duplicate area, add prefix to new fields -->
-
 
             </section>
 
@@ -821,11 +819,7 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page5'}">
-            <!--
-            <h2 class="page__heading">
-                <h:outputText value="#{msgs.login_new_activation}" />
-            </h2>
-            -->
+
             <section class="common-region one-col overview">
                 <!-- show all fields in read only mode -->
                 <h3>
@@ -913,7 +907,7 @@
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='wait'}">
             <section class="common-region">
-                <h:outputText value="#{msgs.login_new_account_creationSuccessful}" />
+                <h:outputText escape="false" value="#{msgs.login_new_account_creationSuccessful}" />
             </section>
         </ui:fragment>
 
