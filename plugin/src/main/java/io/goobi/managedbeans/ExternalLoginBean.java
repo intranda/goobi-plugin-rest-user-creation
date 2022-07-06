@@ -2,13 +2,12 @@ package io.goobi.managedbeans;
 
 import java.io.Serializable;
 import java.security.SecureRandom;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +18,6 @@ import javax.naming.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
-import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -39,7 +37,6 @@ import de.sub.goobi.helper.JwtHelper;
 import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.persistence.managers.InstitutionManager;
 import de.sub.goobi.persistence.managers.LdapManager;
-import de.sub.goobi.persistence.managers.MySQLHelper;
 import de.sub.goobi.persistence.managers.UserManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -88,20 +85,12 @@ public class ExternalLoginBean implements Serializable {
     @Setter
     private String uiStatus = "";
 
-    // second page
-    @Getter
-    @Setter
-    private String institutionShortName;
     @Getter
     @Setter
     private String institutionName;
 
     @Getter
     private boolean institutionNameInvalid = false;
-    @Getter
-    private boolean institutionShortNameInvalid = false;
-    @Getter
-    private boolean institutionShortNameInUse = false;
 
     @Getter
     private String privacyStatement;
@@ -354,15 +343,13 @@ public class ExternalLoginBean implements Serializable {
         }
 
         Institution institution = new Institution();
-        institution.setShortName(institutionShortName);
         institution.setLongName(institutionName);
         institution.setAllowAllPlugins(true);
         institution.setAllowAllAuthentications(true);
         currentUser.setInstitution(institution);
 
-        for (String pageNumber : additionalFields.keySet()) {
-            List<UserCreationField> fields = additionalFields.get(pageNumber);
-            for (UserCreationField f : fields) {
+        for (Entry<String, List<UserCreationField>> fields : additionalFields.entrySet()) {
+            for (UserCreationField f : fields.getValue()) {
                 if ("institution".equals(f.getType())) {
                     if (f.getFieldType().equals(COMBO_FIELDNAME) && f.getBooleanValue()) {
                         institution.getAdditionalData().put(f.getName(), f.getSubValue());
@@ -381,13 +368,16 @@ public class ExternalLoginBean implements Serializable {
 
         try {
             InstitutionManager.saveInstitution(institution);
+            institution.setShortName("inst_" + institution.getId());
+            InstitutionManager.saveInstitution(institution);
+
             UserManager.saveUser(currentUser);
         } catch (DAOException e) {
             log.error(e);
         }
 
         // send mail to staff to activate account
-        if (StringUtils.isNotBlank(registrationMailRecipient)) {
+        if (StringUtils.isNotBlank(registrationMailRecipient) && StringUtils.isNotBlank(registrationMailBody)) {
             SendMail.getInstance().sendMailToUser(registrationMailSubject, registrationMailBody.replace("{login}", accountName), emailAddress);
 
         }
@@ -441,7 +431,7 @@ public class ExternalLoginBean implements Serializable {
 
         if ("page2".equals(pageName)) {
             // shortname: max 6 characters, A-Za-z0-9
-            valid = validateInstitutionName(valid);
+            //            valid = validateInstitutionName(valid);
 
             // validate institution name, not empty and max 255 character
             if (StringUtils.isBlank(institutionName) || institutionName.length() > 255) {
@@ -462,41 +452,41 @@ public class ExternalLoginBean implements Serializable {
 
     }
 
-    private boolean validateInstitutionName(boolean valid) {
-        if (StringUtils.isBlank(institutionShortName) || institutionShortName.length() > 6 || !institutionShortName.matches("[A-Za-z0-9]+")) {
-            institutionShortNameInvalid = true;
-            valid = false;
-        } else {
-            institutionShortNameInvalid = false;
-
-            // check that shortname is not in use
-            String query = "select count(1) from institution where shortName = ?";
-            Connection connection = null;
-            try {
-                connection = MySQLHelper.getInstance().getConnection();
-                QueryRunner run = new QueryRunner();
-                int number = run.query(connection, query, MySQLHelper.resultSetToIntegerHandler, institutionShortName);
-                if (number > 0) {
-                    valid = false;
-                    institutionShortNameInUse = true;
-                } else {
-                    institutionShortNameInUse = false;
-                }
-            } catch (SQLException e) {
-                log.error(e);
-            } finally {
-                if (connection != null) {
-                    try {
-                        MySQLHelper.closeConnection(connection);
-                    } catch (SQLException e) {
-                        log.error(e);
-                    }
-                }
-            }
-
-        }
-        return valid;
-    }
+    //    private boolean validateInstitutionName(boolean valid) {
+    //        if (StringUtils.isBlank(institutionShortName) || institutionShortName.length() > 6 || !institutionShortName.matches("[A-Za-z0-9]+")) {
+    //            institutionShortNameInvalid = true;
+    //            valid = false;
+    //        } else {
+    //            institutionShortNameInvalid = false;
+    //
+    //            // check that shortname is not in use
+    //            String query = "select count(1) from institution where shortName = ?";
+    //            Connection connection = null;
+    //            try {
+    //                connection = MySQLHelper.getInstance().getConnection();
+    //                QueryRunner run = new QueryRunner();
+    //                int number = run.query(connection, query, MySQLHelper.resultSetToIntegerHandler, institutionShortName);
+    //                if (number > 0) {
+    //                    valid = false;
+    //                    institutionShortNameInUse = true;
+    //                } else {
+    //                    institutionShortNameInUse = false;
+    //                }
+    //            } catch (SQLException e) {
+    //                log.error(e);
+    //            } finally {
+    //                if (connection != null) {
+    //                    try {
+    //                        MySQLHelper.closeConnection(connection);
+    //                    } catch (SQLException e) {
+    //                        log.error(e);
+    //                    }
+    //                }
+    //            }
+    //
+    //        }
+    //        return valid;
+    //    }
 
     public void back() {
         switch (wizzardMode) {
