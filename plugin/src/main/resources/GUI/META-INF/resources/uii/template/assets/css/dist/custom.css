@@ -571,6 +571,10 @@
   font-size: var(--fs-200);
 }
 
+#login-body {
+  counter-reset: section;
+}
+
 /* LAYOUT */
 html {
   font-size: 62.5%;
@@ -589,7 +593,7 @@ body.modal-open {
   padding-right: 0 !important;
 }
 
-/* Typography */
+/* TYPOGRAPHY */
 h1,
 h2 {
   color: var(--clr-primary-400);
@@ -607,19 +611,6 @@ h2 a:hover {
 h2 {
   font-size: 2.2rem;
   line-height: 2.6rem;
-}
-
-.heading__contact {
-  color: var(--clr-primary-400);
-}
-
-#login-body {
-  counter-reset: section;
-}
-
-.heading__contact::before {
-  counter-increment: section;
-  content: counter(section) ". ";
 }
 
 .page__heading {
@@ -774,8 +765,8 @@ header .container-fluid.header__lower svg {
     padding: 0.8rem;
   }
 
-  .actions__lang span,
-.actions__user span {
+  .language-select__locale,
+.user__account-menu__name {
     display: none;
   }
 
@@ -1258,7 +1249,7 @@ input ~ .font-danger {
 
 @media (max-width: 1000px) {
   /* Make status bar larger than the container */
-  .submit {
+  .container-escape {
     width: 100vw;
     position: relative;
     margin-left: -50vw;
@@ -1270,7 +1261,7 @@ input ~ .font-danger {
 }
 @media (max-width: 640px) {
   /* Don't show step name on small screens */
-  ul span {
+  .statuslist .status {
     display: none;
   }
 }
@@ -1385,6 +1376,59 @@ input ~ .font-danger {
   margin: 0;
 }
 
+/* Error pages */
+#zlbEPflicht #navigation {
+  display: none;
+}
+
+[action^="/goobi/uii/error.xhtml"] {
+  font-size: var(--fs-400);
+}
+
+[action^="/goobi/uii/error.xhtml"] h1 {
+  margin: 2.4rem 0;
+  font-size: 4.8rem;
+}
+
+[action^="/goobi/uii/error.xhtml"] h4 {
+  font-size: 2.4rem;
+  color: var(--clr-primary-400);
+}
+
+[action^="/goobi/uii/error.xhtml"] .stats {
+  padding: 0;
+}
+
+[action^="/goobi/uii/error.xhtml"] * {
+  font-size: 1.8rem;
+}
+
+[action^="/goobi/uii/error.xhtml"] i {
+  margin-right: 8px;
+}
+
+[action^="/goobi/uii/error.xhtml"] .btn {
+  background-color: var(--clr-primary-400);
+  color: #fff;
+  padding: 8px;
+}
+
+[action^="/goobi/uii/error.xhtml"] p:first-of-type {
+  font-size: 2rem;
+  color: var(--clr-danger);
+}
+
+/* CONTACT PERSONS (USER CREATION) */
+.heading__contact {
+  color: var(--clr-primary-400);
+}
+
+.heading__contact::before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+
+/* MEDIA QUERIES */
 @media (max-width: 900px) {
   .common-region {
     --grid-tc: 1fr;
