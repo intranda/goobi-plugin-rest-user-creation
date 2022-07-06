@@ -374,7 +374,7 @@
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
 
             <section class="common-region">
-                
+
 
                 <div class="form #{externalLoginBean.institutionNameInvalid ? 'validate--danger' : ''}">
                     <zlb:label
@@ -525,7 +525,7 @@
             </div>
             <section class="common-region">
 
-                <h3 class="heading__contact">#{msgs.login_new_contact}</h3>
+                <h3 class="heading__contact grid-full-width">#{msgs.login_new_contact}</h3>
 
                 <ui:repeat
                     var="field"
@@ -635,7 +635,7 @@
                 class="common-region"
                 jsf:rendered="#{externalLoginBean.displaySecondContact}">
 
-                <h3 class="heading__contact">#{msgs.login_new_contact}</h3>
+                <h3 class="heading__contact grid-full-width">#{msgs.login_new_contact}</h3>
 
                 <ui:repeat
                     var="field"
@@ -876,7 +876,9 @@
                         field="#{field.value}"
                         fieldStyle="form-control" />
                 </ui:repeat>
-                <h3>
+            </section>
+            <section class="common-region one-col overview">
+                <h3 class="heading__contact">
                     <h:outputText value="#{msgs.login_new_contact}" />
                 </h3>
                 <ui:repeat
@@ -889,6 +891,11 @@
                         fieldStyle="form-control" />
                 </ui:repeat>
                 <ui:fragment rendered="#{externalLoginBean.displaySecondContact}">
+
+                    <h3 class="heading__contact">
+                        <h:outputText value="#{msgs.login_new_contact}" />
+                    </h3>
+
                     <ui:repeat
                         var="field"
                         value="#{externalLoginBean.additionalFields['page3a']}">
@@ -899,6 +906,9 @@
                             fieldStyle="form-control" />
                     </ui:repeat>
                 </ui:fragment>
+
+            </section>
+            <section class="common-region one-col overview">
 
                 <h3>
                     <h:outputText value="#{msgs.login_new_additionalData}" />
@@ -912,6 +922,16 @@
                         field="#{field.value}"
                         fieldStyle="form-control" />
                 </ui:repeat>
+
+            </section>
+
+            <!-- ANTRAG AUF FREISCHALTUNG -->
+
+            <section class="common-region one-col overview">
+                <h3>
+                    <h:outputText value="#{msgs.login_new_account_askForActivation}" />
+                </h3>
+
 
                 <div class="form form-check">
                     <div class="form-check-wrapper">
