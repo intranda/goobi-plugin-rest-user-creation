@@ -985,6 +985,7 @@ input ~ .font-danger {
 .confirm-privacy,
 .form-check {
   align-items: center;
+  align-self: flex-end;
   font-size: var(--fs-400);
 }
 
