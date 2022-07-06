@@ -374,37 +374,7 @@
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
 
             <section class="common-region">
-                <div class="form #{externalLoginBean.institutionShortNameInUse == true || externalLoginBean.institutionShortNameInvalid == true ? 'validate--danger' : ''}">
-
-                    <zlb:label
-                        labelFor="institutionShortName"
-                        labelText="#{msgs.login_new_account_institutionShortName}"
-                        labelRequired="true" />
-
-                    <zlb:input
-                        inputId="institutionShortName"
-                        inputAriaLabel="#{msgs.login_new_account_institutionShortName}"
-                        inputForceId="true"
-                        inputValue="#{externalLoginBean.institutionShortName}"
-                        inputRequired="false"
-                        inputPlaceholder=""
-                        inputDuplicate="false"
-                        showHelpBtn="true"
-                        helpTitle="#{msgs.login_new_account_institutionShortName}"
-                        helpText="#{msgs.plugin_rest_usercreation_helpText_institutionShortName}" />
-                    <h:panelGroup
-                        layout="block"
-                        rendered="#{externalLoginBean.institutionShortNameInvalid}"
-                        styleClass="font-danger validation-message">
-                        <h:outputText value="#{msgs.login_new_account_institutionShortNameInvalid}" />
-                    </h:panelGroup>
-                    <h:panelGroup
-                        layout="block"
-                        rendered="#{externalLoginBean.institutionShortNameInUse}"
-                        styleClass="font-danger validation-message">
-                        <h:outputText value="#{msgs.login_new_account_institutionShortNameInUse}" />
-                    </h:panelGroup>
-                </div>
+                
 
                 <div class="form #{externalLoginBean.institutionNameInvalid ? 'validate--danger' : ''}">
                     <zlb:label
