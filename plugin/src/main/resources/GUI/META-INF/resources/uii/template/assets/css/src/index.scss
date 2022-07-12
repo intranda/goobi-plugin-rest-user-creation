@@ -995,9 +995,9 @@ input ~ .font-danger {
 
 
 [action^="/goobi/uii/error.xhtml"] * {
-
-  font-size: 1.8rem;
+  font-size: var(--fs-400);
 }
+
 [action^="/goobi/uii/error.xhtml"] i {
   margin-right: 8px;
 }
