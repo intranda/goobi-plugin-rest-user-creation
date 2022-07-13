@@ -534,10 +534,8 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("../../fonts/open-sans-v29-latin-regular.eot");
-  /* IE9 Compat Modes */
-  src: local(""), url("../../fonts/open-sans-v29-latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v29-latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v29-latin-regular.woff") format("woff"), url("../../fonts/open-sans-v29-latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v29-latin-regular.svg#OpenSans") format("svg");
-  /* Legacy iOS */
+  src: url("../../fonts/open-sans-v29-latin-regular.eot"); /* IE9 Compat Modes */
+  src: local(""), url("../../fonts/open-sans-v29-latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v29-latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v29-latin-regular.woff") format("woff"), url("../../fonts/open-sans-v29-latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v29-latin-regular.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
 :root {
   --clr-primary-200: rgb(110, 23, 105, 0.6);
@@ -764,12 +762,10 @@ header .container-fluid.header__lower svg {
   header .container-fluid {
     padding: 0.8rem;
   }
-
   .language-select__locale,
 .user__account-menu__name {
     display: none;
   }
-
   .actions__lang svg {
     width: 3.2rem;
     height: 3.2rem;
@@ -790,7 +786,6 @@ header .container-fluid.header__lower svg {
   .brand__logo {
     border-right: 0;
   }
-
   .brand__copy {
     display: none;
   }
@@ -1435,7 +1430,6 @@ input ~ .font-danger {
     --grid-tc: 1fr;
     padding: 1.6rem 1.6rem;
   }
-
   .zlb-progress__step__name {
     display: none;
   }
