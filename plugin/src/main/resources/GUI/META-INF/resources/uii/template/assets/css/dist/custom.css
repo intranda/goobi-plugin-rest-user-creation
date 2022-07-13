@@ -1089,6 +1089,7 @@ input ~ .font-danger {
   --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
   align-items: unset;
   grid-auto-rows: auto;
+  padding: 3.2rem 0;
 }
 
 .layout #globalWarningMessage {
@@ -1267,7 +1268,7 @@ input ~ .font-danger {
 
 .form-actions.form-actions--progress {
   display: flex;
-  margin: 1.6rem 0;
+  margin: 7.2rem 0 9.6rem 0;
 }
 .form-actions.form-actions--progress .btn {
   align-self: baseline;

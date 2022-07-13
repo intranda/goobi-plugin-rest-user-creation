@@ -620,14 +620,12 @@ input ~ .font-danger {
     // stretch all items to the same hight (always fill up grid rows completely)
     align-items: unset;
     grid-auto-rows: auto;
+    padding: 3.2rem 0;
   }
 }
 
 .layout #globalWarningMessage {
   grid-column: 1 / -1;
-}
-
-.page__heading {
 }
 
 /* COMPONENTS */
@@ -846,7 +844,7 @@ input ~ .font-danger {
 .form-actions.form-actions--progress {
   display: flex;
 
-  margin: 1.6rem 0;
+  margin: 7.2rem 0 9.6rem 0;
 
   .btn {
     align-self: baseline;
