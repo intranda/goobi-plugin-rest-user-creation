@@ -906,11 +906,13 @@ section .overview .form-check {
 }
 
 /* VALIDATION */
-.validate--danger input {
+.validate--danger input,
+.validate--danger select {
   border-color: var(--clr-danger);
 }
 
-input ~ .font-danger {
+input ~ .font-danger,
+select ~ .font-danger {
   color: var(--clr-danger);
   font-size: var(--fs-200);
 }
@@ -966,7 +968,8 @@ input ~ .font-danger {
   vertical-align: super;
 }
 
-.form-control {
+.form-control,
+.form-select {
   padding: 0.375em 0.75em;
   font-size: 1.6rem;
 }
