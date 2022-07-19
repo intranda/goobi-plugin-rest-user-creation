@@ -122,6 +122,7 @@
   position: absolute;
   bottom: 0;
   right: 8px;
+  z-index: 1;
 }
 
 .btn-inside ~ form .statuslist {
