@@ -91,7 +91,7 @@
                     labelText="#{cc.attrs.labelText}"
                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                     labelRequired="#{cc.attrs.fieldRequired}" />
-                    
+
                 <h:selectOneRadio
                     id="#{cc.attrs.identifier}_radio"
                     rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
@@ -158,7 +158,7 @@
                 <h:selectOneMenu
                     id="#{cc.attrs.identifier}_select"
                     rendered="#{cc.attrs.fieldType=='dropdown' or cc.attrs.fieldType=='journaltitles'}"
-                    styleClass="form-control #{cc.attrs.fieldStyle}"
+                    styleClass="form-select #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}"
                     pt:aria-label="#{cc.attrs.labelText}">
                     <f:selectItem
