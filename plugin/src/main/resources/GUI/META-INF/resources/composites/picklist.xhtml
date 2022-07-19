@@ -79,7 +79,7 @@
                 </ui:include>
                 -->
             </label>
-            <div class="form-field #{cc.attrs.subClass}">
+            <div class="form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
 
 
                 <h:selectOneMenu
