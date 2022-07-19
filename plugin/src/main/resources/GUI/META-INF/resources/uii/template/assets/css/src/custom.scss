@@ -94,6 +94,7 @@ h2 {
   }
 }
 
+
 h2 {
   font-size: 2.2rem;
   line-height: 2.6rem;
@@ -118,7 +119,7 @@ h2 {
   }
 }
 
-a,
+a, .btn-link,
 .confirm-privacy.confirm-privacy a {
   background: transparent;
   color: var(--clr-primary-400);
@@ -153,6 +154,11 @@ a,
 }
 
 /* HEADER */
+
+.header .nav-link {
+  text-decoration: none;
+}
+
 header .container-fluid {
   font-size: var(--fs-400);
   position: relative;
@@ -931,6 +937,28 @@ input ~ .font-danger {
     margin: 0;
     margin-top: 1.6rem;
     color: var(--clr-primary-400);
+  }
+}
+
+// Contact Person
+
+#createNewContact {
+  display: flex;
+  align-items: center;
+  color: var(--clr-primary-400);
+  text-decoration: none;
+}
+
+#createNewContact span {
+  display: flex;
+  margin-left: .8rem;
+  color: var(--clr-text-body);
+}
+
+// Additional data
+.additional-data {
+  .form-check {
+    padding-left: 0;
   }
 }
 

@@ -627,13 +627,13 @@ h2 {
   fill: var(--clr-primary-400);
 }
 
-a,
+a, .btn-link,
 .confirm-privacy.confirm-privacy a {
   background: transparent;
   color: var(--clr-primary-400);
   cursor: pointer;
 }
-a:focus, a:hover, a:active,
+a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 .confirm-privacy.confirm-privacy a:focus,
 .confirm-privacy.confirm-privacy a:hover,
 .confirm-privacy.confirm-privacy a:active {
@@ -662,6 +662,10 @@ a:focus, a:hover, a:active,
 }
 
 /* HEADER */
+.header .nav-link {
+  text-decoration: none;
+}
+
 header .container-fluid {
   font-size: var(--fs-400);
   position: relative;
@@ -1346,6 +1350,23 @@ input ~ .font-danger {
   margin: 0;
   margin-top: 1.6rem;
   color: var(--clr-primary-400);
+}
+
+#createNewContact {
+  display: flex;
+  align-items: center;
+  color: var(--clr-primary-400);
+  text-decoration: none;
+}
+
+#createNewContact span {
+  display: flex;
+  margin-left: 0.8rem;
+  color: var(--clr-text-body);
+}
+
+.additional-data .form-check {
+  padding-left: 0;
 }
 
 .overview .common-region {

@@ -308,17 +308,18 @@
                     <h:outputText value="#{msgs.abbrechen}" />
                 </button>
 
+                <!--
                 <ui:include src="/uii/includes/zlb-progress.xhtml">
                     <ui:param
                         name="data"
                         value="#{externalLoginBean}" />
                 </ui:include>
-
+                -->
                 <!-- create button -->
                 <button
                     jsf:action="#{externalLoginBean.createAccount}"
                     jsf:id="create"
-                    class="btn btn-primary-400 ms-4">
+                    class="btn btn-primary-400 ms-auto">
                     <h:outputText value="#{msgs.login_new_account_createAccount}" />
                 </button>
             </div>
@@ -369,6 +370,7 @@
                     escape="false"
                     value="#{msgs.login_new_account_confirmEmail}" />
             </section>
+
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page2'}">
@@ -627,8 +629,12 @@
                 jsf:id="createNewContact"
                 jsf:action="#{externalLoginBean.createNewContact}"
                 style="margin-bottom: 20px;"
-                class="btn btn-primary-400 ms-auto">
-                <h:outputText value="#{msgs.login_new_createNewContact}" />
+                class="btn btn-link ms-auto">
+
+                <ui:include src="/uii/includes/icon-plus.xhtml" />
+                <span>
+                    <h:outputText value="#{msgs.login_new_createNewContact}" />
+                </span>
             </button>
 
             <section
@@ -977,7 +983,7 @@
                 escape="false"
                 value="#{msgs.plugin_rest_usercreation_requiredFields}" />
         </div>
-        <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1'}">
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1' and externalLoginBean.wizzardMode!='confirm'}">
             <div class="submit form-actions form-actions--progress">
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
