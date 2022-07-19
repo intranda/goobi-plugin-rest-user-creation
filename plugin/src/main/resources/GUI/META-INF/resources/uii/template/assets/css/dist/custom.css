@@ -1073,7 +1073,6 @@ select ~ .font-danger {
   display: grid;
   grid-template-columns: var(--grid-tc);
   grid-auto-rows: auto;
-  gap: var(--gap);
   row-gap: calc(var(--gap) + 1rem);
   column-gap: calc(var(--gap) + 3rem);
   align-items: baseline;
