@@ -53,12 +53,12 @@
 
                     <zlb:label
                         labelFor="accountName"
-                        labelText="#{msgs.plugin_rest_usercreation_new_account_accountName}"
+                        labelText="#{msgs.plugin_rest_usercreation_userName}"
                         labelRequired="true" />
 
                     <x:inputText
                         id="accountName"
-                        pt:aria-label="#{msgs.plugin_rest_usercreation_new_account_accountName}"
+                        pt:aria-label="#{msgs.plugin_rest_usercreation_userName}"
                         styleClass="form-control"
                         value="#{externalLoginBean.accountName}">
                         <f:ajax
@@ -66,13 +66,13 @@
                             execute="@this" />
                         <f:passThroughAttribute
                             name="placeholder"
-                            value="#{msgs.plugin_rest_usercreation_new_account_accountName}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_userName}" />
                     </x:inputText>
                     <!-- ICONS -->
                     <ui:include src="/uii/includes/form_icons.xhtml">
                         <ui:param
                             name="helpTitle"
-                            value="#{msgs.plugin_rest_usercreation_new_account_accountName}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_userName}" />
                         <ui:param
                             name="helpBody"
                             value="#{msgs.plugin_rest_usercreation_helpText_userName}" />
@@ -996,7 +996,7 @@
                     jsf:action="#{externalLoginBean.back}"
                     jsf:id="goBack"
                     class="btn btn-blank me-auto">
-                    <h:outputText value="#{msgs.back}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_back}" />
                 </button>
                 <ui:include src="/uii/includes/zlb-progress.xhtml">
                     <ui:param
@@ -1008,14 +1008,14 @@
                     jsf:id="goNext"
                     jsf:action="#{externalLoginBean.next}"
                     class="btn btn-success ms-auto">
-                    <h:outputText value="#{msgs.next}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_next}" />
                 </button>
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
                     jsf:id="createInsitution"
                     jsf:action="#{externalLoginBean.createInstitution}"
                     class="btn btn-success ms-auto">
-                    <h:outputText value="#{msgs.createInsitution}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_createInstitution}" />
                 </button>
             </div>
         </ui:fragment>
