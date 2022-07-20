@@ -617,6 +617,10 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin: 8rem 0 6.4rem 0;
+  padding: 0;
+  text-transform: none;
+  border: 0;
+  font-size: 2.8rem;
 }
 .page__help {
   padding-right: 0;
@@ -726,6 +730,9 @@ header .container-fluid.header__lower svg {
 
 .user__account-menu__name {
   margin-right: 8px;
+}
+.user__account-menu__name img {
+  max-height: 4rem;
 }
 
 .dropdown-menu span,
