@@ -163,6 +163,8 @@
     </nav>
     -->
 
+    <main>
+
         <h:panelGroup rendered="#{LoginForm.myBenutzer==null}">
             <ui:include src="external_login.xhtml" />
         </h:panelGroup>
@@ -182,7 +184,7 @@
                                 channel="developerMessageChannel"
                                 connected="#{DevModeBean.developerMode}"
                                 onmessage="() => window.location.reload()" />
-                            <header>
+                            <div>
                                 <div class="page-header">
                                     <h:panelGroup id="globalWarningMessage">
                                         <h:panelGroup
@@ -200,7 +202,7 @@
                                     </o:socket>
 
                                 </div>
-                            </header>
+                            </div>
                         </h:form>
                         <div role="complementary">
                             <h:panelGroup
@@ -227,6 +229,8 @@
                 </div>
             </div>
         </c:if>
+
+    </main>
 
         <zlb:modal
             modalId="exampleModal"
