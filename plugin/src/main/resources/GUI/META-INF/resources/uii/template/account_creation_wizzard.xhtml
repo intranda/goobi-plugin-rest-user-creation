@@ -975,17 +975,20 @@
             <section class="common-region">
                 <h:outputText
                     escape="false"
-                    value="#{msgs.login_new_account_creationSuccessful}" />
+                    value="#{msgs.plugin_rest_usercreation_new_account_creationSuccessful}" />
             </section>
         </ui:fragment>
 
-        <div
-            class="info-required"
-            jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">
-            <h:outputText
-                escape="false"
-                value="#{msgs.plugin_rest_usercreation_requiredFields}" />
-        </div>
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode!='confirm'}">
+            <div
+                class="info-required"
+                jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">
+                <h:outputText
+                    escape="false"
+                    value="#{msgs.plugin_rest_usercreation_requiredFields}" />
+            </div>
+        </ui:fragment>
+
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1' and externalLoginBean.wizzardMode!='confirm'}">
             <div class="submit form-actions form-actions--progress">
                 <button
