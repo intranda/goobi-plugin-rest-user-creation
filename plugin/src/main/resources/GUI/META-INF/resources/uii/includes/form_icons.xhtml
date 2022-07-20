@@ -20,7 +20,11 @@
 
     <!-- Duplicate form element -->
     <c:if test="#{duplicateElement != null ? duplicateElement : 'false'}">
-        <button type="button" class="form-icons__button form-icons__button--duplicate">
+        <button
+          type="button"
+          class="form-icons__button form-icons__button--duplicate"
+          aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}"
+          >
           <ui:include src="/uii/includes/icon-plus.xhtml" />
         </button>
     </c:if>

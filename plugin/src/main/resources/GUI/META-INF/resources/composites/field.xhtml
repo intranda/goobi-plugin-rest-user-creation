@@ -183,7 +183,8 @@
                 <button
                     jsf:id="button"
                     jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
-                    class="form-icons__button form-icons__button--duplicate">
+                    class="form-icons__button form-icons__button--duplicate"
+                    aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}">
                     <ui:include src="/uii/includes/icon-plus.xhtml" />
                     <f:setPropertyActionListener
                         value="#{field}"
