@@ -20,19 +20,19 @@
         <h2 class="page__heading">
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='confirm'}"
-                value="#{msgs.login_new_account}" />
+                value="#{msgs.plugin_rest_usercreation_new_account}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page2'}"
-                value="#{msgs.login_new_institution}" />
+                value="#{msgs.plugin_rest_usercreation_new_institution}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page3'}"
-                value="#{msgs.login_new_contact}" />
+                value="#{msgs.plugin_rest_usercreation_new_contact}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page4'}"
-                value="#{msgs.login_new_additionalData}" />
+                value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page5'}"
-                value="#{msgs.login_new_activation}" />
+                value="#{msgs.plugin_rest_usercreation_new_activation}" />
             <button
                 type="button"
                 class="btn page__help"
@@ -53,12 +53,12 @@
 
                     <zlb:label
                         labelFor="accountName"
-                        labelText="#{msgs.login_new_account_accountName}"
+                        labelText="#{msgs.plugin_rest_usercreation_new_account_accountName}"
                         labelRequired="true" />
 
                     <x:inputText
                         id="accountName"
-                        pt:aria-label="#{msgs.login_new_account_accountName}"
+                        pt:aria-label="#{msgs.plugin_rest_usercreation_new_account_accountName}"
                         styleClass="form-control"
                         value="#{externalLoginBean.accountName}">
                         <f:ajax
@@ -66,13 +66,13 @@
                             execute="@this" />
                         <f:passThroughAttribute
                             name="placeholder"
-                            value="#{msgs.login_new_account_accountName}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_accountName}" />
                     </x:inputText>
                     <!-- ICONS -->
                     <ui:include src="/uii/includes/form_icons.xhtml">
                         <ui:param
                             name="helpTitle"
-                            value="#{msgs.login_new_account_accountName}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_accountName}" />
                         <ui:param
                             name="helpBody"
                             value="#{msgs.plugin_rest_usercreation_helpText_userName}" />
@@ -141,13 +141,13 @@
 
                     <zlb:label
                         labelFor="password"
-                        labelText="#{msgs.login_new_account_password}"
+                        labelText="#{msgs.plugin_rest_usercreation_new_account_password}"
                         labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <x:inputSecret
                         id="password"
-                        pt:aria-label="#{msgs.login_new_account_password}"
+                        pt:aria-label="#{msgs.plugin_rest_usercreation_new_account_password}"
                         forceId="true"
                         styleClass="form-control"
                         value="#{externalLoginBean.password}"
@@ -161,7 +161,7 @@
                     <ui:include src="/uii/includes/form_icons.xhtml">
                         <ui:param
                             name="helpTitle"
-                            value="#{msgs.login_new_account_password}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_password}" />
                         <ui:param
                             name="helpBody"
                             value="#{msgs.plugin_rest_usercreation_helpText_password}" />
@@ -180,13 +180,13 @@
 
                     <zlb:label
                         labelFor="password2"
-                        labelText="#{msgs.login_new_account_password2}"
+                        labelText="#{msgs.plugin_rest_usercreation_new_account_password2}"
                         labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <x:inputSecret
                         id="password2"
-                        pt:aria-label="#{msgs.login_new_account_password2}"
+                        pt:aria-label="#{msgs.plugin_rest_usercreation_new_account_password2}"
                         forceId="true"
                         styleClass="form-control"
                         value="#{externalLoginBean.confirmPassword}"
@@ -200,7 +200,7 @@
                     <ui:include src="/uii/includes/form_icons.xhtml">
                         <ui:param
                             name="helpTitle"
-                            value="#{msgs.login_new_account_password2}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_password2}" />
                         <ui:param
                             name="helpBody"
                             value="#{msgs.plugin_rest_usercreation_helpText_password2}" />
@@ -214,18 +214,18 @@
 
                     <zlb:label
                         labelFor="emailAddress"
-                        labelText="#{msgs.login_new_account_emailAddress}"
+                        labelText="#{msgs.plugin_rest_usercreation_new_account_emailAddress}"
                         labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <zlb:input
                         inputId="emailAddress"
-                        inputAriaLabel="#{msgs.login_new_account_emailAddress}"
+                        inputAriaLabel="#{msgs.plugin_rest_usercreation_new_account_emailAddress}"
                         inputForceId="true"
                         inputValue="#{externalLoginBean.emailAddress}"
                         inputRequired="false"
-                        inputPlaceholder="#{msgs.login_new_account_emailAddress}"
-                        helpTitle="#{msgs.login_new_account_emailAddress}"
+                        inputPlaceholder="#{msgs.plugin_rest_usercreation_new_account_emailAddress}"
+                        helpTitle="#{msgs.plugin_rest_usercreation_new_account_emailAddress}"
                         helpText="#{msgs.plugin_rest_usercreation_helpText_email}" />
 
                     <h:panelGroup
@@ -244,7 +244,7 @@
                     <div class="form-check-wrapper">
                         <h:selectBooleanCheckbox
                             id="privacyStatement"
-                            pt:aria-label="#{msgs.login_new_account_confirmPrivacyStatement}"
+                            pt:aria-label="#{msgs.plugin_rest_usercreation_new_account_confirmPrivacyStatement}"
                             forceId="true"
                             styleClass="form-check-input"
                             value="#{externalLoginBean.privacyTextAccepted}"
@@ -256,7 +256,7 @@
                             class="zlb-label">
                             <h:outputText
                                 escape="false"
-                                value="#{msgs.login_new_account_confirmPrivacyStatement}" />
+                                value="#{msgs.plugin_rest_usercreation_new_account_confirmPrivacyStatement}" />
 
                             <span
                                 class="input-required"
@@ -320,7 +320,7 @@
                     jsf:action="#{externalLoginBean.createAccount}"
                     jsf:id="create"
                     class="btn btn-primary-400 ms-auto">
-                    <h:outputText value="#{msgs.login_new_account_createAccount}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_new_account_createAccount}" />
                 </button>
             </div>
 
@@ -381,25 +381,25 @@
                 <div class="form #{externalLoginBean.institutionNameInvalid ? 'validate--danger' : ''}">
                     <zlb:label
                         labelFor="institutionName"
-                        labelText="#{msgs.login_new_account_institutionName}"
+                        labelText="#{msgs.plugin_rest_usercreation_new_account_institutionName}"
                         labelRequired="true" />
 
                     <zlb:input
                         inputId="institutionName"
-                        inputAriaLabel="#{msgs.login_new_account_institutionName}"
+                        inputAriaLabel="#{msgs.plugin_rest_usercreation_new_account_institutionName}"
                         inputForceId="true"
                         inputValue="#{externalLoginBean.institutionName}"
                         inputRequired="false"
                         inputPlaceholder=""
                         inputDuplicate="false"
                         showHelpBtn="true"
-                        helpTitle="#{msgs.login_new_account_institutionName}"
+                        helpTitle="#{msgs.plugin_rest_usercreation_new_account_institutionName}"
                         helpText="#{msgs.plugin_rest_usercreation_helpText_institutionName}" />
                     <h:panelGroup
                         layout="block"
                         rendered="#{externalLoginBean.institutionNameInvalid}"
                         styleClass="font-danger validation-message">
-                        <h:outputText value="#{msgs.login_new_account_institutionNameInvalid}" />
+                        <h:outputText value="#{msgs.plugin_rest_usercreation_new_account_institutionNameInvalid}" />
                     </h:panelGroup>
                 </div>
 
@@ -508,7 +508,7 @@
                 <div class="form-check-wrapper">
                     <h:selectBooleanCheckbox
                         id="contactPersonCheckbox"
-                        pt:aria-label="#{msgs.login_new_account_userIsContactPerson}"
+                        pt:aria-label="#{msgs.plugin_rest_usercreation_new_account_userIsContactPerson}"
                         forceId="true"
                         styleClass="form-check-input"
                         value="#{externalLoginBean.userIsContactPerson}"
@@ -519,7 +519,7 @@
                     </h:selectBooleanCheckbox>
                     <zlb:label
                         labelFor="contactPersonCheckbox"
-                        labelText="#{msgs.login_new_account_userIsContactPerson}"
+                        labelText="#{msgs.plugin_rest_usercreation_new_account_userIsContactPerson}"
                         labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
                 </div>
@@ -527,7 +527,7 @@
             </div>
             <section class="common-region">
 
-                <h3 class="heading__contact grid-full-width">#{msgs.login_new_contact}</h3>
+                <h3 class="heading__contact grid-full-width">#{msgs.plugin_rest_usercreation_new_contact}</h3>
 
                 <ui:repeat
                     var="field"
@@ -633,7 +633,7 @@
 
                 <ui:include src="/uii/includes/icon-plus.xhtml" />
                 <span>
-                    <h:outputText value="#{msgs.login_new_createNewContact}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_new_createNewContact}" />
                 </span>
             </button>
 
@@ -641,7 +641,7 @@
                 class="common-region"
                 jsf:rendered="#{externalLoginBean.displaySecondContact}">
 
-                <h3 class="heading__contact grid-full-width">#{msgs.login_new_contact}</h3>
+                <h3 class="heading__contact grid-full-width">#{msgs.plugin_rest_usercreation_new_contact}</h3>
 
                 <ui:repeat
                     var="field"
@@ -866,10 +866,10 @@
             <section class="common-region one-col overview">
                 <!-- show all fields in read only mode -->
                 <h3>
-                    <h:outputText value="#{msgs.login_new_institution}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_new_institution}" />
                 </h3>
                 <intranda:formOutputText
-                    label="#{msgs.login_new_account_institutionName}"
+                    label="#{msgs.plugin_rest_usercreation_new_account_institutionName}"
                     field="#{externalLoginBean.institutionName}"
                     name="institutionName"
                     fieldStyle="form-control" />
@@ -885,7 +885,7 @@
             </section>
             <section class="common-region one-col overview">
                 <h3 class="heading__contact">
-                    <h:outputText value="#{msgs.login_new_contact}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_new_contact}" />
                 </h3>
                 <ui:repeat
                     var="field"
@@ -899,7 +899,7 @@
                 <ui:fragment rendered="#{externalLoginBean.displaySecondContact}">
 
                     <h3 class="heading__contact">
-                        <h:outputText value="#{msgs.login_new_contact}" />
+                        <h:outputText value="#{msgs.plugin_rest_usercreation_new_contact}" />
                     </h3>
 
                     <ui:repeat
@@ -917,7 +917,7 @@
             <section class="common-region one-col overview">
 
                 <h3>
-                    <h:outputText value="#{msgs.login_new_additionalData}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
                 </h3>
                 <ui:repeat
                     var="field"
@@ -935,7 +935,7 @@
 
             <section class="common-region one-col overview">
                 <h3>
-                    <h:outputText value="#{msgs.login_new_account_askForActivation}" />
+                    <h:outputText value="#{msgs.plugin_rest_usercreation_new_account_askForActivation}" />
                 </h3>
 
 
@@ -943,7 +943,7 @@
                     <div class="form-check-wrapper">
                         <h:selectBooleanCheckbox
                             id="activation"
-                            pt:aria-label="#{msgs.login_new_account_activation}"
+                            pt:aria-label="#{msgs.plugin_rest_usercreation_new_account_activation}"
                             forceId="true"
                             styleClass="form-check-input"
                             value="#{externalLoginBean.activation}"
@@ -951,7 +951,7 @@
                         </h:selectBooleanCheckbox>
                         <zlb:label
                             labelFor="activation"
-                            labelText="#{msgs.login_new_account_activation}"
+                            labelText="#{msgs.plugin_rest_usercreation_new_account_activation}"
                             labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                             labelRequired="true" />
                     </div>
