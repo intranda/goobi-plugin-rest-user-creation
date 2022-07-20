@@ -670,7 +670,20 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   text-decoration: none;
 }
 
-header .container-fluid {
+.header__lower a {
+  color: var(--clr-primary-400);
+  text-decoration: none;
+  transition: all 0.1s ease;
+}
+
+.header__lower a:hover,
+.header__lower a:hover svg {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  transition: all 0.1s ease;
+}
+
+.header .container-fluid {
   font-size: var(--fs-400);
   position: relative;
   display: flex;
@@ -681,16 +694,16 @@ header .container-fluid {
   padding-left: 4.8rem;
   padding-right: 4.8rem;
 }
-header .container-fluid.header__upper {
+.header .container-fluid.header__upper {
   background: var(--clr-secondary-400);
   border-bottom: 2px solid var(--clr-accent);
   color: var(--clr-text-light);
 }
-header .container-fluid.header__lower {
+.header .container-fluid.header__lower {
   display: flex;
   justify-content: center;
-  padding-left: 12rem;
-  padding-right: 12rem;
+  padding-left: 4.8rem;
+  padding-right: 4.8rem;
   padding-top: 1.6rem;
   padding-bottom: 4rem;
   margin-top: 1.6rem;
@@ -699,12 +712,13 @@ header .container-fluid.header__lower {
   width: 100%;
   text-transform: uppercase;
 }
-header .container-fluid.header__lower h1 {
+.header .container-fluid.header__lower h1 {
   font-size: 3.6rem;
 }
-header .container-fluid.header__lower svg {
+.header .container-fluid.header__lower svg {
   margin-right: auto;
   color: inherit;
+  fill: currentColor;
 }
 
 .actions form {
@@ -725,16 +739,11 @@ header .container-fluid.header__lower svg {
 .language-select__locale {
   text-transform: uppercase;
   margin-left: 8px;
-  margin-right: 24px;
 }
 
 .user__account-menu__name {
   margin-right: 8px;
 }
-.user__account-menu__name img {
-  max-height: 4rem;
-}
-
 .dropdown-menu span,
 .dropdown-menu i {
   color: var(--clr-text-body);
@@ -818,6 +827,7 @@ header .container-fluid.header__lower svg {
 .actions__user {
   display: flex;
   align-items: center;
+  margin-left: 1.6rem;
   gap: 8px;
 }
 
@@ -874,8 +884,10 @@ section .overview .form-check {
   font-size: var(--fs-200);
   margin-bottom: 2.4rem;
 }
-.info-required span {
+.info-required__asterisk {
+  font-size: 10px;
   color: var(--clr-primary-400);
+  vertical-align: super;
 }
 
 /* custom styles */
@@ -1016,8 +1028,8 @@ select ~ .font-danger {
 
 @media only screen and (min-width: 800px) {
   .footer.container-fluid {
-    padding-right: 20rem;
-    padding-left: 20rem;
+    padding-right: 4.8rem;
+    padding-left: 4.8rem;
   }
 }
 .footer .links {
