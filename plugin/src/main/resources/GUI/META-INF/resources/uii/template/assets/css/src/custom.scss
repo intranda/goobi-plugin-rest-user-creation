@@ -234,6 +234,10 @@ header .container-fluid {
 
 .user__account-menu__name {
   margin-right: 8px;
+
+  img {
+    max-height: 4rem;
+  }
 }
 
 .dropdown-menu span,
