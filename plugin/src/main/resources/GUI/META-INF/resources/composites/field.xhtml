@@ -58,7 +58,7 @@
         <composite:attribute
             name="fieldStyle"
             default="" />
-
+            
         <composite:attribute name="displayDuplicateButton" default="false" />
         <composite:attribute name="render" default="@form" />
 
@@ -80,7 +80,9 @@
                     rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-check-input"
-                    value="#{cc.attrs.booleanValue}">
+                    value="#{cc.attrs.booleanValue}"
+                    validator="#{field.validateField}"
+                    >
                     <f:ajax
                         render="#{cc.attrs.render}"
                         execute="@this" />
@@ -133,7 +135,8 @@
                     rendered="#{cc.attrs.fieldType=='input'}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}">
+                    value="#{cc.attrs.value}"
+                    validator="#{field.validateField}">
                     <f:ajax
                         render="#{cc.attrs.render}"
                         execute="@this" />
@@ -147,7 +150,8 @@
                     rendered="#{cc.attrs.fieldType=='textarea'}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}">
+                    value="#{cc.attrs.value}"
+                    validator="#{field.validateField}">
                     <f:ajax
                         render="#{cc.attrs.render}"
                         execute="@this" />
@@ -160,9 +164,10 @@
                     rendered="#{cc.attrs.fieldType=='dropdown' or cc.attrs.fieldType=='journaltitles'}"
                     styleClass="form-select #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}"
-                    pt:aria-label="#{cc.attrs.labelText}">
+                    pt:aria-label="#{cc.attrs.labelText}"
+                    validator="#{field.validateField}">
                     <f:selectItem
-                        itemValue="null"
+                        itemValue=""
                         itemLabel="#{msgs.bitteAuswaehlen}" />
                     <f:ajax
                         render="#{cc.attrs.render}"

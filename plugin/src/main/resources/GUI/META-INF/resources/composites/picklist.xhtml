@@ -71,13 +71,6 @@
                     rendered="#{cc.attrs.fieldRequired}">
                     <i class="fa fa-asterisk" />
                 </h:panelGroup>
-                <!--
-                <ui:include src="../uii/includes/icon-help.xhtml">
-                    <ui:param
-                        name="helpText"
-                        value="#{cc.attrs.labelHelpText}" />
-                </ui:include>
-                -->
             </label>
             <div class="form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
 
@@ -86,7 +79,8 @@
                     id="#{cc.attrs.identifier}_select"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.role}"
-                    pt:aria-label="#{cc.attrs.labelText}">
+                    pt:aria-label="#{cc.attrs.labelText}"
+                    validator="#{field.validateField}">
                     <f:selectItem
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
@@ -100,7 +94,8 @@
                     id="#{cc.attrs.identifier}_input"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}">
+                    value="#{cc.attrs.value}"
+                    validator="#{field.validateField}">
                     <f:ajax
                         render="@form"
                         execute="@this" />
