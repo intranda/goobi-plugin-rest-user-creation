@@ -257,14 +257,14 @@ public class ExternalLoginBean implements Serializable {
         }
         if (!password.equals(confirmPassword)) {
             passwordValid = false;
-            passwordErrorMessage = Helper.getTranslation("login_new_account_confirmPasswordWrong");
+            passwordErrorMessage = Helper.getTranslation("plugin_rest_usercreation_new_account_confirmPasswordWrong");
             return;
         }
         // check password length
 
         if (!privacyTextAccepted) {
             privacyValid = false;
-            privacyErrorMessage = Helper.getTranslation("login_new_account_privacyTextNotAcccepted");
+            privacyErrorMessage = Helper.getTranslation("plugin_rest_usercreation_new_account_privacyTextNotAcccepted");
             return;
         }
 
@@ -338,7 +338,7 @@ public class ExternalLoginBean implements Serializable {
     public void createInstitution() {
 
         if (!activation) {
-            Helper.setFehlerMeldung("login_new_account_activationNotSet");
+            Helper.setFehlerMeldung("plugin_rest_usercreation_new_account_activationNotSet");
             return;
         }
 

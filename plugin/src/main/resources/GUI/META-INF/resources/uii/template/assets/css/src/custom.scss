@@ -108,6 +108,10 @@ h2 {
     justify-content: space-between;
     align-items: center;
     margin: 8rem 0 6.4rem 0;
+    padding: 0;
+    text-transform: none;
+    border: 0;
+    font-size: 2.8rem;
   }
   &__help {
     padding-right: 0;
@@ -159,7 +163,20 @@ a, .btn-link,
   text-decoration: none;
 }
 
-header .container-fluid {
+.header__lower a {
+  color: var(--clr-primary-400);
+  text-decoration: none;
+  transition: all .1s ease;
+}
+
+.header__lower a:hover,
+.header__lower a:hover svg {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  transition: all .1s ease;
+}
+
+.header .container-fluid {
   font-size: var(--fs-400);
   position: relative;
   display: flex;
@@ -178,8 +195,8 @@ header .container-fluid {
   &.header__lower {
     display: flex;
     justify-content: center;
-    padding-left: 12rem;
-    padding-right: 12rem;
+    padding-left: 4.8rem;
+    padding-right: 4.8rem;
     padding-top: 1.6rem;
     padding-bottom: 4rem;
     margin-top: 1.6rem;
@@ -197,6 +214,7 @@ header .container-fluid {
     svg {
       margin-right: auto;
       color: inherit;
+      fill: currentColor;
     }
   }
 }
@@ -225,11 +243,15 @@ header .container-fluid {
 .language-select__locale {
   text-transform: uppercase;
   margin-left: 8px;
-  margin-right: 24px;
+  // margin-right: 24px;
 }
 
 .user__account-menu__name {
   margin-right: 8px;
+
+  img {
+
+  }
 }
 
 .dropdown-menu span,
@@ -317,15 +339,11 @@ header .container-fluid {
   gap: 32px;
   align-items: center;
 }
-.actions__help {
-}
-
-.actions__lang {
-}
 
 .actions__user {
   display: flex;
   align-items: center;
+  margin-left: 1.6rem;
   gap: 8px;
 }
 
@@ -385,8 +403,11 @@ section .overview .form-check {
 .info-required {
   font-size: var(--fs-200);
   margin-bottom: 2.4rem;
-  span {
+
+  &__asterisk {
+    font-size: 10px;
     color: var(--clr-primary-400);
+    vertical-align: super;
   }
 }
 
@@ -534,8 +555,8 @@ select ~ .font-danger {
 
 @media only screen and (min-width: 800px) {
   .footer.container-fluid {
-    padding-right: 20rem;
-    padding-left: 20rem;
+    padding-right: 4.8rem;
+    padding-left: 4.8rem;
   }
 }
 

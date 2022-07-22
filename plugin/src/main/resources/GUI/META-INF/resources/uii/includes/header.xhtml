@@ -172,9 +172,11 @@
             </div>
             <div class="container-fluid header__lower">
 
-                <ui:include src="../includes/icon-logo-goobi.xhtml" />
+                <a href="external_index.xhtml" class="me-auto">
+                    <ui:include src="../includes/icon-logo-goobi.xhtml" />
+                </a>
                 <h1>
-                    <a href="index.xhtml">
+                    <a href="external_index.xhtml">
                         <h:outputText
                             escape="false"
                             value="ZLB E-Pflicht" />
@@ -182,10 +184,15 @@
 
                 </h1>
 
-                <div class="actions__help">
+                <a
+                    href="external_index.xhtml"
+                    class="actions__help"
+                    title="#{msgs.plugin_rest_usercreation_goToHelpPages}"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left">
                     <ui:include src="/uii/includes/icon-info.xhtml" />
                     Hilfe
-                </div>
+                </a>
             </div>
 
         </header>

@@ -19,8 +19,6 @@
     <composite:implementation>
 
 
-        <main>
-
             <div
                 id="login-body"
                 class="#{externalLoginBean.uiStatus != 'accountCreation' ? 'login-body' : ''} container">
@@ -29,9 +27,9 @@
                     value="Developer Mode ON"
                     rendered="#{DevModeBean.developerMode}" />
                 <ui:fragment rendered="#{!LoginForm.oidcAutoRedirect}">
-                    <h2 jsf:rendered="#{externalLoginBean.uiStatus != 'accountCreation'}">
+                    <h1 class="page__heading m-0 mb-3" jsf:rendered="#{externalLoginBean.uiStatus != 'accountCreation'}">
                         <h:outputText value="#{msgs.login}" />
-                    </h2>
+                    </h1>
                     <h:form
                         styleClass="form-validate #{externalLoginBean.uiStatus != 'accountCreation' ? '' : 'd-grid'}"
                         id="loginForm"
@@ -71,7 +69,7 @@
 
                                 <zlb:label
                                     labelFor="login"
-                                    labelText="User name"
+                                    labelText="#{msgs.plugin_rest_usercreation_userName}"
                                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                                     labelRequired="false" />
 
@@ -90,7 +88,7 @@
 
                                 <zlb:label
                                     labelFor="passwort"
-                                    labelText="Password"
+                                    labelText="#{msgs.plugin_rest_usercreation_password}"
                                     labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                                     labelRequired="false" />
 
@@ -154,7 +152,7 @@
                                     <button
                                         jsf:id="resetPassword"
                                         class="btn btn-link">
-                                        <h:outputText value="#{msgs.login_new_account_resetPassword}" />
+                                        <h:outputText value="#{msgs.plugin_rest_usercreation_new_account_resetPassword}" />
                                         <f:setPropertyActionListener
                                             value="resetPassword"
                                             target="#{externalLoginBean.uiStatus}" />
@@ -199,7 +197,7 @@
                                     jsf:id="reset"
                                     jsf:action="#{LoginForm.resetPassword}"
                                     class="btn btn-primary-400">
-                                    <h:outputText value="#{msgs.login_new_account_resetPassword}" />
+                                    <h:outputText value="#{msgs.plugin_rest_usercreation_new_account_resetPassword}" />
                                     <f:setPropertyActionListener
                                         value=""
                                         target="#{externalLoginBean.uiStatus}" />
@@ -273,7 +271,6 @@
                 value="#{msgs.version} #{HelperForm.version}" />
 
             -->
-        </main>
     </composite:implementation>
 
 
