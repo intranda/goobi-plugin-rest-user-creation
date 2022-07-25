@@ -50,7 +50,7 @@
 }
 
 .statuslist li {
-  max-width: 150px;
+  // max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -114,6 +114,8 @@
 
 /* Some forms have a submit button inside the form
 .btn-inside helps to display them outside of the form for coherence */
+
+/*
 #main-area .container {
   position: relative;
 }
@@ -129,6 +131,7 @@
 .btn-inside ~ form .statuslist {
   margin: 0;
 }
+*/
 
 /* Very specific selectors => overriding styles from index.scss */
 .form__actions input.form-control-lg,
@@ -178,15 +181,6 @@ flex-direction: column;
 /* Journals */
 .journal__data {
   position: relative;
-}
-
-.journal__data ~ form .statuslist {
-  margin: 0;
-}
-.journal__data ~ form button {
-  position: absolute;
-  bottom: 0;
-  left:0;
 }
 
 @media (max-width: 750px) {

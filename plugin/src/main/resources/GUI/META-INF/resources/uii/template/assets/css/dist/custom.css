@@ -528,7 +528,15 @@
   border-color: var(--clr-action);
 }
 
-/* GENERAL */
+/*
+ * 1. Imports
+ * 2. Fonts
+ * 3. Variables (custom props)
+ * 4. General overrides (usually bootstrap)
+ * 5. Utilities
+ */
+/* IMPORT _colors.scss */
+/* FONTS */
 /* open-sans-regular - latin */
 @font-face {
   font-family: "Open Sans";
@@ -537,6 +545,7 @@
   src: url("../../fonts/open-sans-v29-latin-regular.eot"); /* IE9 Compat Modes */
   src: local(""), url("../../fonts/open-sans-v29-latin-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/open-sans-v29-latin-regular.woff2") format("woff2"), url("../../fonts/open-sans-v29-latin-regular.woff") format("woff"), url("../../fonts/open-sans-v29-latin-regular.ttf") format("truetype"), url("../../fonts/open-sans-v29-latin-regular.svg#OpenSans") format("svg"); /* Legacy iOS */
 }
+/* VARIABLES */
 :root {
   --clr-primary-200: rgb(110, 23, 105, 0.6);
   --clr-primary-400: #6e1769;
@@ -564,13 +573,39 @@
   --height-footer-and-nav: 303px;
 }
 
-/* GENERAL */
+/* OVERRIDES */
 .tooltip {
   font-size: var(--fs-200);
 }
 
 #login-body {
   counter-reset: section;
+}
+
+/* Override BS inline padding (applied when opening a modal) */
+body.modal-open {
+  padding-right: 0 !important;
+}
+
+/* Utilities */
+.column-start {
+  grid-column: 1/1;
+}
+
+.grid-full-width {
+  grid-column: 1/-1;
+}
+
+.corporategrid {
+  display: grid;
+  gap: calc(var(--gap) / 2);
+  grid-template-columns: 1fr 1fr;
+}
+
+.persongrid {
+  display: grid;
+  gap: calc(var(--gap) / 2);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* LAYOUT */
@@ -582,16 +617,60 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   width: 100vw;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - var(--height-footer-and-nav));
+}
+
+.common-region {
+  display: grid;
+  grid-template-columns: var(--grid-tc);
+  grid-auto-rows: auto;
+  row-gap: calc(var(--gap) + 1rem);
+  column-gap: calc(var(--gap) + 3rem);
+  align-items: baseline;
+  padding: 3.2rem 2.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--gap);
+  /* standard is 2 columns
+   * 2 cols are used in views with inputs
+   * 3 cols in views with boxes (usually overviews of possible user actions)
+   */
+}
+.common-region.one-col {
+  --grid-tc: 1fr;
+}
+.common-region--no-borders {
+  border: 0;
+}
+.common-region--three-cols {
+  --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
+  align-items: unset;
+  grid-auto-rows: auto;
+  padding: 3.2rem 0;
+}
+
+.layout #globalWarningMessage {
+  grid-column: 1/-1;
+}
+
+@media (max-width: 900px) {
+  .common-region {
+    --grid-tc: 1fr;
+    padding: 1.6rem 1.6rem;
+  }
+}
+/* TYPOGRAPHY */
+body {
   font-family: "Open Sans", sans-serif;
   font-size: var(--fs-400);
 }
 
-/* Override BS inline padding (applied when opening a modal) */
-body.modal-open {
-  padding-right: 0 !important;
-}
-
-/* TYPOGRAPHY */
 h1,
 h2 {
   color: var(--clr-primary-400);
@@ -604,6 +683,28 @@ h2 a {
 h1 a:hover,
 h2 a:hover {
   color: var(--clr-accent);
+}
+
+/* Main Heading */
+main h1 {
+  display: flex;
+  justify-content: center;
+  padding-left: 12rem;
+  padding-right: 12rem;
+  padding-top: 16px;
+  padding-bottom: 40px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--clr-neutral-600);
+  width: 100%;
+  font-size: 3.6rem;
+  text-transform: uppercase;
+}
+main h1 a {
+  margin-left: auto;
+}
+main h1 svg {
+  margin-left: auto;
 }
 
 h2 {
@@ -644,28 +745,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   color: var(--clr-accent);
 }
 
-/* Buttons */
-.btn {
-  font-size: 1.6rem;
-}
-
-.btn-primary-400:hover {
-  background-color: var(--clr-primary-200);
-  border-color: var(--clr-primary-200);
-}
-
-.btn-blank {
-  color: var(--clr-text-body);
-  border-color: var(--clr-text-body);
-}
-
-.btn-blank:hover {
-  background-color: var(--clr-text-body);
-  border-color: var(--clr-text-body);
-  color: var(--clr-text-light);
-}
-
-/* HEADER */
+/* Header */
 .header .nav-link {
   text-decoration: none;
 }
@@ -721,6 +801,20 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   fill: currentColor;
 }
 
+/* Header actions */
+.actions {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.actions__user {
+  display: flex;
+  align-items: center;
+  margin-left: 1.6rem;
+  gap: 8px;
+}
+
 .actions form {
   display: flex;
   align-items: center;
@@ -744,13 +838,17 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 .user__account-menu__name {
   margin-right: 8px;
 }
+.user__account-menu img {
+  max-height: 4.2rem;
+}
+
 .dropdown-menu span,
 .dropdown-menu i {
   color: var(--clr-text-body);
   font-size: var(--fs-400);
 }
 
-/* lower header => actions: help button */
+/* Lower header => help button */
 .actions__help {
   display: flex;
   align-items: center;
@@ -765,6 +863,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   height: 2.2rem;
 }
 
+/* Header on medium sized screens */
 @media (max-width: 900px) {
   .header__lower {
     flex-wrap: wrap;
@@ -791,6 +890,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
     height: 3.2rem;
   }
 }
+/* Header brand (ZLB Logo) */
 .brand {
   display: flex;
   text-decoration: none;
@@ -802,14 +902,6 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   border-right: 1px solid #fff;
 }
 
-@media (max-width: 800px) {
-  .brand__logo {
-    border-right: 0;
-  }
-  .brand__copy {
-    display: none;
-  }
-}
 .brand__copy,
 .brand__copy:focus,
 .brand__copy:hover,
@@ -818,50 +910,257 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   color: #fff;
 }
 
-.actions {
+@media (max-width: 800px) {
+  .brand__logo {
+    border-right: 0;
+  }
+  .brand__copy {
+    display: none;
+  }
+}
+/* FOOTER */
+.footer {
   display: flex;
-  gap: 32px;
+  justify-content: space-between;
   align-items: center;
+  background: var(--clr-secondary-400);
+  min-height: 84px;
+  border-top: 2px solid var(--clr-accent);
+  color: var(--clr-text-light);
 }
 
-.actions__user {
-  display: flex;
-  align-items: center;
-  margin-left: 1.6rem;
-  gap: 8px;
+@media only screen and (min-width: 800px) {
+  .footer.container-fluid {
+    padding-right: 4.8rem;
+    padding-left: 4.8rem;
+  }
 }
-
-main {
+.footer .links {
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-height: calc(100vh - var(--height-footer-and-nav));
-}
-
-main h1 {
-  display: flex;
-  justify-content: center;
-  padding-left: 12rem;
-  padding-right: 12rem;
-  padding-top: 16px;
-  padding-bottom: 40px;
-  margin-top: 16px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--clr-neutral-600);
+  justify-content: space-between;
   width: 100%;
-  font-size: 3.6rem;
+  font-size: var(--fs-400);
+}
+
+.footer .links__social {
+  margin-right: 1.6rem;
+}
+
+.footer .links__legal {
+  margin-left: auto;
+}
+
+.footer .links__legal a {
+  margin-right: 1.6rem;
+}
+
+.footer a {
+  color: var(--clr-text-light);
+  text-decoration: none;
+}
+
+.footer a:focus,
+.footer a:hover,
+.footer a:active {
+  color: var(--clr-accent);
+  text-decoration: underline;
+}
+
+/* 1. Login
+ * 2. Contact Person
+ * 3. Additional data
+ * 4. Overview
+ * 5. Error pages
+ *
+ *
+ *
+ */
+/* ****************************** */
+/* Login                         */
+/* **************************** */
+.login-body {
+  margin: auto;
+  padding: 64px;
+  background-color: var(--clr-neutral-400);
+  max-width: 480px;
+}
+
+.login-body h2 {
   text-transform: uppercase;
+  font-size: 3.6rem;
 }
 
-main h1 a {
-  margin-left: auto;
+.messagesLogin {
+  padding-left: 0;
+  font-size: var(--fs-200);
+  color: var(--clr-danger);
+}
+.messagesLogin li {
+  list-style: none;
 }
 
-main h1 svg {
-  margin-left: auto;
+.login-body #loginForm {
+  display: grid;
+  grid-gap: var(--gap);
+}
+.login-body .form-actions .submit {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.login-body #loginButton {
+  order: 1;
+}
+.login-body #resetPassword {
+  width: 100%;
+  text-align: end;
+  order: 2;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  margin-top: 1.6rem;
+  color: var(--clr-primary-400);
 }
 
-/* Form elements */
+/* ****************************** */
+/* Contact Person                */
+/* **************************** */
+#createNewContact {
+  display: flex;
+  align-items: center;
+  color: var(--clr-primary-400);
+  text-decoration: none;
+}
+
+#createNewContact span {
+  display: flex;
+  margin-left: 0.8rem;
+  color: var(--clr-text-body);
+}
+
+.heading__contact {
+  color: var(--clr-primary-400);
+}
+
+.heading__contact::before {
+  counter-increment: section;
+  content: counter(section) ". ";
+}
+
+/* ****************************** */
+/* Additional data               */
+/* **************************** */
+.additional-data .form-check {
+  padding-left: 0;
+}
+
+/* ****************************** */
+/* Overview                      */
+/* **************************** */
+.overview .common-region {
+  font-size: var(--fs-400);
+  font-family: "Open Sans", sans-serif;
+}
+.overview h3 {
+  color: var(--clr-primary-400);
+}
+.overview .control-label {
+  font-size: var(--fs-400);
+  display: inline;
+  font-weight: bold;
+}
+.overview .control-label::after {
+  content: ": ";
+}
+.overview .col-sm-9 {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+.overview .col-sm-9 span {
+  padding: 0;
+  margin: 0;
+}
+
+/* ****************************** */
+/* Error pages                   */
+/* **************************** */
+#zlbEPflicht #navigation {
+  display: none;
+}
+
+[action^="/goobi/uii/error.xhtml"] {
+  font-size: var(--fs-400);
+}
+
+[action^="/goobi/uii/error.xhtml"] h1 {
+  margin: 2.4rem 0;
+  font-size: 4.8rem;
+}
+
+[action^="/goobi/uii/error.xhtml"] h4 {
+  font-size: 2.4rem;
+  color: var(--clr-primary-400);
+}
+
+[action^="/goobi/uii/error.xhtml"] .stats {
+  padding: 0;
+}
+
+[action^="/goobi/uii/error.xhtml"] * {
+  font-size: var(--fs-400);
+}
+
+[action^="/goobi/uii/error.xhtml"] i {
+  margin-right: 8px;
+}
+
+[action^="/goobi/uii/error.xhtml"] .btn {
+  background-color: var(--clr-primary-400);
+  color: #fff;
+  padding: 8px;
+}
+
+[action^="/goobi/uii/error.xhtml"] p:first-of-type {
+  font-size: 2rem;
+  color: var(--clr-danger);
+}
+
+/*
+ * 1. Buttons
+ * 2. Form elements
+ * 3. Validation
+ * 4. Checkboxes
+ * 5. Status bar (user creation)
+ * 6. Status bar (delivery Plugin)
+ *
+ */
+/* ******************************* */
+/* Buttons                        */
+/* ***************************** */
+.btn {
+  font-size: 1.6rem;
+}
+
+.btn-primary-400:hover {
+  background-color: var(--clr-primary-200);
+  border-color: var(--clr-primary-200);
+}
+
+.btn-blank {
+  color: var(--clr-text-body);
+  border-color: var(--clr-text-body);
+}
+
+.btn-blank:hover {
+  background-color: var(--clr-text-body);
+  border-color: var(--clr-text-body);
+  color: var(--clr-text-light);
+}
+
+/* ******************************* */
+/* FORM ELEMENTS (inputs etc)     */
+/* ***************************** */
 .zlb-label {
   margin-bottom: 0.8rem;
   grid-column: 1/-1;
@@ -896,12 +1195,6 @@ section .overview .form-check {
   display: grid;
   grid-template-columns: 4fr 6rem;
   align-items: center;
-  /*
-  input:not([type="checkbox"]) {
-    height: 3.8rem;
-    grid-column: 1;
-  }
-  */
 }
 @media screen and (max-width: 620px) {
   .form {
@@ -1003,6 +1296,29 @@ select ~ .font-danger {
   grid-column: -1/1;
 }
 
+.form-actions:not(.form-actions--progress) {
+  margin-left: auto;
+}
+
+.form-actions.form-actions--progress {
+  display: flex;
+  margin: 7.2rem 0 9.6rem 0;
+}
+.form-actions.form-actions--progress .btn {
+  align-self: baseline;
+}
+.form-actions.form-actions--progress .btn-primary-400 {
+  background-color: var(--clr-success);
+  border-color: var(--clr-success);
+}
+.form-actions.form-actions--progress .btn-primary-400:hover {
+  filter: brightness(110%);
+  filter: brightness(80%);
+}
+
+/* ******************************* */
+/* Checkboxes                     */
+/* ***************************** */
 .confirm-privacy,
 .form-check {
   align-items: center;
@@ -1013,54 +1329,6 @@ select ~ .font-danger {
 .form-check-input:checked {
   background-color: var(--clr-primary-400);
   border: var(--clr-primary-400);
-}
-
-/* FOOTER */
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--clr-secondary-400);
-  min-height: 84px;
-  border-top: 2px solid var(--clr-accent);
-  color: var(--clr-text-light);
-}
-
-@media only screen and (min-width: 800px) {
-  .footer.container-fluid {
-    padding-right: 4.8rem;
-    padding-left: 4.8rem;
-  }
-}
-.footer .links {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  font-size: var(--fs-400);
-}
-
-.footer .links__social {
-  margin-right: 1.6rem;
-}
-
-.footer .links__legal {
-  margin-left: auto;
-}
-
-.footer .links__legal a {
-  margin-right: 1.6rem;
-}
-
-.footer a {
-  color: var(--clr-text-light);
-  text-decoration: none;
-}
-
-.footer a:focus,
-.footer a:hover,
-.footer a:active {
-  color: var(--clr-accent);
-  text-decoration: underline;
 }
 
 .additional-data .form-group label {
@@ -1088,41 +1356,9 @@ select ~ .font-danger {
   border-color: var(--clr-primary-400);
 }
 
-.common-region {
-  display: grid;
-  grid-template-columns: var(--grid-tc);
-  grid-auto-rows: auto;
-  row-gap: calc(var(--gap) + 1rem);
-  column-gap: calc(var(--gap) + 3rem);
-  align-items: baseline;
-  padding: 3.2rem 2.4rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  margin-bottom: var(--gap);
-  /* standard is 2 columns
-   * 2 cols are used in views with inputs
-   * 3 cols in views with boxes (usually overviews of possible user actions)
-   */
-}
-.common-region.one-col {
-  --grid-tc: 1fr;
-}
-.common-region--no-borders {
-  border: 0;
-}
-.common-region--three-cols {
-  --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
-  align-items: unset;
-  grid-auto-rows: auto;
-  padding: 3.2rem 0;
-}
-
-.layout #globalWarningMessage {
-  grid-column: 1/-1;
-}
-
-/* COMPONENTS */
-/* Modal */
+/* ******************************* */
+/* Modal                          */
+/* ***************************** */
 .modal-dialog {
   font-size: var(--fs-400);
   max-width: 900px;
@@ -1142,7 +1378,9 @@ select ~ .font-danger {
   width: 100%;
 }
 
-/* Progress bar */
+/* ******************************* */
+/* Status bar (user creation)     */
+/* ***************************** */
 .zlb-progress {
   --progress-step-width: 16px;
   --progress-line-height: 2px;
@@ -1204,8 +1442,23 @@ select ~ .font-danger {
 }
 .zlb-progress__step__name {
   margin-top: 1.6rem;
+  width: 120px;
+  word-wrap: anywhere;
 }
 
+@media (max-width: 900px) {
+  .zlb-progress__step__name {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .zlb-progress {
+    display: none;
+  }
+}
+/* ******************************* */
+/* Status bar (delivery Plugin)   */
+/* ***************************** */
 .statuslist {
   --progress-step-width: 16px;
   --progress-line-height: 2px;
@@ -1284,201 +1537,6 @@ select ~ .font-danger {
 @media (max-width: 640px) {
   /* Don't show step name on small screens */
   .statuslist .status {
-    display: none;
-  }
-}
-.form-actions:not(.form-actions--progress) {
-  margin-left: auto;
-}
-
-.form-actions.form-actions--progress {
-  display: flex;
-  margin: 7.2rem 0 9.6rem 0;
-}
-.form-actions.form-actions--progress .btn {
-  align-self: baseline;
-}
-.form-actions.form-actions--progress .btn-primary-400 {
-  background-color: var(--clr-success);
-  border-color: var(--clr-success);
-}
-.form-actions.form-actions--progress .btn-primary-400:hover {
-  filter: brightness(110%);
-  filter: brightness(80%);
-}
-
-/* Utilities */
-.column-start {
-  grid-column: 1/1;
-}
-
-.grid-full-width {
-  grid-column: 1/-1;
-}
-
-.corporategrid {
-  display: grid;
-  gap: calc(var(--gap) / 2);
-  grid-template-columns: 1fr 1fr;
-}
-
-.persongrid {
-  display: grid;
-  gap: calc(var(--gap) / 2);
-  grid-template-columns: repeat(3, 1fr);
-}
-
-/* VIEWS */
-.login-body {
-  margin: auto;
-  padding: 64px;
-  background-color: var(--clr-neutral-400);
-  max-width: 480px;
-}
-
-.login-body h2 {
-  text-transform: uppercase;
-  font-size: 3.6rem;
-}
-
-.messagesLogin {
-  padding-left: 0;
-  font-size: var(--fs-200);
-  color: var(--clr-danger);
-}
-.messagesLogin li {
-  list-style: none;
-}
-
-.login-body #loginForm {
-  display: grid;
-  grid-gap: var(--gap);
-}
-.login-body .form-actions .submit {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-.login-body #loginButton {
-  order: 1;
-}
-.login-body #resetPassword {
-  width: 100%;
-  text-align: end;
-  order: 2;
-  padding: 0;
-  border: 0;
-  margin: 0;
-  margin-top: 1.6rem;
-  color: var(--clr-primary-400);
-}
-
-#createNewContact {
-  display: flex;
-  align-items: center;
-  color: var(--clr-primary-400);
-  text-decoration: none;
-}
-
-#createNewContact span {
-  display: flex;
-  margin-left: 0.8rem;
-  color: var(--clr-text-body);
-}
-
-.additional-data .form-check {
-  padding-left: 0;
-}
-
-.overview .common-region {
-  font-size: var(--fs-400);
-  font-family: "Open Sans", sans-serif;
-}
-.overview h3 {
-  color: var(--clr-primary-400);
-}
-.overview .control-label {
-  font-size: var(--fs-400);
-  display: inline;
-  font-weight: bold;
-}
-.overview .control-label::after {
-  content: ": ";
-}
-.overview .col-sm-9 {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
-.overview .col-sm-9 span {
-  padding: 0;
-  margin: 0;
-}
-
-/* Error pages */
-#zlbEPflicht #navigation {
-  display: none;
-}
-
-[action^="/goobi/uii/error.xhtml"] {
-  font-size: var(--fs-400);
-}
-
-[action^="/goobi/uii/error.xhtml"] h1 {
-  margin: 2.4rem 0;
-  font-size: 4.8rem;
-}
-
-[action^="/goobi/uii/error.xhtml"] h4 {
-  font-size: 2.4rem;
-  color: var(--clr-primary-400);
-}
-
-[action^="/goobi/uii/error.xhtml"] .stats {
-  padding: 0;
-}
-
-[action^="/goobi/uii/error.xhtml"] * {
-  font-size: var(--fs-400);
-}
-
-[action^="/goobi/uii/error.xhtml"] i {
-  margin-right: 8px;
-}
-
-[action^="/goobi/uii/error.xhtml"] .btn {
-  background-color: var(--clr-primary-400);
-  color: #fff;
-  padding: 8px;
-}
-
-[action^="/goobi/uii/error.xhtml"] p:first-of-type {
-  font-size: 2rem;
-  color: var(--clr-danger);
-}
-
-/* CONTACT PERSONS (USER CREATION) */
-.heading__contact {
-  color: var(--clr-primary-400);
-}
-
-.heading__contact::before {
-  counter-increment: section;
-  content: counter(section) ". ";
-}
-
-/* MEDIA QUERIES */
-@media (max-width: 900px) {
-  .common-region {
-    --grid-tc: 1fr;
-    padding: 1.6rem 1.6rem;
-  }
-  .zlb-progress__step__name {
-    display: none;
-  }
-}
-@media (max-width: 600px) {
-  .zlb-progress {
     display: none;
   }
 }
