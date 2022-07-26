@@ -93,7 +93,6 @@
                     <zlb:label
                         labelFor="firstname"
                         labelText="#{msgs.firstname}"
-                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <zlb:input
@@ -119,7 +118,6 @@
                     <zlb:label
                         labelFor="lastname"
                         labelText="#{msgs.lastname}"
-                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <zlb:input
@@ -145,7 +143,6 @@
                     <zlb:label
                         labelFor="password"
                         labelText="#{msgs.plugin_rest_usercreation_new_account_password}"
-                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <x:inputSecret
@@ -184,7 +181,6 @@
                     <zlb:label
                         labelFor="password2"
                         labelText="#{msgs.plugin_rest_usercreation_new_account_password2}"
-                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <x:inputSecret
@@ -218,7 +214,6 @@
                     <zlb:label
                         labelFor="emailAddress"
                         labelText="#{msgs.plugin_rest_usercreation_new_account_emailAddress}"
-                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                         labelRequired="true" />
 
                     <zlb:input
@@ -785,7 +780,7 @@
                                 <ui:include src="/uii/includes/form_icons.xhtml">
                                     <ui:param
                                         name="helpTitle"
-                                        value="#{field.label}" />
+                                        value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
                                     <ui:param
                                         name="helpBody"
                                         value="#{field.helpMessage}" />
@@ -960,17 +955,16 @@
                         <zlb:label
                             labelFor="activation"
                             labelText="#{msgs.plugin_rest_usercreation_new_account_activation}"
-                            labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
                             labelRequired="true" />
                     </div>
                     <!-- ICONS -->
                     <ui:include src="/uii/includes/form_icons.xhtml">
                         <ui:param
                             name="helpTitle"
-                            value="#{field.label}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_askForActivation}" />
                         <ui:param
                             name="helpBody"
-                            value="#{field.helpMessage}" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_activation_helpMessage}" />
                     </ui:include>
                 </div>
             </section>
