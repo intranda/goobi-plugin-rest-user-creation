@@ -63,6 +63,7 @@ h2 {
   }
   &__help {
     padding-right: 0;
+    min-width: unset !important;
     svg {
       width: 3.2rem;
       height: 3.2rem;

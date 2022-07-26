@@ -58,12 +58,12 @@
                         <h:panelGroup rendered="#{externalLoginBean.uiStatus != 'accountCreation' and externalLoginBean.uiStatus != 'resetPassword'}">
 
                             <script>
-                                                                                                                    /* Focus first form Element on the login page */
-                                                                                                                    function focusForm() {
-                                                                                                                        document.getElementById( 'login' ).focus();
-                                                                                                                    }
-                                                                                                                    document.addEventListener( "DOMContentLoaded", focusForm )
-                                                                                                                </script>
+                                /* Focus first form Element on the login page */
+                                function focusForm() {
+                                    document.getElementById( 'login' ).focus();
+                                }
+                                document.addEventListener( "DOMContentLoaded", focusForm )
+                            </script>
 
                             <div class="form form--full-width">
 

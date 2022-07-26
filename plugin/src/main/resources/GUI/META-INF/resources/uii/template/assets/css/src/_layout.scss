@@ -17,6 +17,7 @@ main {
 }
 
 .common-region {
+  background-color: var(--clr-neutral-400);
   display: grid;
   grid-template-columns: var(--grid-tc);
   grid-auto-rows: auto;

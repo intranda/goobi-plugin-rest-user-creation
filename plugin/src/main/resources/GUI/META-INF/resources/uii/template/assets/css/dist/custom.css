@@ -627,6 +627,7 @@ main {
 }
 
 .common-region {
+  background-color: var(--clr-neutral-400);
   display: grid;
   grid-template-columns: var(--grid-tc);
   grid-auto-rows: auto;
@@ -760,6 +761,12 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 .header__lower a:hover svg {
   color: var(--clr-accent);
   text-decoration: underline;
+  transition: all 0.1s ease;
+}
+
+.header__lower a:hover svg path {
+  fill: currentColor;
+  color: currentColor;
   transition: all 0.1s ease;
 }
 
@@ -1060,6 +1067,10 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 .overview .common-region {
   font-size: var(--fs-400);
   font-family: "Open Sans", sans-serif;
+  row-gap: var(--gap);
+}
+.overview .common-region span {
+  background-color: var(--clr-neutral-400);
 }
 .overview h3 {
   color: var(--clr-primary-400);
@@ -1071,15 +1082,27 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 }
 .overview .control-label::after {
   content: ": ";
+  padding-left: 0;
 }
-.overview .col-sm-9 {
-  display: inline-block;
+.overview .col-md-3, .overview .col-md-9 {
+  display: flex;
+  align-self: flex-end;
   padding: 0;
   margin: 0;
 }
 .overview .col-sm-9 span {
   padding: 0;
   margin: 0;
+  align-self: flex-end;
+  background-color: var(--clr-neutral-400);
+}
+.overview .control-label.col-sm-3 {
+  padding-left: 0;
+}
+.overview .overview .label__body {
+  font-weight: 400;
+  margin-left: 0;
+  display: inline;
 }
 
 /* ****************************** */
@@ -1139,6 +1162,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 /* Buttons                        */
 /* ***************************** */
 .btn {
+  min-width: 9.6rem;
   font-size: 1.6rem;
 }
 
@@ -1172,11 +1196,20 @@ section .overview .form-check {
 
 @media (min-width: 900px) {
   .overview .form-check {
-    max-width: 45%;
+    /* max-width: 45%; */
   }
 }
 .form-check .zlb-label {
   margin: 0;
+}
+
+.label__heading {
+  font-weight: 600;
+}
+
+.label__body {
+  display: block;
+  margin-left: 2.8rem;
 }
 
 .info-required {
@@ -1329,6 +1362,15 @@ select ~ .font-danger {
 .form-check-input:checked {
   background-color: var(--clr-primary-400);
   border: var(--clr-primary-400);
+}
+
+.label__heading {
+  font-weight: 600;
+}
+
+.label__body {
+  display: block;
+  margin-left: 2.8rem;
 }
 
 .additional-data .form-group label {

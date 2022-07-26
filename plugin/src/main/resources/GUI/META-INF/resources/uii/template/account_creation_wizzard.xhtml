@@ -33,6 +33,9 @@
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page5'}"
                 value="#{msgs.plugin_rest_usercreation_new_activation}" />
+            <h:outputText
+                rendered="#{externalLoginBean.wizzardMode=='wait'}"
+                value="#{msgs.plugin_rest_usercreation_new_account_creationSuccessfulHeading}" />
             <button
                 type="button"
                 class="btn page__help"
@@ -523,8 +526,8 @@
                     <zlb:label
                         labelFor="contactPersonCheckbox"
                         labelText="#{msgs.plugin_rest_usercreation_new_account_userIsContactPerson}"
-                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                        labelRequired="true" />
+                        labelHelpText=""
+                        labelRequired="false" />
                 </div>
 
             </div>
@@ -772,7 +775,8 @@
                                     <zlb:label
                                         labelFor="activation"
                                         labelText="#{field.label}"
-                                        labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                                        labelHelpText=""
+                                        labelEscapeText="#{false}"
                                         labelRequired="#{field.required}" />
                                 </div>
                                 <!-- end form-check-wraper -->
@@ -871,7 +875,7 @@
                 <h3>
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_institution}" />
                 </h3>
-                <intranda:formOutputText
+                <zlb:formOutputTxt
                     label="#{msgs.plugin_rest_usercreation_new_account_institutionName}"
                     field="#{externalLoginBean.institutionName}"
                     name="institutionName"
@@ -879,7 +883,7 @@
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page2']}">
-                    <intranda:formOutputText
+                    <zlb:formOutputTxt
                         name="field"
                         label="#{field.label}"
                         field="#{field.value}"
@@ -893,7 +897,7 @@
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page3']}">
-                    <intranda:formOutputText
+                    <zlb:formOutputTxt
                         name="field"
                         label="#{field.label}"
                         field="#{field.value}"
@@ -908,7 +912,7 @@
                     <ui:repeat
                         var="field"
                         value="#{externalLoginBean.additionalFields['page3a']}">
-                        <intranda:formOutputText
+                        <zlb:formOutputTxt
                             name="field"
                             label="#{field.label}"
                             field="#{field.value}"
@@ -925,11 +929,12 @@
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page4']}">
-                    <intranda:formOutputText
+                    <zlb:formOutputTxt
                         name="field"
                         label="#{field.label}"
                         field="#{field.value}"
-                        fieldStyle="form-control" />
+                        fieldStyle="form-control"
+                        classLeft="col-sm-12 col-md-3 flex-column" />
                 </ui:repeat>
 
             </section>
@@ -942,7 +947,7 @@
                 </h3>
 
 
-                <div class="form form-check">
+                <div class="form form-check grid-full-width">
                     <div class="form-check-wrapper">
                         <h:selectBooleanCheckbox
                             id="activation"
@@ -972,14 +977,17 @@
         </ui:fragment>
 
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='wait'}">
-            <section class="common-region">
+            <section class="common-region one-col">
                 <h:outputText
                     escape="false"
                     value="#{msgs.plugin_rest_usercreation_new_account_creationSuccessful}" />
             </section>
+
+            <a href="external_index.xhtml" class="btn btn-primary-400 ms-auto">#{msgs.plugin_rest_usercreation_backToLogin}</a>
+
         </ui:fragment>
 
-        <ui:fragment rendered="#{externalLoginBean.wizzardMode!='confirm'}">
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode!='confirm' and externalLoginBean.wizzardMode!='wait'}">
             <div
                 class="info-required"
                 jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">

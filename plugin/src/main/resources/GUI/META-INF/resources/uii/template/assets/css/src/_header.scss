@@ -18,6 +18,12 @@
   transition: all .1s ease;
 }
 
+.header__lower a:hover svg path {
+  fill: currentColor;
+  color: currentColor;
+  transition: all .1s ease;
+}
+
 .header .container-fluid {
   font-size: var(--fs-400);
   position: relative;

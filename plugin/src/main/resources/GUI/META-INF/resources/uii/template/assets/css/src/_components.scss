@@ -13,6 +13,7 @@
 /* ***************************** */
 
 .btn {
+  min-width: 9.6rem;
   font-size: 1.6rem;
 }
 
@@ -47,12 +48,22 @@ section .overview .form-check {
 
 @media (min-width: 900px) {
   .overview .form-check {
-    max-width: 45%;
+   /* max-width: 45%; */
   }
 }
 
 .form-check .zlb-label {
   margin: 0;
+}
+
+.label__heading {
+  font-weight: 600;
+}
+
+.label__body {
+  display: block;
+  margin-left: 2.8rem;
+
 }
 
 .info-required {
@@ -214,6 +225,16 @@ select ~ .font-danger {
   border: var(--clr-primary-400);
 }
 
+.label__heading {
+  font-weight: 600;
+}
+
+.label__body {
+  display: block;
+  margin-left: 2.8rem;
+
+}
+
 .additional-data {
   .form-group label {
     font-size: var(--fs-400);
@@ -243,6 +264,7 @@ select ~ .font-danger {
     background-color: var(--clr-primary-400);
     border-color: var(--clr-primary-400);
   }
+
 }
 
 /* ******************************* */
