@@ -27,6 +27,8 @@ public class UserCreationField {
 
     private String helpMessage;
 
+    private String shortLabel;
+
     public void setBooleanValue(boolean val) {
         if (val) {
             value = "true";

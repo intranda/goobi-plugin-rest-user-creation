@@ -179,6 +179,8 @@ public class ExternalLoginBean implements Serializable {
             ucf.setValidation(hc.getString("@validation", null));
             ucf.setValidationErrorMessage(hc.getString("@validationErrorDescription", null));
             ucf.setHelpMessage(hc.getString("@helpMessage"));
+            ucf.setShortLabel(hc.getString("@alternativeLabel", hc.getString("@label")));
+
             List<UserCreationField> configuredFields = additionalFields.get(ucf.getPosition());
             if (configuredFields == null) {
                 configuredFields = new ArrayList<>();
