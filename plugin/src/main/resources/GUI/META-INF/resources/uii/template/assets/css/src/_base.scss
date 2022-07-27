@@ -80,8 +80,9 @@ body.modal-open {
 
 
 /* Utilities */
-.highlight-border {
-  border: 2px solid var(--clr-primary-400)
+.highlight-border.highlight-border {
+  border: 2px solid var(--clr-primary-400);
+
 }
 
 .column-start {
