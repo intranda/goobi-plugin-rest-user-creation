@@ -121,7 +121,7 @@
                 for="#{cc.attrs.identifier}_input"
                 class="zlb-label"
                 >
-                #{cc.attrs.labelText}
+                <h:outputText escape="false" value="#{cc.attrs.labelText}" />
                 <h:panelGroup
                     styleClass="input-required"
                     rendered="#{cc.attrs.fieldRequired}">
