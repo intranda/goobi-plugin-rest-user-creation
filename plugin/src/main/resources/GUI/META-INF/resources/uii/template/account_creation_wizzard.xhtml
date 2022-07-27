@@ -973,6 +973,7 @@
             </section>
         </ui:fragment>
 
+        <!-- Account erfolgreich angelegt -->
         <ui:fragment rendered="#{externalLoginBean.wizzardMode=='wait'}">
             <section class="common-region one-col">
                 <h:outputText
@@ -994,7 +995,7 @@
             </div>
         </ui:fragment>
 
-        <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1' and externalLoginBean.wizzardMode!='confirm'}">
+        <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1' and externalLoginBean.wizzardMode!='confirm' and externalLoginBean.wizzardMode!='wait'}">
             <div class="submit form-actions form-actions--progress">
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
