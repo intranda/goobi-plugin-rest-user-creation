@@ -18,6 +18,12 @@
 
     <!-- User Creation Plugin (Registration Wizzard) -->
 
+    <!-- TODO: Diese Modals werden ins reduced_content_template.hmtl gerendert
+        Es muss für jeden view ein anderes Modal bzw. andere Message keys eingebunden werden
+        Daher unten die rendered conditons
+        Das hier funktioniert im plugin-user-creation
+        Problem: es muss auch im dashboard-delivery funktionieren
+    -->
     <ui:fragment rendered="#{externalLoginBean.wizzardMode=='page1'}">
         <zlb:modal
             modalId="pageHelpModal"
