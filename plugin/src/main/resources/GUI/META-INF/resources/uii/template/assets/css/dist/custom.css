@@ -1462,69 +1462,80 @@ select ~ .font-danger {
 /* ******************************* */
 /* Status bar (user creation)     */
 /* ***************************** */
+/*
 .zlb-progress {
   --progress-step-width: 16px;
   --progress-line-height: 2px;
+
   position: relative;
   margin: 0.8rem auto;
   width: 70%;
   display: flex;
   justify-content: space-between;
-}
-.zlb-progress::after {
-  position: absolute;
-  display: inline-block;
-  content: "";
-  height: var(--progress-line-height);
-  transform: translateY(-50%);
-  top: calc(var(--progress-step-width) / 2 + var(--progress-line-height) / 2);
-  width: 100%;
-  z-index: -1;
-  background-color: var(--clr-neutral-600);
-}
-.zlb-progress__step {
-  position: relative;
-  display: flex;
-}
-.zlb-progress__step__link {
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  color: var(--clr-text-body);
-  font-size: var(--fs-200);
-}
-.zlb-progress__step__link::before {
-  display: inline-block;
-  position: absolute;
-  content: "";
-  width: var(--progress-step-width);
-  height: var(--progress-step-width);
-  border-radius: 32px;
-  background-color: var(--clr-neutral-600);
-}
-.zlb-progress__step__link:hover {
-  text-decoration: underline;
-  color: var(--clr-primary-400);
-}
-.zlb-progress__step__link.pending::before {
-  background-color: var(--clr-neutral-600);
-}
-.zlb-progress__step__link.active::before {
-  background-color: var(--clr-accent);
-}
-.zlb-progress__step__link.done::before {
-  background-color: var(--clr-success);
-}
-.zlb-progress__step:last-child .zlb-progress__step__link {
-  justify-content: flex-end;
-}
-.zlb-progress__step:first-child .zlb-progress__step__link {
-  justify-content: flex-start;
-}
-.zlb-progress__step__name {
-  margin-top: 1.6rem;
-  width: 120px;
-  word-wrap: anywhere;
+
+  &::after {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    height: var(--progress-line-height);
+    transform: translateY(-50%);
+    top: calc(var(--progress-step-width) / 2 + var(--progress-line-height) / 2);
+    width: 100%;
+    z-index: -1;
+    background-color: var(--clr-neutral-600);
+  }
+  &__step {
+    position: relative;
+    display: flex;
+
+    &__link {
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--clr-text-body);
+      font-size: var(--fs-200);
+
+      &::before {
+        display: inline-block;
+        position: absolute;
+        content: "";
+        width: var(--progress-step-width);
+        height: var(--progress-step-width);
+        border-radius: 32px;
+        background-color: var(--clr-neutral-600);
+      }
+
+      &:hover {
+        text-decoration: underline;
+        color: var(--clr-primary-400);
+      }
+
+      // Step status
+      &.pending::before {
+        background-color: var(--clr-neutral-600);
+      }
+      &.active::before {
+        background-color: var(--clr-accent);
+      }
+      &.done::before {
+        background-color: var(--clr-success);
+      }
+    }
+
+    &:last-child .zlb-progress__step__link {
+      justify-content: flex-end;
+    }
+
+    &:first-child .zlb-progress__step__link {
+      justify-content: flex-start;
+    }
+  }
+
+  &__step__name {
+    margin-top: 1.6rem;
+    width: 120px;
+    word-wrap: anywhere;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1532,11 +1543,13 @@ select ~ .font-danger {
     display: none;
   }
 }
+
 @media (max-width: 600px) {
   .zlb-progress {
     display: none;
   }
 }
+*/
 /* ******************************* */
 /* Status bar (delivery Plugin)   */
 /* ***************************** */
@@ -1544,65 +1557,152 @@ select ~ .font-danger {
   --progress-step-width: 16px;
   --progress-line-height: 2px;
   position: relative;
+  padding: 0;
+  margin: 0rem 3.2rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.statuslist::after {
+  content: "";
+  height: 3px;
+  background: var(--clr-neutral-600);
+  width: 100%;
+  position: absolute;
+  top: 7px;
+  z-index: 1;
+}
+
+.statuslist li {
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+}
+
+.statuslist li:first-child {
+  justify-content: flex-start;
+}
+
+.statuslist li:last-child {
+  justify-content: flex-end;
+}
+
+.statuslist li span {
+  margin-top: 24px;
+  text-align: center;
+  font-size: var(--fs-200);
+}
+
+.statuslist li::before {
+  z-index: 2;
+  border-radius: 32px;
+  content: "";
+  display: inline-block;
+  height: var(--progress-step-width);
+  position: absolute;
+  width: var(--progress-step-width);
+  background: var(--clr-neutral-600);
+}
+
+.submit button {
+  align-self: flex-start;
+}
+
+li.active::before {
+  background-color: var(--clr-accent);
+}
+
+li.finished::before {
+  background-color: var(--clr-success);
+}
+
+/*
+.statuslist {
+  --progress-step-width: 16px;
+  --progress-line-height: 2px;
+
+  position: relative;
   margin: 0.8rem auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
+
 }
 
-.statuslist li {
-  position: relative;
-  display: flex;
-  width: 10%;
-  justify-content: center;
-  overflow: initial !important;
-}
-.statuslist li::after {
-  position: absolute;
-  display: inline-block;
-  content: "";
-  height: var(--progress-line-height);
-  transform: translateY(-50%);
-  top: calc(var(--progress-step-width) / 2 + var(--progress-line-height) / 2);
-  left: calc(-100% + var(--progress-step-width) / 4);
-  width: 150%;
-  z-index: -1;
-  background-color: var(--clr-neutral-600);
-}
-.statuslist li:first-child,
-.statuslist li:last-child,
-.statuslist li:nth-child(-n+2)::after,
-.statuslist li:last-child::after {
-  width: unset;
-}
-.statuslist li::before {
-  display: inline-block;
-  position: absolute;
-  content: "";
-  width: var(--progress-step-width);
-  height: var(--progress-step-width);
-  border-radius: 32px;
-  background-color: var(--clr-neutral-600);
-}
-.statuslist li:first-child::before,
-.statuslist li:last-child::before {
-  display: none;
-}
-.statuslist li span {
-  margin-top: 24px;
-  display: flex;
-  text-align: center;
-}
-.statuslist li button {
-  align-self: start;
-}
-.statuslist li.active::before {
-  background-color: var(--clr-accent);
-}
-.statuslist li.finished::before {
-  background-color: var(--clr-success);
-}
+.statuslist {
+  li {
+    position: relative;
+    display: flex;
+    width: 10%;
+    justify-content: center;
+    overflow: initial !important;
+  }
 
+
+  // Steps
+  li::after {
+      position: absolute;
+      display: inline-block;
+      content: "";
+      height: var(--progress-line-height);
+      transform: translateY(-50%);
+      top: calc(var(--progress-step-width) / 2 + var(--progress-line-height) / 2);
+      left: calc(-100% + var(--progress-step-width) / 4);
+      width: 150%;
+      z-index: -1;
+      background-color: var(--clr-neutral-600);
+  }
+
+  li:first-child,
+  li:last-child,
+  li:nth-child(-n+2)::after,
+  li:last-child::after {
+    width: unset;
+  }
+
+  // Line connecting status steps
+  li::before {
+    display: inline-block;
+    position: absolute;
+    content: "";
+    width: var(--progress-step-width);
+    height: var(--progress-step-width);
+    border-radius: 32px;
+    background-color: var(--clr-neutral-600);
+  }
+
+  li:first-child::before,
+  li:last-child::before {
+    display: none;
+
+  }
+
+  // Step name
+  li span {
+    margin-top: 24px;
+    display: flex;
+    text-align: center;
+  }
+
+  // back + next btn
+  li button {
+    align-self: start;
+  }
+
+  // step color code status
+  li.active::before {
+    background-color: var(--clr-accent);
+  }
+
+  li.finished::before {
+    background-color: var(--clr-success);
+  }
+} // end .statuslist
+
+*/
 @media (max-width: 1000px) {
   /* Make status bar larger than the container */
   .container-escape {

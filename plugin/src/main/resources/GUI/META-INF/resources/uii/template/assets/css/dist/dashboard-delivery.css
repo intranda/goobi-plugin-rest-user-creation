@@ -43,21 +43,22 @@
   justify-content: center;
 }
 
+/*
 .statuslist {
-  list-style: none;
-  display: flex;
-  padding: 0;
+    list-style: none;
+    display: flex;
+    padding: 0;
 }
 
 .statuslist li {
+  // max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .statuslist li:not(:last-child) {
   margin-right: 8px;
 }
-
+*/
 /* Upload form */
 #uploadForm,
 #issueUploadForm {
