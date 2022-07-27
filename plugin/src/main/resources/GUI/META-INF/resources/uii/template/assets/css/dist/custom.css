@@ -1721,5 +1721,9 @@ li.finished::before {
     display: none;
   }
 }
+#globalMessage ul {
+  list-style: none;
+  padding-left: 0;
+}
 
 /*# sourceMappingURL=custom.css.map */

@@ -569,3 +569,9 @@ li.finished::before {
   }
 }
 
+
+// GLOBAL WARNING MESSAGE
+#globalMessage ul {
+  list-style: none;
+  padding-left: 0;
+}

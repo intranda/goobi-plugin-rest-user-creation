@@ -89,6 +89,10 @@
   margin-top: 3.2rem;
 }
 
+.form__msg {
+  text-align: center;
+}
+
 .form__msg-or {
   text-transform: uppercase;
   position: relative;
