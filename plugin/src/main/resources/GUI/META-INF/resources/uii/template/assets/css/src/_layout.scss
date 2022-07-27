@@ -35,7 +35,7 @@ main {
     --grid-tc: 1fr;
   }
   &--no-borders {
-    border: 0;
+    // border: 0;
   }
 
   /* standard is 2 columns
@@ -47,7 +47,8 @@ main {
     // stretch all items to the same hight (always fill up grid rows completely)
     align-items: unset;
     grid-auto-rows: auto;
-    padding: 3.2rem 0;
+    // padding: 3.2rem 0;
+    background-color: #fff;
   }
 }
 
