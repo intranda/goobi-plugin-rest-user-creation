@@ -588,7 +588,7 @@ body.modal-open {
 }
 
 /* Utilities */
-.highlight-border {
+.highlight-border.highlight-border {
   border: 2px solid var(--clr-primary-400);
 }
 
@@ -650,14 +650,11 @@ main {
 .common-region.one-col {
   --grid-tc: 1fr;
 }
-.common-region--no-borders {
-  border: 0;
-}
 .common-region--three-cols {
   --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
   align-items: unset;
   grid-auto-rows: auto;
-  padding: 3.2rem 0;
+  background-color: #fff;
 }
 
 .layout #globalWarningMessage {
@@ -1110,12 +1107,14 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   padding-left: 0;
   align-self: flex-end;
 }
-.overview .col-md-3, .overview .col-md-9 {
+.overview .col-md-3, .overview .col-md-9,
+.overview .col-md-6 ~ .col-md-6 {
   display: flex;
   align-self: flex-end;
   margin: 0;
 }
-.overview .col-sm-9 span {
+.overview .col-sm-9 span,
+.overview .col-md-6 span {
   padding: 0;
   margin: 0;
   align-self: flex-end;
@@ -1373,6 +1372,10 @@ select ~ .font-danger {
   filter: brightness(80%);
 }
 
+.container--user-data .form-field > span {
+  background-color: var(--clr-neutral-600);
+}
+
 /* ******************************* */
 /* Checkboxes                     */
 /* ***************************** */
@@ -1395,6 +1398,10 @@ select ~ .font-danger {
 .label__body {
   display: block;
   margin-left: 2.8rem;
+}
+
+.container--user-data .label__body {
+  margin-left: 0;
 }
 
 .additional-data .form-group label {
