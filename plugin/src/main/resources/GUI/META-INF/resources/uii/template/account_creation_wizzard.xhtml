@@ -929,7 +929,10 @@
                         label="#{field.label}"
                         field="#{field.value}"
                         fieldStyle="form-control"
-                        classLeft="col-sm-12 col-md-3 flex-column" />
+                        classLeft="col-sm-12 col-md-6 flex-column"
+                        classRight="col-sm-12 col-md-6"
+                        showDisabledCheckBox="#{true}"
+                        showDisabledCheckBoxActivated="#{field.value}"/>
                 </ui:repeat>
 
             </section>
