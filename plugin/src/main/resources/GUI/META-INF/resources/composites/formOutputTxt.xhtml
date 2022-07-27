@@ -1,6 +1,12 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:composite="http://xmlns.jcp.org/jsf/composite"
-    xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:x="http://myfaces.apache.org/tomahawk"
-    xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:x="http://myfaces.apache.org/tomahawk"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites">
 
     <composite:interface>
         <composite:attribute name="name" />
@@ -13,17 +19,52 @@
         <composite:attribute name="classLeft" default="col-sm-12 col-md-3" />
         <composite:attribute name="classRight" default="col-sm-12 col-md-9" />
         <composite:attribute name="tabindex" default="0" />
+        <composite:attribute name="showDisabledCheckBox" default="false" />
+        <composite:attribute name="showDisabledCheckBoxActivated" default="false" />
     </composite:interface>
 
     <composite:implementation>
 
         <div class="form-group row" style="#{cc.attrs.style}">
             <h:outputLabel escape="false" for="#{cc.attrs.name}" styleClass="control-label #{cc.attrs.classLeft}" value="#{cc.attrs.label}" />
+
             <div class="#{cc.attrs.classRight}">
-                <x:outputText escape="false" id="#{cc.attrs.name}" style="border:0px;" forceId="#{cc.attrs.forceId}" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.field}" tabindex="#{cc.attrs.tabindex}"/>
+
+                <ui:fragment rendered="#{cc.attrs.showDisabledCheckBox and cc.attrs.showDisabledCheckBoxActivated}">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="flexCheckCheckedDisabled"
+                            checked="true"
+                        />
+                        <label class="sr-only form-check-label" for="flexCheckCheckedDisabled">
+                            #{msgs.plugin_rest_usercreation_new_account_overview_checkedCheck_ariaLabel}
+                        </label>
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{cc.attrs.showDisabledCheckBox and !cc.attrs.showDisabledCheckBoxActivated}">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="flexCheckunCheckedDisabled"
+                        />
+                        <label class="sr-only form-check-label" for="flexCheckUncheckedDisabled">
+                            #{msgs.plugin_rest_usercreation_new_account_overview_uncheckedCheck_ariaLabel}
+                        </label>
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{!cc.attrs.showDisabledCheckBox}">
+                    <x:outputText escape="false" id="#{cc.attrs.name}" style="border:0px;" forceId="#{cc.attrs.forceId}" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.field}" tabindex="#{cc.attrs.tabindex}"/>
+                </ui:fragment>
+
             	<intranda:formHelp content="#{cc.attrs.help}" />
             </div>
         </div>
+
 
     </composite:implementation>
 

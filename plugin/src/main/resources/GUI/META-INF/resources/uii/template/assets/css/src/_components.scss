@@ -236,7 +236,10 @@ select ~ .font-danger {
 .label__body {
   display: block;
   margin-left: 2.8rem;
+}
 
+.container--user-data .label__body {
+  margin-left: 0;
 }
 
 .additional-data {

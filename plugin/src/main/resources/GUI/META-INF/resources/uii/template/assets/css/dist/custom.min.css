@@ -1400,6 +1400,10 @@ select ~ .font-danger {
   margin-left: 2.8rem;
 }
 
+.container--user-data .label__body {
+  margin-left: 0;
+}
+
 .additional-data .form-group label {
   font-size: var(--fs-400);
   display: inline;
