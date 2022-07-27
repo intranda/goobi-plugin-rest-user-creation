@@ -209,6 +209,10 @@ select ~ .font-danger {
   }
 }
 
+.container--user-data .form-field > span {
+  background-color: var(--clr-neutral-600);
+}
+
 /* ******************************* */
 /* Checkboxes                     */
 /* ***************************** */
