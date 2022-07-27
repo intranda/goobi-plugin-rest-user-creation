@@ -1149,6 +1149,14 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   color: var(--clr-primary-400);
 }
 
+[action^="/goobi/uii/error.xhtml"] ul {
+  list-style: none;
+}
+
+[action^="/goobi/uii/error.xhtml"] li {
+  display: flex;
+}
+
 [action^="/goobi/uii/error.xhtml"] .stats {
   padding: 0;
 }
