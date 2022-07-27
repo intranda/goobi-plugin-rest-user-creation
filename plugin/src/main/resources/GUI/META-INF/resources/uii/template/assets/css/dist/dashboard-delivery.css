@@ -59,7 +59,8 @@
 }
 
 /* Upload form */
-#uploadForm {
+#uploadForm,
+#issueUploadForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,10 +72,12 @@
   border-radius: var(--border-radius);
 }
 
+#issueUploadForm .form__icons,
 #uploadForm .form__icons {
   margin-top: 0;
 }
 
+#issueUploadForm svg,
 #uploadForm svg {
   width: 4.8rem;
   height: 4.8rem;
