@@ -152,13 +152,15 @@
     align-self: flex-end;
   }
 
-  .col-md-3, .col-md-9 {
+  .col-md-3, .col-md-9,
+  .col-md-6 ~ .col-md-6 {
     display: flex;
     align-self: flex-end;
     margin: 0;
   }
 
-  .col-sm-9 span {
+  .col-sm-9 span,
+  .col-md-6 span {
     padding: 0;
     margin: 0;
     align-self: flex-end;
