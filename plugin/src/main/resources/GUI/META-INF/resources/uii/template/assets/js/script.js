@@ -1,5 +1,4 @@
 $("document").ready(function () {
-  console.log('ready')
 
   // Scripts for modals can be found in `resources/composites/modals.xhtml`
   // => "Inline Help" + page help
