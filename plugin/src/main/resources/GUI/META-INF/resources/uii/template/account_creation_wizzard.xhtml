@@ -369,7 +369,18 @@
                     value="#{msgs.plugin_rest_usercreation_new_account_confirmEmail}" />
             </section>
 
-            <a href="external_index.xhtml" class="btn btn-primary-400 ms-auto">#{msgs.plugin_rest_usercreation_backToLogin}</a>
+            <button
+                class="btn btn-primary-400 ms-auto"
+                jsf:immediate="true"
+                jsf:id="backToStart">
+                <h:outputText value="#{msgs.plugin_rest_usercreation_backToLogin}" />
+                <f:setPropertyActionListener
+                    value=""
+                    target="#{externalLoginBean.uiStatus}" />
+                <f:setPropertyActionListener
+                    value="page1"
+                    target="#{externalLoginBean.wizzardMode}" />
+            </button>
 
 
         </ui:fragment>
@@ -406,13 +417,14 @@
 
                 <ui:repeat
                     var="field"
-                    value="#{externalLoginBean.additionalFields['page2']}">
-
-                    <div class="form #{field.validationError ? 'validate--danger' : ''}">
+                    value="#{externalLoginBean.additionalFields['page2']}"
+                    varStatus="status"
+                    >
+                    <div class="form  #{status.index==0?'column-start':''} #{field.validationError ? 'validate--danger' : ''}">
 
                         <zlb:label
                             labelFor="input"
-                            labelText="#{field.label}"
+                            labelText="#{msgs[field.label]}"
                             labelRequired="#{field.required}" />
 
 
@@ -538,7 +550,7 @@
 
                         <zlb:label
                             labelFor="input1"
-                            labelText="#{field.label}"
+                            labelText="#{msgs[field.label]}"
                             labelRequired="#{field.required}" />
 
 
@@ -652,7 +664,7 @@
 
                         <zlb:label
                             labelFor="input1"
-                            labelText="#{field.label}"
+                            labelText="#{msgs[field.label]}"
                             labelRequired="#{field.required}" />
 
 
@@ -769,7 +781,7 @@
 
                                     <zlb:label
                                         labelFor="activation"
-                                        labelText="#{field.label}"
+                                        labelText="#{msgs[field.label]}"
                                         labelHelpText=""
                                         labelEscapeText="#{false}"
                                         labelRequired="#{field.required}" />
@@ -932,7 +944,7 @@
                         classLeft="col-sm-12 col-md-10 flex-column"
                         classRight="col-sm-12 col-md-2"
                         showDisabledCheckBox="#{true}"
-                        showDisabledCheckBoxActivated="#{field.value}"/>
+                        showDisabledCheckBoxActivated="#{field.value}" />
                 </ui:repeat>
 
             </section>
@@ -981,7 +993,19 @@
                     value="#{msgs.plugin_rest_usercreation_new_account_creationSuccessful}" />
             </section>
 
-            <a href="external_index.xhtml" class="btn btn-primary-400 ms-auto">#{msgs.plugin_rest_usercreation_backToLogin}</a>
+
+            <button
+                class="btn btn-primary-400 ms-auto"
+                jsf:immediate="true"
+                jsf:id="backToStart2">
+                <h:outputText value="#{msgs.plugin_rest_usercreation_backToLogin}" />
+                <f:setPropertyActionListener
+                    value=""
+                    target="#{externalLoginBean.uiStatus}" />
+                <f:setPropertyActionListener
+                    value="page1"
+                    target="#{externalLoginBean.wizzardMode}" />
+            </button>
 
         </ui:fragment>
 
@@ -1004,11 +1028,44 @@
                     class="btn btn-blank me-auto">
                     <h:outputText value="#{msgs.plugin_rest_usercreation_back}" />
                 </button>
-                <ui:include src="/uii/includes/zlb-progress.xhtml">
-                    <ui:param
-                        name="data"
-                        value="#{externalLoginBean}" />
-                </ui:include>
+
+
+
+
+
+                  <ul class="statuslist">
+                        <li class="#{externalLoginBean.wizzardMode=='page1'?'active':'finished'}">
+
+                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page1'?'active':'finished'} ">
+                                <h:outputText value="#{msgs.plugin_rest_usercreation_page1}" />
+                            </h:panelGroup>
+                        </li>
+                        <li class="#{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
+                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
+                                <h:outputText value="#{msgs.plugin_rest_usercreation_page2}" />
+                            </h:panelGroup>
+                        </li>
+                        <li class="#{externalLoginBean.wizzardMode=='page3' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
+                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='data2' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
+                                <h:outputText value="#{msgs.plugin_rest_usercreation_page3}" />
+                            </h:panelGroup>
+                        </li>
+                        <li class="#{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
+                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
+                                <h:outputText value="#{msgs.plugin_rest_usercreation_page4}" />
+                            </h:panelGroup>
+                        </li>
+                        
+                        <li class="#{externalLoginBean.wizzardMode=='page5' ? 'active': externalLoginBean.wizzardMode=='confirm' ? 'finished': 'inactive'}">
+                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page5' ? 'active': externalLoginBean.wizzardMode=='confirm' ? 'finished': 'inactive'}">
+                                <h:outputText value="#{msgs.plugin_dashboard_delivery_overview}" />
+                            </h:panelGroup>
+                        </li>
+                    </ul>
+
+
+
+
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
                     jsf:id="goNext"
