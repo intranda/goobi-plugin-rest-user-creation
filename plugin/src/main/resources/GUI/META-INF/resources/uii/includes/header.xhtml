@@ -64,26 +64,26 @@
                                         var="availableLanguage"
                                         value="#{SpracheForm.supportedLocales}"
                                         id="plugin4">
-                                        <li class="nav-item">
-                                            <button
-                                                jsf:id="locale"
-                                                class="dropdown-item text_head btn-link"
-                                                jsf:action="#{SpracheForm.SpracheUmschalten}"
-                                                title="#{availableLanguage.displayLanguageTranslated}">
-                                                <f:param
-                                                    name="locale"
-                                                    value="#{availableLanguage.id}" />
-                                                <f:setPropertyActionListener
-                                                    value="#{null}"
-                                                    target="#{SessionForm.dateFormatter}" />
-                                                <!--
-                                    <h:graphicImage value="&#127760;" />
-                                    -->
-                                                <span>
-                                                    <h:outputText value="#{msgs[availableLanguage.displayLanguageSelf]}" />
-                                                </span>
-                                            </button>
-                                        </li>
+
+                                        <ui:fragment rendered="#{availableLanguage.id=='de' or availableLanguage.id=='en'}">
+                                            <li class="nav-item">
+                                                <button
+                                                    jsf:id="locale"
+                                                    class="dropdown-item text_head btn-link"
+                                                    jsf:action="#{SpracheForm.SpracheUmschalten}"
+                                                    title="#{availableLanguage.displayLanguageTranslated}">
+                                                    <f:param
+                                                        name="locale"
+                                                        value="#{availableLanguage.id}" />
+                                                    <f:setPropertyActionListener
+                                                        value="#{null}"
+                                                        target="#{SessionForm.dateFormatter}" />
+                                                    <span>
+                                                        <h:outputText value="#{msgs[availableLanguage.displayLanguageSelf]}" />
+                                                    </span>
+                                                </button>
+                                            </li>
+                                        </ui:fragment>
                                     </ui:repeat>
                                 </ul>
                             </div>
@@ -172,7 +172,10 @@
             </div>
             <div class="container-fluid header__lower">
 
-                <a href="external_index.xhtml" class="me-auto" aria-label="#{plugin_rest_usercreation_backToLogin}">
+                <a
+                    href="external_index.xhtml"
+                    class="me-auto"
+                    aria-label="#{plugin_rest_usercreation_backToLogin}">
                     <ui:include src="../includes/icon-logo-goobi.xhtml" />
                 </a>
                 <h1>
