@@ -351,6 +351,10 @@ public class ExternalLoginBean implements Serializable {
         currentUser.setInstitution(institution);
 
         for (Entry<String, List<UserCreationField>> fields : additionalFields.entrySet()) {
+            if (fields.getKey().equals("page3a") && !displaySecondContact) {
+                continue;
+            }
+
             for (UserCreationField f : fields.getValue()) {
                 if ("institution".equals(f.getType())) {
                     if (f.getFieldType().equals(COMBO_FIELDNAME) && f.getBooleanValue()) {
@@ -432,9 +436,6 @@ public class ExternalLoginBean implements Serializable {
         boolean valid = true;
 
         if ("page2".equals(pageName)) {
-            // shortname: max 6 characters, A-Za-z0-9
-            //            valid = validateInstitutionName(valid);
-
             // validate institution name, not empty and max 255 character
             if (StringUtils.isBlank(institutionName) || institutionName.length() > 255) {
                 institutionNameInvalid = true;
@@ -453,42 +454,6 @@ public class ExternalLoginBean implements Serializable {
         return valid;
 
     }
-
-    //    private boolean validateInstitutionName(boolean valid) {
-    //        if (StringUtils.isBlank(institutionShortName) || institutionShortName.length() > 6 || !institutionShortName.matches("[A-Za-z0-9]+")) {
-    //            institutionShortNameInvalid = true;
-    //            valid = false;
-    //        } else {
-    //            institutionShortNameInvalid = false;
-    //
-    //            // check that shortname is not in use
-    //            String query = "select count(1) from institution where shortName = ?";
-    //            Connection connection = null;
-    //            try {
-    //                connection = MySQLHelper.getInstance().getConnection();
-    //                QueryRunner run = new QueryRunner();
-    //                int number = run.query(connection, query, MySQLHelper.resultSetToIntegerHandler, institutionShortName);
-    //                if (number > 0) {
-    //                    valid = false;
-    //                    institutionShortNameInUse = true;
-    //                } else {
-    //                    institutionShortNameInUse = false;
-    //                }
-    //            } catch (SQLException e) {
-    //                log.error(e);
-    //            } finally {
-    //                if (connection != null) {
-    //                    try {
-    //                        MySQLHelper.closeConnection(connection);
-    //                    } catch (SQLException e) {
-    //                        log.error(e);
-    //                    }
-    //                }
-    //            }
-    //
-    //        }
-    //        return valid;
-    //    }
 
     public void back() {
         switch (wizzardMode) {
@@ -527,5 +492,14 @@ public class ExternalLoginBean implements Serializable {
 
     public void createNewContact() {
         displaySecondContact = true;
+    }
+
+
+    public void disableContact() {
+        displaySecondContact = false;
+        List<UserCreationField> ucfList = additionalFields.get("page3a");
+        for (UserCreationField ucf : ucfList) {
+            ucf.setValue("");
+        }
     }
 }

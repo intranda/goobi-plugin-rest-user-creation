@@ -418,8 +418,7 @@
                 <ui:repeat
                     var="field"
                     value="#{externalLoginBean.additionalFields['page2']}"
-                    varStatus="status"
-                    >
+                    varStatus="status">
                     <div class="form  #{status.index==0?'column-start':''} #{field.validationError ? 'validate--danger' : ''}">
 
                         <zlb:label
@@ -654,7 +653,19 @@
                 class="common-region"
                 jsf:rendered="#{externalLoginBean.displaySecondContact}">
 
-                <h3 class="heading__contact grid-full-width">#{msgs.plugin_rest_usercreation_new_contact}</h3>
+                <h3 class="heading__contact grid-full-width">
+                    #{msgs.plugin_rest_usercreation_new_contact}
+                    <button
+                        jsf:id="disableContact"
+                        jsf:action="#{externalLoginBean.disableContact}"
+                        style="float: right"
+                        class="btn btn-link ms-auto">
+
+                        <span>
+                            <h:outputText value="#{msgs.plugin_rest_usercreation_new_disableContact}" />
+                        </span>
+                    </button>
+                </h3>
 
                 <ui:repeat
                     var="field"
@@ -1012,7 +1023,7 @@
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='confirm' and externalLoginBean.wizzardMode!='wait'}">
             <div
                 class="info-required"
-                jsf:rendered="#{externalLoginBean.wizzardMode!='page1'}">
+                jsf:rendered="#{externalLoginBean.wizzardMode!='page1' and externalLoginBean.wizzardMode!='page4'}">
                 <h:outputText
                     escape="false"
                     value="#{msgs.plugin_rest_usercreation_requiredFields}" />
@@ -1033,35 +1044,35 @@
 
 
 
-                  <ul class="statuslist">
-                        <li class="#{externalLoginBean.wizzardMode=='page1'?'active':'finished'}">
+                <ul class="statuslist">
+                    <li class="#{externalLoginBean.wizzardMode=='page1'?'active':'finished'}">
 
-                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page1'?'active':'finished'} ">
-                                <h:outputText value="#{msgs.plugin_rest_usercreation_page1}" />
-                            </h:panelGroup>
-                        </li>
-                        <li class="#{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
-                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
-                                <h:outputText value="#{msgs.plugin_rest_usercreation_page2}" />
-                            </h:panelGroup>
-                        </li>
-                        <li class="#{externalLoginBean.wizzardMode=='page3' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
-                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='data2' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
-                                <h:outputText value="#{msgs.plugin_rest_usercreation_page3}" />
-                            </h:panelGroup>
-                        </li>
-                        <li class="#{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
-                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
-                                <h:outputText value="#{msgs.plugin_rest_usercreation_page4}" />
-                            </h:panelGroup>
-                        </li>
-                        
-                        <li class="#{externalLoginBean.wizzardMode=='page5' ? 'active': externalLoginBean.wizzardMode=='confirm' ? 'finished': 'inactive'}">
-                            <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page5' ? 'active': externalLoginBean.wizzardMode=='confirm' ? 'finished': 'inactive'}">
-                                <h:outputText value="#{msgs.plugin_dashboard_delivery_overview}" />
-                            </h:panelGroup>
-                        </li>
-                    </ul>
+                        <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page1'?'active':'finished'} ">
+                            <h:outputText value="#{msgs.plugin_rest_usercreation_page1}" />
+                        </h:panelGroup>
+                    </li>
+                    <li class="#{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
+                        <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
+                            <h:outputText value="#{msgs.plugin_rest_usercreation_page2}" />
+                        </h:panelGroup>
+                    </li>
+                    <li class="#{externalLoginBean.wizzardMode=='page3' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
+                        <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='data2' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
+                            <h:outputText value="#{msgs.plugin_rest_usercreation_page3}" />
+                        </h:panelGroup>
+                    </li>
+                    <li class="#{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
+                        <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
+                            <h:outputText value="#{msgs.plugin_rest_usercreation_page4}" />
+                        </h:panelGroup>
+                    </li>
+
+                    <li class="#{externalLoginBean.wizzardMode=='page5' ? 'active': externalLoginBean.wizzardMode=='confirm' ? 'finished': 'inactive'}">
+                        <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page5' ? 'active': externalLoginBean.wizzardMode=='confirm' ? 'finished': 'inactive'}">
+                            <h:outputText value="#{msgs.plugin_dashboard_delivery_overview}" />
+                        </h:panelGroup>
+                    </li>
+                </ul>
 
 
 
