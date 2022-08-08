@@ -24,6 +24,8 @@
   text-align: center;
   padding: 6.4rem;
   background-color: var(--clr-neutral-400);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
 }
 
 .item__icons svg {

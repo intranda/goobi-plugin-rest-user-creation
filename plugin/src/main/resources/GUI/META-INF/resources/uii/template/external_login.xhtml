@@ -28,7 +28,12 @@
                     rendered="#{DevModeBean.developerMode}" />
                 <ui:fragment rendered="#{!LoginForm.oidcAutoRedirect}">
                     <h1 class="page__heading m-0 mb-3" jsf:rendered="#{externalLoginBean.uiStatus != 'accountCreation'}">
-                        <h:outputText value="#{msgs.login}" />
+                        <h:outputText
+                            rendered="#{externalLoginBean.uiStatus != 'accountCreation' and externalLoginBean.uiStatus != 'resetPassword'}"
+                            value="#{msgs.login}" />
+                        <h:outputText
+                            rendered="#{externalLoginBean.uiStatus == 'resetPassword'}"
+                            value="#{msgs.plugin_rest_usercreation_pwReset_heading}" />
                     </h1>
                     <h:form
                         styleClass="form-validate #{externalLoginBean.uiStatus != 'accountCreation' ? '' : 'd-grid'}"
@@ -162,12 +167,12 @@
 
                         <h:panelGroup rendered="#{externalLoginBean.uiStatus == 'resetPassword'}">
 
-                            <div class="form form--full-width">
+                            <div class="form form--full-width pw-reset">
 
                                 <zlb:label
                                     labelFor="loginOrMail"
-                                    labelText="User name or email"
-                                    labelRequired="false" />
+                                    labelText="#{msgs.plugin_rest_usercreation_pwReset_label}"
+                                    labelRequired="true" />
 
                                 <zlb:input
                                     inputId="loginOrMail"
@@ -180,7 +185,9 @@
 
                             </div>
 
-                            <div class="form-actions">
+                            <p class="pw-reset__msg">#{msgs.plugin_rest_usercreation_pwReset_message}</p>
+
+                            <div class="form-actions pw-reset__actions">
                                 <button
                                     jsf:id="back2"
                                     class="btn btn-blank me-2"

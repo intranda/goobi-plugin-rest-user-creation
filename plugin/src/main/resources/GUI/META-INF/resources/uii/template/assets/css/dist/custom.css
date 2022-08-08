@@ -570,7 +570,7 @@
   --bs-body-font-family: "Open Sans", sans-serif;
   /* Grid */
   --grid-tc: repeat(auto-fit, minmax(45rem, 1fr));
-  --height-footer-and-nav: 303px;
+  --height-footer-and-nav: 335px;
 }
 
 /* OVERRIDES */
@@ -650,10 +650,14 @@ main {
 .common-region.one-col {
   --grid-tc: 1fr;
 }
+.common-region--no-borders {
+  border: 0;
+}
 .common-region--three-cols {
   --grid-tc: repeat(auto-fit, minmax(34rem, 1fr));
   align-items: unset;
   grid-auto-rows: auto;
+  padding: 3.2rem 0;
   background-color: #fff;
 }
 
@@ -934,6 +938,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   align-items: center;
   background: var(--clr-secondary-400);
   min-height: 84px;
+  margin-top: 3.2rem;
   border-top: 2px solid var(--clr-accent);
   color: var(--clr-text-light);
 }
@@ -989,9 +994,9 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 /* **************************** */
 .login-body {
   margin: auto;
-  padding: 64px;
+  padding: 6.4rem;
   background-color: var(--clr-neutral-400);
-  max-width: 480px;
+  max-width: 48rem;
 }
 
 .login-body h2 {
@@ -1028,6 +1033,10 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   border: 0;
   margin: 0;
   margin-top: 1.6rem;
+  color: var(--clr-primary-400);
+}
+.login-body .pw-reset__msg {
+  font-size: var(--fs-200);
   color: var(--clr-primary-400);
 }
 
@@ -1108,7 +1117,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   align-self: flex-end;
 }
 .overview .col-md-3, .overview .col-md-9,
-.overview .col-md-6 ~ .col-md-6 {
+.overview .col-md-10 ~ .col-md-2 {
   display: flex;
   align-self: flex-end;
   margin: 0;
