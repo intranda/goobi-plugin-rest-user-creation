@@ -757,6 +757,11 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   text-decoration: none;
 }
 
+.header .dropdown-menu {
+  border-color: var(--clr-accent);
+  box-shadow: 3px 4px 16px 0px rgba(0, 0, 0, 0.64);
+}
+
 .header__lower a {
   color: var(--clr-primary-400);
   text-decoration: none;
@@ -848,11 +853,19 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   margin-left: 8px;
 }
 
+.user__account-menu {
+  padding-left: 1.6rem;
+  border-left: 1px solid currentColor;
+}
+.user__account-menu .dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
 .user__account-menu__name {
   margin-right: 8px;
 }
 .user__account-menu img {
-  max-height: 4.2rem;
+  height: 3.8rem;
 }
 
 .dropdown-menu span,
@@ -910,9 +923,11 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 }
 
 .brand__logo {
-  padding-right: 8px;
-  margin-right: 8px;
+  padding-right: 1.6rem;
   border-right: 1px solid #fff;
+  height: 100%;
+  margin: auto 1.6rem;
+  margin-left: 0;
 }
 
 .brand__copy,
@@ -993,6 +1008,8 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 /* Login                         */
 /* **************************** */
 .login-body {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
   margin: auto;
   padding: 6.4rem;
   background-color: var(--clr-neutral-400);
@@ -1207,8 +1224,8 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 }
 
 .btn-primary-400:hover {
-  background-color: var(--clr-primary-200);
-  border-color: var(--clr-primary-200);
+  background-color: var(--clr-primary-600);
+  border-color: var(--clr-primary-600);
 }
 
 .btn-blank {
