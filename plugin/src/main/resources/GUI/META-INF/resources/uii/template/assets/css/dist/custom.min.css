@@ -993,9 +993,10 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 /* **************************** */
 .login-body {
   margin: auto;
-  padding: 64px;
+  padding: 6.4rem;
   background-color: var(--clr-neutral-400);
-  max-width: 480px;
+  max-width: 48rem;
+  margin-bottom: 3.2rem;
 }
 
 .login-body h2 {
