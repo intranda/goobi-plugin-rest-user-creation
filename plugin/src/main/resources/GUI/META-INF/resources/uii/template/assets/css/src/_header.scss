@@ -5,6 +5,11 @@
   text-decoration: none;
 }
 
+.header .dropdown-menu {
+  border-color: var(--clr-accent);
+  box-shadow: 3px 4px 16px 0px rgba(0,0,0,0.64);
+}
+
 .header__lower a {
   color: var(--clr-primary-400);
   text-decoration: none;
@@ -111,12 +116,20 @@
 }
 
 .user__account-menu {
+  padding-left: 1.6rem;
+  border-left: 1px solid currentColor;
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+  }
+
   &__name {
     margin-right: 8px;
   }
 
   img {
-    max-height: 4.2rem;
+    height: 3.8rem;
   }
 }
 
@@ -181,9 +194,11 @@
 }
 
 .brand__logo {
-  padding-right: 8px;
-  margin-right: 8px;
+  padding-right: 1.6rem;
   border-right: 1px solid #fff;
+  height: 100%;
+  margin: auto 1.6rem;
+  margin-left: 0;
 }
 
 
