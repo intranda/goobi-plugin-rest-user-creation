@@ -474,7 +474,9 @@
                             id="radio"
                             rendered="#{field.fieldType=='combo' and field.booleanValue}"
                             styleClass="form-control"
-                            value="#{field.subValue}">
+                            value="#{field.subValue}"
+                            required="true"
+                            requiredMessage="#{field.validationErrorMessage}">
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
@@ -597,7 +599,9 @@
                         <h:selectOneRadio
                             rendered="#{field.fieldType=='combo' and field.booleanValue}"
                             styleClass="form-control"
-                            value="#{field.subValue}">
+                            value="#{field.subValue}"
+                            required="true"
+                            requiredMessage="#{field.validationErrorMessage}">
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
@@ -723,7 +727,9 @@
                         <h:selectOneRadio
                             rendered="#{field.fieldType=='combo' and field.booleanValue}"
                             styleClass="form-control"
-                            value="#{field.subValue}">
+                            value="#{field.subValue}"
+                            required="true"
+                            requiredMessage="#{field.validationErrorMessage}">
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
@@ -852,7 +858,8 @@
                             <h:selectOneRadio
                                 rendered="#{field.fieldType=='combo' and field.booleanValue}"
                                 styleClass="form-control"
-                                value="#{field.subValue}">
+                                value="#{field.subValue}"
+                            >
                                 <f:ajax
                                     render="@form"
                                     execute="@this" />

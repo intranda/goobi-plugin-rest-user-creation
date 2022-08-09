@@ -411,19 +411,19 @@ public class ExternalLoginBean implements Serializable {
 
     public void next() {
         switch (wizzardMode) {
-            case "page2":
+            case "page2": //NOSONAR
                 if (validateFields("page2")) {
-                    wizzardMode = "page3";
+                    wizzardMode = "page3"; //NOSONAR
                 }
                 break;
             case "page3":
                 if (validateFields("page3")) {
-                    wizzardMode = "page4";
+                    wizzardMode = "page4"; //NOSONAR
                 }
                 break;
             case "page4":
                 if (validateFields("page4")) {
-                    wizzardMode = "page5";
+                    wizzardMode = "page5"; //NOSONAR
                 }
                 break;
             default:

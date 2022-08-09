@@ -44,6 +44,12 @@ public class UserCreationField {
     public boolean validateValue() {
 
         String val = value;
+
+        if (fieldType.equals("combo") && getBooleanValue() && StringUtils.isBlank(subValue)) {
+            validationError = true;
+            return false;
+        }
+
         if (StringUtils.isNotBlank(subValue)) {
             val = subValue;
         }
@@ -54,12 +60,9 @@ public class UserCreationField {
             return false;
         }
 
-        if (StringUtils.isNotBlank(validation) && StringUtils.isNotBlank(val)) {
-            if (!val.matches(validation)) {
-                validationError = true;
-                return false;
-            }
-
+        if (StringUtils.isNotBlank(validation) && StringUtils.isNotBlank(val) && !val.matches(validation)) {
+            validationError = true;
+            return false;
         }
         return true;
     }
