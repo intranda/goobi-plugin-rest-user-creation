@@ -3,8 +3,7 @@
  * 2. Form elements
  * 3. Validation
  * 4. Checkboxes
- * 5. Status bar (user creation)
- * 6. Status bar (delivery Plugin)
+ * 5. Status bar (delivery Plugin)
  *
  */
 
@@ -302,99 +301,6 @@ select ~ .font-danger {
 }
 
 /* ******************************* */
-/* Status bar (user creation)     */
-/* ***************************** */
-
-/*
-.zlb-progress {
-  --progress-step-width: 16px;
-  --progress-line-height: 2px;
-
-  position: relative;
-  margin: 0.8rem auto;
-  width: 70%;
-  display: flex;
-  justify-content: space-between;
-
-  &::after {
-    position: absolute;
-    display: inline-block;
-    content: "";
-    height: var(--progress-line-height);
-    transform: translateY(-50%);
-    top: calc(var(--progress-step-width) / 2 + var(--progress-line-height) / 2);
-    width: 100%;
-    z-index: -1;
-    background-color: var(--clr-neutral-600);
-  }
-  &__step {
-    position: relative;
-    display: flex;
-
-    &__link {
-      display: flex;
-      justify-content: center;
-      text-decoration: none;
-      color: var(--clr-text-body);
-      font-size: var(--fs-200);
-
-      &::before {
-        display: inline-block;
-        position: absolute;
-        content: "";
-        width: var(--progress-step-width);
-        height: var(--progress-step-width);
-        border-radius: 32px;
-        background-color: var(--clr-neutral-600);
-      }
-
-      &:hover {
-        text-decoration: underline;
-        color: var(--clr-primary-400);
-      }
-
-      // Step status
-      &.pending::before {
-        background-color: var(--clr-neutral-600);
-      }
-      &.active::before {
-        background-color: var(--clr-accent);
-      }
-      &.done::before {
-        background-color: var(--clr-success);
-      }
-    }
-
-    &:last-child .zlb-progress__step__link {
-      justify-content: flex-end;
-    }
-
-    &:first-child .zlb-progress__step__link {
-      justify-content: flex-start;
-    }
-  }
-
-  &__step__name {
-    margin-top: 1.6rem;
-    width: 120px;
-    word-wrap: anywhere;
-  }
-}
-
-@media (max-width: 900px) {
-  .zlb-progress__step__name {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .zlb-progress {
-    display: none;
-  }
-}
-*/
-
-/* ******************************* */
 /* Status bar (delivery Plugin)   */
 /* ***************************** */
 
@@ -465,92 +371,25 @@ li.active::before {
 li.finished::before {
   background-color: var(--clr-success);
 }
-/*
-.statuslist {
-  --progress-step-width: 16px;
-  --progress-line-height: 2px;
 
-  position: relative;
-  margin: 0.8rem auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
+.statuslist .status {
+  max-width: 120px;
+  word-break: break;
+  hyphens: auto;
+  padding: 0 8px;
+}
+.statuslist li:first-of-type .status {
+  padding-left: 0;
+}
+.statuslist li:last-of-type .status {
+  padding-right: 0;
 }
 
-.statuslist {
-  li {
-    position: relative;
-    display: flex;
-    width: 10%;
-    justify-content: center;
-    overflow: initial !important;
-  }
 
 
-  // Steps
-  li::after {
-      position: absolute;
-      display: inline-block;
-      content: "";
-      height: var(--progress-line-height);
-      transform: translateY(-50%);
-      top: calc(var(--progress-step-width) / 2 + var(--progress-line-height) / 2);
-      left: calc(-100% + var(--progress-step-width) / 4);
-      width: 150%;
-      z-index: -1;
-      background-color: var(--clr-neutral-600);
-  }
 
-  li:first-child,
-  li:last-child,
-  li:nth-child(-n+2)::after,
-  li:last-child::after {
-    width: unset;
-  }
-
-  // Line connecting status steps
-  li::before {
-    display: inline-block;
-    position: absolute;
-    content: "";
-    width: var(--progress-step-width);
-    height: var(--progress-step-width);
-    border-radius: 32px;
-    background-color: var(--clr-neutral-600);
-  }
-
-  li:first-child::before,
-  li:last-child::before {
-    display: none;
-
-  }
-
-  // Step name
-  li span {
-    margin-top: 24px;
-    display: flex;
-    text-align: center;
-  }
-
-  // back + next btn
-  li button {
-    align-self: start;
-  }
-
-  // step color code status
-  li.active::before {
-    background-color: var(--clr-accent);
-  }
-
-  li.finished::before {
-    background-color: var(--clr-success);
-  }
-} // end .statuslist
-
-*/
 @media (max-width: 1000px) {
-  /* Make status bar larger than the container */
+  /* Make status bar larger than its container */
   .container-escape {
     width: 100vw;
     position: relative;
