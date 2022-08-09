@@ -255,3 +255,19 @@ table button span {
 .form-select {
   font-size: var(--fs-400);
 }
+
+// Modify help btn position in combo checkboxes
+// => They remain in the upper right corner when the combo is opend
+.deliveryPlugin .form-check {
+  position: relative;
+}
+
+.deliveryPlugin .form-check .form-icons {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.deliveryPlugin .form-check table {
+  width: calc(100% - 6.4rem)
+}
