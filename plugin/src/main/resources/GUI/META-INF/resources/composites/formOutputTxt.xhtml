@@ -21,6 +21,9 @@
         <composite:attribute name="tabindex" default="0" />
         <composite:attribute name="showDisabledCheckBox" default="false" />
         <composite:attribute name="showDisabledCheckBoxActivated" default="false" />
+        <composite:attribute name="secondValue" />
+        
+        
     </composite:interface>
 
     <composite:implementation>
@@ -36,12 +39,15 @@
                             class="form-check-input"
                             type="checkbox"
                             id="flexCheckCheckedDisabled"
-                            checked="true"
+                            checked="checked"
                             disabled="disabled"
                         />
                         <label class="sr-only form-check-label" for="flexCheckCheckedDisabled">
                             #{msgs.plugin_rest_usercreation_new_account_overview_checkedCheck_ariaLabel}
                         </label>
+                        
+                      <x:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.secondValue}" tabindex="#{cc.attrs.tabindex}"/>
+
                     </div>
                 </ui:fragment>
 

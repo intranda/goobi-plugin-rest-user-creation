@@ -263,6 +263,12 @@ public class ExternalLoginBean implements Serializable {
             return;
         }
         // check password length
+        // The new password must fulfill the minimum password length (read from default configuration file)
+        int minimumLength = ConfigurationHelper.getInstance().getMinimumPasswordLength();
+        if (password.length() < minimumLength) {
+            Helper.setFehlerMeldung("neuesPasswortNichtLangGenug", "" + minimumLength);
+            return;
+        }
 
         if (!privacyTextAccepted) {
             privacyValid = false;
@@ -384,7 +390,7 @@ public class ExternalLoginBean implements Serializable {
 
         // send mail to staff to activate account
         if (StringUtils.isNotBlank(registrationMailRecipient) && StringUtils.isNotBlank(registrationMailBody)) {
-            SendMail.getInstance().sendMailToUser(registrationMailSubject, registrationMailBody.replace("{login}", accountName), emailAddress);
+            SendMail.getInstance().sendMailToUser(registrationMailSubject, registrationMailBody.replace("{login}", currentUser.getLogin()), currentUser.getEmail());
 
         }
         wizzardMode = "wait";
@@ -444,7 +450,14 @@ public class ExternalLoginBean implements Serializable {
                 institutionNameInvalid = false;
             }
         }
-
+        if ("page3".equals(pageName) && displaySecondContact) {
+            List<UserCreationField> fields = additionalFields.get("page3a");
+            for (UserCreationField field : fields) {
+                if (!field.validateValue()) {
+                    valid = false;
+                }
+            }
+        }
         List<UserCreationField> fields = additionalFields.get(pageName);
         for (UserCreationField field : fields) {
             if (!field.validateValue()) {
@@ -493,7 +506,6 @@ public class ExternalLoginBean implements Serializable {
     public void createNewContact() {
         displaySecondContact = true;
     }
-
 
     public void disableContact() {
         displaySecondContact = false;
