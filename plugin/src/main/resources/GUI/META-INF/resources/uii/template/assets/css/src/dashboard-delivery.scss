@@ -73,6 +73,10 @@
     fill: var(--clr-primary-400);
 }
 
+#issueUploadForm {
+  margin-bottom: 5.6rem;
+}
+
 #issueUploadForm ~ form {
   margin-top: 3.2rem;
 }
