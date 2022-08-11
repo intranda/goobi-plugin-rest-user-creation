@@ -90,7 +90,7 @@ Click here to login: &lt;a href="{url}"&gt;login.&lt;/a&gt;
 	<registration>
 		<recipient>robert@intranda.com</recipient>
 		<subject>Neuer Account wurde erstellt</subject>
-		<body>Es wurde ein neuer Account erstellt: {login}</body>
+		<body>Es wurde ein neuer Account erstellt</body>
 	</registration>
 
 </config_plugin>

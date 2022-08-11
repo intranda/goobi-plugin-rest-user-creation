@@ -148,6 +148,9 @@ public class ExternalLoginBean implements Serializable {
     @Getter
     private String privacyErrorMessage;
 
+    private static final String NEWLINE = "<br />";
+    private static final String COLON = ": ";
+
     // additional fields, stored in a map with page number as key and list of fields as value
     @Getter
     transient Map<String, List<UserCreationField>> additionalFields = new HashMap<>();
@@ -236,7 +239,7 @@ public class ExternalLoginBean implements Serializable {
 
         if (StringUtils.isBlank(firstname)) {
             firstNameValid = false;
-            firstNameErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField");
+            firstNameErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField"); //NOSONAR
             return;
         }
 
@@ -324,10 +327,8 @@ public class ExternalLoginBean implements Serializable {
             String token = JwtHelper.createToken(tokenMap);
 
             String url = SendMail.getInstance().getConfig().getApiUrl().replace("mails/disable", "users/email/" + token);
-            String messageSubject = SendMail.getInstance().getConfig().getUserCreationMailSubject();
-            String messageBody = SendMail.getInstance()
-                    .getConfig()
-                    .getUserCreationMailBody()
+            String messageSubject = Helper.getTranslation(SendMail.getInstance().getConfig().getUserCreationMailSubject());
+            String messageBody = Helper.getTranslation(SendMail.getInstance().getConfig().getUserCreationMailBody())
                     .replace("{password}", password)
                     .replace("{login}", accountName)
                     .replace("{url}", url);
@@ -357,7 +358,7 @@ public class ExternalLoginBean implements Serializable {
         currentUser.setInstitution(institution);
 
         for (Entry<String, List<UserCreationField>> fields : additionalFields.entrySet()) {
-            if (fields.getKey().equals("page3a") && !displaySecondContact) {
+            if (fields.getKey().equals("page3a") && !displaySecondContact) { //NOSONAR
                 continue;
             }
 
@@ -390,7 +391,98 @@ public class ExternalLoginBean implements Serializable {
 
         // send mail to staff to activate account
         if (StringUtils.isNotBlank(registrationMailRecipient) && StringUtils.isNotBlank(registrationMailBody)) {
-            SendMail.getInstance().sendMailToUser(registrationMailSubject, registrationMailBody.replace("{login}", currentUser.getLogin()), currentUser.getEmail());
+            String subject = Helper.getTranslation(registrationMailSubject);
+            String body = Helper.getTranslation(registrationMailBody);
+            body = body.replace("{login}", currentUser.getLogin());
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(NEWLINE);
+            sb.append(NEWLINE);
+
+            // first page
+            sb.append("Account");
+            sb.append(NEWLINE);
+            sb.append(Helper.getTranslation("plugin_rest_usercreation_userName"));
+            sb.append(COLON);
+            sb.append(currentUser.getLogin());
+            sb.append(NEWLINE);
+
+            sb.append(Helper.getTranslation("firstname"));
+            sb.append(COLON);
+            sb.append(currentUser.getVorname());
+            sb.append(NEWLINE);
+            sb.append(Helper.getTranslation("lastname"));
+            sb.append(COLON);
+            sb.append(currentUser.getNachname());
+            sb.append(NEWLINE);
+            sb.append(Helper.getTranslation("plugin_rest_usercreation_new_account_emailAddress"));
+            sb.append(COLON);
+            sb.append(currentUser.getEmail());
+            sb.append(NEWLINE);
+            sb.append(NEWLINE);
+            sb.append("Institution");
+            sb.append(NEWLINE);
+
+            // second page
+            sb.append(Helper.getTranslation("plugin_rest_usercreation_new_account_institutionName"));
+            sb.append(COLON);
+            sb.append(institutionName);
+            sb.append(NEWLINE);
+
+            for (UserCreationField field : additionalFields.get("page2")) { //NOSONAR
+                sb.append(Helper.getTranslation(field.getLabel()));
+                sb.append(COLON);
+                sb.append(field.getValue());
+                if (StringUtils.isNotBlank(field.getSubValue())) {
+                    sb.append(", " + field.getSubValue());
+                }
+                sb.append(NEWLINE);
+            }
+            sb.append(NEWLINE);
+
+            // third page
+            sb.append("Contact");
+            sb.append(NEWLINE);
+            for (UserCreationField field : additionalFields.get("page3")) { //NOSONAR
+                sb.append(Helper.getTranslation(field.getLabel()));
+                sb.append(COLON);
+                sb.append(field.getValue());
+                if (StringUtils.isNotBlank(field.getSubValue())) {
+                    sb.append(", " + field.getSubValue());
+                }
+                sb.append(NEWLINE);
+            }
+
+            if (displaySecondContact) {
+                sb.append("Second Contact");
+                sb.append(NEWLINE);
+                for (UserCreationField field : additionalFields.get("page3a")) { //NOSONAR
+                    sb.append(Helper.getTranslation(field.getLabel()));
+                    sb.append(COLON);
+                    sb.append(field.getValue());
+                    if (StringUtils.isNotBlank(field.getSubValue())) {
+                        sb.append(", " + field.getSubValue());
+                    }
+                    sb.append(NEWLINE);
+                }
+            }
+            sb.append(NEWLINE);
+
+            // page 4
+            sb.append(Helper.getTranslation("plugin_rest_usercreation_new_additionalData"));
+            sb.append(NEWLINE);
+            for (UserCreationField field : additionalFields.get("page4")) { //NOSONAR
+                sb.append(Helper.getTranslation(field.getLabel()));
+                sb.append(COLON);
+                sb.append(field.getValue());
+                if (StringUtils.isNotBlank(field.getSubValue())) {
+                    sb.append(", " + field.getSubValue());
+                }
+                sb.append(NEWLINE);
+            }
+            sb.append(NEWLINE);
+
+            SendMail.getInstance().sendMailToUser(subject, body + NEWLINE + sb.toString(), currentUser.getEmail());
 
         }
         wizzardMode = "wait";
