@@ -1241,13 +1241,22 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 }
 
 .btn-accent {
-  color: var(--clr-accent);
+  color: var(--clr-primary-600);
   border: 1px solid var(--clr-accent);
+  background-color: var(--clr-accent);
+}
+.btn-accent:hover {
+  --clr-accent: #DD8C00;
 }
 
-.btn-accent:hover {
-  color: #fff;
-  background-color: var(--clr-accent);
+.btn-outline-secondary {
+  border-color: var(--clr-text-400);
+  color: var(--clr-text-400);
+}
+.btn-outline-secondary:hover {
+  border-color: var(--clr-text-400);
+  color: var(--clr-text-light);
+  background-color: var(--clr-text-400);
 }
 
 /* ******************************* */
