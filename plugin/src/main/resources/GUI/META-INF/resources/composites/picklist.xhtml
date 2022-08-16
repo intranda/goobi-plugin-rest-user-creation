@@ -77,7 +77,7 @@
 
                 <h:selectOneMenu
                     id="#{cc.attrs.identifier}_select"
-                    styleClass="form-control #{cc.attrs.fieldStyle}"
+                    styleClass="form-select #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.role}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     validator="#{field.validateField}">
@@ -121,7 +121,8 @@
                     <button
                         jsf:id="button"
                         jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
-                        class="form-icons__button form-icons__button--duplicate">
+                        class="form-icons__button form-icons__button--duplicate"
+                        aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}">
                         <ui:include src="/uii/includes/icon-plus.xhtml" />
                         <f:setPropertyActionListener
                             value="#{field}"
