@@ -36,11 +36,15 @@ var fileUpload = (function fileUpload(){
     fakeBtnSend.removeAttribute('disabled');
   }
 
-  function init() {
-    const form = document.querySelector('#file');
+  function init({DSForm, DSSubmit}) {
+
+
+    const form = document.querySelector(DSForm);
+    const submit = document.querySelector(DSSubmit);
     const fakeBtnBrowse = document.querySelector('.fake-btn--browse');
     const fakeBtnSend= document.querySelector('.fake-btn--send');
-    const submit = document.querySelector('#submit');
+
+    if(!form || !submit) return;
 
     // Listen for file submit => update Frontend 
     form.addEventListener('change', updateFE);
