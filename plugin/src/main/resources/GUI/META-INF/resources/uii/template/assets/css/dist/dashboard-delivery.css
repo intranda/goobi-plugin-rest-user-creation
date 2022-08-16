@@ -147,7 +147,7 @@
 }
 
 /* URL Upload Modal */
-#modalUploadUrl form {
+#modalUploadUrl .form-wrapper {
   display: flex;
   gap: 0.8rem;
 }

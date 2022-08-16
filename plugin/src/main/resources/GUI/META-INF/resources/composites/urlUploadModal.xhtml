@@ -12,11 +12,12 @@
 	<composite:interface>
 		<composite:attribute name="modalId" />
 		<composite:attribute name="modalTitle" />
+    <composite:attribute name="placeholder" default="https://www.example.com" />
 	</composite:interface>
 
 	<composite:implementation>
 
-    <composite:attribute name="placeholder" default="https://www.example.com"/>
+
 
 		<zlb:modal
 				modalId="modalUploadUrl"
@@ -28,7 +29,7 @@
 				labelText="Geben sie hier eine URL ein"
 				labelRequired="true" />
 
-			<h:form>
+			<div class="form-wrapper">
 
 			<!--
 			<h:inputText value="#{DashboardForm.plugin.downloadUrl}"/>
@@ -50,7 +51,7 @@
 				<ui:include src="/uii/includes/icon-help.xhtml" />
 			</button>
 
-			</h:form>
+			</div>
 
 			<p class="modal__help-msg invisible">#{msgs.plugin_dashboard_delivery_urlUploadForm_helpMsg}</p>
 

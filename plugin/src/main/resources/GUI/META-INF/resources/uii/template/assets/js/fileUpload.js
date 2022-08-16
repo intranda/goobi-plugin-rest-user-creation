@@ -1,3 +1,4 @@
+
 var fileUpload = (function fileUpload(){
 
   function updateFE(e) {
@@ -8,6 +9,7 @@ var fileUpload = (function fileUpload(){
     const formMsg = document.querySelector('.form__msg');
     const formMsgOr = document.querySelector('.form__msg-or');
     const fakeBtnSend = document.querySelector('.fake-btn--send');
+    const btnUrlUpload = document.querySelector('.btn--url-upload');
 
 
     // Check length of the file name
@@ -23,17 +25,21 @@ var fileUpload = (function fileUpload(){
       fileName.innerHTML = file.name
     }
 
-    // Hide icon + upload message
+    // Hide icon, upload message + url upload btn
     iconFirst.classList.add('d-none');
     formMsg.classList.add('d-none');
     formMsgOr.classList.add('d-none');
+    btnUrlUpload.classList.add('d-none');
+
+    
 
     // Show file names + upload icon
     fileName.classList.remove('d-none');
     iconSecond.classList.remove('d-none');
 
     // Enable fake send btn
-    fakeBtnSend.removeAttribute('disabled');
+    // fakeBtnSend.removeAttribute('disabled');
+    fakeBtnSend.classList.remove('d-none');
   }
 
   function init({DSForm, DSSubmit}) {
