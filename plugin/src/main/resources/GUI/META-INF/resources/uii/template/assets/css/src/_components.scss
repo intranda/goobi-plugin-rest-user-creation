@@ -32,6 +32,16 @@
   color: var(--clr-text-light);
 }
 
+.btn-accent {
+  color: var(--clr-accent);
+  border: 1px solid var(--clr-accent);
+}
+
+.btn-accent:hover {
+  color: #fff;
+  background-color: var(--clr-accent);
+}
+
 /* ******************************* */
 /* FORM ELEMENTS (inputs etc)     */
 /* ***************************** */

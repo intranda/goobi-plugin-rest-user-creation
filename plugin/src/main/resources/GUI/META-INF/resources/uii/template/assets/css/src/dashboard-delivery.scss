@@ -149,6 +149,31 @@
   right: 4px;
 }
 
+/* URL Upload Modal */
+#modalUploadUrl {
+
+  form {
+    display: flex;
+    gap : .8rem;
+  }
+
+   [id$="urlUploadInput"] {
+    width: 100%;
+  }
+
+  .modal__trigger--help-msg {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: var(--clr-primary-400);
+  }
+
+  .modal__help-msg {
+    font-size: var(--fs-200);
+    color: var(--clr-neutral-800);
+  }
+}
+
 
 /* Some forms have a submit button inside the form
 .btn-inside helps to display them outside of the form for coherence */
