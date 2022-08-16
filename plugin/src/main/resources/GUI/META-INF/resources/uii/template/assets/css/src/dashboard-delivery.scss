@@ -115,6 +115,41 @@
     gap: .8rem;
 }
 
+.form-control.form-control-lg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+
+}
+
+#uploadForm {
+  display: relative;
+}
+
+.form__inner {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 3.2rem;
+}
+
+.form__actions {
+  position: relative;
+}
+
+#submit {
+  position: absolute;
+  left: 4px;
+}
+
+.fake-btn {
+  right: 4px;
+}
+
+
 /* Some forms have a submit button inside the form
 .btn-inside helps to display them outside of the form for coherence */
 
