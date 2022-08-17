@@ -44,11 +44,6 @@ public class UsercreationRestPlugin {
     public void verifyEmail(@PathParam("token") String token) {
 
         HttpSession session = servletRequest.getSession();
-        //        LoginBean userBean = Helper.getLoginBeanFromSession(session);
-        //        if (userBean == null) {
-        //            // create new bean
-        //            userBean=  Helper.getBeanByClass(LoginBean.class);
-        //        }
 
         ExternalLoginBean elb = (ExternalLoginBean) getBeanFromSession(session, ExternalLoginBean.class);
         try {
@@ -56,13 +51,11 @@ public class UsercreationRestPlugin {
             DecodedJWT jwt = JwtHelper.verifyTokenAndReturnClaims(token);
 
             // extract user data from request
-            //            String userId = jwt.getClaim("id").asString();
             String accountName = jwt.getClaim("user").asString();
 
             // log user in
             User user = UserManager.getUserByLogin(accountName);
             user.lazyLoad();
-            //            userBean.setMyBenutzer(user);
 
             elb.setCurrentUser(user);
             elb.setWizzardMode("page2");
