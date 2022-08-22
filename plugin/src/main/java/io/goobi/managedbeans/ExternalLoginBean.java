@@ -486,7 +486,7 @@ public class ExternalLoginBean implements Serializable {
             recipients.add(registrationMailRecipient);
             recipients.add(currentUser.getEmail());
 
-            SendMail.getInstance() .sendMailToUser(subject, body + NEWLINE + sb.toString(), recipients, true);
+            SendMail.getInstance() .sendMailToUser(subject, body + NEWLINE + sb.toString(), recipients, false);
 
         }
         wizzardMode = "wait";
