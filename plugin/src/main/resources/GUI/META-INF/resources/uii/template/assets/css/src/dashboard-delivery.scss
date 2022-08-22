@@ -38,6 +38,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: 1.6rem;
+    hyphens: none;
   }
 }
 
@@ -391,7 +392,7 @@ button ~ .box {
 
 @media (max-width: 2000px) {
   .container.existing-data {
-    width: 100vw;
+    /*width: 100vw;*/
   }
 }
 

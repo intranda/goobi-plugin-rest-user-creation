@@ -128,6 +128,10 @@ section .overview .form-check {
   }
 }
 
+span.form-control {
+  min-height: 3.8rem;
+}
+
 /* VALIDATION */
 .validate--danger input,
 .validate--danger select {
