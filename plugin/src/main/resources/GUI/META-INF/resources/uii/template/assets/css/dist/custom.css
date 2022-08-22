@@ -578,6 +578,10 @@
   font-size: var(--fs-200);
 }
 
+.text-danger {
+  color: var(--clr-danger);
+}
+
 #login-body {
   counter-reset: section;
 }
@@ -795,7 +799,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   padding-right: 4.8rem;
 }
 .header .container-fluid.header__upper {
-  background: var(--clr-secondary-400);
+  background: var(--clr-primary-400);
   border-bottom: 2px solid var(--clr-accent);
   color: var(--clr-text-light);
 }
@@ -953,7 +957,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--clr-secondary-400);
+  background: var(--clr-primary-400);
   min-height: 84px;
   margin-top: 3.2rem;
   border-top: 2px solid var(--clr-accent);

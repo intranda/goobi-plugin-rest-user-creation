@@ -68,6 +68,10 @@
   font-size: var(--fs-200);
 }
 
+.text-danger {
+  color: var(--clr-danger);
+}
+
 // Reset counter globally
 #login-body {
   counter-reset: section;

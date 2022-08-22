@@ -28,6 +28,16 @@
   border-radius: var(--border-radius);
 }
 
+.item.incomplete-user-data > *:not(p) {
+  opacity: 0.65;
+}
+.item.incomplete-user-data .text-danger {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1.6rem;
+}
+
 .item__icons svg {
   margin: 0 0.4rem;
   width: 3.2rem;

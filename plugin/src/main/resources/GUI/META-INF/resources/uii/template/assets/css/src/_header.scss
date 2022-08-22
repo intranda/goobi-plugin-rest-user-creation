@@ -41,7 +41,8 @@
   padding-right: 4.8rem;
 
   &.header__upper {
-    background: var(--clr-secondary-400);
+    // background: var(--clr-secondary-400);
+    background: var(--clr-primary-400);
     border-bottom: 2px solid var(--clr-accent);
     color: var(--clr-text-light);
   }
