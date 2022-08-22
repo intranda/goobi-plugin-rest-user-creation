@@ -68,7 +68,7 @@ public class UsercreationRestPlugin {
             // forward to institution creation screen
             sessionForm.updateSessionUserName(servletRequest.getSession(), user);
             servletResponse.sendRedirect("/goobi/uii/external_index.xhtml");
-
+            return;
         } catch (TokenExpiredException|SignatureVerificationException e) {
             log.error(e);
             Base64.Decoder decoder = Base64.getUrlDecoder();
