@@ -361,6 +361,16 @@ button ~ .box {
   --bs-table-accent-bg: var(--clr-neutral-200);
 }
 
+/* Target first nested table in every row (Metadata column) */
+.existing-data td:first-child tr {
+  display: flex;
+  hyphens: unset;
+}
+
+.existing-data td:first-child tr td {
+  hyphens: none;
+}
+
 @media (max-width: 2000px) {
   .container.existing-data {
     /*width: 100vw;*/
