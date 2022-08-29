@@ -11,10 +11,18 @@
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <composite:interface>
-        <composite:attribute name="inputDuplicate" default="false" />
-        <composite:attribute name="showHelpBtn" default="true" />
-        <composite:attribute name="helpTitle" default="default help Title (field.xhtml)"/>
-        <composite:attribute name="helpText" default="default help text"/>
+        <composite:attribute
+            name="inputDuplicate"
+            default="false" />
+        <composite:attribute
+            name="showHelpBtn"
+            default="true" />
+        <composite:attribute
+            name="helpTitle"
+            default="default help Title (field.xhtml)" />
+        <composite:attribute
+            name="helpText"
+            default="default help text" />
 
         <composite:attribute name="identifier" />
         <!-- #{field.label} -->
@@ -58,9 +66,13 @@
         <composite:attribute
             name="fieldStyle"
             default="" />
-            
-        <composite:attribute name="displayDuplicateButton" default="false" />
-        <composite:attribute name="render" default="@form" />
+
+        <composite:attribute
+            name="displayDuplicateButton"
+            default="false" />
+        <composite:attribute
+            name="render"
+            default="@form" />
 
     </composite:interface>
 
@@ -71,49 +83,56 @@
             styleClass="form-group #{cc.attrs.mainClass}">
 
             <!-- Checkbox needs slightly different markup -->
-            <ui:fragment rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}" >
-            <div class="form-check #{!cc.attrs.propertyValid ? 'validate--danger' : ''}" >
-                <div class="form-check-wrapper">
+            <ui:fragment rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}">
+                <div class="form-check #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
+                    <div class="form-check-wrapper">
 
-                <h:selectBooleanCheckbox
-                    id="#{cc.attrs.identifier}_checkbox"
-                    rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}"
-                    pt:aria-label="#{cc.attrs.labelText}"
-                    styleClass="form-check-input"
-                    value="#{cc.attrs.booleanValue}">
-                    <f:ajax
-                        render="#{cc.attrs.render}"
-                        execute="@this" />
-                </h:selectBooleanCheckbox>
+                        <h:selectBooleanCheckbox
+                            id="#{cc.attrs.identifier}_checkbox"
+                            rendered="#{cc.attrs.fieldType=='checkbox' or cc.attrs.fieldType=='combo'}"
+                            pt:aria-label="#{cc.attrs.labelText}"
+                            styleClass="form-check-input"
+                            value="#{cc.attrs.booleanValue}"
+                            onfocus="focusField(this);">
+                            <f:ajax
+                                render="#{cc.attrs.render}"
+                                execute="@this" />
+                        </h:selectBooleanCheckbox>
 
-                 <zlb:label
-                    labelFor="activation"
-                    labelText="#{cc.attrs.labelText}"
-                    labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-                    labelRequired="#{cc.attrs.fieldRequired}" />
+                        <zlb:label
+                            labelFor="activation"
+                            labelText="#{cc.attrs.labelText}"
+                            labelHelpText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+                            labelRequired="#{cc.attrs.fieldRequired}" />
 
-                <h:selectOneRadio
-                    id="#{cc.attrs.identifier}_radio"
-                    rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
-                    styleClass="form-control"
-                    value="#{cc.attrs.subValue}"
-                    >
-                    <f:ajax
-                        render="#{cc.attrs.render}"
-                        execute="@this" />
-                    <f:selectItems value="#{cc.attrs.selectItems}" />
-                </h:selectOneRadio>
+                        <h:selectOneRadio
+                            id="#{cc.attrs.identifier}_radio"
+                            rendered="#{cc.attrs.fieldType=='combo' and cc.attrs.booleanValue}"
+                            styleClass="form-control"
+                            value="#{cc.attrs.subValue}"
+                            onfocus="focusField(this);">
+                            <f:ajax
+                                render="#{cc.attrs.render}"
+                                execute="@this" />
+                            <f:selectItems value="#{cc.attrs.selectItems}" />
+                        </h:selectOneRadio>
 
-                </div> <!-- end form-check-wraper -->
+                    </div>
+                    <!-- end form-check-wraper -->
 
 
-                 <!-- ICONS -->
-                <ui:include src="/uii/includes/form_icons.xhtml">
-                    <ui:param name="helpTitle" value="#{cc.attrs.helpTitle}" />
-                    <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
-                </ui:include>
-                
-            </div> <!-- end form-check -->
+                    <!-- ICONS -->
+                    <ui:include src="/uii/includes/form_icons.xhtml">
+                        <ui:param
+                            name="helpTitle"
+                            value="#{cc.attrs.helpTitle}" />
+                        <ui:param
+                            name="helpBody"
+                            value="#{cc.attrs.helpText}" />
+                    </ui:include>
+
+                </div>
+                <!-- end form-check -->
                 <!-- Help text / danger text -->
                 <h:panelGroup
                     layout="block"
@@ -127,111 +146,124 @@
                     value="#{cc.attrs.labelHelpText}" />
             </ui:fragment>
 
-            <ui:fragment rendered="#{cc.attrs.fieldType!='checkbox' and cc.attrs.fieldType!='combo'}" >
-            <label
-                for="#{cc.attrs.identifier}_input"
-                class="zlb-label"
-                >
-                <h:outputText escape="false" value="#{cc.attrs.labelText}" />
-                <h:panelGroup
-                    styleClass="input-required"
-                    rendered="#{cc.attrs.fieldRequired}">
-                    <i class="fa fa-asterisk" />
-                </h:panelGroup>
-            </label>
+            <ui:fragment rendered="#{cc.attrs.fieldType!='checkbox' and cc.attrs.fieldType!='combo'}">
+                <label
+                    for="#{cc.attrs.identifier}_input"
+                    class="zlb-label">
+                    <h:outputText
+                        escape="false"
+                        value="#{cc.attrs.labelText}" />
+                    <h:panelGroup
+                        styleClass="input-required"
+                        rendered="#{cc.attrs.fieldRequired}">
+                        <i class="fa fa-asterisk" />
+                    </h:panelGroup>
+                </label>
 
-            <div class="form form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
-                <x:inputText
-                    id="#{cc.attrs.identifier}_input"
-                    rendered="#{cc.attrs.fieldType=='input'}"
-                    pt:aria-label="#{cc.attrs.labelText}"
-                    styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}"
-                    validator="#{field.validateField}">
-                    <f:ajax
-                        render="#{cc.attrs.render}"
-                        execute="@this" />
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="#{cc.attrs.placeholderText}" />
-                </x:inputText>
+                <div class="form form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
+                    <x:inputText
+                        id="#{cc.attrs.identifier}_input"
+                        rendered="#{cc.attrs.fieldType=='input'}"
+                        pt:aria-label="#{cc.attrs.labelText}"
+                        styleClass="form-control #{cc.attrs.fieldStyle}"
+                        value="#{cc.attrs.value}"
+                        validator="#{field.validateField}"
+                        onfocus="focusField(this);">
+                        <f:ajax
+                            render="#{cc.attrs.render}"
+                            execute="@this focusField" />
+                        <f:passThroughAttribute
+                            name="placeholder"
+                            value="#{cc.attrs.placeholderText}" />
+                    </x:inputText>
 
-                <x:inputTextarea
-                    id="#{cc.attrs.identifier}_textare"
-                    rendered="#{cc.attrs.fieldType=='textarea'}"
-                    pt:aria-label="#{cc.attrs.labelText}"
-                    styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}"
-                    validator="#{field.validateField}">
-                    <f:ajax
-                        render="#{cc.attrs.render}"
-                        execute="@this" />
-                    <f:passThroughAttribute
-                        name="placeholder"
-                        value="#{cc.attrs.placeholderText}" />
-                </x:inputTextarea>
-                <h:selectOneMenu
-                    id="#{cc.attrs.identifier}_select"
-                    rendered="#{cc.attrs.fieldType=='dropdown' or cc.attrs.fieldType=='journaltitles'}"
-                    styleClass="form-select #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}"
-                    pt:aria-label="#{cc.attrs.labelText}"
-                    validator="#{field.validateField}">
-                    <f:selectItem
-                        itemValue=""
-                        itemLabel="#{msgs.bitteAuswaehlen}" />
-                    <f:ajax
-                        render="#{cc.attrs.render}"
-                        execute="@this" />
-                    <f:selectItems value="#{cc.attrs.selectItems}" />
-                </h:selectOneMenu>
+                    <x:inputTextarea
+                        id="#{cc.attrs.identifier}_textare"
+                        rendered="#{cc.attrs.fieldType=='textarea'}"
+                        pt:aria-label="#{cc.attrs.labelText}"
+                        styleClass="form-control #{cc.attrs.fieldStyle}"
+                        value="#{cc.attrs.value}"
+                        validator="#{field.validateField}"
+                        onfocus="focusField(this);">
+                        <f:ajax
+                            render="#{cc.attrs.render}"
+                            execute="@this" />
+                        <f:passThroughAttribute
+                            name="placeholder"
+                            value="#{cc.attrs.placeholderText}" />
+                    </x:inputTextarea>
+                    <h:selectOneMenu
+                        id="#{cc.attrs.identifier}_select"
+                        rendered="#{cc.attrs.fieldType=='dropdown' or cc.attrs.fieldType=='journaltitles'}"
+                        styleClass="form-select #{cc.attrs.fieldStyle}"
+                        value="#{cc.attrs.value}"
+                        pt:aria-label="#{cc.attrs.labelText}"
+                        validator="#{field.validateField}"
+                        onfocus="focusField(this);">
+                        <f:selectItem
+                            itemValue=""
+                            itemLabel="#{msgs.bitteAuswaehlen}" />
+                        <f:ajax
+                            render="#{cc.attrs.render}"
+                            execute="@this" />
+                        <f:selectItems value="#{cc.attrs.selectItems}" />
+                    </h:selectOneMenu>
 
-                <h:outputText
-                    rendered="#{cc.attrs.fieldType=='output'}"
-                    styleClass="form-control #{cc.attrs.fieldStyle}"
-                    value="#{cc.attrs.value}">
-                </h:outputText>
-
-
-
-            <div class="form-icons">
-            <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
-                <button
-                    jsf:id="button"
-                    jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
-                    class="form-icons__button form-icons__button--duplicate"
-                    aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}">
-                    <ui:include src="/uii/includes/icon-plus.xhtml" />
-                    <f:setPropertyActionListener
-                        value="#{field}"
-                        target="#{DashboardForm.plugin.currentField}" />
-                </button>
-            </h:panelGroup>
-
-              <!-- ICONS + HELP -->
-              <ui:include src="/uii/includes/form_icons.xhtml">
-                <ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
-                <ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
-                <ui:param name="helpTitle" value="#{cc.attrs.helpTitle}" />
-                <ui:param name="helpBody" value="#{cc.attrs.helpText}" />
-              </ui:include>
-            </div>
-
-            <!-- Help text / danger text -->
-            <h:panelGroup
-                layout="block"
-                rendered="#{!cc.attrs.propertyValid}"
-                styleClass="font-danger validation-message">
-                <h:outputText value="#{cc.attrs.errorMessageText}" />
-            </h:panelGroup>
-            <h:outputText
-                styleClass="help-block font-light"
-                rendered="#{NavigationForm.showHelp}"
-                value="#{cc.attrs.labelHelpText}" />
-        </div>
+                    <h:outputText
+                        rendered="#{cc.attrs.fieldType=='output'}"
+                        styleClass="form-control #{cc.attrs.fieldStyle}"
+                        value="#{cc.attrs.value}">
+                    </h:outputText>
 
 
-        </ui:fragment>
+
+                    <div class="form-icons">
+                        <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
+                            <button
+                                jsf:id="button"
+                                jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
+                                class="form-icons__button form-icons__button--duplicate"
+                                aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}"
+                                jsf:onfocus="focusField(this);">
+                                <ui:include src="/uii/includes/icon-plus.xhtml" />
+                                <f:setPropertyActionListener
+                                    value="#{field}"
+                                    target="#{DashboardForm.plugin.currentField}" />
+                            </button>
+                        </h:panelGroup>
+
+                        <!-- ICONS + HELP -->
+                        <ui:include src="/uii/includes/form_icons.xhtml">
+                            <ui:param
+                                name="duplicateElement"
+                                value="#{cc.attrs.inputDuplicate}" />
+                            <ui:param
+                                name="showHelpBtn"
+                                value="#{cc.attrs.showHelpBtn}" />
+                            <ui:param
+                                name="helpTitle"
+                                value="#{cc.attrs.helpTitle}" />
+                            <ui:param
+                                name="helpBody"
+                                value="#{cc.attrs.helpText}" />
+                        </ui:include>
+                    </div>
+
+                    <!-- Help text / danger text -->
+                    <h:panelGroup
+                        layout="block"
+                        rendered="#{!cc.attrs.propertyValid}"
+                        styleClass="font-danger validation-message">
+                        <h:outputText value="#{cc.attrs.errorMessageText}" />
+                    </h:panelGroup>
+                    <h:outputText
+                        styleClass="help-block font-light"
+                        rendered="#{NavigationForm.showHelp}"
+                        value="#{cc.attrs.labelHelpText}" />
+                </div>
+
+
+            </ui:fragment>
         </h:panelGroup>
 
     </composite:implementation>
