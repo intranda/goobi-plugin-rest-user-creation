@@ -80,7 +80,8 @@
                     styleClass="form-select #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.role}"
                     pt:aria-label="#{cc.attrs.labelText}"
-                    validator="#{field.validateField}">
+                    validator="#{field.validateField}"
+                    onfocus="focusField(this);">
                     <f:selectItem
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
@@ -95,7 +96,8 @@
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}"
-                    validator="#{field.validateField}">
+                    validator="#{field.validateField}"
+                    onfocus="focusField(this);">
                     <f:ajax
                         render="#{cc.attrs.render}"
                         execute="@this" />
@@ -122,7 +124,8 @@
                         jsf:id="button"
                         jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
                         class="form-icons__button form-icons__button--duplicate"
-                        aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}">
+                        aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}"
+                        jsf:onfocus="focusField(this);">
                         <ui:include src="/uii/includes/icon-plus.xhtml" />
                         <f:setPropertyActionListener
                             value="#{field}"
