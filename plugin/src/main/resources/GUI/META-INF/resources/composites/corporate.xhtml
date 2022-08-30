@@ -17,7 +17,9 @@
         <!-- #{field.helpMessage} -->
         <composite:attribute name="labelHelpText" />
         <!-- #{field.required} -->
-        <composite:attribute name="fieldRequired" default="false" />
+        <composite:attribute
+            name="fieldRequired"
+            default="false" />
         <!-- #{field.value} -->
         <composite:attribute name="value" />
         <!-- #{field.role} -->
@@ -32,14 +34,26 @@
         <composite:attribute name="selectItems" />
 
         <!-- #{field.helpMessage} ? -->
-        <composite:attribute name="placeholderText" default="" />
+        <composite:attribute
+            name="placeholderText"
+            default="" />
         <!-- styling options -->
-        <composite:attribute name="mainClass" default="" />
-        <composite:attribute name="subClass" default="" />
-        <composite:attribute name="fieldStyle" default="" />
+        <composite:attribute
+            name="mainClass"
+            default="" />
+        <composite:attribute
+            name="subClass"
+            default="" />
+        <composite:attribute
+            name="fieldStyle"
+            default="" />
 
-        <composite:attribute name="displayDuplicateButton" default="false" />
-        <composite:attribute name="render" default="@form" />
+        <composite:attribute
+            name="displayDuplicateButton"
+            default="false" />
+        <composite:attribute
+            name="render"
+            default="@form" />
 
     </composite:interface>
 
@@ -58,13 +72,14 @@
                     <i class="fa fa-asterisk" />
                 </h:panelGroup>
             </label>
-            <div class="form-field #{cc.attrs.subClass}">
+            <div class="form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
                 <x:inputText
                     id="#{cc.attrs.identifier}_input"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}"
-                    validator="#{field.validateField}">
+                    validator="#{field.validateField}"
+                    onfocus="focusField(this);">
                     <f:ajax
                         render="#{cc.attrs.render}"
                         execute="@this" />
@@ -78,14 +93,15 @@
                     styleClass="form-select #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.role}"
                     pt:aria-label="#{cc.attrs.labelText}"
-                    validator="#{field.validateField}">
+                    validator="#{field.validateField}"
+                    onfocus="focusField(this);">
                     <f:selectItem
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
+                    <f:selectItems value="#{cc.attrs.selectItems}" />
                     <f:ajax
                         render="#{cc.attrs.render}"
                         execute="@this" />
-                    <f:selectItems value="#{cc.attrs.selectItems}" />
                 </h:selectOneMenu>
             </div>
 
@@ -93,6 +109,7 @@
             <div class="form-icons">
                 <h:panelGroup rendered="#{cc.attrs.displayDuplicateButton}">
                     <button
+                        jsf:onfocus="focusField(this);"
                         jsf:id="button"
                         jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
                         class="form-icons__button form-icons__button--duplicate"
@@ -103,18 +120,19 @@
                             target="#{DashboardForm.plugin.currentField}" />
                     </button>
                 </h:panelGroup>
-                <!-- ICONS + HELP -->
-                <ui:include src="/uii/includes/form_icons.xhtml">
-                    <ui:param
-                        name="duplicateElement"
-                        value="#{cc.attrs.inputDuplicate}" />
-                    <ui:param
-                        name="showHelpBtn"
-                        value="#{cc.attrs.showHelpBtn}" />
-                    <ui:param
-                        name="helpBody"
-                        value="#{cc.attrs.helpText}" />
-                </ui:include>
+                <h:panelGroup rendered="#{cc.attrs.showHelpBtn}">
+                    <button
+                        jsf:id="showHelpCorporate"
+                        jsf:onfocus="focusField(this);"
+                        type="button"
+                        class="form-icons__button form-icons__button--help"
+                        aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementHelp}"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-body="#{cc.attrs.helpText}">
+                        <ui:include src="/uii/includes/icon-help.xhtml" />
+                    </button>
+                </h:panelGroup>
             </div>
 
             <h:panelGroup

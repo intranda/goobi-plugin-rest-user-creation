@@ -72,7 +72,7 @@
                 </h:panelGroup>
 
             </label>
-            <div class="form-field #{cc.attrs.subClass}">
+            <div class="form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
                 <x:inputText
                     id="#{cc.attrs.identifier}_input"
                     pt:aria-label="#{cc.attrs.labelText}"
@@ -128,7 +128,7 @@
                         jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
                         class="form-icons__button form-icons__button--duplicate"
                         aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}"
-                        jsf:onfocus="focusField(this);">
+                        onfocus="focusField(this);">
                         <ui:include src="/uii/includes/icon-plus.xhtml" />
                         <f:setPropertyActionListener
                             value="#{field}"
@@ -136,18 +136,20 @@
                     </button>
                 </h:panelGroup>
 
-                <!-- ICONS + HELP -->
-                <ui:include src="/uii/includes/form_icons.xhtml">
-                    <ui:param
-                        name="duplicateElement"
-                        value="#{cc.attrs.inputDuplicate}" />
-                    <ui:param
-                        name="showHelpBtn"
-                        value="#{cc.attrs.showHelpBtn}" />
-                    <ui:param
-                        name="helpBody"
-                        value="#{cc.attrs.helpText}" />
-                </ui:include>
+                <h:panelGroup rendered="#{cc.attrs.showHelpBtn}">
+                    <button
+                        jsf:id="showHelpPerson"
+                        jsf:onfocus="focusField(this);"
+                        type="button"
+                        class="form-icons__button form-icons__button--help"
+                        aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementHelp}"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-body="#{cc.attrs.helpText}"
+                        data-bs-title="#{cc.attrs.helpTitle}">
+                        <ui:include src="/uii/includes/icon-help.xhtml" />
+                    </button>
+                </h:panelGroup>
 
             </div>
             <!-- Help text / danger text -->
