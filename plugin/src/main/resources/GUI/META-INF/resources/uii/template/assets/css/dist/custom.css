@@ -1343,7 +1343,8 @@ span.form-control {
 }
 
 input ~ .font-danger,
-select ~ .font-danger {
+select ~ .font-danger,
+div ~ .font-danger {
   color: var(--clr-danger);
   font-size: var(--fs-200);
 }
