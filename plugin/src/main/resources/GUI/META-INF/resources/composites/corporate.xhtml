@@ -61,7 +61,7 @@
         <h:panelGroup
             id="#{cc.attrs.identifier}"
             layout="block"
-            styleClass="form #{cc.attrs.mainClass}">
+            styleClass="form #{cc.attrs.mainClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
             <label
                 class="zlb-label"
                 for="#{cc.attrs.identifier}_input">
@@ -72,7 +72,7 @@
                     <i class="fa fa-asterisk" />
                 </h:panelGroup>
             </label>
-            <div class="form-field #{cc.attrs.subClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
+            <div class="form-field #{cc.attrs.subClass}">
                 <x:inputText
                     id="#{cc.attrs.identifier}_input"
                     pt:aria-label="#{cc.attrs.labelText}"
@@ -80,7 +80,7 @@
                     value="#{cc.attrs.value}"
                     validator="#{field.validateField}"
                     onfocus="focusField(this);">
-                    <f:ajax
+                    <f:ajax event="blur"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:passThroughAttribute
@@ -99,7 +99,7 @@
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
-                    <f:ajax
+                    <f:ajax event="blur"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                 </h:selectOneMenu>
