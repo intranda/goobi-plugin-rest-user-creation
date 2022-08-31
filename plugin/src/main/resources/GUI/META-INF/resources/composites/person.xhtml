@@ -74,7 +74,7 @@
             </label>
             <div class="form-field #{cc.attrs.subClass}">
                 <x:inputText
-                    id="#{cc.attrs.identifier}_input"
+                    id="#{cc.attrs.identifier}_firstname"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}"
@@ -89,7 +89,7 @@
                 </x:inputText>
 
                 <x:inputText
-                    id="#{cc.attrs.identifier}_input2"
+                    id="#{cc.attrs.identifier}_lastname"
                     pt:aria-label="#{cc.attrs.labelText}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.secondValue}"
@@ -109,7 +109,8 @@
                     value="#{cc.attrs.role}"
                     pt:aria-label="#{cc.attrs.labelText}"
                     validator="#{field.validateField}"
-                    onfocus="focusField(this);">
+                    onfocus="focusField(this);"
+                    required="false">
                     <f:selectItem
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
