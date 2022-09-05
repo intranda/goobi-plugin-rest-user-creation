@@ -29,6 +29,8 @@ public class UserCreationField {
 
     private String shortLabel;
 
+    private String placeholderText;
+
     public void setBooleanValue(boolean val) {
         if (val) {
             value = "true";
