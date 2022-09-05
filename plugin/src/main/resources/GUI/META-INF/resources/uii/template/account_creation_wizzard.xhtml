@@ -459,7 +459,7 @@
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
+                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                         </h:selectOneMenu>
                         <h:selectBooleanCheckbox
                             rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
@@ -480,7 +480,7 @@
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
+                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
@@ -585,7 +585,7 @@
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
+                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                         </h:selectOneMenu>
                         <h:selectBooleanCheckbox
                             rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
@@ -605,7 +605,7 @@
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
+                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
@@ -713,7 +713,7 @@
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
+                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                         </h:selectOneMenu>
                         <h:selectBooleanCheckbox
                             rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
@@ -733,7 +733,7 @@
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" />
+                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
@@ -853,7 +853,7 @@
                                 <f:ajax
                                     render="@this"
                                     execute="@this" />
-                                <f:selectItems value="#{field.selectItemList}" />
+                                <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                             </h:selectOneMenu>
                             <h:selectOneRadio
                                 rendered="#{field.fieldType=='combo' and field.booleanValue}"
@@ -863,7 +863,7 @@
                                 <f:ajax
                                     render="@form"
                                     execute="@this" />
-                                <f:selectItems value="#{field.selectItemList}" />
+                                <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
                             </h:selectOneRadio>
                             <h:panelGroup
                                 layout="block"

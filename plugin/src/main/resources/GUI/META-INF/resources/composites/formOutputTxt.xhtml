@@ -46,7 +46,7 @@
                             #{msgs.plugin_rest_usercreation_new_account_overview_checkedCheck_ariaLabel}
                         </label>
                         
-                      <x:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.secondValue}" tabindex="#{cc.attrs.tabindex}"/>
+                        <x:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.secondValue}" tabindex="#{cc.attrs.tabindex}"/>
 
                     </div>
                 </ui:fragment>
@@ -62,8 +62,8 @@
                         <label class="sr-only form-check-label" for="flexCheckUncheckedDisabled">
                             #{msgs.plugin_rest_usercreation_new_account_overview_uncheckedCheck_ariaLabel}
                         </label>
+                        <x:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{msgs.plugin_rest_usercreation_new_account_notSelected}" tabindex="#{cc.attrs.tabindex}"/>
                     </div>
-                    <x:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{msgs.plugin_rest_usercreation_new_account_notSelected}" tabindex="#{cc.attrs.tabindex}"/>
                 </ui:fragment>
 
                 <ui:fragment rendered="#{!cc.attrs.showDisabledCheckBox}">
