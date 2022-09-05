@@ -329,6 +329,8 @@ public class ExternalLoginBean implements Serializable {
             String url = SendMail.getInstance().getConfig().getApiUrl().replace("mails/disable", "users/email/" + token);
             String messageSubject = Helper.getTranslation(SendMail.getInstance().getConfig().getUserCreationMailSubject());
             String messageBody = Helper.getTranslation(SendMail.getInstance().getConfig().getUserCreationMailBody())
+                    .replace("{firstname}", user.getVorname())
+                    .replace("{lastname}", user.getNachname())
                     .replace("{password}", password)
                     .replace("{login}", accountName)
                     .replace("{url}", url);
@@ -486,7 +488,7 @@ public class ExternalLoginBean implements Serializable {
             recipients.add(registrationMailRecipient);
             recipients.add(currentUser.getEmail());
 
-            SendMail.getInstance() .sendMailToUser(subject, body + NEWLINE + sb.toString(), recipients, false);
+            SendMail.getInstance().sendMailToUser(subject, body + NEWLINE + sb.toString(), recipients, false);
 
         }
         wizzardMode = "wait";
