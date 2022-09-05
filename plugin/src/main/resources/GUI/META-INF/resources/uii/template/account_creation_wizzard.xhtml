@@ -69,7 +69,7 @@
                             execute="@this" />
                         <f:passThroughAttribute
                             name="placeholder"
-                            value="" />
+                            value="#{msgs.plugin_rest_usercreation_new_account_placeholder_accountName}" />
                     </x:inputText>
                     <!-- ICONS -->
                     <ui:include src="/uii/includes/form_icons.xhtml">
@@ -395,7 +395,7 @@
                         inputForceId="true"
                         inputValue="#{externalLoginBean.institutionName}"
                         inputRequired="false"
-                        inputPlaceholder=""
+                        inputPlaceholder="#{msgs.plugin_rest_usercreation_new_account_institutionNamePlaceholder}"
                         inputDuplicate="false"
                         showHelpBtn="true"
                         helpTitle="#{msgs.plugin_rest_usercreation_new_account_institutionName}"
@@ -431,7 +431,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="" />
+                                value="#{msgs[field.placeholderText]}" />
                         </x:inputText>
 
                         <x:inputTextarea
@@ -445,7 +445,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="" />
+                                value="#{msgs[field.placeholderText]}" />
                         </x:inputTextarea>
                         <h:selectOneMenu
                             id="dropdown"
@@ -558,7 +558,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="" />
+                                value="#{msgs[field.placeholderText]}" />
                         </x:inputText>
 
 
@@ -572,7 +572,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="" />
+                                value="#{msgs[field.placeholderText]}" />
                         </x:inputTextarea>
                         <h:selectOneMenu
                             rendered="#{field.fieldType=='dropdown'}"
@@ -686,7 +686,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="" />
+                                value="#{msgs[field.placeholderText]}" />
                         </x:inputText>
 
 
@@ -700,7 +700,7 @@
                                 execute="@this" />
                             <f:passThroughAttribute
                                 name="placeholder"
-                                value="" />
+                                value="#{msgs[field.placeholderText]}" />
                         </x:inputTextarea>
                         <h:selectOneMenu
                             rendered="#{field.fieldType=='dropdown'}"
@@ -828,7 +828,7 @@
                                     execute="@this" />
                                 <f:passThroughAttribute
                                     name="placeholder"
-                                    value="" />
+                                    value="#{msgs[field.placeholderText]}" />
                             </x:inputText>
                             <x:inputTextarea
                                 rendered="#{field.fieldType=='textarea'}"
@@ -840,7 +840,7 @@
                                     execute="@this" />
                                 <f:passThroughAttribute
                                     name="placeholder"
-                                    value="" />
+                                    value="#{msgs[field.placeholderText]}" />
                             </x:inputTextarea>
                             <h:selectOneMenu
                                 rendered="#{field.fieldType=='dropdown'}"
@@ -1041,10 +1041,6 @@
                     <h:outputText value="#{msgs.plugin_rest_usercreation_back}" />
                 </button>
 
-
-
-
-
                 <ul class="statuslist">
                     <li class="#{externalLoginBean.wizzardMode=='page1'?'active':'finished'}">
 
@@ -1074,9 +1070,6 @@
                         </h:panelGroup>
                     </li>
                 </ul>
-
-
-
 
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
