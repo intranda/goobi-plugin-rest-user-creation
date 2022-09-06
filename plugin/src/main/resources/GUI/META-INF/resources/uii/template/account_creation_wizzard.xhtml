@@ -955,7 +955,7 @@
                         classLeft="col-sm-12 col-md-10 flex-column"
                         classRight="col-sm-12 col-md-2"
                         showDisabledCheckBox="#{true}"
-                        showDisabledCheckBoxActivated="#{field.value}" 
+                        showDisabledCheckBoxActivated="#{field.value}"
                         secondValue="#{field.subValue}"/>
                 </ui:repeat>
 
@@ -1095,6 +1095,49 @@
 function focusField (elem) {
 // do nothing
 }
+
+
+var pwInput = document.querySelector('#password');
+var pwInputConfirm = document.querySelector('#password2');
+
+function comparePasswords() {
+    const infoTextSucc = 'Die Passwörter stimmen überein.';
+    const infoTextErr = '#{msgs.plugin_rest_usercreation_new_account_confirmPasswordWrong}';
+
+    pwInput.parentElement.querySelector('.text-danger')?.remove();
+    pwInput.parentElement.querySelector('.text-success')?.remove();
+    const isEmpty = (pwInput.value === '' || pwInputConfirm.value === '');
+    const isEqual = pwInput.value === pwInputConfirm.value;
+    const infoEl = document.createElement('div');
+
+    if (isEmpty) {
+        pwInput.style.borderColor = 'var(--border-color)';
+        pwInputConfirm.style.borderColor = 'var(--border-color)';
+        return
+    }
+
+    if(isEqual) {
+        pwInput.style.borderColor = 'var(--clr-success)';
+        pwInputConfirm.style.borderColor = 'var(--clr-success)';
+        infoEl.classList.add('text-success');
+        infoEl.innerText = infoTextSucc;
+        pwInput.parentElement.appendChild(infoEl);
+        return
+    }
+
+    pwInput.style.borderColor = 'var(--clr-danger)';
+    pwInputConfirm.style.borderColor = 'var(--clr-danger)';
+    infoEl.classList.add('text-danger');
+    infoEl.innerText = infoTextErr;
+    pwInput.parentElement.appendChild(infoEl);
+
+
+}
+
+pwInput.addEventListener('keyup', comparePasswords)
+pwInputConfirm.addEventListener('keyup', comparePasswords)
+
+
 </script>
 
     </composite:implementation>
