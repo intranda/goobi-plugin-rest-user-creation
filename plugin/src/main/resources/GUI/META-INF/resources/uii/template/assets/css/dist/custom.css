@@ -1251,7 +1251,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
   background-color: var(--clr-accent);
 }
 .btn-accent:hover {
-  --clr-accent: #DD8C00;
+  --clr-accent: #dd8c00;
 }
 
 .btn-outline-secondary {
@@ -1346,6 +1346,10 @@ input ~ .font-danger,
 select ~ .font-danger,
 div ~ .font-danger {
   color: var(--clr-danger);
+  font-size: var(--fs-200);
+}
+
+.validation-message--clientside {
   font-size: var(--fs-200);
 }
 

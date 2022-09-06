@@ -38,10 +38,9 @@
   background-color: var(--clr-accent);
 
   &:hover {
-    --clr-accent: #DD8C00;
+    --clr-accent: #dd8c00;
   }
 }
-
 
 // BS override
 .btn-outline-secondary {
@@ -54,7 +53,6 @@
     background-color: var(--clr-text-400);
   }
 }
-
 
 /* ******************************* */
 /* FORM ELEMENTS (inputs etc)     */
@@ -71,7 +69,7 @@ section .overview .form-check {
 
 @media (min-width: 900px) {
   .overview .form-check {
-   /* max-width: 45%; */
+    /* max-width: 45%; */
   }
 }
 
@@ -86,7 +84,6 @@ section .overview .form-check {
 .label__body {
   display: block;
   margin-left: 2.8rem;
-
 }
 
 .info-required {
@@ -142,6 +139,10 @@ input ~ .font-danger,
 select ~ .font-danger,
 div ~ .font-danger {
   color: var(--clr-danger);
+  font-size: var(--fs-200);
+}
+
+.validation-message--clientside {
   font-size: var(--fs-200);
 }
 
@@ -299,7 +300,6 @@ div ~ .font-danger {
     background-color: var(--clr-primary-400);
     border-color: var(--clr-primary-400);
   }
-
 }
 
 /* ******************************* */
@@ -333,7 +333,6 @@ div ~ .font-danger {
 /* Status bar (delivery Plugin)   */
 /* ***************************** */
 
-
 .statuslist {
   --progress-step-width: 16px;
   --progress-line-height: 2px;
@@ -347,7 +346,7 @@ div ~ .font-danger {
 }
 
 .statuslist::after {
-  content: '';
+  content: "";
   height: 3px;
   background: var(--clr-neutral-600);
   width: calc(100%);
@@ -414,9 +413,6 @@ li.finished::before {
   padding-right: 0;
 }
 
-
-
-
 @media (max-width: 1000px) {
   /* Make status bar larger than its container */
   .container-escape {
@@ -436,7 +432,6 @@ li.finished::before {
     display: none;
   }
 }
-
 
 // GLOBAL WARNING MESSAGE
 #globalMessage ul {
