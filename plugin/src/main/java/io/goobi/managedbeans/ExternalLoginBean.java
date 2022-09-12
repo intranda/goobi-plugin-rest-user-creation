@@ -214,13 +214,11 @@ public class ExternalLoginBean implements Serializable {
         if (StringUtils.isBlank(accountName)) {
             accountNameErrorMessage = Helper.getTranslation("keinLoginAngegeben");
             accountNameValid = false;
-            return;
         } else {
             // check that account name only uses valid characters
             if (!isLoginValide(accountName)) {
                 accountNameErrorMessage = Helper.getTranslation("loginWrongCharacter");
                 accountNameValid = false;
-                return;
             }
             // check that the account name was not used yet
             String query = "login='" + StringEscapeUtils.escapeSql(accountName) + "'";
@@ -230,7 +228,6 @@ public class ExternalLoginBean implements Serializable {
                 if (num > 0) {
                     accountNameErrorMessage = Helper.getTranslation("loginBereitsVergeben");
                     accountNameValid = false;
-                    return;
                 }
             } catch (DAOException e) {
                 log.error(e);
@@ -240,45 +237,41 @@ public class ExternalLoginBean implements Serializable {
         if (StringUtils.isBlank(firstname)) {
             firstNameValid = false;
             firstNameErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField"); //NOSONAR
-            return;
         }
 
         if (StringUtils.isBlank(lastname)) {
             lastNameValid = false;
             lastNameErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField");
-            return;
         }
 
         // check that email address is valid?
         if (!EmailValidator.getInstance().isValid(emailAddress)) {
             emailValid = false;
             emailErrorMessage = Helper.getTranslation("emailNotValid");
-            return;
         }
         if (StringUtils.isBlank(password)) {
             passwordValid = false;
             passwordErrorMessage = Helper.getTranslation("plugin_rest_usercreation_requiredField");
-            return;
-        }
-        if (!password.equals(confirmPassword)) {
+        } else if (!password.equals(confirmPassword)) {
             passwordValid = false;
             passwordErrorMessage = Helper.getTranslation("plugin_rest_usercreation_new_account_confirmPasswordWrong");
-            return;
+        } else {
+            // check password length
+            // The new password must fulfill the minimum password length (read from default configuration file)
+            int minimumLength = ConfigurationHelper.getInstance().getMinimumPasswordLength();
+            if (password.length() < minimumLength) {
+                Helper.setFehlerMeldung("neuesPasswortNichtLangGenug", "" + minimumLength);
+                return;
+            }
         }
-        // check password length
-        // The new password must fulfill the minimum password length (read from default configuration file)
-        int minimumLength = ConfigurationHelper.getInstance().getMinimumPasswordLength();
-        if (password.length() < minimumLength) {
-            Helper.setFehlerMeldung("neuesPasswortNichtLangGenug", "" + minimumLength);
-            return;
-        }
-
         if (!privacyTextAccepted) {
             privacyValid = false;
             privacyErrorMessage = Helper.getTranslation("plugin_rest_usercreation_new_account_privacyTextNotAcccepted");
-            return;
         }
 
+        if (!accountNameValid || !firstNameValid || !lastNameValid || !emailValid || !passwordValid) {
+            return;
+        }
         // create new user
         User user = new User();
         user.setVorname(firstname);
