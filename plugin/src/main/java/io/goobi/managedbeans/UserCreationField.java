@@ -70,6 +70,6 @@ public class UserCreationField {
     }
 
     public boolean isDisplayHelpButton() {
-        return !helpMessage.isEmpty();
+        return StringUtils.isNotBlank(helpMessage);
     }
 }
