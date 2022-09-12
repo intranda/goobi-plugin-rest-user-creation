@@ -1031,7 +1031,18 @@
             </div>
         </ui:fragment>
 
+
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1' and externalLoginBean.wizzardMode!='confirm' and externalLoginBean.wizzardMode!='wait'}">
+                <!-- cancel button -->
+                <button
+                    jsf:id="cancel"
+                    class="btn btn-blank me-4"
+                    jsf:immediate="true">
+                    <f:setPropertyActionListener
+                        value=""
+                        target="#{externalLoginBean.uiStatus}" />
+                    <h:outputText value="#{msgs.abbrechen}" />
+                </button>
             <div class="submit form-actions form-actions--progress">
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"

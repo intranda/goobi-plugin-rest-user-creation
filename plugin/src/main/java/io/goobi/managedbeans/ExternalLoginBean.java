@@ -118,6 +118,9 @@ public class ExternalLoginBean implements Serializable {
     private String registrationMailSubject;
     private String registrationMailBody;
 
+    private String userCreationMailSubject;
+    private String userCreationMailBody;
+
     @Getter
     private boolean accountNameValid = true;
     @Getter
@@ -202,14 +205,12 @@ public class ExternalLoginBean implements Serializable {
         registrationMailSubject = conf.getString("/registration/subject");
         registrationMailBody = conf.getString("/registration/body");
 
+        userCreationMailSubject = conf.getString("/userCreation/subject");
+        userCreationMailBody = conf.getString("/userCreation/body");
     }
 
     public void createAccount() {
-        accountNameValid = true;
-        firstNameValid = true;
-        lastNameValid = true;
-        emailValid = true;
-        passwordValid = true;
+        resetValues();
         // validate entries
         if (StringUtils.isBlank(accountName)) {
             accountNameErrorMessage = Helper.getTranslation("keinLoginAngegeben");
@@ -320,9 +321,8 @@ public class ExternalLoginBean implements Serializable {
             String token = JwtHelper.createToken(tokenMap);
 
             String url = SendMail.getInstance().getConfig().getApiUrl().replace("mails/disable", "users/email/" + token);
-            String messageSubject = Helper.getTranslation(SendMail.getInstance().getConfig().getUserCreationMailSubject());
-            String messageBody = Helper.getTranslation(SendMail.getInstance().getConfig().getUserCreationMailBody())
-                    .replace("{firstname}", user.getVorname())
+            String messageSubject = userCreationMailSubject;
+            String messageBody = userCreationMailBody.replace("{firstname}", user.getVorname())
                     .replace("{lastname}", user.getNachname())
                     .replace("{password}", password)
                     .replace("{login}", accountName)
@@ -388,7 +388,9 @@ public class ExternalLoginBean implements Serializable {
         if (StringUtils.isNotBlank(registrationMailRecipient) && StringUtils.isNotBlank(registrationMailBody)) {
             String subject = Helper.getTranslation(registrationMailSubject);
             String body = Helper.getTranslation(registrationMailBody);
-            body = body.replace("{login}", currentUser.getLogin());
+            body = body.replace("{login}", currentUser.getLogin())
+                    .replace("{firstname}", currentUser.getVorname())
+                    .replace("{lastname}", currentUser.getNachname());
 
             StringBuilder sb = new StringBuilder();
             sb.append(NEWLINE);
@@ -604,5 +606,14 @@ public class ExternalLoginBean implements Serializable {
         for (UserCreationField ucf : ucfList) {
             ucf.setValue("");
         }
+    }
+
+    public void resetValues() {
+        accountNameValid = true;
+        firstNameValid = true;
+        lastNameValid = true;
+        emailValid = true;
+        passwordValid = true;
+        privacyValid = true;
     }
 }

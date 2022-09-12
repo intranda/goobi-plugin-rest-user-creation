@@ -142,7 +142,9 @@
                                         <button
                                         jsf:immediate="true"
                                             jsf:id="createAccount"
-                                            class="btn btn-blank me-2">
+                                            class="btn btn-blank me-2"
+                                            jsf:action="#{externalLoginBean.resetValues}"
+                                            >
                                             <f:setPropertyActionListener
                                                 value="accountCreation"
                                                 target="#{externalLoginBean.uiStatus}" />
