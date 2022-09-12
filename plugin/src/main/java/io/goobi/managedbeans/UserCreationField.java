@@ -68,4 +68,8 @@ public class UserCreationField {
         }
         return true;
     }
+
+    public boolean isDisplayHelpButton() {
+        return !helpMessage.isEmpty();
+    }
 }

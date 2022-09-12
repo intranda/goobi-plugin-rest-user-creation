@@ -259,7 +259,7 @@
                             <span
                                 class="input-required"
                                 jsf:rendered="true">
-                                <i class="fa fa-asterisk" />
+                                <span class="fa fa-asterisk" />
                             </span>
 
                         </label>
@@ -382,7 +382,6 @@
 
             <section class="common-region">
 
-
                 <div class="form #{externalLoginBean.institutionNameInvalid ? 'validate--danger' : ''}">
                     <zlb:label
                         labelFor="institutionName"
@@ -492,14 +491,16 @@
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
-                        <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param
-                                name="helpTitle"
-                                value="#{field.label}" />
-                            <ui:param
-                                name="helpBody"
-                                value="#{field.helpMessage}" />
-                        </ui:include>
+                        <ui:fragment rendered="#{field.displayHelpButton}">
+                            <ui:include src="/uii/includes/form_icons.xhtml">
+                                <ui:param
+                                    name="helpTitle"
+                                    value="#{field.label}" />
+                                <ui:param
+                                    name="helpBody"
+                                    value="#{field.helpMessage}" />
+                            </ui:include>
+                        </ui:fragment>
 
                         <h:panelGroup
                             layout="block"
@@ -625,15 +626,16 @@
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
-                        <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param
-                                name="helpTitle"
-                                value="#{field.label}" />
-                            <ui:param
-                                name="helpBody"
-                                value="#{field.helpMessage}" />
-                        </ui:include>
-
+                        <ui:fragment rendered="#{field.displayHelpButton}">
+                            <ui:include src="/uii/includes/form_icons.xhtml">
+                                <ui:param
+                                    name="helpTitle"
+                                    value="#{field.label}" />
+                                <ui:param
+                                    name="helpBody"
+                                    value="#{field.helpMessage}" />
+                            </ui:include>
+                        </ui:fragment>
                         <h:panelGroup
                             layout="block"
                             rendered="#{field.validationError}"
@@ -761,15 +763,16 @@
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
-                        <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param
-                                name="helpTitle"
-                                value="#{field.label}" />
-                            <ui:param
-                                name="helpBody"
-                                value="#{field.helpMessage}" />
-                        </ui:include>
-
+                        <ui:fragment rendered="#{field.displayHelpButton}">
+                            <ui:include src="/uii/includes/form_icons.xhtml">
+                                <ui:param
+                                    name="helpTitle"
+                                    value="#{field.label}" />
+                                <ui:param
+                                    name="helpBody"
+                                    value="#{field.helpMessage}" />
+                            </ui:include>
+                        </ui:fragment>
                         <h:panelGroup
                             layout="block"
                             rendered="#{field.validationError}"
@@ -823,19 +826,20 @@
                                 <!-- end form-check-wraper -->
 
                                 <!-- ICONS -->
-                                <ui:include src="/uii/includes/form_icons.xhtml">
-                                    <ui:param
-                                        name="helpTitle"
-                                        value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
-                                    <ui:param
-                                        name="helpBody"
-                                        value="#{field.helpMessage}" />
-                                </ui:include>
-
+                                <ui:fragment rendered="#{field.displayHelpButton}">
+                                    <ui:include src="/uii/includes/form_icons.xhtml">
+                                        <ui:param
+                                            name="helpTitle"
+                                            value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
+                                        <ui:param
+                                            name="helpBody"
+                                            value="#{field.helpMessage}" />
+                                    </ui:include>
+                                </ui:fragment>
                             </div>
                         </ui:fragment>
 
-                        <i
+                        <span
                             jsf:rendered="#{field.required}"
                             class="fa fa-asterisk pull-right font-asterisk"
                             title="#{msgs.requiredField}"
