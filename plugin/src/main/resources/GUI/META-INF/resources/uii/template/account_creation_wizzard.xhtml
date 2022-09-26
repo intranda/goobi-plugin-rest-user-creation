@@ -942,13 +942,14 @@
                 <h3>
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_institution}" />
                     <button
-                        class="btn bnt-link"
+                        class="btn bnt-link overview__edit"
                         style="float: right"
                         jsf:immediate="true">
                         <f:setPropertyActionListener
                             value="page2"
                             target="#{externalLoginBean.wizzardMode}" />
-                        <h:outputText value="#{msgs.bearbeiten}" />
+                        <ui:include src="/uii/includes/icon-edit.xhtml" />
+                        <span>#{msgs.bearbeiten}</span>
                     </button>
                 </h3>
                 <zlb:formOutputTxt
@@ -970,13 +971,14 @@
                 <h3 class="heading__contact">
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_contact}" />
                     <button
-                        class="btn bnt-link"
+                        class="btn bnt-link overview__edit"
                         style="float: right"
                         jsf:immediate="true">
                         <f:setPropertyActionListener
                             value="page3"
                             target="#{externalLoginBean.wizzardMode}" />
-                        <h:outputText value="#{msgs.bearbeiten}" />
+                        <ui:include src="/uii/includes/icon-edit.xhtml" />
+                        <span>#{msgs.bearbeiten}</span>
                     </button>
                 </h3>
                 <ui:repeat
@@ -993,13 +995,14 @@
                     <h3 class="heading__contact">
                         <h:outputText value="#{msgs.plugin_rest_usercreation_new_contact}" />
                         <button
-                            class="btn bnt-link"
+                            class="btn bnt-link overview__edit"
                             style="float: right"
                             jsf:immediate="true">
                             <f:setPropertyActionListener
                                 value="page3"
                                 target="#{externalLoginBean.wizzardMode}" />
-                            <h:outputText value="#{msgs.bearbeiten}" />
+                            <ui:include src="/uii/includes/icon-edit.xhtml" />
+                            <span>#{msgs.bearbeiten}</span>
                         </button>
                     </h3>
 
@@ -1020,13 +1023,14 @@
                 <h3>
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
                     <button
-                        class="btn bnt-link"
+                        class="btn bnt-link overview__edit"
                         style="float: right"
                         jsf:immediate="true">
                         <f:setPropertyActionListener
                             value="page4"
                             target="#{externalLoginBean.wizzardMode}" />
-                        <h:outputText value="#{msgs.bearbeiten}" />
+                        <ui:include src="/uii/includes/icon-edit.xhtml" />
+                        <span>#{msgs.bearbeiten}</span>
                     </button>
                 </h3>
                 <ui:repeat
@@ -1141,7 +1145,6 @@
 
                 <ul class="statuslist">
                     <li class="#{externalLoginBean.wizzardMode=='page1'?'active':'finished'}">
-
                         <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page1'?'active':'finished'} ">
                             <h:outputText value="#{msgs.plugin_rest_usercreation_page1}" />
                         </h:panelGroup>

@@ -82,7 +82,7 @@
 
 #createNewContact span {
   display: flex;
-  margin-left: .8rem;
+  margin-left: 0.8rem;
   color: var(--clr-text-body);
 }
 
@@ -93,7 +93,7 @@
 // Insert count
 .heading__contact::before {
   counter-increment: section;
-  content: counter(section)". "
+  content: counter(section) ". ";
 }
 
 /* ****************************** */
@@ -134,12 +134,23 @@
 
     @media (min-width: 667px) {
       span {
-        padding-left: .8rem;
+        padding-left: 0.8rem;
       }
     }
   }
   h3 {
     color: var(--clr-primary-400);
+  }
+
+  &__edit {
+    display: flex;
+    align-items: center;
+    color: var(--clr-pirmary-400);
+  }
+
+  &__edit:hover {
+    text-decoration: underline;
+    color: var(--clr-accent);
   }
 
   .control-label {
@@ -159,7 +170,8 @@
     align-self: flex-end;
   }
 
-  .col-md-3, .col-md-9,
+  .col-md-3,
+  .col-md-9,
   .col-md-10 ~ .col-md-2 {
     display: flex;
     align-self: flex-end;
@@ -178,7 +190,6 @@
     padding-left: 0;
   }
 
-
   .label__body {
     margin-left: 0;
     font-weight: 400;
@@ -191,7 +202,6 @@
 
 #zlbEPflicht #navigation {
   display: none;
-
 }
 
 [action^="/goobi/uii/error.xhtml"] {
@@ -217,10 +227,8 @@
 }
 
 [action^="/goobi/uii/error.xhtml"] .stats {
-
   padding: 0;
 }
-
 
 [action^="/goobi/uii/error.xhtml"] * {
   font-size: var(--fs-400);
@@ -240,5 +248,3 @@
   font-size: 2rem;
   color: var(--clr-danger);
 }
-
-
