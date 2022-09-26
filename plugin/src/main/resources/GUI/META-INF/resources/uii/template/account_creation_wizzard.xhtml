@@ -1197,6 +1197,12 @@
                     </li>
                 </ul>
 
+                <!-- Load script for better ux when using statusbar for navigation -->
+                <script src="template/assets/js/statusListNavigation.js?v=#{HelperForm.buildVersion}"></script>
+                <script>
+                    statusListNavigation.init()
+                </script>
+
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
                     jsf:id="goNext"
