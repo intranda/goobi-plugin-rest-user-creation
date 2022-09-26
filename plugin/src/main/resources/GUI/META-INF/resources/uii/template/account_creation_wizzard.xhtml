@@ -273,7 +273,7 @@
                             <span
                                 class="input-required"
                                 jsf:rendered="true">
-                                <i class="fa fa-asterisk" />
+                                <span class="fa fa-asterisk" />
                             </span>
 
                         </label>
@@ -396,7 +396,6 @@
 
             <section class="common-region">
 
-
                 <div class="form #{externalLoginBean.institutionNameInvalid ? 'validate--danger' : ''}">
                     <zlb:label
                         labelFor="institutionName"
@@ -473,7 +472,11 @@
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                            <f:selectItems
+                                value="#{field.selectItemList}"
+                                itemLabel="#{msgs[val]}"
+                                itemValue="#{val}"
+                                var="val" />
                         </h:selectOneMenu>
                         <h:selectBooleanCheckbox
                             rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
@@ -494,18 +497,24 @@
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                            <f:selectItems
+                                value="#{field.selectItemList}"
+                                itemLabel="#{msgs[val]}"
+                                itemValue="#{val}"
+                                var="val" />
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
-                        <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param
-                                name="helpTitle"
-                                value="#{field.label}" />
-                            <ui:param
-                                name="helpBody"
-                                value="#{field.helpMessage}" />
-                        </ui:include>
+                        <ui:fragment rendered="#{field.displayHelpButton}">
+                            <ui:include src="/uii/includes/form_icons.xhtml">
+                                <ui:param
+                                    name="helpTitle"
+                                    value="#{field.label}" />
+                                <ui:param
+                                    name="helpBody"
+                                    value="#{field.helpMessage}" />
+                            </ui:include>
+                        </ui:fragment>
 
                         <h:panelGroup
                             layout="block"
@@ -599,7 +608,11 @@
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                            <f:selectItems
+                                value="#{field.selectItemList}"
+                                itemLabel="#{msgs[val]}"
+                                itemValue="#{val}"
+                                var="val" />
                         </h:selectOneMenu>
                         <h:selectBooleanCheckbox
                             rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
@@ -619,19 +632,24 @@
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                            <f:selectItems
+                                value="#{field.selectItemList}"
+                                itemLabel="#{msgs[val]}"
+                                itemValue="#{val}"
+                                var="val" />
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
-                        <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param
-                                name="helpTitle"
-                                value="#{field.label}" />
-                            <ui:param
-                                name="helpBody"
-                                value="#{field.helpMessage}" />
-                        </ui:include>
-
+                        <ui:fragment rendered="#{field.displayHelpButton}">
+                            <ui:include src="/uii/includes/form_icons.xhtml">
+                                <ui:param
+                                    name="helpTitle"
+                                    value="#{field.label}" />
+                                <ui:param
+                                    name="helpBody"
+                                    value="#{field.helpMessage}" />
+                            </ui:include>
+                        </ui:fragment>
                         <h:panelGroup
                             layout="block"
                             rendered="#{field.validationError}"
@@ -727,7 +745,11 @@
                             <f:ajax
                                 render="@this"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                            <f:selectItems
+                                value="#{field.selectItemList}"
+                                itemLabel="#{msgs[val]}"
+                                itemValue="#{val}"
+                                var="val" />
                         </h:selectOneMenu>
                         <h:selectBooleanCheckbox
                             rendered="#{field.fieldType=='checkbox' or field.fieldType=='combo'}"
@@ -747,19 +769,24 @@
                             <f:ajax
                                 render="@form"
                                 execute="@this" />
-                            <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                            <f:selectItems
+                                value="#{field.selectItemList}"
+                                itemLabel="#{msgs[val]}"
+                                itemValue="#{val}"
+                                var="val" />
                         </h:selectOneRadio>
 
                         <!-- ICONS -->
-                        <ui:include src="/uii/includes/form_icons.xhtml">
-                            <ui:param
-                                name="helpTitle"
-                                value="#{field.label}" />
-                            <ui:param
-                                name="helpBody"
-                                value="#{field.helpMessage}" />
-                        </ui:include>
-
+                        <ui:fragment rendered="#{field.displayHelpButton}">
+                            <ui:include src="/uii/includes/form_icons.xhtml">
+                                <ui:param
+                                    name="helpTitle"
+                                    value="#{field.label}" />
+                                <ui:param
+                                    name="helpBody"
+                                    value="#{field.helpMessage}" />
+                            </ui:include>
+                        </ui:fragment>
                         <h:panelGroup
                             layout="block"
                             rendered="#{field.validationError}"
@@ -813,19 +840,20 @@
                                 <!-- end form-check-wraper -->
 
                                 <!-- ICONS -->
-                                <ui:include src="/uii/includes/form_icons.xhtml">
-                                    <ui:param
-                                        name="helpTitle"
-                                        value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
-                                    <ui:param
-                                        name="helpBody"
-                                        value="#{field.helpMessage}" />
-                                </ui:include>
-
+                                <ui:fragment rendered="#{field.displayHelpButton}">
+                                    <ui:include src="/uii/includes/form_icons.xhtml">
+                                        <ui:param
+                                            name="helpTitle"
+                                            value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
+                                        <ui:param
+                                            name="helpBody"
+                                            value="#{field.helpMessage}" />
+                                    </ui:include>
+                                </ui:fragment>
                             </div>
                         </ui:fragment>
 
-                        <i
+                        <span
                             jsf:rendered="#{field.required}"
                             class="fa fa-asterisk pull-right font-asterisk"
                             title="#{msgs.requiredField}"
@@ -867,17 +895,24 @@
                                 <f:ajax
                                     render="@this"
                                     execute="@this" />
-                                <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                                <f:selectItems
+                                    value="#{field.selectItemList}"
+                                    itemLabel="#{msgs[val]}"
+                                    itemValue="#{val}"
+                                    var="val" />
                             </h:selectOneMenu>
                             <h:selectOneRadio
                                 rendered="#{field.fieldType=='combo' and field.booleanValue}"
                                 styleClass="form-control"
-                                value="#{field.subValue}"
-                            >
+                                value="#{field.subValue}">
                                 <f:ajax
                                     render="@form"
                                     execute="@this" />
-                                <f:selectItems value="#{field.selectItemList}" itemLabel="#{msgs[val]}" itemValue="#{val}" var="val" />
+                                <f:selectItems
+                                    value="#{field.selectItemList}"
+                                    itemLabel="#{msgs[val]}"
+                                    itemValue="#{val}"
+                                    var="val" />
                             </h:selectOneRadio>
                             <h:panelGroup
                                 layout="block"
@@ -906,6 +941,15 @@
                 <!-- show all fields in read only mode -->
                 <h3>
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_institution}" />
+                    <button
+                        class="btn bnt-link"
+                        style="float: right"
+                        jsf:immediate="true">
+                        <f:setPropertyActionListener
+                            value="page2"
+                            target="#{externalLoginBean.wizzardMode}" />
+                        <h:outputText value="#{msgs.bearbeiten}" />
+                    </button>
                 </h3>
                 <zlb:formOutputTxt
                     label="#{msgs.plugin_rest_usercreation_new_account_institutionName}"
@@ -925,6 +969,15 @@
             <section class="common-region one-col overview">
                 <h3 class="heading__contact">
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_contact}" />
+                    <button
+                        class="btn bnt-link"
+                        style="float: right"
+                        jsf:immediate="true">
+                        <f:setPropertyActionListener
+                            value="page3"
+                            target="#{externalLoginBean.wizzardMode}" />
+                        <h:outputText value="#{msgs.bearbeiten}" />
+                    </button>
                 </h3>
                 <ui:repeat
                     var="field"
@@ -939,6 +992,15 @@
 
                     <h3 class="heading__contact">
                         <h:outputText value="#{msgs.plugin_rest_usercreation_new_contact}" />
+                        <button
+                            class="btn bnt-link"
+                            style="float: right"
+                            jsf:immediate="true">
+                            <f:setPropertyActionListener
+                                value="page3"
+                                target="#{externalLoginBean.wizzardMode}" />
+                            <h:outputText value="#{msgs.bearbeiten}" />
+                        </button>
                     </h3>
 
                     <ui:repeat
@@ -957,6 +1019,15 @@
 
                 <h3>
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_additionalData}" />
+                    <button
+                        class="btn bnt-link"
+                        style="float: right"
+                        jsf:immediate="true">
+                        <f:setPropertyActionListener
+                            value="page4"
+                            target="#{externalLoginBean.wizzardMode}" />
+                        <h:outputText value="#{msgs.bearbeiten}" />
+                    </button>
                 </h3>
                 <ui:repeat
                     var="field"
@@ -970,7 +1041,7 @@
                         classRight="col-sm-12 col-md-2"
                         showDisabledCheckBox="#{true}"
                         showDisabledCheckBoxActivated="#{field.value}"
-                        secondValue="#{field.subValue}"/>
+                        secondValue="#{field.subValue}" />
                 </ui:repeat>
 
             </section>
@@ -1045,8 +1116,21 @@
             </div>
         </ui:fragment>
 
+
+
+
         <ui:fragment rendered="#{externalLoginBean.wizzardMode!='page1' and externalLoginBean.wizzardMode!='confirm' and externalLoginBean.wizzardMode!='wait'}">
             <div class="submit form-actions form-actions--progress">
+                <!-- cancel button -->
+                <button
+                    jsf:id="cancel"
+                    class="btn btn-blank me-4"
+                    jsf:immediate="true">
+                    <f:setPropertyActionListener
+                        value=""
+                        target="#{externalLoginBean.uiStatus}" />
+                    <h:outputText value="#{msgs.abbrechen}" />
+                </button>
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page2'}"
                     jsf:action="#{externalLoginBean.back}"
@@ -1064,17 +1148,42 @@
                     </li>
                     <li class="#{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
                         <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page2' ? 'active': 'finished'}">
-                            <h:outputText value="#{msgs.plugin_rest_usercreation_page2}" />
+                            <button
+                                class="btn bnt-link"
+                                jsf:immediate="true"
+                                jsf:disabled="#{externalLoginBean.wizzardMode=='page2'}">
+                                <f:setPropertyActionListener
+                                    value="page2"
+                                    target="#{externalLoginBean.wizzardMode}" />
+                                <h:outputText value="#{msgs.plugin_rest_usercreation_page2}" />
+                            </button>
                         </h:panelGroup>
                     </li>
                     <li class="#{externalLoginBean.wizzardMode=='page3' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
                         <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='data2' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' ? 'inactive': 'finished'}">
-                            <h:outputText value="#{msgs.plugin_rest_usercreation_page3}" />
+
+                            <button
+                                class="btn bnt-link"
+                                jsf:immediate="true"
+                                jsf:disabled="#{externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3'}">
+                                <f:setPropertyActionListener
+                                    value="page3"
+                                    target="#{externalLoginBean.wizzardMode}" />
+                                <h:outputText value="#{msgs.plugin_rest_usercreation_page3}" />
+                            </button>
                         </h:panelGroup>
                     </li>
                     <li class="#{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
                         <h:panelGroup styleClass="status #{externalLoginBean.wizzardMode=='page4' ? 'active': externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' ? 'inactive': 'finished'}">
-                            <h:outputText value="#{msgs.plugin_rest_usercreation_page4}" />
+                            <button
+                                class="btn bnt-link"
+                                jsf:immediate="true"
+                                jsf:disabled="#{externalLoginBean.wizzardMode=='page2' or externalLoginBean.wizzardMode=='page3' or externalLoginBean.wizzardMode=='page4'}">
+                                <f:setPropertyActionListener
+                                    value="page4"
+                                    target="#{externalLoginBean.wizzardMode}" />
+                                <h:outputText value="#{msgs.plugin_rest_usercreation_page4}" />
+                            </button>
                         </h:panelGroup>
                     </li>
 
@@ -1102,10 +1211,10 @@
             </div>
         </ui:fragment>
 
-    	  <ui:include src="../includes/helpModals.xhtml" />
+        <ui:include src="../includes/helpModals.xhtml" />
 
 
-<script>
+        <script>
 function focusField (elem) {
 // do nothing
 }
