@@ -36,6 +36,9 @@
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='wait'}"
                 value="#{msgs.plugin_rest_usercreation_new_account_creationSuccessfulHeading}" />
+            <span
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                title="#{msgs.plugin_rest_usercreation_helpText_page}">
             <button
                 type="button"
                 class="btn page__help"
@@ -45,6 +48,7 @@
                 data-bs-target="#pageHelpModal">
                 <ui:include src="/uii/includes/icon-help.xhtml" />
             </button>
+            </span>
         </h2>
 
 
