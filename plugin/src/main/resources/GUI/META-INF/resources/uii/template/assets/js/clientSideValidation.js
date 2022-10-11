@@ -2,7 +2,7 @@
 const clientSideValidation = (function (){
 
   // DEBUG
-  const debug = true;
+  const debug = false;
   if (debug) console.log('## Client Side Validation ##');
 
   const compareInputValues = {
