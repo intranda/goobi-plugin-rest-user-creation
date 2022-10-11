@@ -1598,10 +1598,10 @@ li.finished::before {
 }
 
 .statuslist .status {
-  max-width: 120px;
+  max-width: 140px;
   word-break: break;
   hyphens: auto;
-  padding: 0 8px;
+  padding: 0 2px;
 }
 
 .statuslist li:first-of-type .status {
