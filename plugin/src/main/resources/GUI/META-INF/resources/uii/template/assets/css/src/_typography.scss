@@ -63,17 +63,22 @@ h2 {
     hyphens: auto;
   }
   &__help {
+    color: var(--clr-primary-400);
     padding-right: 0;
     min-width: unset !important;
     svg {
       width: 3.2rem;
       height: 3.2rem;
-      fill: var(--clr-primary-400);
+      fill: currentColor;
+    }
+    &:hover {
+      color: var(--clr-hover);
     }
   }
 }
 
-a, .btn-link,
+a,
+.btn-link,
 .confirm-privacy.confirm-privacy a {
   background: transparent;
   color: var(--clr-primary-400);
