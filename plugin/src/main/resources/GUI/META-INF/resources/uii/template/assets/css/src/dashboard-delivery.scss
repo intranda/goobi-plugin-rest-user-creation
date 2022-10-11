@@ -497,3 +497,27 @@ button ~ .box {
   border-radius: var(--border-radius);
   margin-bottom: 4.8rem;
 }
+
+.dd-bottom-nav-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+[id$="createNewContact"] {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  text-decoration: none;
+}
+
+[id$="createNewContact"] span {
+  color: var(--clr-text-400);
+}
+
+[id$="createNewContact"]:hover span,
+[id$="createNewContact"]:hover svg,
+[id$="createNewContact"]:focus svg {
+  color: var(--clr-text-400);
+  fill: var(--clr-primary-400);
+}
