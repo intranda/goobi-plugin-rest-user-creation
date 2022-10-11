@@ -73,6 +73,17 @@
   border: 2px dashed var(--clr-neutral-600);
   border-radius: var(--border-radius);
 }
+
+#uploadForm .form__actions {
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+#uploadForm .form__actions button {
+  flex: 0 0 220px;
+}
+
 #issueUploadForm .form__icons,
 #uploadForm .form__icons {
   margin-top: 0;
