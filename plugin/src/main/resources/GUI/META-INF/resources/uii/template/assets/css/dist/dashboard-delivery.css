@@ -491,4 +491,14 @@ button ~ .box {
   fill: var(--clr-primary-400);
 }
 
+#processTable th button {
+  font-weight: bold;
+  padding-left: 0;
+}
+
+#processTable tbody tbody tr {
+  display: grid;
+  grid-template-columns: 24rem 1fr;
+}
+
 /*# sourceMappingURL=dashboard-delivery.css.map */

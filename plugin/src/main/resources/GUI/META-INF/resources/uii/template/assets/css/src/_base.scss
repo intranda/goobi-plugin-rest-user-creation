@@ -63,6 +63,11 @@
   --height-footer-and-nav: 335px;
 }
 
+* {
+  /* Chrome: show fat fonts as fat fonts */
+  -webkit-font-smoothing: antialiased;
+}
+
 /* OVERRIDES */
 .tooltip {
   font-size: var(--fs-200);

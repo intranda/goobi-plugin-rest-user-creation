@@ -574,6 +574,11 @@
   --height-footer-and-nav: 335px;
 }
 
+* {
+  /* Chrome: show fat fonts as fat fonts */
+  -webkit-font-smoothing: antialiased;
+}
+
 /* OVERRIDES */
 .tooltip {
   font-size: var(--fs-200);
@@ -765,7 +770,7 @@ a:focus, a:hover, a:active,
 .confirm-privacy.confirm-privacy a:focus,
 .confirm-privacy.confirm-privacy a:hover,
 .confirm-privacy.confirm-privacy a:active {
-  color: var(--clr-accent);
+  color: var(--clr-hover);
 }
 
 /* Header */
