@@ -16,7 +16,7 @@
 .item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   hyphens: auto;
   word-wrap: anywhere;
