@@ -323,8 +323,8 @@ table button span {
 /* ****************************** */
 /* DB: delivery: existing data   */
 /* **************************** */
-.existing-data form {
-  overflow: scroll;
+.existing-data #myform {
+  overflow-x: auto;
 }
 
 .existing-data td {
