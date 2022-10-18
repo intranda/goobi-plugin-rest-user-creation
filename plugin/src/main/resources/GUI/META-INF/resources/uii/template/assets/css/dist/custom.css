@@ -555,6 +555,7 @@
   --clr-neutral-400: #eeeeee;
   --clr-neutral-600: #c4c4c4;
   --clr-neutral-800: #6e747c;
+  --clr-hover: hsl(303, 65%, 16%);
   --clr-accent: #ffa100;
   --clr-success: #16882e;
   --clr-danger: #d30404;
@@ -571,6 +572,11 @@
   /* Grid */
   --grid-tc: repeat(auto-fit, minmax(45rem, 1fr));
   --height-footer-and-nav: 335px;
+}
+
+* {
+  /* Chrome: show fat fonts as fat fonts */
+  -webkit-font-smoothing: antialiased;
 }
 
 /* OVERRIDES */
@@ -737,26 +743,34 @@ h2 {
   hyphens: auto;
 }
 .page__help {
+  color: var(--clr-primary-400);
   padding-right: 0;
   min-width: unset !important;
 }
 .page__help svg {
   width: 3.2rem;
   height: 3.2rem;
-  fill: var(--clr-primary-400);
+  fill: currentColor;
+}
+.page__help:hover {
+  color: var(--clr-hover);
 }
 
-a, .btn-link,
+a,
+.btn-link,
 .confirm-privacy.confirm-privacy a {
   background: transparent;
   color: var(--clr-primary-400);
   cursor: pointer;
 }
-a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
+a:focus, a:hover, a:active,
+.btn-link:focus,
+.btn-link:hover,
+.btn-link:active,
 .confirm-privacy.confirm-privacy a:focus,
 .confirm-privacy.confirm-privacy a:hover,
 .confirm-privacy.confirm-privacy a:active {
-  color: var(--clr-accent);
+  color: var(--clr-hover);
 }
 
 /* Header */
@@ -777,7 +791,7 @@ a:focus, a:hover, a:active, .btn-link:focus, .btn-link:hover, .btn-link:active,
 
 .header__lower a:hover,
 .header__lower a:hover svg {
-  color: var(--clr-accent);
+  color: var(--clr-hover);
   text-decoration: underline;
   transition: all 0.1s ease;
 }
@@ -1615,10 +1629,10 @@ li.finished::before {
 }
 
 .statuslist .status {
-  max-width: 120px;
+  max-width: 140px;
   word-break: break;
   hyphens: auto;
-  padding: 0 8px;
+  padding: 0 2px;
 }
 
 .statuslist li:first-of-type .status {

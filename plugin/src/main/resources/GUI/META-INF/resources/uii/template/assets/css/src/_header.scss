@@ -1,4 +1,3 @@
-
 /* Header */
 
 .header .nav-link {
@@ -7,26 +6,26 @@
 
 .header .dropdown-menu {
   border-color: var(--clr-accent);
-  box-shadow: 3px 4px 16px 0px rgba(0,0,0,0.64);
+  box-shadow: 3px 4px 16px 0px rgba(0, 0, 0, 0.64);
 }
 
 .header__lower a {
   color: var(--clr-primary-400);
   text-decoration: none;
-  transition: all .1s ease;
+  transition: all 0.1s ease;
 }
 
 .header__lower a:hover,
 .header__lower a:hover svg {
-  color: var(--clr-accent);
+  color: var(--clr-hover);
   text-decoration: underline;
-  transition: all .1s ease;
+  transition: all 0.1s ease;
 }
 
 .header__lower a:hover svg path {
   fill: currentColor;
   color: currentColor;
-  transition: all .1s ease;
+  transition: all 0.1s ease;
 }
 
 .header .container-fluid {
@@ -89,7 +88,7 @@
 }
 
 // Language + Logout
-.actions form{
+.actions form {
   display: flex;
   align-items: center;
 }
@@ -108,7 +107,6 @@
     display: none;
   }
 }
-
 
 .language-select__locale {
   text-transform: uppercase;
@@ -186,7 +184,6 @@
   }
 }
 
-
 /* Header brand (ZLB Logo) */
 
 .brand {
@@ -201,7 +198,6 @@
   margin: auto 1.6rem;
   margin-left: 0;
 }
-
 
 .brand__copy,
 .brand__copy:focus,

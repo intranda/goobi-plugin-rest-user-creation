@@ -6,7 +6,6 @@
  * 5. Utilities
  */
 
-
 /* IMPORT _colors.scss */
 @use "colors";
 
@@ -40,8 +39,9 @@
   --clr-neutral-400: #eeeeee;
   --clr-neutral-600: #c4c4c4;
   --clr-neutral-800: #6e747c;
-
+  --clr-hover: hsl(303, 65%, 16%);
   --clr-accent: #ffa100;
+
   --clr-success: #16882e;
   --clr-danger: #d30404;
 
@@ -63,6 +63,11 @@
   --height-footer-and-nav: 335px;
 }
 
+* {
+  /* Chrome: show fat fonts as fat fonts */
+  -webkit-font-smoothing: antialiased;
+}
+
 /* OVERRIDES */
 .tooltip {
   font-size: var(--fs-200);
@@ -82,11 +87,9 @@ body.modal-open {
   padding-right: 0 !important;
 }
 
-
 /* Utilities */
 .highlight-border.highlight-border {
   border: 2px solid var(--clr-primary-400);
-
 }
 
 .column-start {
