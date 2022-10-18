@@ -16,8 +16,8 @@
 .item {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  gap: 2.4rem;
   hyphens: auto;
   word-wrap: anywhere;
   font-size: var(--fs-400);
@@ -26,6 +26,10 @@
   background-color: var(--clr-neutral-400);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+}
+
+.item button {
+  margin-top: auto;
 }
 
 .item.incomplete-user-data {
