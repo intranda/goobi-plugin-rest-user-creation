@@ -370,10 +370,26 @@ div ~ .font-danger {
   justify-content: flex-end;
 }
 
-.statuslist li span {
-  margin-top: 24px;
+.statuslist li:last-child span {
+  opacity: 0.65;
+}
+
+.statuslist li.finished {
+  cursor: pointer;
+}
+
+.statuslist li span,
+.statuslist li button {
   text-align: center;
   font-size: var(--fs-200);
+}
+
+.statuslist li span {
+  margin-top: 24px;
+}
+
+.statuslist li button {
+  padding: 0;
 }
 
 .statuslist li::before {

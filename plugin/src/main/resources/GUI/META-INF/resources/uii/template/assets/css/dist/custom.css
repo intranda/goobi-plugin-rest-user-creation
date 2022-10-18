@@ -1141,6 +1141,15 @@ a:focus, a:hover, a:active,
 .overview h3 {
   color: var(--clr-primary-400);
 }
+.overview__edit {
+  display: flex;
+  align-items: center;
+  color: var(--clr-pirmary-400);
+}
+.overview__edit:hover {
+  text-decoration: underline;
+  color: var(--clr-accent);
+}
 .overview .control-label {
   font-size: var(--fs-400);
   display: inline;
@@ -1154,7 +1163,8 @@ a:focus, a:hover, a:active,
   padding-left: 0;
   align-self: flex-end;
 }
-.overview .col-md-3, .overview .col-md-9,
+.overview .col-md-3,
+.overview .col-md-9,
 .overview .col-md-10 ~ .col-md-2 {
   display: flex;
   align-self: flex-end;
@@ -1573,10 +1583,26 @@ div ~ .font-danger {
   justify-content: flex-end;
 }
 
-.statuslist li span {
-  margin-top: 24px;
+.statuslist li:last-child span {
+  opacity: 0.65;
+}
+
+.statuslist li.finished {
+  cursor: pointer;
+}
+
+.statuslist li span,
+.statuslist li button {
   text-align: center;
   font-size: var(--fs-200);
+}
+
+.statuslist li span {
+  margin-top: 24px;
+}
+
+.statuslist li button {
+  padding: 0;
 }
 
 .statuslist li::before {
