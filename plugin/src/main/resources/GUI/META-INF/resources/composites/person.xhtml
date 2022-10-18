@@ -80,7 +80,7 @@
                     value="#{cc.attrs.value}"
                     validator="#{field.validateField}"
                     onfocus="focusField(this);">
-                    <f:ajax event="blur"
+                    <f:ajax event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:passThroughAttribute
@@ -95,7 +95,7 @@
                     value="#{cc.attrs.secondValue}"
                     validator="#{field.validateField}"
                     onfocus="focusField(this);">
-                    <f:ajax event="blur"
+                    <f:ajax event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:passThroughAttribute
@@ -114,7 +114,7 @@
                     <f:selectItem
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
-                    <f:ajax event="blur"
+                    <f:ajax event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />

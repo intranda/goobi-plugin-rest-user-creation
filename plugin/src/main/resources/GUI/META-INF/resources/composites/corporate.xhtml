@@ -80,7 +80,7 @@
                     value="#{cc.attrs.value}"
                     validator="#{field.validateField}"
                     onfocus="focusField(this);">
-                    <f:ajax event="blur"
+                    <f:ajax event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:passThroughAttribute
@@ -99,7 +99,7 @@
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
-                    <f:ajax event="blur"
+                    <f:ajax event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                 </h:selectOneMenu>
