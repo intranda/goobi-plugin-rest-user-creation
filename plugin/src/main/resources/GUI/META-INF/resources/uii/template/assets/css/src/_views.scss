@@ -194,6 +194,10 @@
     margin-left: 0;
     font-weight: 400;
   }
+  .control-label ~ .col-sm-12 span {
+    display: flex;
+    align-items: flex-end;
+  }
 }
 
 /* ****************************** */
