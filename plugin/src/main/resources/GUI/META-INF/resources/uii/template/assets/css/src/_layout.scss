@@ -32,6 +32,7 @@ main {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   margin-bottom: var(--gap);
+  overflow: hidden;
 
   &.one-col {
     --grid-tc: 1fr;
