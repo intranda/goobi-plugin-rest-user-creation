@@ -269,6 +269,10 @@
   font-size: calc(1.3rem + 0.6vw);
 }
 
+.monograph__overview h3 {
+  color: var(--clr-primary-400);
+}
+
 .monograph__overview .grid-row {
   grid-column: 1/-1;
   display: grid;
