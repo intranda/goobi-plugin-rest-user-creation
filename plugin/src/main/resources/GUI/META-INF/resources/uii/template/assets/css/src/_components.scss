@@ -424,6 +424,7 @@ li.finished::before {
 }
 .statuslist li:first-of-type .status {
   padding-left: 0;
+  max-width: 150px;
 }
 .statuslist li:last-of-type .status {
   padding-right: 0;
