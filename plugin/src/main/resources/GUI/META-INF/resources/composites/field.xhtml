@@ -264,7 +264,7 @@
                         layout="block"
                         rendered="#{!cc.attrs.propertyValid}"
                         styleClass="font-danger validation-message">
-                        <h:outputText value="#{cc.attrs.errorMessageText}" />
+                        <h:outputText value="#{msgs[cc.attrs.errorMessageText]}" />
                     </h:panelGroup>
                     <h:outputText
                         styleClass="help-block font-light"
