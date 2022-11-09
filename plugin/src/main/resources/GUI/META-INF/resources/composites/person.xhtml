@@ -52,6 +52,9 @@
             name="displayDuplicateButton"
             default="false" />
         <composite:attribute
+            name="displayRemoveButton"
+            default="false" />
+        <composite:attribute
             name="render"
             default="@form" />
     </composite:interface>
@@ -80,7 +83,8 @@
                     value="#{cc.attrs.value}"
                     validator="#{field.validateField}"
                     onfocus="focusField(this);">
-                    <f:ajax event="change"
+                    <f:ajax
+                        event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:passThroughAttribute
@@ -95,7 +99,8 @@
                     value="#{cc.attrs.secondValue}"
                     validator="#{field.validateField}"
                     onfocus="focusField(this);">
-                    <f:ajax event="change"
+                    <f:ajax
+                        event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:passThroughAttribute
@@ -114,7 +119,8 @@
                     <f:selectItem
                         itemValue="null"
                         itemLabel="#{msgs.bitteAuswaehlen}" />
-                    <f:ajax event="change"
+                    <f:ajax
+                        event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
                     <f:selectItems value="#{cc.attrs.selectItems}" />
@@ -131,6 +137,19 @@
                         aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}"
                         onfocus="focusField(this);">
                         <ui:include src="/uii/includes/icon-plus.xhtml" />
+                        <f:setPropertyActionListener
+                            value="#{field}"
+                            target="#{DashboardForm.plugin.currentField}" />
+                    </button>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{cc.attrs.displayRemoveButton}">
+                    <button
+                        jsf:id="removeButton"
+                        jsf:action="#{DashboardForm.plugin.removeMetadataField}"
+                        class="form-icons__button form-icons__button--duplicate"
+                        aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDeletion}"
+                        onfocus="focusField(this);">
+                        <ui:include src="/uii/includes/icon-minus.xhtml" />
                         <f:setPropertyActionListener
                             value="#{field}"
                             target="#{DashboardForm.plugin.currentField}" />

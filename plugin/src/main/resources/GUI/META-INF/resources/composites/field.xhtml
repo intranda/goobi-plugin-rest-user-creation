@@ -71,6 +71,9 @@
             name="displayDuplicateButton"
             default="false" />
         <composite:attribute
+            name="displayRemoveButton"
+            default="false" />
+        <composite:attribute
             name="render"
             default="@form" />
 
@@ -241,6 +244,20 @@
                                     target="#{DashboardForm.plugin.currentField}" />
                             </button>
                         </h:panelGroup>
+                        <h:panelGroup rendered="#{cc.attrs.displayRemoveButton}">
+                            <button
+                                jsf:id="removeButton"
+                                jsf:action="#{DashboardForm.plugin.removeMetadataField}"
+                                class="form-icons__button form-icons__button--duplicate"
+                                aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDeletion}"
+                                onfocus="focusField(this);">
+                                <ui:include src="/uii/includes/icon-minus.xhtml" />
+                                <f:setPropertyActionListener
+                                    value="#{field}"
+                                    target="#{DashboardForm.plugin.currentField}" />
+                            </button>
+                        </h:panelGroup>
+
 
                         <h:panelGroup rendered="#{cc.attrs.showHelpBtn}">
                             <button
