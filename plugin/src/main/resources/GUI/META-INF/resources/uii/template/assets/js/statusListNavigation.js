@@ -1,8 +1,9 @@
-const statusListNavigation = (function () {
+let statusListNavigation = (function () {
 
   // DEBUG
-  const debug = true
-  if (debug) console.log('## Status List Navigation ##')
+  const debug = false;
+
+  if (debug) console.log('## Status List Navigation ##');
 
   function init() {
     const statusList = document.querySelector('.statuslist');
