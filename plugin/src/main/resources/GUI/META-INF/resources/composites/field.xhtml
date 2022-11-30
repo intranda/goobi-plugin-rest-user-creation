@@ -119,7 +119,7 @@
                                 event="valueChange"
                                 render="#{cc.attrs.render}"
                                 execute="@this" />
-                            <f:selectItems value="#{cc.attrs.selectItems}" />
+                            <f:selectItems value="#{cc.attrs.selectItems}" var="#{cc.attrs.var}" itemLabel="#{cc.attrs.itemLabel}" itemValue="#{cc.attrs.itemValue}" />
                         </h:selectOneRadio>
 
                     </div>
@@ -219,7 +219,7 @@
                             event="valueChange"
                             render="#{cc.attrs.render}"
                             execute="@this" />
-                        <f:selectItems value="#{cc.attrs.selectItems}" />
+                       <f:selectItems value="#{cc.attrs.selectItems}" var="#{cc.attrs.var}" itemLabel="#{cc.attrs.itemLabel}" itemValue="#{cc.attrs.itemValue}" />
                     </h:selectOneMenu>
 
                     <h:outputText
