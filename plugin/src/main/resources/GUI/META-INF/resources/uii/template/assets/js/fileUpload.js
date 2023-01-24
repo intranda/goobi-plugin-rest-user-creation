@@ -53,7 +53,9 @@ var fileUpload = (function fileUpload(){
     if(!form || !submit) return;
 
     // Listen for file submit => update Frontend 
-    form.addEventListener('change', updateFE);
+    // form.addEventListener('change', updateFE);
+    
+    form.addEventListener('change', () => submit.click()); // Upload pdf immediately after choosing a file => eliminates a step wherer the user has to press an 'upload' button
 
     // Listen for click on Browse btn => click on the form to open file browser
     fakeBtnBrowse.addEventListener('click', function() {
