@@ -1,6 +1,9 @@
 package io.goobi.managedbeans;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.model.SelectItem;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -21,7 +24,7 @@ public class UserCreationField {
 
     private String value;
     private String subValue;
-    private List<String> selectItemList;
+    private List<SelectItem> selectItemList = new ArrayList<>();
 
     private boolean validationError = false;
 

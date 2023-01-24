@@ -3,7 +3,6 @@ package io.goobi.managedbeans;
 import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.naming.ConfigurationException;
 
@@ -192,8 +192,11 @@ public class ExternalLoginBean implements Serializable {
                 configuredFields = new ArrayList<>();
             }
             if (ucf.getFieldType().equals("dropdown") || ucf.getFieldType().equals(COMBO_FIELDNAME)) {
-                List<String> valueList = Arrays.asList(hc.getStringArray("/value"));
-                ucf.setSelectItemList(valueList);
+                List<HierarchicalConfiguration> valueList = hc.configurationsAt("/selectfield");
+                for (HierarchicalConfiguration v : valueList) {
+                    SelectItem si = new SelectItem(v.getString("@value"), v.getString("@label"));
+                    ucf.getSelectItemList().add(si);
+                }
             }
 
             configuredFields.add(ucf);
