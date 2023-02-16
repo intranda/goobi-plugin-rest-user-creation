@@ -10,6 +10,7 @@
 	<composite:interface>
 		<composite:attribute name="modalId" />
 		<composite:attribute name="modalTitle" />
+        <composite:attribute name="modalBody" />
 	</composite:interface>
 
 	<composite:implementation>
@@ -18,16 +19,16 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-						<h2 class="modal-title"><h:outputText escape="false" value="#{cc.attrs.modalTitle}" /></h2>
+						<h2>
+                        <h:outputFormat escape="false">
+                        <h:outputText class="modal-title" escape="false" value="#{cc.attrs.modalTitle}" />                      
+                        </h:outputFormat></h2>  
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
 							<composite:insertChildren/>
           </div>
           <div class="modal-footer">
-						<!--
-            <button type="button" class="btn btn-blank" data-bs-dismiss="modal">Close</button>
-						-->
           </div>
         </div>
       </div>
@@ -50,11 +51,11 @@
 				// Update the modal's content.
 				if(title) {
 					var modalTitle = exampleModal.querySelector('.modal-title')
-					modalTitle.textContent = title
+					modalTitle.innerHTML = title
 				}
 				if(body) {
 					var modalBody = exampleModal.querySelector('.modal-body')
-					modalBody.textContent = body
+					modalBody.innerHTML = body
 				}
 
 			})
