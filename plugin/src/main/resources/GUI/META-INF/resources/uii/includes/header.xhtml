@@ -99,15 +99,16 @@
                     aria-label="#{msgs.plugin_rest_usercreation_backToLogin}">
                     <ui:include src="../includes/icon-logo-goobi.xhtml" />
                 </a>
-                <h1>
-                    <a href="external_index.xhtml">
-                        <h:outputText
-                            escape="false"
-                            value="ZLB E-Pflicht" />
-                    </a>
-
-                </h1>
-
+                <span>
+                    <h1>
+                        <a href="external_index.xhtml">
+                            <h:outputText
+                                escape="false"
+                                value="#{msgs.plugin_rest_usercreation_mainTitle}" />
+                        </a>
+                    </h1>
+                    <h2>#{msgs.plugin_rest_usercreation_subTitle}</h2>
+                </span>
                 <a
                     href="external_index.xhtml"
                     class="actions__help"
@@ -118,7 +119,9 @@
                     #{msgs.plugin_rest_usercreation_header_help}
                 </a>
 
+
             </div>
+
 
         </header>
 
