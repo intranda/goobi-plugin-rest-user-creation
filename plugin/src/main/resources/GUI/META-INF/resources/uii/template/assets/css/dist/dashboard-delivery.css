@@ -290,7 +290,7 @@
 }
 
 .monograph__overview .persongrid {
-  display: flex;
+/*   display: flex; */
 }
 
 .monograph__overview .persongrid .form-control:empty {
