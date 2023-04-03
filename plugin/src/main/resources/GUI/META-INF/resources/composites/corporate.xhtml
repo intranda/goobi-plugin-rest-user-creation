@@ -77,9 +77,9 @@
             </label>
             <div class="form-field #{cc.attrs.subClass}">
                 <x:inputText
-                    id="#{cc.attrs.identifier}_input"
+                    id="corporate_input"
                     pt:aria-label="#{cc.attrs.labelText}"
-                    styleClass="form-control #{cc.attrs.fieldStyle}"
+                    styleClass="form-control #{cc.attrs.fieldStyle} corporate"
                     value="#{cc.attrs.value}"
                     validator="#{field.validateField}"
                     onfocus="focusField(this);">
