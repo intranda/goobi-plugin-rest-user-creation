@@ -587,3 +587,40 @@ button ~ .box {
   display: grid;
   grid-template-columns: 24rem 1fr;
 }
+
+.modal-content h1 {
+}
+
+.modal-content h2 {
+}
+.modal-content h3 {
+	font-size: 14px;
+	font-weight: 700;
+}
+.modal-content h4 {
+	font-size: 13.5px;
+	color: var(--clr-primary-400);
+}
+.modal-content h5 {
+}
+.modal-content h6 {
+}
+
+.modal-content hr {
+	color: var(--clr-primary-400);
+}
+
+.modal-content a {
+	padding-left: 17px;
+text-decoration: none;
+background-image: url("../../img/link_pfeil.png");
+background-repeat: no-repeat;
+background-position: left center;
+position: relative !important;
+width: auto !important;
+height: auto !important;
+display: inline-block !important;
+margin: 0 !important;
+}
+
+
