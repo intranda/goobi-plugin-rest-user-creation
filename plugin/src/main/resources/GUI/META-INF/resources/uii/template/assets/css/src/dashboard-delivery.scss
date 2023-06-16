@@ -594,16 +594,19 @@ button ~ .box {
 .modal-content h2 {
 }
 .modal-content h3 {
-	font-size: 14px;
+	font-size: 18px;
 	font-weight: 700;
+	margin-bottom: 10px;
 }
 .modal-content h4 {
-	font-size: 13.5px;
+	font-size: 17.5px;
 	color: var(--clr-primary-400);
+	margin-bottom: 10px;
 }
 .modal-content h5 {
 }
 .modal-content h6 {
+    font-size: 16px;
 }
 
 .modal-content hr {
