@@ -17,6 +17,11 @@
 
     <composite:implementation>
 
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="#{HelperForm.applicationWebsiteUrl}uii/template/assets/css/dist/dashboard-delivery.min.css" />
+
         <h2 class="page__heading">
             <h:outputText
                 rendered="#{externalLoginBean.wizzardMode=='page1' or externalLoginBean.wizzardMode=='confirm'}"
