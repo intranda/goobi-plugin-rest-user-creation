@@ -73,7 +73,9 @@
                         id="accountName"
                         pt:aria-label="#{msgs.plugin_rest_usercreation_userName}"
                         styleClass="form-control"
-                        value="#{externalLoginBean.accountName}">
+                        value="#{externalLoginBean.accountName}"
+                        pattern="[^A-Z]+"
+                        >
                         <f:ajax
                             render="@this"
                             execute="@this" />
@@ -218,7 +220,18 @@
                 </div>
 
                 <script>
-                                                                    clientSideValidation.compareInputValues.init(
+
+                accountNameValidation.validateInputValue.init(
+                {
+                	input: '#accountName',
+                    msgSuccess: '#{msgs.plugin_rest_usercreation_accountNameValid}',
+                    msgError: '#{msgs.plugin_rest_usercreation_accountNameInvalid}'
+                	
+                }		
+                );
+                
+                
+                clientSideValidation.compareInputValues.init(
 
                                                                     {
                                                                         input: '#password',
@@ -1106,7 +1119,7 @@
 
             <button
                 class="btn btn-primary-400 ms-auto"
-                jsf:immediate="true"
+                jsf:immediate="hashicorptrue"
                 jsf:id="backToStart2">
                 <h:outputText value="#{msgs.plugin_rest_usercreation_backToLogin}" />
                 <f:setPropertyActionListener
