@@ -140,6 +140,9 @@
                         <f:setPropertyActionListener
                             value="#{field}"
                             target="#{DashboardForm.plugin.currentField}" />
+                        <f:ajax
+                            render="@form"
+                            execute="@this" />                            
                     </button>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{cc.attrs.displayRemoveButton}">
@@ -153,6 +156,9 @@
                         <f:setPropertyActionListener
                             value="#{field}"
                             target="#{DashboardForm.plugin.currentField}" />
+                        <f:ajax
+                            render="@form"
+                            execute="@this" />                            
                     </button>
                 </h:panelGroup>
 

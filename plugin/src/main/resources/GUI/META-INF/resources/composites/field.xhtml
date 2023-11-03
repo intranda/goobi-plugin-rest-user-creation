@@ -119,7 +119,11 @@
                                 event="valueChange"
                                 render="#{cc.attrs.render}"
                                 execute="@this" />
-                            <f:selectItems value="#{cc.attrs.selectItems}" var="#{cc.attrs.var}" itemLabel="#{cc.attrs.itemLabel}" itemValue="#{cc.attrs.itemValue}" />
+                            <f:selectItems
+                                value="#{cc.attrs.selectItems}"
+                                var="#{cc.attrs.var}"
+                                itemLabel="#{cc.attrs.itemLabel}"
+                                itemValue="#{cc.attrs.itemValue}" />
                         </h:selectOneRadio>
 
                     </div>
@@ -160,11 +164,9 @@
             <ui:fragment rendered="#{cc.attrs.fieldType!='checkbox' and cc.attrs.fieldType!='combo'}">
                 <label
                     for="#{cc.attrs.identifier}_input"
-                    class="zlb-label">
-                    <h:outputText
+                    class="zlb-label"> <h:outputText
                         escape="false"
-                        value="#{cc.attrs.labelText}" />
-                    <h:panelGroup
+                        value="#{cc.attrs.labelText}" /> <h:panelGroup
                         styleClass="input-required"
                         rendered="#{cc.attrs.fieldRequired}">
                         <i class="fa fa-asterisk" />
@@ -220,7 +222,11 @@
                             event="valueChange"
                             render="#{cc.attrs.render}"
                             execute="@this" />
-                       <f:selectItems value="#{cc.attrs.selectItems}" var="#{cc.attrs.var}" itemLabel="#{cc.attrs.itemLabel}" itemValue="#{cc.attrs.itemValue}" />
+                        <f:selectItems
+                            value="#{cc.attrs.selectItems}"
+                            var="#{cc.attrs.var}"
+                            itemLabel="#{cc.attrs.itemLabel}"
+                            itemValue="#{cc.attrs.itemValue}" />
                     </h:selectOneMenu>
 
                     <h:outputText
@@ -243,6 +249,9 @@
                                 <f:setPropertyActionListener
                                     value="#{field}"
                                     target="#{DashboardForm.plugin.currentField}" />
+                                <f:ajax
+                                    render="@form"
+                                    execute="@this" />
                             </button>
                         </h:panelGroup>
                         <h:panelGroup rendered="#{cc.attrs.displayRemoveButton}">
@@ -256,6 +265,9 @@
                                 <f:setPropertyActionListener
                                     value="#{field}"
                                     target="#{DashboardForm.plugin.currentField}" />
+                                <f:ajax
+                                    render="@form"
+                                    execute="@this" />
                             </button>
                         </h:panelGroup>
 
