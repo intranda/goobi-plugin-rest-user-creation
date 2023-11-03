@@ -156,12 +156,14 @@
                 </h:panelGroup>
             </div>
 
-            <h:panelGroup
-                layout="block"
-                rendered="#{!cc.attrs.propertyValid}"
-                styleClass="font-danger validation-message">
-                <h:outputText value="#{msgs[cc.attrs.errorMessageText]}" />
-            </h:panelGroup>
+			<h:panelGroup id="errormessage">
+            	<h:panelGroup
+                	layout="block"
+                	rendered="#{!cc.attrs.propertyValid}"
+                	styleClass="font-danger validation-message" style="color: var(--clr-danger); font-size: var(--fs-200);">
+               		<h:outputText value="#{msgs[cc.attrs.errorMessageText]}" />
+            	</h:panelGroup>
+			</h:panelGroup>            
             <h:outputText
                 styleClass="help-block font-light"
                 rendered="#{NavigationForm.showHelp}"
