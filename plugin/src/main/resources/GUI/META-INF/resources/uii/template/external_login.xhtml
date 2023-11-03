@@ -38,7 +38,8 @@
                     <h:form
                         styleClass="form-validate #{externalLoginBean.uiStatus != 'accountCreation' ? '' : 'd-grid'}"
                         id="loginForm"
-                        prependId="false">
+                        prependId="false"
+                        onkeypress="submitOnEnter(event);">
                         <h:panelGroup id="globalWarningMessage">
                             <h:panelGroup
                                 rendered="#{SessionForm.logoutMessage!=''}"
@@ -132,7 +133,7 @@
                                     <button
                                         jsf:id="loginButton"
                                         jsf:action="#{LoginForm.Einloggen}"
-                                        class="btn btn-primary-400">
+                                        class="btn btn-primary-400 submitOnEnter">
                                         <h:outputText value="#{msgs.einloggen}" />
                                         <f:setPropertyActionListener
                                             target="#{NavigationForm.aktuell}"

@@ -191,7 +191,7 @@ public class ExternalLoginBean implements Serializable {
             if (configuredFields == null) {
                 configuredFields = new ArrayList<>();
             }
-            if (ucf.getFieldType().equals("dropdown") || ucf.getFieldType().equals(COMBO_FIELDNAME)) {
+            if ("dropdown".equals(ucf.getFieldType()) || COMBO_FIELDNAME.equals(ucf.getFieldType())) {
                 List<HierarchicalConfiguration> valueList = hc.configurationsAt("/selectfield");
                 for (HierarchicalConfiguration v : valueList) {
                     SelectItem si = new SelectItem(v.getString("@value"), v.getString("@label"));
@@ -273,7 +273,7 @@ public class ExternalLoginBean implements Serializable {
             privacyErrorMessage = Helper.getTranslation("plugin_rest_usercreation_new_account_privacyTextNotAcccepted");
         }
 
-        if (!accountNameValid || !firstNameValid || !lastNameValid || !emailValid || !passwordValid) {
+        if (!accountNameValid || !firstNameValid || !lastNameValid || !emailValid || !passwordValid || !privacyValid) {
             return;
         }
         // create new user
@@ -356,23 +356,21 @@ public class ExternalLoginBean implements Serializable {
         currentUser.setInstitution(institution);
 
         for (Entry<String, List<UserCreationField>> fields : additionalFields.entrySet()) {
-            if (fields.getKey().equals("page3a") && !displaySecondContact) { //NOSONAR
+            if ("page3a".equals(fields.getKey()) && !displaySecondContact) { //NOSONAR
                 continue;
             }
 
             for (UserCreationField f : fields.getValue()) {
                 if ("institution".equals(f.getType())) {
-                    if (f.getFieldType().equals(COMBO_FIELDNAME) && f.getBooleanValue()) {
+                    if (COMBO_FIELDNAME.equals(f.getFieldType()) && f.getBooleanValue()) {
                         institution.getAdditionalData().put(f.getName(), f.getSubValue());
                     } else {
                         institution.getAdditionalData().put(f.getName(), f.getValue());
                     }
+                } else if (COMBO_FIELDNAME.equals(f.getFieldType()) && f.getBooleanValue()) {
+                    currentUser.getAdditionalData().put(f.getName(), f.getSubValue());
                 } else {
-                    if (f.getFieldType().equals(COMBO_FIELDNAME) && f.getBooleanValue()) {
-                        currentUser.getAdditionalData().put(f.getName(), f.getSubValue());
-                    } else {
-                        currentUser.getAdditionalData().put(f.getName(), f.getValue());
-                    }
+                    currentUser.getAdditionalData().put(f.getName(), f.getValue());
                 }
             }
         }

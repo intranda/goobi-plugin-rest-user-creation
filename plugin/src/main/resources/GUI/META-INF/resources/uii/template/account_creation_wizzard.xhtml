@@ -346,7 +346,7 @@
                 <button
                     jsf:action="#{externalLoginBean.createAccount}"
                     jsf:id="create"
-                    class="btn btn-success ms-auto">
+                    class="btn btn-success ms-auto submitOnEnter">
                     <h:outputText value="#{msgs.plugin_rest_usercreation_new_account_createAccount}" />
                 </button>
             </div>
@@ -1229,14 +1229,14 @@
                     jsf:rendered="#{externalLoginBean.wizzardMode!='page5'}"
                     jsf:id="goNext"
                     jsf:action="#{externalLoginBean.next}"
-                    class="btn btn-success ms-auto">
+                    class="btn btn-success ms-auto submitOnEnter">
                     <h:outputText value="#{msgs.plugin_rest_usercreation_next}" />
                 </button>
                 <button
                     jsf:rendered="#{externalLoginBean.wizzardMode=='page5'}"
                     jsf:id="createInsitution"
                     jsf:action="#{externalLoginBean.createInstitution}"
-                    class="btn btn-success ms-auto">
+                    class="btn btn-success ms-auto submitOnEnter">
                     <h:outputText value="#{msgs.plugin_rest_usercreation_createInstitution}" />
                 </button>
             </div>
