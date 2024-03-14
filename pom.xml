@@ -7,10 +7,11 @@
     <relativePath />
   </parent>
   <groupId>io.goobi.workflow.plugin</groupId>
-  <artifactId>plugin-rest-usercreation</artifactId>
+  <artifactId>plugin-rest-user-creation</artifactId>
   <packaging>pom</packaging>
   <modules>
     <module>module-base</module>
+    <module>module-gui</module>
   </modules>
   <repositories>
     <repository>

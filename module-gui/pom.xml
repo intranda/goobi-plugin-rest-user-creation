@@ -5,6 +5,14 @@
     <artifactId>plugin-rest-user-creation</artifactId>
     <version>24.03-SNAPSHOT</version>
   </parent>
-  <artifactId>plugin-rest-user-creation-base</artifactId>
+  <artifactId>plugin-rest-user-creation-gui</artifactId>
   <packaging>jar</packaging>
+  <build>
+    <resources>
+      <resource>
+        <targetPath>META-INF/resources</targetPath>
+        <directory>src/main/webapp/resources</directory>
+      </resource>
+    </resources>
+  </build>
 </project>
