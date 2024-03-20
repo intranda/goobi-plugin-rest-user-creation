@@ -10,8 +10,10 @@
   <artifactId>plugin-rest-user-creation</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>module-base</module>
+    <module>module-api</module>
     <module>module-gui</module>
+    <module>module-job</module>
+    <module>module-lib</module>
   </modules>
   <repositories>
     <repository>
