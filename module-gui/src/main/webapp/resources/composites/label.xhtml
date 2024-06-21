@@ -21,11 +21,11 @@
 		<label for="#{cc.attrs.labelFor}" class="zlb-label">
 
 			<ui:fragment rendered="#{!cc.attrs.labelEscapeText}">
-				<h:outputText escape="false" value="#{cc.attrs.labelText}" />
+				<h:outputText escape="false" value="#{msgs[cc.attrs.labelText]}" />
 			</ui:fragment>
 
 			<ui:fragment rendered="#{cc.attrs.labelEscapeText}">
-					#{cc.attrs.labelText}
+					#{msgs[cc.attrs.labelText]}
 			</ui:fragment>
 
 			<span

@@ -36,7 +36,7 @@
 						execute="#{cc.attrs.inputAjax}" />
         <f:passThroughAttribute
             name="placeholder"
-            value="#{cc.attrs.inputPlaceholder}" />
+            value="#{msgs[cc.attrs.inputPlaceholder]}" />
 
     </x:inputText>
 
@@ -45,8 +45,8 @@
 			<ui:include src="/uii/includes/form_icons.xhtml">
 				<ui:param name="duplicateElement" value="#{cc.attrs.inputDuplicate}" />
 				<ui:param name="showHelpBtn" value="#{cc.attrs.showHelpBtn}" />
-				<ui:param name="helpTitle" value="#{cc.attrs.helpTitle}" />
-				<ui:param name="helpBody" value="#{cc.attrs.helpText}" />
+				<ui:param name="helpTitle" value="#{msgs[cc.attrs.helpTitle]}" />
+				<ui:param name="helpBody" value="#{msgs[cc.attrs.helpText]}" />
 			</ui:include>
 
 			<!--

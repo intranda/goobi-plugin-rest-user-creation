@@ -67,7 +67,7 @@
             styleClass="form #{cc.attrs.mainClass} #{!cc.attrs.propertyValid ? 'validate--danger' : ''}">
             <label
                 class="zlb-label"
-                for="#{cc.attrs.identifier}_input"> #{cc.attrs.labelText} <h:panelGroup
+                for="#{cc.attrs.identifier}_input"> #{msgs[cc.attrs.labelText]} <h:panelGroup
                     styleClass="input-required"
                     rendered="#{cc.attrs.fieldRequired}">
                     <i class="fa fa-asterisk" />
@@ -87,7 +87,7 @@
                         execute="@this" />
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{cc.attrs.placeholderText}" />
+                        value="#{msgs[cc.attrs.placeholderText]}" />
                 </x:inputText>
 
                 <h:selectOneMenu
@@ -103,7 +103,7 @@
                     <f:selectItems
                         value="#{cc.attrs.selectItems}"
                         var="#{cc.attrs.var}"
-                        itemLabel="#{cc.attrs.itemLabel}"
+                        itemLabel="#{msgs[cc.attrs.itemLabel]}"
                         itemValue="#{cc.attrs.itemValue}" />
                     <f:ajax
                         event="change"
@@ -157,8 +157,8 @@
                         aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementHelp}"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
-                        data-bs-body="#{cc.attrs.helpText}"
-                        data-bs-title="#{cc.attrs.helpTitle}">
+                        data-bs-body="#{msgs[cc.attrs.helpText]}"
+                        data-bs-title="#{msgs[cc.attrs.helpTitle]}">
                         <ui:include src="/uii/includes/icon-help.xhtml" />
                     </button>
                 </h:panelGroup>

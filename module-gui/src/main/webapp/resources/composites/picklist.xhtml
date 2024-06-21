@@ -67,7 +67,7 @@
             <label
                 for="#{cc.attrs.identifier}_input"
                 class="zlb-label">
-                #{cc.attrs.labelText}
+                #{msgs[cc.attrs.labelText]}
                 <h:panelGroup
                     styleClass="input-required"
                     rendered="#{cc.attrs.fieldRequired}">
@@ -91,12 +91,12 @@
                         event="change"
                         render="#{cc.attrs.render}"
                         execute="@this" />
-                    <f:selectItems value="#{cc.attrs.selectItems}" var="#{cc.attrs.var}" itemLabel="#{cc.attrs.itemLabel}" itemValue="#{cc.attrs.itemValue}" />
+                    <f:selectItems value="#{cc.attrs.selectItems}" var="#{cc.attrs.var}" itemLabel="#{msgs[cc.attrs.itemLabel]}" itemValue="#{cc.attrs.itemValue}" />
                 </h:selectOneMenu>
 
                 <x:inputText
                     id="#{cc.attrs.identifier}_input"
-                    pt:aria-label="#{cc.attrs.labelText}"
+                    pt:aria-label="#{msgs[cc.attrs.labelText]}"
                     styleClass="form-control #{cc.attrs.fieldStyle}"
                     value="#{cc.attrs.value}"
                     validator="#{field.validateField}"
@@ -107,7 +107,7 @@
                         execute="@this" />
                     <f:passThroughAttribute
                         name="placeholder"
-                        value="#{cc.attrs.placeholderText}" />
+                        value="#{msgs[cc.attrs.placeholderText]}" />
                 </x:inputText>
 
                 <h:panelGroup
@@ -119,7 +119,7 @@
                 <h:outputText
                     styleClass="help-block font-light"
                     rendered="#{NavigationForm.showHelp}"
-                    value="#{cc.attrs.labelHelpText}" />
+                    value="#{msgs[cc.attrs.labelHelpText]}" />
             </div>
 
             <div class="form-icons">
@@ -164,8 +164,8 @@
                         aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementHelp}"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
-                        data-bs-body="#{cc.attrs.helpText}"
-                        data-bs-title="#{cc.attrs.helpTitle}">
+                        data-bs-body="#{msgs[cc.attrs.helpText]}"
+                        data-bs-title="#{msgs[cc.attrs.helpTitle]}">
                         <ui:include src="/uii/includes/icon-help.xhtml" />
                     </button>
                 </h:panelGroup>
