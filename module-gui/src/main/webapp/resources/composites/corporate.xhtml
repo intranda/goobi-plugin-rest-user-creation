@@ -118,13 +118,13 @@
                     <button
                         jsf:onfocus="focusField(this);"
                         jsf:id="button"
-                        jsf:action="#{DashboardForm.plugin.duplicateMetadataField}"
+                        jsf:action="#{deliveryBean.duplicateMetadataField}"
                         class="form-icons__button form-icons__button--duplicate"
                         aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDuplicate}">
                         <ui:include src="/uii/includes/icon-plus.xhtml" />
                         <f:setPropertyActionListener
                             value="#{field}"
-                            target="#{DashboardForm.plugin.currentField}" />
+                            target="#{deliveryBean.currentField}" />
                         <f:ajax
                             render="@form"
                             execute="@this" />
@@ -133,14 +133,14 @@
                 <h:panelGroup rendered="#{cc.attrs.displayRemoveButton}">
                     <button
                         jsf:id="removeButton"
-                        jsf:action="#{DashboardForm.plugin.removeMetadataField}"
+                        jsf:action="#{deliveryBean.removeMetadataField}"
                         class="form-icons__button form-icons__button--duplicate"
                         aria-label="#{msgs.plugin_rest_usercreation_ariaLabel_elementDeletion}"
                         onfocus="focusField(this);">
                         <ui:include src="/uii/includes/icon-minus.xhtml" />
                         <f:setPropertyActionListener
                             value="#{field}"
-                            target="#{DashboardForm.plugin.currentField}" />
+                            target="#{deliveryBean.currentField}" />
                         <f:ajax
                             render="@form"
                             execute="@this" />

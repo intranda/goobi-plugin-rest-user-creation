@@ -36,14 +36,14 @@
                 <div class="form-wrapper">
                     <h:inputText
                         id="urlUploadInput"
-                        value="#{DashboardForm.plugin.downloadUrl}"
+                        value="#{deliveryBean.downloadUrl}"
                         pt:placeholder="#{cc.attrs.placeholder}" />
 
                     <h:commandButton
                         id="submit"
                         value="#{msgs.plugin_dashboard_delivery_uploadFormSend}"
                         styleClass="btn btn-primary-400"
-                        action="#{DashboardForm.plugin.downloadFile}" />
+                        action="#{deliveryBean.downloadFile}" />
                     <button
                         type="button"
                         class="modal__trigger--help-msg">
