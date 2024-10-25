@@ -48,7 +48,14 @@
         <!-- #{field.validationErrorMessage} -->
         <composite:attribute name="errorMessageText" />
         <!-- #{field.selectItemList} -->
+        
         <composite:attribute name="selectItems" />
+        <composite:attribute name="var" default="var" />        
+        <composite:attribute name="itemValue" default="#{var.itemValue}"/>
+        <composite:attribute name="itemLabel" default="#{var.itemLabel}" />
+
+        
+        
         <!-- #{field.subValue} -->
         <composite:attribute name="subValue" />
 
@@ -119,11 +126,11 @@
                                 event="valueChange"
                                 render="#{cc.attrs.render}"
                                 execute="@this" />
-                            <f:selectItems
-                                value="#{cc.attrs.selectItems}"
-                                var="#{cc.attrs.var}"
-                                itemLabel="#{msgs[cc.attrs.itemLabel]}"
-                                itemValue="#{cc.attrs.itemValue}" />
+                        <f:selectItems
+                            value="#{cc.attrs.selectItems}"
+                            var="#{cc.attrs.var}"
+                            itemLabel="#{cc.attrs.itemLabel}"
+                            itemValue="#{cc.attrs.itemValue}" />
                         </h:selectOneRadio>
 
                     </div>
