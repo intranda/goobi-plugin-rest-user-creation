@@ -6,6 +6,7 @@
     <version>24.06-SNAPSHOT</version>
     <relativePath />
   </parent>
+  <version>24.06-SNAPSHOT</version>
   <groupId>io.goobi.workflow.plugin</groupId>
   <artifactId>plugin-rest-user-creation</artifactId>
   <packaging>pom</packaging>
@@ -25,7 +26,7 @@
     <dependency>
       <groupId>io.goobi.workflow</groupId>
       <artifactId>workflow-core</artifactId>
-      <version>${project.version}</version>
+      <version>24.06-SNAPSHOT</version>
       <classifier>classes</classifier>
     </dependency>
   </dependencies>
