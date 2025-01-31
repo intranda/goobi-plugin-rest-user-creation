@@ -8,8 +8,6 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.annotation.WebListener;
-
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
 import org.apache.commons.dbutils.QueryRunner;
@@ -21,6 +19,7 @@ import org.goobi.production.flow.jobs.AbstractGoobiJob;
 import de.sub.goobi.config.ConfigPlugins;
 import de.sub.goobi.persistence.managers.MySQLHelper;
 import de.sub.goobi.persistence.managers.UserManager;
+import jakarta.servlet.annotation.WebListener;
 import lombok.extern.log4j.Log4j2;
 
 @WebListener

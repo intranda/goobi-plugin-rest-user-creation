@@ -5,8 +5,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:x="http://myfaces.apache.org/tomahawk">
+  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<composite:interface>
 		<composite:attribute name="inputId" />
@@ -24,7 +23,7 @@
 
 	<composite:implementation>
 
-    <x:inputText
+    <h:inputText
         id="#{cc.attrs.inputId}"
 				forceId="true"
         pt:aria-label="#{cc.attrs.inputAriaLabel}"
@@ -38,7 +37,7 @@
             name="placeholder"
             value="#{msgs[cc.attrs.inputPlaceholder]}" />
 
-    </x:inputText>
+    </h:inputText>
 
 
 			<!-- ICONS -->

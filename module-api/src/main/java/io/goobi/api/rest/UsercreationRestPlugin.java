@@ -4,15 +4,6 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.Enumeration;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-
 import org.goobi.beans.User;
 import org.goobi.beans.User.UserStatus;
 import org.jboss.weld.contexts.SerializableContextualInstanceImpl;
@@ -28,10 +19,18 @@ import de.sub.goobi.helper.JwtHelper;
 import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.persistence.managers.UserManager;
 import io.goobi.managedbeans.ExternalLoginBean;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@javax.ws.rs.Path("/users")
+@jakarta.ws.rs.Path("/users")
 public class UsercreationRestPlugin {
 
     @Context
@@ -43,7 +42,7 @@ public class UsercreationRestPlugin {
     @Inject
     private SessionForm sessionForm;
 
-    @javax.ws.rs.Path("/email/{token}")
+    @jakarta.ws.rs.Path("/email/{token}")
     @GET
     @Produces("text/xml")
     public void verifyEmail(@PathParam("token") String token) {
@@ -69,7 +68,7 @@ public class UsercreationRestPlugin {
             sessionForm.updateSessionUserName(servletRequest.getSession(), user);
             servletResponse.sendRedirect("/goobi/uii/external_index.xhtml");
             return;
-        } catch (TokenExpiredException|SignatureVerificationException e) {
+        } catch (TokenExpiredException | SignatureVerificationException e) {
             log.error(e);
             Base64.Decoder decoder = Base64.getUrlDecoder();
 
@@ -82,7 +81,7 @@ public class UsercreationRestPlugin {
             int userId = obj.getInt("id");
             try {
                 User user = UserManager.getUserById(userId);
-                if (user!= null && user.getLogin().equals(username) && user.getStatus() == UserStatus.REGISTERED) {
+                if (user != null && user.getLogin().equals(username) && user.getStatus() == UserStatus.REGISTERED) {
                     UserManager.deleteUser(user);
                 }
             } catch (DAOException e1) {
