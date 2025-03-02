@@ -3,10 +3,9 @@
   <parent>
     <groupId>io.goobi.workflow</groupId>
     <artifactId>workflow-base</artifactId>
-    <version>24.12</version>
+    <version>25.02</version>
     <relativePath />
   </parent>
-  <version>24.12</version>
   <groupId>io.goobi.workflow.plugin</groupId>
   <artifactId>plugin-rest-user-creation</artifactId>
   <packaging>pom</packaging>
@@ -26,7 +25,7 @@
     <dependency>
       <groupId>io.goobi.workflow</groupId>
       <artifactId>workflow-core</artifactId>
-      <version>24.12</version>
+      <version>25.02</version>
       <classifier>classes</classifier>
     </dependency>
   </dependencies>

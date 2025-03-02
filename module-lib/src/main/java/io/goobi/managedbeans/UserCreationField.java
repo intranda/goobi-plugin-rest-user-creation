@@ -3,10 +3,9 @@ package io.goobi.managedbeans;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.model.SelectItem;
-
 import org.apache.commons.lang.StringUtils;
 
+import jakarta.faces.model.SelectItem;
 import lombok.Data;
 
 @Data
@@ -50,7 +49,7 @@ public class UserCreationField {
 
         String val = value;
 
-        if (fieldType.equals("combo") && getBooleanValue() && StringUtils.isBlank(subValue)) {
+        if ("combo".equals(fieldType) && getBooleanValue() && StringUtils.isBlank(subValue)) {
             validationError = true;
             return false;
         }

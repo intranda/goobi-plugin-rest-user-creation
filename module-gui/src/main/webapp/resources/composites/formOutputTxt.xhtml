@@ -4,7 +4,6 @@
     xmlns:composite="http://xmlns.jcp.org/jsf/composite"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:x="http://myfaces.apache.org/tomahawk"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites">
 
@@ -46,7 +45,7 @@
                             #{msgs.plugin_rest_usercreation_new_account_overview_checkedCheck_ariaLabel}
                         </label>
                         
-                        <x:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.secondValue}" tabindex="#{cc.attrs.tabindex}"/>
+                        <h:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.secondValue}" tabindex="#{cc.attrs.tabindex}"/>
 
                     </div>
                 </ui:fragment>
@@ -62,12 +61,12 @@
                         <label class="sr-only form-check-label" for="flexCheckUncheckedDisabled">
                             #{msgs.plugin_rest_usercreation_new_account_overview_uncheckedCheck_ariaLabel}
                         </label>
-                        <x:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{msgs.plugin_rest_usercreation_new_account_notSelected}" tabindex="#{cc.attrs.tabindex}"/>
+                        <h:outputText escape="false" style="border:0px;" styleClass="#{cc.attrs.fieldStyle}" value="#{msgs.plugin_rest_usercreation_new_account_notSelected}" tabindex="#{cc.attrs.tabindex}"/>
                     </div>
                 </ui:fragment>
 
                 <ui:fragment rendered="#{!cc.attrs.showDisabledCheckBox}">
-                    <x:outputText escape="false" id="#{cc.attrs.name}" style="border:0px;" forceId="#{cc.attrs.forceId}" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.field}" tabindex="#{cc.attrs.tabindex}"/>
+                    <h:outputText escape="false" id="#{cc.attrs.name}" style="border:0px;" forceId="#{cc.attrs.forceId}" styleClass="#{cc.attrs.fieldStyle}" value="#{cc.attrs.field}" tabindex="#{cc.attrs.tabindex}"/>
                 </ui:fragment>
 
             	<intranda:formHelp content="#{cc.attrs.help}" />
