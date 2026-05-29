@@ -65,8 +65,7 @@ public class UsercreationRestPlugin {
             elb.setWizzardMode("page2");
             elb.setUiStatus("accountCreation");
             // forward to institution creation screen
-            sessionForm.updateSessionUserName(servletRequest.getSession(), user, servletRequest.getSession().getId(),
-                    servletRequest.getSession().getId());
+            sessionForm.updateSessionUserName(servletRequest.getSession(), user);
             servletResponse.sendRedirect("/goobi/uii/external_index.xhtml");
             return;
         } catch (TokenExpiredException | SignatureVerificationException e) {
