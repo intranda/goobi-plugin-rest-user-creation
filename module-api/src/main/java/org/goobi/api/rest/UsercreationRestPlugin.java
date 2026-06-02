@@ -1,13 +1,10 @@
 package org.goobi.api.rest;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Enumeration;
 
 import org.goobi.beans.User;
-import org.goobi.beans.User.UserStatus;
 import org.jboss.weld.contexts.SerializableContextualInstanceImpl;
-import org.json.JSONObject;
 
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
@@ -16,7 +13,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import de.sub.goobi.forms.SessionForm;
 import de.sub.goobi.helper.Helper;
 import de.sub.goobi.helper.JwtHelper;
-import de.sub.goobi.helper.exceptions.DAOException;
 import de.sub.goobi.persistence.managers.UserManager;
 import io.goobi.managedbeans.ExternalLoginBean;
 import jakarta.inject.Inject;
@@ -70,23 +66,7 @@ public class UsercreationRestPlugin {
             return;
         } catch (TokenExpiredException | SignatureVerificationException e) {
             log.error(e);
-            Base64.Decoder decoder = Base64.getUrlDecoder();
-
-            String[] parts = token.split("\\."); // Splitting header, payload and signature
-
-            String payload = new String(decoder.decode(parts[1])); //Payload: {"purpose":"confirmMail","iss":"Goobi","id":"39","exp":1659142199,"user":"testaccount"}
-
-            JSONObject obj = new JSONObject(payload);
-            String username = obj.getString("user");
-            int userId = obj.getInt("id");
-            try {
-                User user = UserManager.getUserById(userId);
-                if (user != null && user.getLogin().equals(username) && user.getStatus() == UserStatus.REGISTERED) {
-                    UserManager.deleteUser(user);
-                }
-            } catch (DAOException e1) {
-                log.error(e);
-            }
+            Helper.setFehlerMeldung("Invalid token");
 
         } catch (Exception e) {
             log.error(e);
